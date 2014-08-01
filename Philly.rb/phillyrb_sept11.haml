@@ -1,0 +1,49 @@
+%h2 Compass and SASS, Improving the Structure of your Stylesheets
+%i Dave Bock, CodeSherpas, Inc.
+%p Chariot Solutions is tonight's sponsor. They are looking for a Rubyist, so if you are are awesome, contact them!
+%h3 SASS: Syntactically Awesome Stylesheets
+%p SASS is an attempt to improve the syntax of CSS.
+%p The first generation of SASS was a completely new DSL for CSS, and a lot of designers didn't like it. So that is where SCSS came in.
+%p SCSS is a superset of CSS that gives you all that you get with SASS, but it looks and feels like CSS, so a lower learning curve.
+%p SASS/SCSS allows you to group your CSS in blocks and add variables to your CSS.
+%h3 Compass
+%p Compass is a set of class libraries for CSS. You can bundle sets of functionality for CSS:
+%ul
+  %li Resets
+  %li Columns
+  %li Grids
+  %li etc.
+%p Grids are awesome. Blueprint CSS is an example of CSS grid CSS that allow you to layout according to a grid coordinate system. The BAD thing about this is that it makes your HTML classes non-semantic (a.k.a. class="a4 b3")
+%p Semantic HTML doesn't describe the way things LOOK, it describes WHAT things are. So instead of:
+%pre
+  %code{:class=>"html"}&lt;p class="blue left small"&gt;Semantic CSS is Awesome!&lt;/p&gt;
+%p We want it to look more meaningful:
+%pre
+  %code{:class=>"html"}&lt;p class="article"&gt;Semantic CSS is Awesome!&lt;/p&gt;
+%ul
+  %li Use HTML to mark up your data to say what it IS.
+  %li Use CSS to mark up how your data looks.
+%p SASS integrates with Ant, Sinatra, Rails, etc. It is really easy to integrate, so use it!
+%p To use compass, just add the following to your Gemfile and run bundle install:
+%pre
+  %code{:class=>"ruby"}gem 'compass'
+%p In Compass, by convention, you have global variables in a _base.scss file, and you compartmentalize your individual scss files to then be included in your main CSS file once compiled.
+%p Clearfix is part of Compass. One of the cool things about Compass is that you can, with one line, include common CSS patterns:
+%pre
+  %code{:class=>"css"}@incudle clearfix;
+%p
+  Check out
+  %a{:href=>"http://www.colourlovers.com/"}Colour Lovers
+  for a great website on selecting color combos.
+%p So Compass allows you to compartmentalize, and abstract out your CSS. This makes CSS a LOT more maintainable.
+%p There are a few neat things you can do with Compass, like transform colors:
+%pre
+  %code{:class=>"css"}
+    $awesome_color: #bada55;
+    lighten($awesome_color, 20); /* makes the color lighter automatically */
+    compliment($awesome_color); /* gives you the compliment of your color */
+%p One of the BIGGEST advantages of SCSS is that you now have CSS validation baked in. You do not have to change your CSS at all (except to change the file extension to .scss) and use SASS to compile, then you will have validation for free. That is an INSTANT improvement to your CSS code, right there.
+%p A purchased CSS theme can never be semantic. They will always be generic, YOU have to make your CSS semantic. Semantic means it is customized for your client, a.k.a. NOT generic.
+%p By adding in the basics of programming to CSS, SASS allows us to make CSS with less code, less repetition, and code that is more dynamic and modular.
+%p One of the big advantages of using SASS within a Rails 3.1 project is that you can have Ruby code inside your SCSS files. That makes your SCSS turing complete. Now THAT is powerful!
+%p Thanks to Dave for the great talk!

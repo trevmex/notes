@@ -1,0 +1,75 @@
+%h2 Philly.rb November Meeting
+%p Open Data Day (http://www.opendataday.org/) is December 4th. It is a one-day hackathon to do interesting things with publically available data (like the census data). There are many cities around the world taking part, but Philly isn't on the list yet. Volunteers?
+%p http://www.callmehq.com/ - Mat and Trotter just finished coding up Call Me HQ, which allows users to set up one phone number to call many phones at once using Twillio. It will also email you a link to voicemail, if no one picks up.
+%p Check out 'autojump' in Homebrew for a quick way to jump to a file that you have oopened in the past. Trotter just finished writing a vim plugin that uses autojump as well.
+%p scripty2 (http://scripty2.com), the new JavaScript from Thomas Fuchs, uses CSS3 animations for their animation calls. Check it out if you need cool animation effects.
+%p backbone.js (http://documentcloud.github.com/backbone) - A really lightweight MVC for client-side JavaScript. It uses jQuery for the views and is pretty straightforward.
+%ul
+  %li it is from documentcloud, and the documentation for it is really well-written.
+  %li
+    %pre
+      %code.javascript
+        DJ = {};
+        DJ.Item = Backbone.Model.extend({
+        //add your model code here
+        });
+
+        DJ.ItemView = Backbone.View.extend({
+        //add your view code here
+        render: function() {
+        //your render code here
+        }
+        });
+  %li backbone.js allows you to get a fat-client up and running pretty fast without much overhead.
+%h2 Files, and the Flying coders that parse them
+%h3 A peek into the Ruby IO
+%i Angel
+%p Angel is using Ruby to parse very large data sets as flat files in his work in bioinformatics. It is a great field for using map-reduce functions.
+%p Getting better at Ruby will make you better at Rails, so we should study Ruby.
+%pre
+  %code.ruby
+    f = File.open("reference.txt", "r")
+    f.each do |line|
+    puts f
+    puts line
+    break
+    end
+
+    z# output
+    z# #&lt;File:0x1671567&gt;
+    z# This is the first line
+%p The class of the file pointer is "String," so you are actually reading the file in as a big String.
+%pre
+  %code.ruby
+    f = File.readlines("references.txt")
+%p With readlines, f is an "Array" of strings. This is a much more sane way of reading very big files.
+%p the File class and the IO class are basically the same, if you can't find your call in the File class docs, look in IO.
+%p File::Stat is a subclass that can be used to parse some more detailed files.
+%p readline will allow you to redefine wah a line seperator is.
+%pre
+  %code.ruby
+    f.readline("\n\n") # read all info intil the first "\n\n" instead of "\n"
+%p Note: There are a lot of gems out there that can parse standard file formats, you should search out there before writing your own.
+%h3 Parsing the human genome
+%p The DNA base is 778 MB in a 2-bit format.
+%pre
+  %code.ruby
+    DNA = %w{A C G T} # this is a binary format to parse DNA
+%p The genome is in a binary 2-bit format.
+%p The BinData Gem lets you define binary formats easily using a simple DSL in Ruby. Angel did this for the Human Genome 2-bit format.
+%p BinData allows you to set up the header information, and the data information of the file format.
+%p BinData is nice, since it lets you skip around in the file to get exactly what you want. BUT it is pretty slow with very laege data sets.
+%h3 mzML: A data standard for mass spectra
+%p 50-500 MB XML files to encode Base64 strings in XML. With LOTS of data points (10-10K)
+%p mzML allows you to do random access with an offset index at the end of the file, so you don't have to read through the entire file to be able to parse it.
+%p Angel created an MzML module that inherits from File to parse these files using Nokgiri and regular expressions.
+%h3 Threads, Fibers, and GIL
+%p Fibers allow you to control when you give up control from processors, where threads give you less control.
+%p Other useful libraries:
+%ul
+  %li FileUtils - useful file utils
+  %li StringIO - in-memory strings
+  %li Tempfile - allows you to use temporary files
+%p SWIG - Creates a C-wrapper for scripting languages (although it doesn't work with Ruby 1.9 yet).
+%p Zint uses SWIG to create any PNG barcode format you want. It is coming out soon!
+%p Thanks to Angel and everyone for another great meeting!

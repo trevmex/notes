@@ -1,0 +1,40 @@
+%h2 Straight Up RSpec
+%i Greg Sterndale
+%p RSpec is a Ruby BDD framework.
+%h3 Features
+%p The RSpec spec helper is a simple file that loads your RSpec support files. You shouldn't mess with this.
+%p RSpec allows you to run single tests, groups, or tags.
+%p With the documentation option you can have some nicely formatted output.
+%p RSpec allows you to write custom matchers with the Spec::Matchers.define call. This allows you to write cleaner tests by having better defined matchers.
+%p RSpec has a subject feature that allows you to declare a subject for a suite of specs. This allows you to DRY up your test code a lot and makes it much easier to read.
+%p If you describe a class instead of a string, your subject will be a new instance of the class you are describing.
+%p Shared example groups with the "share_example_for" function allows you to run the same tests with different classes/suites with "it_should_behave_like."
+%p In RSpec, context and describe are the same thing, but you cannot use context at the top level due to a library conflict. We use context blocks to make more specific examples.
+%p let(:func) { "stuff" } is a memoized function that let's you call the local function 'func' many times, but the code inside it is only called once (that is what memoized means!).
+%p There is also a let!() method that will execute the function you are memoizing once at the very start of your test.
+%p The its() function allows you to change the subject of a test, which can make your method tests more readable.
+%p Use a dot (.) notation for testing class methods, and a pound sign (#) for instance method tests in your descriptions. That can help your descriptions become more uniform.
+%p The have(1) function checks to see if an enumerable object has a certain number of items (in this case one).
+%p expect { "something" }.to change { "this thing" }.from( "input" ).to "expected output" This is an interesting pattern for testing failures.
+%p RSpec has a decent test double framework. Test doubles are fake objects that we can use to mock out things we are not testing, but are needed for your unit tests.
+%p The should_receive() function will allow you to test if an object will receive a message (or method call). That could be handy. :)
+%h3 Configuration
+%p RSpec.configure can be used to include your custom matchers at a more global level.
+%p Inside the configuration you can have before(:each), before(:all), after(:each), and after(:all) functions that run before or after each or all of your specs. Very useful, user be warned though, using :all can make your code confusing. It is almost always better to use :each, which is the default.
+%p Using filter_run :tag =&gt; true, you can tell RSpec to only run certain specs, then if you set run_all_when_everything_filtered = true, if you have no tags every spec will be run.
+%h3 Other Libraries
+%p RSpec::Rails gives you some Rails add-ons. You are most likely using this, if you are running RSpec with Rails. It also gives you Rails-specific matchers like redirect_to().
+%p Shoulda gives you a lot of really great matchers that allow you to do some nicely readable chained matchers.
+%p Thanks to Greg for the great talk!
+%h2 Announcements
+%i Mat Schaffer
+%p
+  Check out
+  %a{:href => "http://unicorn.bogomips.org/"}unicorn.
+  It is a pretty cool little Ruby web server that can scale really well.
+%p
+  %a{:href => "http://www.redsnakephilly.org/"}Red Snake Philly
+  is coming on February 21, 2012. Mark your calendars!
+%p
+  %a{:href => "http://phillyemergingtech.com/2012"}Philly ETE 2012
+  is coming on April 10-11, 2012. We will have lots of great speakers, and early bird registration is open now.

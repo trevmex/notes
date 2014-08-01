@@ -1,0 +1,61 @@
+%h2 September 2102 Philly.rb Meeting
+%h2 Some Underexposed Features from the Ruby Standard Library
+%i David A. Black, Lead Developer, Cyrus Innovation
+%h3 abbreb.rb
+%p Added a ".abbrev" method to arrays of strings to get the least unique combination of letters that match the string in an array. This is useful for autocomplete features.
+%h3 Substrings with regular expressions
+%pre
+  %code{:class => "ruby"}
+    str = "Hello world"
+    str[/ell.../] # =&gt; "ello w"
+%p That is handy when doing string comparisons!
+%h3 scanf.rb
+%p
+  Works just like scanf in ANSI-C
+  %a{:href => "http://www.kernel.org/doc/man-pages/online/pages/man3/scanf.3.html"}scanf(3)
+%p scanf will perform conversions correctly as you would expect from scanf in C.
+%p scanf can take a block to process the results from the scanf in whatever way you want.
+%p You can also scanf a file handle by opening the file.
+%h3 ostruct.rb (OpenStruct)
+%p OpenStruct objects allow arbitrary attributes. You can also set attributes/values at initialization time, using a hash (from the slides).
+%p User be warned: If you assign a value with a name of a method that the OpenStruct object already has, the older version of the method will prevail when you apply the getter method (from the slides).
+%h3 tracer.rb
+%p Visual representation of a ruby program, line-by-line
+%pre
+  %code{:class => "ruby"}
+    require 'tracer'
+    Tracer.on
+
+    your code here...
+
+    Tracer.display_c_call = true # will trace into c calls
+
+    more code (this code will tell you when you are diving into c code.)
+%h3 prime.rb
+%pre
+  %code{:class => "ruby"}
+    require 'prime'
+    Prime.prime?(5) # true
+    p Prime.take(10) # Array of first ten primes
+
+    5.prime? # true
+    Integer.each_prime(20).to_a # the primes up to 20
+%p This makes the euler problems a LOT easier!
+%h3 pstore
+%p A PStore is a simple file-based data store. It stores data as a hash in a file.
+%p You have to wrap your PStore calls in a transaction to work.
+%p It uses Marshall under the hood.
+%h3 Open3.popen3
+%p This allows you to access input, output, and error handles to modify and view.
+%h3 Open3.capture3
+%p Same as open3, but just gives you the results in instance variables,"status," and "error"
+%h3 Open3.pipeline_rw
+%p This pipes shell commands together as if your called them with the "|" unix command. (Works with Windows as well as UNIX)
+%p There are a LOT more Open3 functions, check them out!
+%h3 English.rb
+%p Adds English aliases to the more cryptic global variables in Ruby.
+%b PROTIP: Check out the English.rb source code to learn what those cryptic global variables do!
+%h3 uri.rb
+%p This will create a URI (HTTP, FTP, Gopher, etc.) that can be easily parsed in Ruby.
+%p There is error handling in URI that will prevent bad URIs from being created.
+%b Thanks to David for the great talk!

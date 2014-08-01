@@ -1,0 +1,30 @@
+%h2 JS on the GPU
+%i Jarred Nicholls
+%p Why? ...because they are megafast!
+%p GPUs are really good at divide-and-conquer algorithms. They are the kings of parallel processings.
+%p GPUs have very high memory bandwidth and can handle many many GigaFLOPs.
+%p ...but they don't solve all problems. You have to have problems that can run well in parallel, with no side effects.
+%p LeteralJS is a mission to get JS on the GPU.
+%p OpenCL is the C compiler for most all video cards out there. They could have done a JS to OpenCL static compiler, which is what River Trail did, but it wasn't good enough to do everything JavaScript gives you (closures, recursion, function objects, variable typing, etc.)
+%p ...so they wrote a JS interpreter in OpenCL!!!
+%b OpenCL Headaches
+%ul
+  %li
+    Multiple memory spaces (pointer hell)
+    %ul
+      %li Private memory, very fast but limited
+      %li local memory, fast L1 cache
+      %li global memory, VERY slow but lots of it.
+    That means that you have three types of fully qualified address spaces for pointer refs.
+  %li No recursion, all inlined functions
+  %li
+    no standard libc libraries, they had to implement memcpy and lots of other library functions as C macros... wow.
+  %li
+    no dynamic memory (you can't allocate memory!!??). They allocated a big heap space, and wrote their own malloc and free within their heap. (be warned, you will kernel panic your computer a lot doing this)
+  %li no standard data structures, apart from vector opts (no stacks or queues, or anything like that)
+  %li Really buggy AMD/Nvidia compilers
+%p They generate an AST with Esprima to make a C struct to send to the GPU to process.
+%p The structs are sent in one stream to the GPU, so you don't have to jump around when reading the program.
+%p They interpret the AST with a simple stack on the GPU.
+%p The numbers from the GPU interpreter was REALLY SLOW. So, the experiment was a bit of a fail.
+%p Thanks to Jarred for the great talk!

@@ -1,0 +1,20 @@
+%h2 Transforming JavaScript with Java like God intended
+%i Malte Ubl (@cramforce)
+%p This is all about the Goolge Closure Compiler.
+%p Closure compiler does unsafe minification and transformation.
+%p Most minifiers change variable names, but Google closure compiler will do property shorting and property collapsing which is UNSAFE, but can improve your code size dramatically.
+%p "Java is to JavaScript like Ham is to Hamster"
+%p Wouldn't it be cool if the only Java class was Node. Google closure compiler uses an abstract syntax tree where everything is a node on the tree.
+%p Closure Compiler can make your Java code look as easy to understand as JavaScript.
+%pre
+  %code{:class => "javascript"}
+    function(require, exports) {
+    var foo = require('foo');
+    var bar = require('bar');
+    exports = { test: 1 };
+    }
+%p Malte created a Java program that does an unsafe minification of common JS code to make it really fast.
+%p
+  Check out the Google Closure Compiler at
+  %a{:href => "https://developers.google.com/closure/compiler/"}Google
+%p Thanks Malte!

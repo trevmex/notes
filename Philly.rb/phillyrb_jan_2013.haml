@@ -1,0 +1,37 @@
+%h1 Philly.rb January 2013 Meeting
+%h2 Talking to strangers cause train wreaks
+%i Mike Toppa, ElectNext.com
+%p The Law of Demeter: do not talk to strangers. This means if your class has an association with another object, you do not want to directly connect to that objects associated objects. E.g.: objA.getB().getC() == bad.
+%p Rails relations make it really easy to break the Law of Demeter due to the ease of use wiring up ActiveRecord relationships. That makes it really hard to test, due to the intricate and fragile mocks you need for unit testing these deep-linked relations.
+%p Factories (e.g. FactoryGirl) helps you go one level out to make your life easier, but not farther. This helps you know when you are breaking the rules.
+%p Using has_many :through associations make reduct Demeter violating code in your Rails apps.
+%p The use of delegation can also solve your Demeter violations, by having interim methods for access to your friend's friends through your friend (if that makes sense).
+%h2 Google Analytics for Developers
+%i Chris Le (@iamchrisle), Seer Interactive
+%p What is the difference between Google Analytics (GA) and Mixpanel? GA bases everything around URLs, and Mixpanel bases everything around JavaScript events.
+%ul
+  %li GA and Mixpanel both need some boilerplate JavaScript to track pages.
+  %li In Mixpanel all of the things a user can do on the page can be tracked, BUT it has to all be coded by hand. Great for devs, not so great for non-devs.
+  %li GA is drop and go. Easier for non-devs, and it is FREE.
+  %li GA is also more integrated with other data about your site. GA reports have a lot more data, but it is more complex to deal with.
+  %li Mixpanel has built-in cohort analysis, in GA you have to build it in.
+%h3 Simple Funnel Analysis
+%p The funnel is the flow of what a user goes through on your site. You don't want a long and complex funnel, or you will lose users. Lightweight funnels for first-time users is key to hooking in users.
+%p Where do the users come from, you need to know that for ads, etc. The funnel shrinks as you go farther down the path. You are looking for big drop-offs in the funnel data. Those are the places you want to focus on improving.
+%p There are organic and paid search traffic (from Google, for example), and for organic traffic, there are branded vs non-branded traffic. Branded traffic is when the user searches for your company directly, unbranded is when they are searching for something else and come to you.
+%p The more visits you have the better your site is doing! Exits are normal, don't panic about them. Also, don't freak out about high bounce rates. I you have high bounce rates, consider the content of the page before reacting.
+%p Mixpanel does not have inbound data, so you cannot find out how the user got to your site. With GA, you get that for free.
+%p In Rails, it is easiest to have a simple partial to render the GA boilerplate code that you can add to your application layout. It is that easy.
+%p In GA you set up your funnels with the Goals tab. You set up your goals and once a user has gone through the funnel they have met their goals. Your goals can be a URL destination, a JavaScript event, an amount of time spent on a page. In Mixpanel, you can only have JavaScript events.
+%p The funnel visualization clearly shows you where your drop-offs are in your funnels. The Mixpanel visualizations are similar.
+%p You can use the exit rate to see the drop-offs over time. Lower exit rates are better. With GA you can measure your exit rates to very clearly see what changes are helping and what are not.
+%p You get all of this with no lines of code at all!
+%h3 Advanced (using code to make things cool)
+%p Who's being a quitter? You can add events with code using _gaq.push() in JavaScript. You can call this function many times, and the last time it is called wins, so you can change the values of your custom variables on the fly if user information or actions changes. Then, again, using the exit pages view in GA, you can track your custom variables and see if certain types of users are leaving faster or slower than others.
+%p In GA you can find data about cities, browsers, even screen resolutions all for free.
+%h3 JavaScript Events with Forms
+%p You want to answer the question: why are your users falling away. It is pretty straightforward. Add an HTML data attribute to your form fields (textboxes, checkboxes, etc.), and then in your JavaScript (if you are using jQuery for example), you can trigger a _gaq.push() event to occur on blur of your fields. This is a way to get fine-grained details on what fields in your forms users are clicking on.
+%p Analyzing these GA stats allow you to intelligently figure out where to spend your develop time.
+%p GA Event Flows are nice to see where your events are leading too, but be warned don't use event flows for everything, the UI is really complex if you have more than a few events linked together.
+%p GA now has web performance anomaly detection now. It is really new, but has lots of potential.
+%p Thank you to Mike, Brandon, and Chris for the great talks!

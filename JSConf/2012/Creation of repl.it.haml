@@ -1,0 +1,25 @@
+%h2
+  Creation of
+  %a{:href => "http://repl.it/"}repl.it
+%i Max Shawabkeh
+%p repl.it is a read eval print loop for many different languages in the browser, written entirely in JavaScript.
+%p The UI is all the same for all the REPLs, and the API is the same for all the languages.
+%p All the code is executed on the client. And all the interpreters are written in JS.
+%p Interpreters are pretty easy to write, it turns out. You need to have code that:
+%ul
+  %li initializes the language
+  %li evaluates strigns as code
+  %li mantains state
+  %li can do I/O callbacks (read from the keyboard, write to the screen)
+%p repl.it reuses a lot of interpreters that are already out there. Remember, the best programmers steal!
+%b All things can be JavaScript
+%p
+  %a{:href => "https://github.com/kripken/emscripten/wiki"}Emscripten:
+  LLVM bitcode to JavaScript
+%p
+  OMG, that is amazing. That means ANYTHING that you can compile to
+  %a{:href => "http://llvm.org/"}LLVM
+  (C, C++, etc.) can be turned into JavaScript and run in a browser.
+%p That is amazing. repl.it compiled Ruby 1.8 and CPython in LLVM and then emscripted them to run in the browser.
+%p repl.it is great for learning new languages.
+%p Great talk! Thanks to Max!

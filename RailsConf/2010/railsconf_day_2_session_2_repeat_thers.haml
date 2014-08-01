@@ -1,0 +1,57 @@
+%h2 Don't Repeat Yourself, Repeat Others
+%i John Nunemaker (www.railstips.com)
+
+%p Learn more about Ruby to get better at Rails
+%p Reinventing the wheel can be a good thing. Redoing other's work can make you a better coder.
+%p Ruby is a dynamic language. Really.
+%ul
+  %li autoload: it is the same as require, BUT it lazy loads the code, instead if loading the code on start up.
+  %li method missing is magical. It let's you dynamically create methods by method names using regex.
+  %li dirty keys: e.g. name_changed? will check to see if a name is changed. You can implement this using method missing. (a regex on /(*.)_changed\?$/)
+  %li class_eval: Allows you to extend a subclass at its creation time.
+  %li key: adds the variable, variable=, and variable? for you to override.
+  %li 
+    %i TODO: Dig into include and extend to learn more about this stuff
+  %li Check out the Metaprogramming in Ruby book
+%ul
+  %li You can override Object methods in your Class/Module
+  %li
+    Equality
+    %ul
+      %li You can override eql?, but do not override equal?, it is only for ref equality.
+      %li You can alias :== to eql?
+  %li Clone/dup: Clone actually makes a clone of this object, but it does not make clones of the things this object associates with.
+%p Hooks:
+%ul
+  %li There are a lot of hooks in Ruby.
+  %li The self.included hook runs each time you include a Class
+%h3 Patterns!
+%ul
+  %li Proxy: A class that is an interface to another class. It is like a bouncer that protects the little guy.
+  %li Proxy uses method_missing to pass everything to the source.
+  %li Decorator: Add awesomeness to an Object without duck punching (monkey patching) it.
+  %li By using object.extend, we can add decorators to an object.
+  %li Identity Map: A man with two watches never knows the time
+  %li Read Ruby Design Patterns. It's good.
+%p APIs
+%ul
+  %li EAT YOUR OWN DOG FOOD!
+  %li You can make everything a plugin, and use your code to access your code.
+%quote "I want to make things, not just glue things together" - Mike Taylor, Whatever Happened to Programming.
+
+%h3 Steal!
+%ul
+  %li Good programmers create, great ones steal.
+  %li If someone has a good idea use it blatantly.
+
+%h3 Think
+%ul
+  %li Make decisions: Don't solve for multiple cases in your functions
+  %li "Just in Time vs Just in Case"
+  %li Extraction vs Prediction: Don't be afraid of doing the same thing a few times and see the patterns.
+  %li REFACTOR! Refactoring is love.
+  %li Check out Refactoring Ruby Edition
+  %li Refactor on paper, it can help you think!
+  %li Write, blog, tweet, discuss, talk about what you do. Write for yourself. It can help you connect the dots for yourself.
+  %li Talk about what you are doing, and how you are doing it.
+%h3 super is SUPER. It's true.

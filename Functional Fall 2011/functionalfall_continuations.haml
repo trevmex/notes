@@ -1,0 +1,18 @@
+%h2 Continuations, functions, and jumps
+%i Kyle Burton moderating
+%p A continuation is a different way of representing functions, as a chain of calls with links to the next function or label to call.
+%p A continuation is a generic control structure that you can create a try/catch with.
+%p Using the callcc feature of Scheme or Ruby, you can call continuations that will execute and then return to where the callcc was executed.
+%p A continuation passing style is a way for people that like lambdas to avoid writing control flow diagrams.
+%p Once you translate your program to a CPS you no longer need a function stack.
+%p A continuation passing style allows you to create control flows in languages without control flows, like assembly, which is why CPS is so useful in compiler design.
+%p Remember, when you are using a continuation, you are not returning anything but another continuation.
+%p Tail recursion, or tail call optimization, is a way to optimize recursive functions by adding a goto at the end of the function that recurses. You can only do this IF the last call in your function is the function itself.
+%p Scala allows for tail recursion optimizations,  but it is a trick of the language, since the JVM doesn't allow for this.
+%p The "inversion of control" is another term for event-based programming.
+%p A continuation is a goto with arguments.
+%p Using callcc in a language like Ruby is the functionally the same as using a goto.
+%p The reinversion of the inversion of control allows you to write seemingly linear code but allows you to move backwards and forwards in your code. The reinversion of the inversion of control uses continuations to allow this access.
+%p In JavaScript you can think of a callback as a type of continuation passing style, since JavaScript cannot do continuations.
+%p The reason CPS is useful is that it gives you usability and vigor in imperative languages, and it allows you to translate imperative concepts into non-imperative languages, like Assembly or Haskell.
+%p 

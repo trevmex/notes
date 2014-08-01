@@ -1,0 +1,56 @@
+%h2 Tasty Burgers
+%i Aaron Patternson (@tenderlove)
+%p (http://tenderlovemaking.com/railsconf2010.pdf => WAU! That's a lot of slides!)
+%p Announcing Rails 4! Now with Ponies, Unicorns, and Venture Capital!
+%p Twisting Software to see how Rails really works
+%ul
+  %li SQLite
+  %li ERB
+  %li Rack
+  %li YAML
+%p SQLite is the default DB for Rails
+%ul
+  %li ActiveRecord sits on top of SQLite3-Ruby
+  %li AR:Base asks for an adapter from a connection pool, which gives AR::Base a SQLite3 Adapter
+  %li You can use SQLite in memory, but it doesn't quite work right yet, VERY NO!
+  %li You can prepare statements before sending them to the DB
+  %li Why prepare a statement? You can cache a statement that you use over and over again. Which can help the Garbage Collector.
+  %li They can also improve database queries (sometimes)
+  %li Rails has no prepared statement support. We should do this.
+  %li
+    Twisting SQlite3
+    %ul
+      %li SQLite3 has support for virtual file systems
+      %li That means you can get IO hooks
+      %li @tenderlove wrote a hook that allows us to make virtual file systems in Ruby
+      %li __END__ + DATA: At the end of a ruby script you can add data. With this hack, you can add a SQLite3 DB inside a ruby file WOW
+  %li The new SQLite3 1.3.0 has Ruby 1.9 support and is about 1000x faster (no really!)
+%h3 ERb
+%p Used to process erb files
+%ul
+  %li Rails uses the Factory design pattern to get access to various view renderers, like ERb
+  %li ERb takes a file and turns it into ruby code.  You can look at the output with the .src method
+  %li
+    Twisting ERb
+    %ul
+      %li ERb Memory Footprint: We have to store a lot of stuff in memory
+      %li What would be nice is if we could use have IO Input and Output
+      %li Using MMap instead of strings, you can store ERb templates
+      %li Check out the slides for the details (tons o' code)
+%h3 Rack
+%p Rack provides a generic interface to rails.
+%ul
+  %li When you are using Rails you don't have to worry about Rack (woohoo!)
+  %li Rack outside of Rails is pretty straightforward, too.
+  %li
+    Writing an ERb Handler in Rack
+    %ul
+      %li This is like, 15 lines of code. WAU!
+      %li He just showed us how to use IO streams and threading to speed up get requests.
+      %li There could be room for improvement in Rails using this technique (again, look at the slides)
+%h3 Parsing YAML
+%p The new YAML parser is Psych, the old one is Sync and is unmaintained
+%p JSON is a subset of YAML. With Psych we can just call to_json to get JSON
+%hr
+%p The goal of the story is dig in and have fun. Rail is fun!
+%p IRC is a really good source of people to learn about Rails and Ruby

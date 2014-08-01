@@ -1,0 +1,54 @@
+%h2 Philly Lambda June 2011 Meeting
+%h3 Building Multi-Channel Communication Apps with Tropo, Phono and SMSified
+%i Mark Headd
+%p You can write telephony apps with tropo in php, groovy, ruby, or javascript.
+%p You can add many phone numbers to use for your telephoe apps.
+%p You can start a conference call in tropo by just executing "conference()"
+%p Check out Chloe, it is awesome.
+%p Tropo gives you speech recognition with some simple grammers. Text-to-speech in 9 languages.
+%h4 SMSified
+%p SMSified is a powerful SMS API that is very simple to use.
+%p You can make a simple node app that the phone number can connect to. Basically all you have to do is have a URL to post to, and your phone will send to your app.
+%p Google, GroupMe, and Twillio are being sued in a class action lawsuit about spammers. Tropo is very aware of this.
+%p Non-malicious spoofing is legal on phone calls (according to the FCC).
+%p Carriers are very wary of SMS spammers, and will block your phone number if you spam a lot.
+%p Voice XML was suppose to be "telephone APIs just like the web," but it turns out that most people don't like to code in XML. You can do lots of great stuff with it, but it is SO complex, so some of the APIs like Twillio and Tropo, are simple but limited.
+%p SMSified is a pure RESTful API. There is no server-side queue, so you will have to have a server connected to your phone number at all times.
+%h4 Phono
+%p Phono is an extension to jQuery
+%pre
+  %code.javascript
+    $.phone()
+%p With Phono, you can have your front end code make and receive phone calls.
+%p One cool thing you can do with this is set up a simple remote call center solution with couchdb.
+%p Phono uses XMPP to communicate with the Tropo SIP network. It is very much like Skype.
+%p Thanks to Mark for the great talk!
+%p Check out cradle, it is a couch-db connector for node.js!
+%h3 Introduction to Mobile Robotics
+%i Tom Panzarella
+%p Tom does mobile robotics!
+%p Let's get excited about robotics! As a computer programmer, you can get into robotics today! V. Cool!
+%p Tom does unmanned ground vehicles (with wheels) for people, like the elderly.
+%p Willow Garage is one of the most important companies in robotics today. Robotics is a field that is like computers in the 1970s. It is amazing.
+%ol
+  %li
+    DARPA 2004 and 2005 Grand Challenge, then the 2007 Urban Challenge made teams to create automated cars. A lot of interesting robotics tech came out of these races. The big thing that came out of this is the power of 3D lidar systems to make a 3D reconstruction of the world. 3D lidar is how robots see. You can play with this stuff with the pcl open source library. pcl is written by the guys that made OpenCL.
+  %li
+    The XBOX 360 Kinect is a game changer. It is the first cheap 3D sensor ($150, where as 3D liders cost about $1,200). The physics of the kinect is totally different than lidar. You can integrate with the kinect with the OpenNI and libfreenect code libraries. The official SDK from Microsoft came out this week, but it is only Microsoft technologies, unlike the other libraries. The advantage to using a kinect over a webcam is that you can get a 3D image with a kinect. Kinect is not suitable for outdoor use, but it is good for indoor robotics. The key is that it is inexpensive. There is a more expensive sensor ($1,200) called the IFM Efector O3D200 3D Flash LIDAR that can give you a better picture that CAN work outside.
+  %li
+    Willow Garage was founded by Scott Hassan, the 3rd employee for Google, and they want to advance the industry of robots that work with people. Robots in your home. They make the PR2, which is the primary robot used for research in universities in the US. Check out the TurtleBot, which is an iRobot Create, a laptop, and a Kinect all together to make an affordable (~$1200) programmable robot to play with. The whole point of the TurtleBot is that you don't have to worry about the details of robotics, you just have to write app.
+  %li
+    www.ros.org - The Robot Operating System. "It is like 'Ruby on Rails' for robotics." ROS allows you to write simple app-level code to control robots without worrying about the messy physics. First class citizens in ROS are C++ and Python. There is also ROSJava, which is the goal for Google to get Andriod-based robots. There is a movement to make a lot of the robotics movements stored in the cloud, so many robots can share how they interact with the world.
+  %li
+    Sebastian Thurn now works at Google. Fast Company calls him the 5th most creative person in business. He is behind the unmanned cars that Google make. He believes that he will bring unmanned cars into the mainstream. All the technology is there right now.
+  %li Cloud Robotics: Go watch http://bit.ly/lGGoKI
+  %li iRobot did it. They made robotics marketable.
+  %li You can now get a degree on robotics. It is a legitimate thing now.
+%p To get started:
+%ul
+  %li Buy a TurtleBot.
+  %li Learn ROS.
+  %li Learn Andriod.
+%p Apple is the anti-robot company. They will not allow people to write robot controllers for iOS or the Mac. That is why you have to stick with Andriod. Google is giving robotics its full supports.
+%p (Tom went into a lot of technical stuff and math, it is amazing, but I had to pay attention to understand, sorry folks. :P)
+%p Thanks to Tom for the great talk!

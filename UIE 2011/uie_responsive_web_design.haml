@@ -1,0 +1,73 @@
+%h2 The  How and Why of Responsive Web Design
+%i Eathan Marcotte
+%p UIE Virtual Seminar (2011-01-13)
+%p Zero - an interesting idea.
+%ul
+  %li Zero can mean a lot of thing...
+  %li Despair
+  %li Emptiness
+  %li Hope
+  %li Completeness
+%p Check out the post "The Dao of Web Design" on "A List Apart"
+%ul
+  %li The central argument of the paper is that there is an essential tension between the web and the way we design it.
+  %li Print and web is very different.
+  %li In WEB design, we have a very different canvas than a traditional artist.
+  %li Our canvas is the browser!
+  %li We, as designers, surrender a lot of control over our canvas to the reader (viewer).
+  %li There are a lot of ways we try to control the canvas, but ultimately, the reader has the control to tweak the canvas.
+  %li Instead of trying to constrain the canvas to our ideas, we need to EMBRACE the flexibility of the devices that connect to our chosen canvas.
+%p iOS devices have skyrocketed in adoption.
+%b In 2-4 years, the mobile web will usurp the desktop as the dominate platform for the web.
+%p
+  As designers we here this a lot:
+  %b "I need an iPhone website"
+%p But what does this mean to use? Do we make an iOS site, or one that works everywhere, where do we get off the bus?
+%p What we need is a responsive web design.
+%ul
+  %li A flexible grid (with flexible images) that incorporate media queries and 
+  %li Check out robotornot.com for a good flexible grid design.
+%h3 The Flexible Grid
+%p This idea comes from the concept of the "typographical grid"
+%p the grid is tailored to the NEED of the content of the grid.
+%p The reader will get a series of vertical and horizontal lines to guide the eye.
+%p ...but when the Web came, that stuff was thrown out...
+%p until the grid systems came: YUI Grids, blueprint, less, etc.
+%p BUT the problem with ALL of these is that they are FIXED-WIDTH grids.
+%p So how do you make FLEXIBLE grids?
+%ul
+  %li Target / Context = result // Fluid grids
+  %li First, use percentages for width, not pixels.
+%h3 Flexible Media
+%p The flexible grid looks great with text only, but once you have images you have some issues.
+%p
+  %b img{max-width:100%}
+  to the rescue!
+%p This will make your images fit to your flexible grid. Easy!
+%p what about video? NO PROBLEM!
+%b img, object, video {max-width: 100%}
+%p ...but max-width doesn't work in IE6?
+%p
+  So for IE6 you can use 
+  %b img, object, video {width:100%}
+%p but be careful, it doesn't work quite right all the times.
+%p IE7 and lower will degrade the quality of an image if you shrink an image using max-width.
+%h3 Media Queries
+%p At some point, everything breaks. (But that is OK)
+%p No design, fixed or fluid, are designed to look well on all screens (they are either desktop-centric or mobile-centric)
+%p So, how can we be more responsive? How can we scale to multiple widths.
+%p Back in the day, we had media types. (print, screen, aural, etc.)
+%pre
+  %code.html
+    &lt;link rel="stylesheet" media="screen" href="teh_csszorz.css" /&gt;
+%p So now we have the media query!
+%pre
+  %code.html
+    &lt;link rel="stylesheet" media="screen and (max-width:340px)" href="baby_csszorz.css" /&gt;
+%p This also works within CSS itself
+%pre
+  %code.html
+    @media {...}
+%p The REAL cool thing is that you don't have to ONLY specify the width, you can restrain your CSS to many different things (color, viewport, height, etc.)
+%hr
+%p Thanks to Eathan for the great talk!

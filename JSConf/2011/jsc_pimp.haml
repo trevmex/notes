@@ -1,0 +1,75 @@
+/ Pimp Your JS Library
+%h3 #jsconf Notes
+%i Dan Webb
+%p Designing a Non-Shit JavaScript API.
+%p In the beginning there was prototype, dojo, and mochikit.
+%p Then jQuery came along with their simple way of writing code. And jQuery is now (almost) the default choice for a library when doing browser programming.
+%p The internals were not so important, John Resig created a great interface.
+%b All programmers are API designers
+%p The API is Priority #1, it needs to be:
+%ul
+  %li
+    Predictable
+    %ul
+      %li We don't want to have to worry about the lower level details when solving a higher level problem.
+      %li You have to think about your audience: JavaScript Programmers.
+      %li It is important to use conventions that people know in the language itself, and standard libraries.
+      %li For example, use camel case. Yes, really.
+      %li Constructors should start with uppercase, etc.
+      %li Be careful with polyfills.
+      %li Your library that solves one probem is not the right place to fix for each...
+      %li Polyfills can cause a lot of pain when used incorrectly.
+      %li Be like popular JS library conventions.
+      %li Raphael.js is a great example of this. It is easy to use, and it looks and feels a lot like jQuery.
+      %li Evaluate your problem domain for predictability. For example: jQuery CSS manipulation looks a lot like actual CSS.
+  %li
+    Simple
+    %ul
+      %li Please read "Don't Make Me Think" by Steve Krug
+      %li Don't make the user make decisions they do not need to make.
+      %li When you present al the options all of the time, it is confusing.
+      %li Don't make me RTFM again...
+      %li What this means is the use of sensible defaults.
+      %li event.initMouseEvent(...) is especially bad at not having sensible defaults.
+      %li element.addEventListener(...) is another bad guy. Why do we have to always say false at the end?
+      %li
+        %b Use options hashes for optional arguments!
+      %li Check out Rebecca Murphy's http://blog.rebeccamurphey.com/objects-as-arguments-in-javascript-where-do-y article.
+      %li Function calls should read well.
+      %li The DOM API has the least intuitive APIs out there, Dojo is better, but jQuery got it right.
+      %li Try your best to mask complexity, where possible, but be careful about not creating "magic."
+  %li
+    Flexible
+    %ul
+      %li Remember: you can't please everyone.
+      %li Don't try to second guess every use case.
+      %li Option hashes do NOT equal flexibility.
+      %li jQuery UI is especially bad at having a swiss army knife approach to their API.
+      %li Maybe a better way is to add hackability to your API. (like monkey patching)
+      %li Have a public API, and internal API, and a protected API.
+      %li
+        You can hack away on the public API, you shouldn't hack the internal APIs, and you cannot hack the private APIs:
+        %pre
+          %code.javascript
+            var myLib = (function () {
+            function private() {/* This is a private function, you can't hack this. */}
+
+            return {
+            _internal: function () {/* This is an internal function, please don't hack if you can help it. */},
+            public: function () {/* This is a public function, hack away. */}
+            };
+            }());
+      %li Use private functions sparingly
+      %li Wherever you can return something, you can return a function that returns the right thing. This way you can overwrite what functions can return. Adding powerful hackability to JavaScript.
+      %li Use Prototypical Inheritance to allow developers to extend your library easily.
+      %li Check out http://github.com/danwrong/loadrunner for a good example of this.
+      %li Remember duck typing! If it looks like a duck and walks like a duck, it is a duck. Take advantage of this in your APIs.
+%p Create a framework to solve a problem, then build your library on top of your framework. Then you will have a plugin system.
+%b Everything should be hackable.
+%p Build tools to solve a problem.
+%ol
+  %li Design up front
+  %li Make use of conventions
+  %li Don't make me think
+  %li Build in hackability
+%p Thank you Dan for the great talk!

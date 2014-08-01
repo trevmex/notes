@@ -1,0 +1,45 @@
+/ Test Your Legacy Code
+%h3 #railsconf 2011 Notes
+%i Noel Rappin (@noelrap)
+%p First thing with testing legacy code, you want to DO NO HARM!
+%p You want to add features or fix bugs at a sustainable pace.
+%p To do this you have to improve your code quality.
+%b Every time you touch a piece of code, you want to leave it better than you found it.
+%p We cannot test everything all at once. We also cannot just drop in changes without tests.
+%p "It's a small world, but I wouldn't want to paint it." It is not a quick win to cover your entire legacy suite and write tests everywhere.
+%p Do not just jump into an unknown code base and write tests.
+%p If you don't understand a code base, it is almost certain you will be writing bugs.
+%p The goal here is to add value by testing features that YOU touch and let your code feed back into the tests.
+%p Don't start by writing a lot of tests.
+%p Why not just drop something into your code? Because when you do NOT add tests to your code and you advocate testing, you are diminishing your own value.
+%p When you don't write tests, you are hurting your reputation.
+%p How do you become a good quality programmer? Start with TDD on NEW stuff. Don't worry about what is legacy.
+%p Test the parts of your code that you are working on.
+%p There is not a whole lot of value on working on tests for parts of your code that are not going to change.
+%ul
+  %li You don't know what to test.
+  %li It is hard to isolate objects under test.
+%p git is your friend when you are working on a legacy code base.
+%p git bisect allows you to pinpoint the check in that break your builds.
+%p Check in frequently, check in small commits, This makes a difference.
+%p Cucumber is great for testing legacy code. We can use cucumber on old legacy code.
+%p ...but cucumber tests are SLOW! There is no good solution for this...
+%p Cucumber is good at telling you that there is a problem, but not good at telling you where the problem is. That being said, it is good for regression testing.
+%p When you don't understand a code base, it is good to start at the high level cucumber tests.
+%h3 Test Driven Exploration
+%p Start with a test that you know will fail, paste in the code, and make it green.
+%b The code is the source of truth.
+%p If there is an incompatibility with how the code works and how the test is written, the code is always right.
+%p Mock testing allows you to test really fast and they allow you to isolate your units.
+%p But mocks can be really hard to set up. And you can end up with a lot of mocks in your test cases. When you have more and more mocks, you have brittle tests.
+%p You should not be having mocks within mocks, that is a code smell, and it indicates a violation of the law of demeter.
+%h3 Seams
+%p A seam is when you change the behavior of your code to make it able to test. An example of that is subclassing your actual class and overide methods that you don't want to have your tests call.
+%p You can add arguments to your old methods to extend their functionality.
+%p What about BAD tests?
+%ul
+  %li Make sure the test suite runs green before you fix bad tests!
+  %li The 5-minute rule: If you do not know what a test does and you cannot figure it out in 5 minutes, comment it out.
+%p When do you refactor? Refactor when your tests run green. Refactor the simple things only.
+%p For complex stuff, ONLY refactor it when you have an actual request.
+%p Than you to Noel for the great talk!

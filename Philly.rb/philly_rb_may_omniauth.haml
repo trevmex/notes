@@ -1,0 +1,35 @@
+/ Omniauth
+%h3 #phillyrb May 2011 Meeting Notes
+%i Thibut Assus
+%p Announcements:
+%ul
+  %li The SunGard Cloud Compitition is coming up soon. Check it out.
+  %li If you are going to RailsConf or BohConf next week, watch the twitter feeds for #railsconf or #bohconf to see what is going on. It is awesome.
+  %li GuRuCo is on June 4th at Pace University in New York. It is sold out, but Trotter and Aaron will be there!
+%p Omniauth is a flexible authentication suite that is awesome.
+%p Thibut is using it at http://www.feedmehq.com/
+%p Authentication is the act of confirming that a user is who they say they are.
+%p Authentication is not the same as identity. You have one identity, but you can have lots of ways to authenticate.
+%p Omniauth currently supports 47 different ways to authenticate a user's identity:
+%ul
+  %li facebook
+  %li twitter
+  %li linkedin
+  %li github
+  %li foursquare
+  %li ...and much much more!
+%p To use it with Facebook, you have to create an app on Facebook and then you add one line to your config/application.rb file in Rails, and your authentication with Facebook just works.
+%p To log into your app with Facebook, you just add a link to '/auth/facebook' and you can log in.
+%p One thing about this is that you cannot store the Facebook user's name due to security, but you can ask the user if it is OK to get their name.
+%p In your controller you can call User.find_by_provider_and_uid(auth['provider'], auth['uid']) to verify that your user exists.
+%p The great thing about using Omniauth is that you now don't have to worry about stupid login screens anymore, and everyone has one of these accounts already.
+%p You don't have to manage routes, controllers, views, or anything else anymore. Let someone else worry about login for once!
+%p "When you work with startups, you always start with something. And it is often authentication, which is never the core business of your client or business!"
+%p It always takes a LONG TIME to figure out the simplest way for users to get on board in a website. Why not just let the user use something they are already familiar with.
+%p Also, you don't want to be stuck with an obsolete authentication library. Rails has been bad with this: first there was acts_as_authenticated, then restful_authentication, then authlogic, then devise, and they all die out eventually.
+%p How do you test this?
+%ul
+  %li Fortunately the smart guys at Omniauth have a test mode (Omniauth.config.test_mode = true) that tells Omniauth to mock out authentication for testing. Awesome!
+%p Check out Thibut's github account for sample code!
+%p Basically Omniauth is awesome. It is fast, simple, and flexible. It is really good for prototyping and getting your apps up fast!
+%p Thank you to Thibut for the great talk!

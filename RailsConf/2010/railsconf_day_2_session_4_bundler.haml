@@ -1,0 +1,61 @@
+%h2 Bundler
+%h3 Why Bundler?
+%ul
+  %li Applications need gem manifests so they can track what gems they use
+  %li rake gems:unpack could cause LoadErrors
+  %li rake gems:install could change gem versions
+  %li monkeypatches are a crappy way to fix bugs
+%ul
+  %li Gemfiles list out all the gems you are using
+  %li bundler resolves dependencies before installing
+  %li bundler locks the gem versions at install time
+  %li allows gems to be used directly from git repos
+%h3 Gemfile
+%ul
+  %li The gemfile is just a ruby file with a list of gems to instal: `bundle install` installs the gems
+  %li `bundle update` will update the gems that are installed
+  %li `bundle pack` will vender all the gem files with your app. That way your apps can deploy without the Internet.
+  %li `bundle install vendor` same as Rails 2 vendoring
+  %li Gem environments allow you to group gems for specific installations
+%h3 Pure Ruby usage
+%ul
+  %li
+    %pre
+      %code{:class => "ruby"}
+        require "rubygems"
+        require "bundler/setup"
+
+        require "nokogiri"
+        html = Nokogiri::HTML("<h1>Hi!</h1>")
+%p Bundler was written for Rails 3. It just works.
+%p For Rails 2: add preinitializer.rb, tweak boot.rb. The code is available at gembundler.com
+%h3 Deploying
+%p
+  deploying can become more complicated:
+  %pre
+    %code{:class => "ruby"}
+      after "deploy:update_code" do
+      run "cd {release_path} && bundle install"
+      end
+%p Bundler 1.0beta is coming out today.
+%h3 What is new?
+%ul
+  %li New lockfile format allowing for easy merging: it is now deterministic
+  %li Bundler.require loads gems in Gemfile order
+  %li Locking happens automatically (no more need for `bundle lock`)
+  %li Update to newer gem versions with `bundle update`
+  %li `bundle exec` is now depricated, it is no longer needed.
+  %li Bundler installs directly to system gems
+  %li Prompts for sudo password if needed
+  %li If using app-isolated gems, just prepend ~/.bundle/bin to your $PATH
+  %li Explicit support for multiple platforms: still under development, but it works right now. Caching still not working with all platforms.
+  %li
+    %pre
+      %code{:class => "ruby"}
+        platforms :ruby_18 do
+        gem 'nokogiri'
+        end
+  
+        platforms :jruby do
+        gem 'httpricot'
+        end

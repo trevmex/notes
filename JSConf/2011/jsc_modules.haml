@@ -1,0 +1,70 @@
+/ Simple, Powerful Modules for JS.Next
+%h3 #jsconf Notes
+%i Dave Herman
+%p There are a LOT of libraries for JavaScript, but Python with 14,490 packages, Ruby has 23,501 gems, and Perl has 22,529 distros.
+%p We are WAY behind the times.
+%p There are about 2000 packages for npm, which is awesome. We are working on it!
+%p JavaScript hands you a big ball of clay. You have to recreate a lot to get things to work. It is cool, but a lot of work.
+%p The Module Pattern: We add our libraries as scripts.
+%p So there is a lot of bookkeeping we need to do to make a library work.
+%p I don't want to be a compiler, I want a compiler to be a compiler.
+%p CommonJS is gaining some steam on the browser. Node.js is already making heavy use of it.
+%p But you still have to wrap your programs in a callback to use it.
+%p And CommonJS cannot fix fundamental problems with the language (like the for loop)
+%h3 Modules in JS.next
+%p TC39, the ECMAScript Working Group, is working on making module inclusion simple:
+%pre
+  %code.javascript 
+    module mylib = require "mylib.js";
+    module jQuery = require "jquery.js";
+    module underscore = require "underscore.js";
+%p How does this work without blocking, though? They are shoving the IO of the modules in the compilation phase, so they are loaded before execution.
+%p Your UI thread can continue as the modules are loaded.
+%p You can get compile-time checking for typos, etc.
+%p In JS.next, ALL unbound variables will give you a compile error.
+%p You can also do:
+%pre
+  %code.javascript import "util.*";
+%p Modules are all singletons, so you only load each once.
+%p You can still do dynamic loading with:
+%pre
+  %code.javascript ModuleLoader.require("egg.js", function (egg) { /* Do something */ }
+%p You can do evals of evals.
+%pre
+  %code.javascript .
+%p Eval should not go away, we just need to do it better.
+%p We need to make sure that we eval in a sandbox using childLoader.
+%p These sandboxes have:
+%ul
+  %li custom instance caching
+  %li custom loading
+  %li separate global object
+%p Dave has actually prototyped this for Mozilla. Using:
+%pre
+  %code.html
+    &lt;script type="application/narcissus" src="coffee-loader.js"&gt;&lt;/script&gt;
+    &lt;script type="application/narcissus" loader="CoffeeScript"&gt;
+    some CoffeeScript here!
+    &lt;/script&gt;
+    &lt;script type="application/narcissus" src="scheme-loader.js"&gt;&lt;/script&gt;
+    &lt;script type="application/narcissus" loader="scheme"&gt;
+    (some Scheme code here)
+    &lt;/script&gt;
+%p Holy crap, Dave just live demoed using native Scheme and CoffeeScript in a script tag in HTML. That is an AMAZING proof of concept. I love it.
+%p Modules are being worked on for Firefox 7, which should be out for developers later this year.
+%p We have to:
+%ul
+  %li Spec.
+  %li Prototype.
+  %li Build.
+  %li Deploy.
+  %li Polyfill.
+  %li
+    %b Advocate.
+%p Polyfilling is important. We can use shims until these things are really supported.
+%b Advocate: If you demand it, it will be built.
+%p Firefox 4 is shipping with Proxies! Proxies are very very awesome (think method_missing for JavaScript).
+%p Is import something.* dangerous? Since the import is at compile time you will get early error.
+%p require is a contextual keyword.
+%p This is not here to solve the packaging system problem. But ModuleLoaders will allow you to write your own loading semantics.
+%p Thank you to Dave for the awesome peek into the future.

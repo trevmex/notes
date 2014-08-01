@@ -1,0 +1,84 @@
+/ Building Rails Apps for the Rich Client
+%h3 #railsconf 2011 Notes
+%i Yehuda Katz (@wycats)
+%p How do you build Rails apps that work with rich client-side applications?
+%p Rails can be very useful, even if you are not rendering HTML, Rails makes making APIs really awesome. It can work well for machine-to-machine communication.
+%p "If all I'm doing is sending JSON back and forth, what's the point of Rails? Wouldn't something like Sinatra be better?"
+%p The idea in Rails 1.2 was that Rails was more than an HTML generator. And a lot of that is lost on people that have not created APIs.
+%p Rails is a rich HTTP abstraction.
+%p Read the HTTP spec, read the HTML spec.
+%b Just read specs. They are actually awesome!
+%p Fat models and skinny controllers: This allows you to make APIs easier. Your typical Rails application does a lot of auth, and other things that allow you to do so much more than rendering HTML.
+%b If you haven't looked at the ActionDispatch directory, check it out.
+%p ActionDispatch is the thing that abstracts out all the HTTP work. One thing Yehuda learned with ActionDispatch is that it is HARD to make these things work well.
+%p Rails does a lot in middleware:
+%ul
+  %li Sessions: you can get sessions for free
+  %li Standards: Rails puts your app in standards mode in Chome and IE. Awesome.
+  %li Cookies: Rails makes getting and setting signed and permanent cookies really easy.
+  %lib If you haven't looked at the ActionDispatch directory, check it out.
+  %p ActionDispatch is the thing that abstracts out all the HTTP work.
+  One thing Yehuda learned with ActionDispatch is that it is HARD to make these things work well.
+  %p Rails does a lot in middleware:
+  %ul
+    %li Sessions: you can get sessions for free
+    %li Standards: Rails puts your app in standards mode in Chome and IE. Awesome.
+    %li Cookies: Rails makes getting and setting signed and permanent cookies really easy.
+    %li Parameters: Rails deserializes xml, json, etc. nested stuff for you.
+    %li Reloading: Rails has built in reloading in dev mode.
+    %li Security: Rails handles remote IP spoofing for free, it helps prevent timing attacks.
+    %li Routing: Routing is easy with Rails.
+    %li Caching: Etags, last-modified are given to you for free, and you can specify your own.
+    %li Content negotiation: MIME just works.
+%p Once you leave Rails you lose all of this, and you ave to roll your own. You will miss it.
+%p ActionView is just a small part of what Rails is.
+%p The good thing about Rails is that you don't have to think about ANY of this, and you can concentrate on your own app.
+%p Just because something LOOKS simple, it doesn't mean it is. Rails does a whole lot of awesome underneath.
+%p Rich Client MVC: The controller sends JSON to the fat client in the browser, and the fat client renders the HTML. This removes the HTML rendering from the server.
+%p The state of JavaScript templating was not good in 2005. It is WAY better now.
+%p Echo, Handlebars, Mustache, etc. There are a LOT of awesome template engines in JavaScript now. Check them out. Don't be afraid of losing the ActionView layer.
+%p The job of the controller now is to package up the state of a view and hand it off to the fat client to render it.
+%p Rails actually has a lot of stuff going on behind the scenes. Check it out.
+%p There are a lot of things in Rails when you are building JSON APIs that are up to you. Naming keys are up to you, unlike ActiveRecird.
+%p Error reporting is all up to you with JSON APIs. A LOT is up to you.
+%p It is hard to write a single client when using JSON APIs, it is all lose and free-form. That is tough (Apache is working on this as well).
+%p ActiveResource takes way too much configuration. We need to make it a lot better.
+%h3 Rules for API Design
+%ol
+  %li
+    The root has to have one or more keys for what you are asking for.
+    %pre
+      %code.javascript
+        { posts : [ {title: "foo" } ] } // GOOD
+        { title: "foo" } // BAD
+  %li
+    No Nested URLs. No nested resources. APIs with nested resources are really hard.
+    %p Always do:
+    %pre GET /posts
+    %p not
+    %pre GET /group/1/posts
+    %p Also OK:
+    %pre GET /posts?group=1
+  %li Nested objects should follow these same rules (a.k.a.: all nested comment MUST follow rule 1.)
+%b Goal: One client for all resources!
+%p We need convention over configuration in JSON APIs like we have in Rails!
+%p Rules areaewesome, we need to embrace them with APIs.
+%p Conventional Ares should be possible with APIs, but it is not right now. We need to fix it.
+%p BULK. We need to be able to get many things at once with one API call (e.g. get many records at once.) Our APIs tend to not have a good way to handle batch operations (like SQL does).
+%p Check out the bulk_api gem. It allows Rails to work a bit more like a SQL server. V. useful.
+%p There should be one and only one way to handle a resource:
+%pre
+  GET /api/bulk?posts=all
+  GET /api/bulk?posts=1,2
+  POST /api/bulk
+%p The point of this is NOT to make it human-readable, it is to make it machine readable.
+%p The Bulk API allows you to batch your updates.
+%p The most important thing about the server-side piece is that it is conventional. It will proxy things to ActiveRecord.
+%p The bulk API gem converts JSON to ActiveRecord calls. (cool!)
+%p We need a convention for authentication. Devise is a pretty good library.
+%p We NEED to build libraries that build out conventions. These libraries should do the simple things by default, and are powerful enough to handle custom cases.
+%b "Just use REST isn't good enough."
+%p We need to optimize machine protocols for consistency, not human-readability.
+%p "Place your burden to machine shoulders." - Matz
+%b Rails is great for JSON APIs.
+%p Thank you to Yehuda for the great talk!

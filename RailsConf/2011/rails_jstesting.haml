@@ -1,0 +1,65 @@
+/ Getting Started With JavaScript Testing
+%h3 #railsconf 2011 Notes
+%i CJ Kihlbom (@cjkihlbom), Jonas Nicklas (jonicklas)
+%p Why don't we test our JavaScript code? JavaScript testing is really neglected. It is not included in Rails (sad face)
+%p Most of us do not think of JavaScript as "real code," but that is not true anymore.
+%p Web apps are closing in on desktop app, we HAVE to start treating JavaScript as real code.
+%p JavaScript testing is hard. It is hard to setup, hard to maintain (it is in the view layer)
+%p There are no established best practices in JS Testing.
+%p Actually, it is quite easy to get started!
+%h3 How to test JavaScript
+%p Unit Testing
+%ul
+  %li For testing widgets and components.
+%p Integration testing
+%ul
+  %li Ajax
+  %li Glue code
+  %li Complicated DOM
+%p Capybara is fun for integration testing! It simulates user behavior using Ruby.
+%p Capybara is driver-agnostic! You can use rack-test, selenium, akephalos, capybara-envjs, and capybara-webkit!
+%p Akephalos is headless and has good JS support, but it is slow.
+%p Capybara-envjs is fast, but it has poor JS support.
+%p Capybara in included in Cucumber. It is really easy to switch drivers in cucumber with the @ tag.
+%p (I'm using watir, but capybara is cool, too).
+%p In RSpec, if you add :js =&gt; true, you can test JavaScript in your RSpec tests. The same is true with Cucumber using @javascript.
+%p You should write tests from the user's perspective. You want to get into the headspace of the user.
+%p Remove the noise the user doesn't understand from the tests. To do this, use modules to create your own DSL in Capybara. The great thing about this is that Capybara is just ruby code, so you can extend it with simple Ruby methods.
+%p Cucumber is a great way to abstract common patterns. Keep anything that the user will not understand from your cucumber tests.
+%b Write your steps in real plain text!
+%p The selectors API in Capybara allows you to select certain parts of your page, instead of using complex xpaths in your code. Again, this is all about abstracting your code so the DSL is really related to your domain.
+%p Avoid asserting on:
+%ul
+  %li URLs
+  %li Cookies
+  %li Sessions
+  %li Application state
+  %li
+    %b And anything that the user will not care about!
+%p When you make test like those above, you make really brittle tests, and that is bad.
+%b Write stable specs.
+%p You want to decouple your specs from your implementation. Be as lenient as possible. Avoid specific selectors.
+%p You want to make really generic asserts. Try to check that an element exists, not where it is.
+%h3 Unit Testing
+%p The best test framework for JS: Jasmine! (w00t!)
+%p It is small, full-featured, and well-maintained.
+%p It is general purpose, but it is not well packaged. Jonas has created the Evergreen gem to make Jasmine easier to use. (I wrote a wrapper as well, called EnvJasmine, plug!)
+%p Evergreen is not tied to Rails, though.
+%b One of the cool things about Evergreen is that you can use it to write your tests with CoffeeScript.
+%p To run your tests, you can just go to /evergreen in your browser, and you can run your tests. It also makes it easy to run your tests in any browser. Much easier than selenium.
+%p With rake spec:javascripts you will be able to run your tests with any of the capybara test suites.
+%p Evergreen has templates that allow you to load a fragment of the DOM to use on your tests.
+%b Write testable code!
+%p If you write your JS in structured units, you make it a lot easier to unit test.
+%p It is hard to test jQuery spaghetti code. Try using objects to segment your JavaScript, so you can test it easier.
+%p Check out CoffeeScript, it makes JS look a lot like Ruby. It is cool.
+%p Do not be afraid to make OO JavaScript code. It is OK to do that. We can take our skills from Ruby.
+%p Try to maintain a consistant feel to your JavaScript code (OO or functional)
+%p Separate you JavaScript code into FILES! Your logic should be split up.
+%p ALWAYS TEST METHODS!
+%p You should mostly test event bindings, but that is pretty tough. That might be a case for integration tests.
+%p Write custom matchers.
+%p Try to isolate away ajax into some type of components that are testable. Spys make ajax easier to test, if you have to.
+%p Treat templates as fixtures, and update them manually. Use your integration tests to validate your templates.
+%p Simplify your DOM when you are testing units of JS. Try to write isolated JS and an isolated DOM to test on.
+%p Thank you to CJ and Jonas for the great talk!

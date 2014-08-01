@@ -1,0 +1,35 @@
+/ Tutti a Fun Way to Browser Test
+%h3 #jsconf Notes
+%i Toby Ho
+%p Tutti (http://tobyho.com/Tutti_-_Multiple_Browser_Interactive_Javascript_Shell) is an interactive JavaScript Shell that you load on multiple web browsers, and execute on one shell.
+%p That means that you can type one command in one shell and see the results of ALL the connected browsers.
+%p There is also a command line shell that you can install with:
+%pre
+  %code npm install tutti
+%p That will not only give you a command line interface to all your browsers, but it allows you to write Node code to execute code in all the connected browsers.
+%p You can use Tutti with Jasmine and Node to run your Jasmine tests on all the browsers that you want to test on.
+%p This is really really useful. Currently with EvnJasmine, you only test with John Resig's EnvJS browser emulator. With Tutti you can test your JavaScript unit test in as many actual browsers as you want.
+%p Using Node.js, Toby has made an autotest suite using fs.watchFile on his JavaScript source files. So now we have the ability to do autotesting in JavaScript. That is pretty powerful stuff.
+%p This way you can test to see if certain browsers do not have built-in functions. This can avoid a LOT of bugs down the road.
+%p Toby created a feature detection table using Tutti and @paul_irish's awesome modernizr library!
+%p Thank you to Toby for the great talk!
+
+/ Writing an (in)secure webapp in 3 easy steps
+%h3 #jsconf Notes
+%i Adam Baldwin, Curator of evilpacket.net
+%p We write a lot of insecure web applications. XSS is a big issue.
+%p We are always under pressure to ship it, and sometimes we don't have the time to secure all our apps.
+%b "Stop using TODOs and start using a real bug tracker!"
+%p The Security industry and the Development industry have a lot to talk about.
+%p Check our CORS for security issues. (http://evilpacket.net/cors/)
+%p Shebangs in URL strings explained: http://stackoverflow.com/questions/3009380/whats-the-shebang-hashbang-in-facebook-and-new-twitter-urls-for
+%p XSS is a big deal!
+%b It's NOT okay to just encode "&gt;&lt;'&amp;
+%p Use ESAPI/jquery-encoder to encode and decode your stuff. DON'T WRITE YOUR OWN. We want to standardize on some ways to encode/decode, etc. It is non-trivial to do.
+%p Check out: X-Content-Security-Policy: default-src 'self'
+%p Content security policy works in Firefox and Chrome and it allows you to control the sources of where your scripts come from.
+%p This is a great idea. We should all look into doing this.
+%p Security is not a 100% thing. You want to do better. That is all you can do!
+%p Be careful about Cross-Site Request Forgery.
+%p Clickjacking is where you put a site in an invisible frame and clicks and keys go through to the page beneath. This is a way to keylog.
+%p The moral of the story is to care about security.

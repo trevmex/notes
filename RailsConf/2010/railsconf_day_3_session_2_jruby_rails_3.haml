@@ -1,0 +1,55 @@
+%h2 Rails 3 + JRuby: Awesome Framework, Awesome Platform
+%i Nick Sieger
+%p Engine Yard has a JRuby Support Service to allow enterprise to feel comfortable about deploying JRuby
+%p Using JRuby - New Beta book on JRuby written by the JRuby Core Team
+%p What is life on the other side of the fence:
+%ul
+  %li J2EE devs are trapped in an IDE all day...
+  %li Think XML is the only way to communicate
+  %li Wish they could break free.
+%p JRuby is the gateway. It is the way to let the Java slave developers see a way out. A way to love what they do again.
+%p JRubyHub is a Rails 3-based website using JRuby
+%ul
+  %li Uses Neo4j: A NoSQL DB for Java based on graphs
+  %li The point of the site is to keep JRuby current, and have the core team eat their own dog food.
+%p What makes Rails 3 Awesome?
+%ul
+  %li Bundler. Bundler is awesome. No really. Coming from Java, this rocks.
+  %li What would be awesome: hooking in Maven to Bundler. i.e. Allow Bundler to pul down Java libs. (TODO)
+  %li Railties: makes initializing easier. You can write a simple Neo4j Rack app and hook it into Rails through Railties using the initializer command
+  %li ActiveModel is awesome: It allows you to mix in modules to make plain ruby classes act like ActiveRecord classes.
+%p JRuby on Rails unit tests almost all pass. You probably will not run into any showstopper bugs.
+%p ActiveRecord has more edge case bugs, but you should write tests! And if something fails, let the JRuby core team know about it.
+%h3 JRuby 1.5/1.6 Updates
+%ul
+  %li Heavier Java integration.
+  %li Ruby-to-Java compiler (you can compile to a .class)
+  %li Rake and Ant support
+  %li Lots of new performance pushes coming in 1.6
+  %li Totally rewriting the complier.
+  %li More integrated JVM features like coroutines and invokeddynamic
+  %li Big push for Ruby 1.9.2 support
+%p What makes the JVM awesome?
+%ul
+  %li The core of the JVM is called HotSpot
+  %li HotSpot has Garbage Collection (woohoo!): actually it has four different garbage collectors that are very customizable
+  %li The JVM has a great monitoring interface built into it using JMX: VisualVM is one of the better ones.
+  %li Java GCs only reclaim a large chunk of the heap until they hit the limit of the chunk size.
+  %li The JVM has a maximum heap size, so you will never overwhelm the machine you are running on even if your app eats a lot of memory.
+  %li There are two types of VMs: --client and --server
+  %li Client is faster to startup
+  %li Server has more aggressive optimizations (use this one!)
+  %li The JVM takes a while to load up (annoying!)
+%p How can we speed up to JVM startup times?
+%ul
+  %li Use JRuby + Spork + Watchr + Demo (eep!)
+  %li Spork allows us to spawn different threads with jruby instances in them. But the team hacked the Kernel.system command to catch jruby instances to spawn in the same JVM.
+  %li This is useful for faster TDD development.
+%p Rails.threadsafe!: Don't pool runtimes. It makes your startup times explode.
+%h3 Deployment
+%ul
+  %li Ruby-flavored servers (Mongrel, WEBrick, Glassfish, etc) work great
+  %li You can run Java servers (like jetty) with JRuby
+  %li Make a war: Warbler + Java Server (I <3 warbler!)
+  %li New in warbler: you can now make executable war files with JRuby!
+%p The bottom line is that there is still a lot of work left to do, but it is coming along.

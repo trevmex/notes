@@ -1,0 +1,75 @@
+%h2 Delayed Processing
+%i Rob DiMarco
+%p We want to delay processing to allow us to do less up front.
+%p When you do less in the main thread, you are loading your main content faster!
+%h4 How to do it?
+%pre
+  %code.ruby
+    Thread.fork {functionName}
+%p That creates another thread for you to do something and forget about it.
+%p When we talk about threads, the thread is running within your current process. Your process cannot exit before your thread is done.
+%p The Thread is an object in your shared object space, so, user be warned.
+%p You really have to control your thread count, that is where EventMachine and the like comes in.
+%b Threads are good for small simple things.
+%h4 fork
+%pre
+  %code.ruby
+    fork {functionName}
+%p This is specific to UNIX, and it DOES spwan another process on your OS.
+%p You get a pid as a response to fork, so you can detach the process and it is not a part of your process.
+%p Using forks are easy, BUT you cannot see data from other threads in the current process.
+%h4 LEVEL UP TO QUEUING!
+%p A queue will push processing off to something else (another process, program, or machine) and then that job is popped off by a worker.
+%h5 Delayed::Job
+%p Delayed::Job is from Shopify.
+%p It has exactly one queue and you send stuff to that queue.
+%ul
+  %li In your Gemfile: gem 'delayed_job'
+%p The nice thing about Delayed::Job is that you have to make very little code changes
+%pre
+  %code.ruby
+    User.find(1).follow!(User.find(2))
+    ;# Becomes
+    User.find(1).delay.follow!(User.find(2))
+%p The delayed jobs are stored in the queue in YAML. You are persisting your Active Record object as YAML. This is troublesome! Your object COULD change by the time you want to use it, so user beware.
+%p The jobs are processed with the daemon script 'scripts/delayed_job' (if you are running Rails).
+%p There is only one queue, you cannot vary the amount of workers per job type. You have priorities, but there is no easy way to priorities types of jobs.
+%p If you have very large queues, you wind up doing a lot of database locking when processing jobs.
+%p It is nice and easy, but there are some downsides: no out-of-the-box GUI, big queues hurt you, and working outside your codebase is tough.
+%h5 Resque
+%p Resque was created by GitHub. They were on Delayed::Job, but wanted something more verbose.
+%p Resque is based on Redis, a key/value store similar to memcached.
+%p To use it, you have to install Redis (brew install redis), and add the resque gem to your Gemfile.
+%p To enqueue things in your class, you need two things:
+%ol
+  %li A perform class method that takes an id and a branch that performs work.
+  %li An enqueue class method you use to add things to your queue.
+%p Your jobs are encoded in JSON. If you cannot encode in JSON, you are out of luck!
+%p Resque comes with a nice Sinatra app that you can use to admin your queue.
+%p Redis is an open source in-memory key/value store. Redis makes master-slave replication very easy.
+%p Resque uses Redis for storing the list of queue, the jobs in the queues and stats on your jobs.
+%p There are no priorities in Resque, the order you give the queues in is your priority order. There is no in-queue priority.
+%p Resque takes advantage of Ruby EE, if you are using it.
+%p To run your Resque queue you have to run the rake task:
+%pre
+  %code
+    QUEUE=* rake environment resque:work
+%p There is a resque web app that you can look at your queue quickly. You don't have that with Delayed::Job.
+%p The workers are more resistant to job quirks, which is nice.
+%p If you can't install redis, you can't use it.
+%p Resque has a fair amount of plugins, e.g. job retries, etc.
+%p Resque has a singleton plugin that makes your queues a set instead of a list.
+Amazon SQS
+%p Simple Queue Service is a web-based message queue.
+%p All the messages are passed into and out of SQS with SOAP.
+%p It is sort of like S3 for queues.
+%p It is 100,000 messages free, and $0.01/10,000 messages after that.
+%p You can use the RightAws gem to access sqs.
+%p All you can do is push onto the queue, and pop off of the queue. Pretty easy and straightforward.
+%p You can have as many queues as you want.
+%p ...but you have to handle the serialization (it passes strings only) and workers.
+%h5 AMQP (The bug guns!)
+%p Advanced Message Queue Protocol is very robust, RabbitMQ and Aapche Qpid are the big players in this space.
+%p This is quite a bit more complex than the other systems mentioned. It is for big and more complex systems.
+%h4 Thanks!
+%p Thank you to Rob for the fantastic and educational talk!

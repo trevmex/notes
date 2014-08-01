@@ -1,0 +1,98 @@
+/ Uncovering the Unknown: Priciples of Type Inference
+%h3 #phillyete Session 8 Notes
+%i Daniel Spiewak
+%p Type inference is either a really dry or really controversial.
+%p All the mainstream languages do strong typing REALLY REALLY BADLY.
+%p What is the basic theory of type theory?
+%ul
+  %li What does static typing mean at a fundamental level.
+%p A type system is a proof system.
+%p A type checker runs through your code and verifies lots of little proofs.
+%p Each of these proofs are trivial, but when you have a LOT of them together. It is helpful.
+%p Strong typing is designed to help you be a better programmer. Making you miserable is a side effect.
+%p Progress and Preservation!
+%p Progress: If a term is well-typed, then we know it evaluates to a value OR it is already a value.
+%p Static typing can give you intuition about what will happen in runtime. Progress tells you that.
+%p Preservation: If a term is well-typed and evaluates, then that result has the same type.
+%p So WHEN you evaluate, you will get the same type.
+%p This gives you soundness. All good type systems have this. C does not. :)
+%p The type should not change as you evaluate.
+%h3 THIS IS TYPE THEORY!
+%p That is ALL you need to know about type theory: Progress and Preservation.
+%p Where do the types come from?
+%ul
+  %li There is nothing that forces you the programmer to write types.
+%p Why do languages FORCE you to make typing explicit? LAZINESS! It is laziness in the part of the language creators.
+%p When you infer type explicitly, you are doing work for the compiler. That is dumb-tastic!
+%p And that is why Java sucks!
+%p There are many systems where the type inference is harder then the type system.
+%p But in general, the stuff we do use inferable types.
+%p Type inference is a misnomer. It is type reconstruction. The compiler looks and understands your code and puts your types together like lego bricks. It lays the burden of type checking where it belongs, in the compiler.
+%p There are two approaches:
+%ul
+  %li Each small reconstruction is self-contained
+  %li The other looks at large chunks holistically.
+%p "Local" inference confines your focus to a single declaration. The Chunk size is one statement long.
+%p With local inference, you evaluate one line and move on. You never go back.
+%p The pros of local inference:
+%ul
+  %li Mostly intuitive behavior. It is easy to run the algorithm yourself to figure out.
+  %li It is very very simple thing to do.
+  %li The Java compiler actually works this way, but with one extra step, it check that you set the right type as well.
+  %li It is always O(1) and always decidable.
+  %li Very useful in practice.
+%p There is NO excuse for a language designer to impose local inference onto your statically typed languages.
+%p It is catching on, but there are places this falls over:
+%pre
+  %code
+    def add5(x) = x + 5
+%p What does that return? You cannot know without annotation.
+%p Local inference HAS to explicitly declare parameter types in your parameter signature.
+%pre
+  %code
+    def add5(x:Int) = x + 5
+%p For recursive algorithms, your type inference is recursive as well. SO Recursive functions HAVE to have types as well (annoying!).
+%p The solution: "Global" Inference.
+%p Global inference doesn't look at the whole program, just the whole function.
+%p Scala cannot do global inference, but ML can!
+%pre
+  %code
+    fun fac (x: int) =
+    if x &lt;= 1 then
+    1
+    else
+    x * fac (x - 1)
+%p ML operators have types. For example: * has the type ":int * int -&gt; int" and that allows you to discover the type (:int) of the function fuc.
+%p ML cannot infer mutual recursion, but Haskell and OCAML can. That is a harder problem.
+%p So, can we get rid of the parameter type?
+%pre
+  %code
+    fun fac (x) =
+    if x &lt;= 1 then
+    1
+    else
+    x * fac (x - 1)
+%p Since the type of the * operator is still ":int * int -&gt; int", you can now know that both x and fuc are of type :int.
+%p How does ML know if it is an int or a real? It cannot, ML punts. Haskell can actually do this with type classes, but it is crazy complex.
+%p ML is awesome because it gives you static typing without declaring types.
+%p How about something harder?
+%pre
+  %code
+    fun grow f x = (f x) :: x
+%p The type is ":(d list -&gt; d) -&gt; d list -&gt; d list" where d is any type. This is called parametric polymorphism. Daniel just explained this and it blew my mind.
+%p The logical conclusion of this type system is a Hindley-Milner type system.
+%p The algorithm this uses is a Damas-Milner algorithm (used to infer types). Damas-Milner gives you structure of types, not names of types.
+%p Damas-Milner does not know anything about the label of your type. It is a structural, not nominal type inference. And THAT is why Scala doesn't have it, since it NEEDS to know the name of the type, since its type system has to run on the JVM.
+%p The JVM looks at the NAMES of types, not the structure. It is type equality based on the name. That is nominal type inference. That sucks. Structural typing rules.
+%p Dynamic typing is structural typing. That is what we are talking about when we talk about "duck typing."
+%p There are problems that arise when you ONLY have structural types. Errors become really ugly, since the types of things have no names.
+%p e.g. I expected something with foo, bar, and baz, but you gave me something with foo, bar, and dog.
+%p Structural typing is not Java-compatible. You cannot completely solve this problem in the JVM.
+%p We should never be forced to nominally type.
+%p Java is huge, but we will not always be tied to Java-compatibility.
+%p "Statically typed languages of the future will use structural, rather than nominal, type systems."
+%p Type systems do not have to be horrible. We can do it better. Don't base your assumptions on Java.
+%p There is no excuse for your language to not have local inference.
+%p Inference can have a profound effect.
+%p Nominal typing is bad. Don't do it.
+%p Thanks to Daniel for the great talk!

@@ -1,0 +1,17 @@
+1. Install Eclipse
+2. Install Marketplace
+3. Install STS
+4. Install m2e
+5. Install EGit
+5a. Install Github Mylyn Adaptor
+6. Install Subversive
+7. Install SVNKit for Subversion 1.6 (check your svn --version to make sure)
+8. Install Aptana from http://download.aptana.com/studio3/plugin/install
+9. brew install scala sbt maven giter8
+10. Install Scala IDE from http://download.scala-ide.org/nightly-update-juno-master-2.10.x
+11. Install Scala Worksheet from http://scala-ide.dreamhosters.com/nightly-update-worksheet-scalaide21-210/site/
+12. Install Solorized Aptana Theme from https://github.com/trevmex/Aptana-Solarized
+13. Install Vrapper
+14. Install eCobertura from http://ecobertura.johoop.de/update/
+15. Install Counterclockwise
+16. Install MoreUnit

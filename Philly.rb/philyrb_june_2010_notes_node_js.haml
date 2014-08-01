@@ -1,0 +1,62 @@
+%h2 Node.js in 30 minutes or less
+%i Mat Schaffer
+
+%p What is Node.js?
+%ul
+  %li Node.js is the new hawtness!
+  %li Node.js built off of V8 (the JavaScript engine for Google Chrome, P.S. V8 was written in assembly, so...yeah in your face 'C' is fast people)
+  %li Node.js is Chrome + EventMachine: So Node.js is an event loop for JavaScript (make your JavaScript act like an application!)
+%p Time is wasted for IO, how can we make better use of the time spent waiting for IO to complete.
+%p What about threads? You could do this with threads, but why not just register a callback? (Very JS-like)
+%pre
+  %code{:class => "javascript"}
+    fs.readFile
+    dns.resolve4('www.google.com', callback)
+    net.createServer(callback)
+%p JavaScript has callbacks baked in, so this is easy for it.
+%p This means that using an event loop (like Node.js) as opposed to spawning multiple threads can increase your throughput.
+%p Getting Node.js
+%ul
+  %li
+    %pre
+      %code
+        git clone git://github.com/ry/node.git
+        cd node
+        configure --prefix=/usr/local
+        make
+        make install || sudo make install
+  %li Node.js is updated a LOT. So, make sure to watch the github repo for updates.
+%p
+  Each node.js file expects to export the functions within it. (i.e.
+  %pre sys = require('sys)
+  )
+%p Node.js handles requests about 50 times faster than the same code running on Mongrel (a Ruby web server)
+%p
+  How do you write an asynchronous system?
+  %br/
+  %pre
+    %code{:class => "javascript"}
+      things.each(function(thing, next) {
+      doStuffWith(i, next);
+      });
+  When your code is done, it calls whatever there is in
+  %pre next.
+%p Node.js has their own event handler, but it is complex. So watch out for some event handlers that will be written. (Maybe you will write it, :D)
+%p  underscore.js - a utility JavaScript library that gives you a LOT of cool features (USE THIS!)
+%p Node.js is testable
+%ul
+  %li
+    Use JSpec w/ recorderMock.js: You will have to write a lot of mocks for the async. calls.
+    %br/
+    (recorderMock allows you to write mocks easily in JavaScript)
+  %li Expresso might be a good solution as well.
+%p Cool Node.js Projects:
+%ul
+  %li Express: A Sinatra-like library for Node.js (supports HAML and SASS)
+  %li Connect: A Rack-like library for Node.js
+  %li (fab): Like Sinatra, but with an absurd about of parens...
+  %li Socket.IO: This is a library for doing server/client message passing.
+  %li Massively Multiplayer Asteroids: http://lazeroids.com/ - Uses Node.js to do the multiplayer messaging
+  %li Cappuccino uses Node.js for messaging to make Mac-like web-apps.
+%p Kiwi: A package manager for Node.js (like RubyGems)
+%p Check out the node.js KO, a competition to hack some awesome node goodness. The price is an iPod! W00t!

@@ -1,0 +1,199 @@
+// Distributes Systems with Node.js
+%h3 #phillyete Session 6 Notes
+%i Ryan Dahl, Creator of Node.js
+%p Node is a server-side JavaScript thing. :)
+%p Node is a command-line thing to do server-side JavaScript written in Python.
+%p Typing node in the command line gives you a prompt that lets you type JavaScript. That's cool.
+%p process is a global object with a bunch of things in it.
+%p process.versions shows you the versions.
+%p Node is tightly coupled by V8. Node is a set of libraries on top of V8.
+%p V8 is Google's awesome JavaScript engine written in Assembly.
+%pre
+  %code.javascript
+    setTimeout(function () {
+    console.log('world');
+    }, 1000);
+    console.log('hello');
+%p The hello world idea shows you how JavaScript works with asynchronous calls.
+%p How about a web server:
+%pre
+  %code.javascript
+    var http = require('http');
+    var s = http.Server(function (req, res) {
+    res.writeHead(200);
+    res.end("hello world\n");
+    });
+    s.listen(8000);
+%p This abstracts parsing HTTP and parses the response. This is hard to do by hand, and Node does that all for you.
+%p Node Servers are TRUE HTTP 1.1 compliant.
+%pre
+  %code.javascript
+    var http = require('http');
+    var s = http.Server(function (req, res) {
+    res.writeHead(200);
+    res.write("hello\n");
+
+    setTimeOut(function () {
+    res.end("world\n");
+    }, 1000);
+    });
+    s.listen(8000);
+%p Now you can have your web server send things at certain amounts of time. You can continue to have connections come to the server when the timeout is there. Timeouts DON'T BLOCK.
+%p Node is good at concurrency. This will check the speed of your requests, to prove that the blocking doesn't happen.
+%pre
+  %code
+    ab -n 100 -c 100 http://localhost:8000
+%p That means you can have threads really easily.
+%p You can make a standalone TCP server. So you can telnet to this:
+%pre
+  %code.javascript
+    var net = require('net');
+
+    var server = net.Server(function(socket) {
+    socket.write('hello world\n');
+    socket.end('hello world\n'); // This will terminate the telnet connection.
+    });
+    server.listen(8000);
+%p What will you use this for!?!
+%p ...FOR EVERYTHING!
+%p If you need a little thing that talks to other things just a little bit, this is perfect!
+%p You can build libraries on top of node to make is more robust.
+%p How about a chat server:
+%pre
+  %code.javascript
+    var cp = require('child_process');
+
+    var net = require('net');
+    var sockets = [];
+
+    var server = net.Server(function (socket) {
+    sockets.push(socket);
+    socket.write('welcome to the chatz\n');
+
+    cp.exec('sleep 1; ls /tmp', function (err, stdout) { // Prove that your child processes do NOT block
+    if (!socket.writable) {return;}
+    if (err) {
+    console.log(err);
+    } else {
+    socket.write(stdout);
+    }
+    });
+
+    socket.on('data', function (data) {
+    for (var i = 0; i &lt; sockets.length; i += 1) {
+    sockets[i].write(data);
+    }
+    });
+
+    socket.on('close', function () {
+    var i = sockets.indexOf(socket);
+    sockets.splice(i, 1);
+    });
+    });
+    server.listen(8000);
+%p Single threads are much better at doing multiple threads for concurrency.
+%p Everything in node is non-blocking.
+%p Node relies on the OS it sits on for its threads. What node does for threading is very minimal.
+%p This server is sitting on epoll. There is no scheduling, node just passes it off to the OS.
+%p Node has no preemptive multitasking, but most web services you do are not compute-bound. Those are usually not your bottlenecks.
+%p But how would you ACTUALLY use this system.
+%p Building a web framework on top of node.
+%p There is a tool called npm at npmjs.org that is a development tool (not a package manager like gem). npm is a development tool. When you npm install something it will drop that into your current directory!
+%pre
+  %code
+    npm install express
+%pre
+  %code.javascript
+    var express = require('express');
+
+    var app = express.createServer();
+
+    app.configure('development', function () {
+    app.use(express.static(__dirname + '/public')); //serves files from the public directory.
+    });
+
+    app.get('/', function (req, res) {
+    res.send("hello world");
+    });
+
+    res.listen(8000);
+%p Express is like Sinatra for Node.
+%p Express is also a static file server.
+%p Socket.io abstracts the power of talking to web browsers. AWESOME!
+%pre
+  %code
+    npm install socket.io
+%pre
+  %code.javascript
+    var express = require('express');
+    var socketio = require('socket.io');
+
+    var app = express.createServer();
+
+    app.configure('development', function () {
+    app.use(express.static(__dirname + '/public')); //serves files from the public directory.
+    });
+
+    app.get('/', function (req, res) {
+    res.send("hello world");
+    });
+
+    res.listen(8000);
+
+    var io = socketio.listen(app);
+
+    io.on('connection', function (socket) {
+    console.log("someone connected");
+
+    socket.on('message', function (m) {
+    socket.broadcast(m);
+    });
+    });
+%p the chat web page:
+%pre
+  %code.html
+    &lt;html&gt;
+    &lt;head&gt;
+    &lt;script src="/socket.io/socket.io.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+    var socket = new io.Socket();
+    socket.connect();
+
+    function addText(t) {
+    var text = document.createElement('text');
+    text.innerText = m.text;
+
+    var chat = document.getElementById('chat');
+    chat.appendChild(text);
+    window.scrollBy(0, 100000000000000);
+    }
+
+    socket.on('message', function (m) {
+    addText(m);
+    });
+
+    function onSubmit() {
+    var entry = document.getElementById('entry');
+    console.log(entry.value);
+    socket.send({text: entry.value});
+    addText(entry.value);
+    entry.value = '';
+    }
+    &lt;/script&gt;
+    &lt;body&gt;
+    &lt;h1&gt;This is a chat server!&lt;/h1&gt;
+    &lt;div id="chat"&gt;&lt;/div&gt;
+    &lt;form onsubmit="onSubmit(); return false;"&gt;
+    &lt;input type="text" id="entry" /&gt;
+    &lt;input type=sumbit value="Send" /&gt;
+    &lt;/form&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+%p We like things in the same folder! Easier to distribute.
+%b OMG, live demo chat server. Flippin' rock star. Serious. Rock star.
+%p The Node package 'supervisor' can help monitor your servers to reload without restart.
+%p V8 has a C++ interface, and Node can hack into that. V. cool.
+%p There are a LOT of modules for node. It is quite popular.
+%p "When you start using node, you should write a web framework"
+%p Node is still very young, but it is growing like wildfire.
+%p Thank you Ryan for the great talk and live coding!

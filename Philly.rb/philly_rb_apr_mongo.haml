@@ -1,0 +1,106 @@
+%h2 philly.rb April Meeting
+%ul
+  %li Philly Lambda 4/18 Kyle Burton speaks on Twilio
+  %li Phily Tech Week 4/25-4/29 (phillytechweek.com)
+  %li Philly ETE 4/27-4/28 (phillyemergingtech.com/2011)
+  %li Rails Boot Camp with Mat 4/29 (philly.railslessons.com)
+  %li Conshohocken.rb 5/5 (conshohockenrb.org) - Come check out a new user group!
+%p Check out www.cloudspokes.com/Challenges.html to make some money coding some stuff.
+%p RailsConf is May 16-19, I can take some people down. I'll email the group about that.
+%p HackingEducation has a contest
+%h3 The Steak Gem
+%i Len (@ignu)
+%p Steak creates some generators and helpers using Capybara, and RSpec to make setting up a test workflow a lot easier.
+%p Steak is a replacement to Cucumber that uses straight Ruby to write tests instead of writing tests in Gherkin (i.e. human-readable)
+%pre
+  %code
+    rails g steak:install
+    rails g steak:spec spec_name # generates the spec
+    rake spec:acceptance # runs the test
+%p lowdownapp.com - a visual interface for writing cucumber.
+%p Thanks Len!
+%h2 MongoDB and Ruby and Q &amp; A
+%i Kyle Banker (@hwaet)
+%p mongo.cloudfoundry.com - Check out the MongoDB Shell online.
+%p MongoDB uses "rich documents" to store data.
+%p Why MongoDB?
+%ul
+  %li It is a database that fits in-between a key-value store and a full relational database.
+  %li Relational databases are robust and powerful. You can do a lot of things with it.
+  %li A key-value store is simple and fast, but you can't do much with it.
+  %li MongoDB is somewhere in the middle, it is fast and powerful, but not as robust as a relational database.
+%p MongoDB feels a lot like Ruby in the sense that it tries to make the database level more human-readable.
+%p MongoDB is used by many web companies right now like etsy, foursquare, github, shutterfly, The New York Times, etc.
+%p MongoDB has a geospacial API that was written for Foursquare.
+%h3 Rich Documents
+%p MongoDB is a "document database. " The data model is just a JSON document.
+%p Everything pertaining to a record is contained in the record. It is very denormalized.
+%p MongoDB does not use integers for keys, they use alphanumeric UIDs.
+%p The cool thinkg about MongoDB is that you can model your data in a way that makes it more readable.
+%p You use JavaScript to work within the MongoDB Shell.
+%pre
+  %code.javascript
+    // Find all the orders with the line items with the following sku
+    db.orders.find({"line_items.sku": 1});
+%p There are a lot of special query operators ($ne, $gt, $lt, etc.) that allow you to specialize your db queries.
+%p Using the $push command, you can manipulate objects very easily.
+%p The query language allows you to update specific parts of an object using the $set operator.
+%p the $inc operator lets you increment a number in an update command.
+%p MongoDB is not as hot when it comes to aggregating data.
+%ul
+  %li There is a now 2.0 framework coming out using UNIX-style pipes that will make aggregation a lot easier than how to do it right now (using map-reduce).
+%p Rich documents are pre-joined for fast retrieval.
+%p The Mongo ruby gem has a couple of classes: Connection and ReplSetConnection.
+%p A ReplSet is a set of three nodes of Mongo connections. There are three replica nodes: a master, a slave, and a decider (the decider chooses which is the master or slave).
+%pre
+  %code.ruby
+    begin
+    require 'mongo'
+    rescue
+    require 'rubygems'
+    require 'mongo'
+    end
+
+    include Mongo
+
+    @connection = ReplSetConnection.new(['m1', 27017], ['m2', 27017])
+
+    @db = @connection['commerce']
+    @coll = @db['users']
+%p Mongo now has a journal that gives you a tail-append log that allows you to recover from a catastrophic failure. (AWESOME!)
+%p Using the save command in the Ruby lets you save a document (that is just a Ruby hash) to a MongoDB.
+%p Check out BSONSpec.org to learn all about BSON, the storage device of MongoDB
+%p You can use the same MongoDB query strings in the Ruby code, just like you do in JavaScript.
+%p There is a global writer lock in MongoDB, so there will not be write conflicts.
+%p You should treat an index creation as a migration. Indexes should be created intentionally because indexing locks the DB, and if the DB is very large, that can burn you.
+%h3 Data Modeling
+%p It is OK to do both relational modelling OR a rich document model. There are three ways to model relationships in MongoDB
+%ol
+  %li Embedded Documents: This embeds the child records in a parent record, like when you have an order with a lot of line items. That makes sense to have one order be embedded with line items. This is the fastest.
+  %li Embedded and Nested Document: This lets you have recursive children within an object. E.g.: A post with comments, which themselves have comments. This allows for complex objects.
+  %li Normalized: This allows you the maximum flexibility with the data you use, it is a lot like how you would work with a relational DB. This makes global updates much easier.
+%p Mongo has a concept of projections that allow your query to ONLY return the data you need. You can even query only the index, and not touch the DB file itself at all. Super fast.
+%h3 A Many-to-many relationship
+%p Have a document with an array of ids from the other table:
+%pre
+  %code.javascript
+    product = {'name': "Coffee",
+    '_id': ObjectID("..."),
+    'category_ids': [ObjectID("123..."),
+    ObjectID("456..."),
+    ObjectID("789...")]}
+
+    category = ...
+%p That way you have all the categories for each product. It is like doing database joins with arrays alone!
+%p Sharding is useful when your data set cannot fit in the RAM in one machine. It allows you to store your data set across multiple machines. Most people do not have enough data to NEED sharding. It is only useful when you have a high read AND write load.
+%p If you only have a high read mode, you can address your scaling issues with replication alone.
+%p Mongo uses a system called mongos that will read client queries and retrieve data from the correct shard or delegate to one of your replica mongod cinfig servers.
+%p Kyle created a ruby gem called 'mink' to set up replica mongo servers on your local machine for testing and experimentation.
+%pre
+  %code
+    mink make rs
+    vim mink.yml # to check tweak your mongo settings
+    mink init # spins up your replicas!
+%p Thanks to Kyle for the great talk!
+%p Check out Kyle's new book "MongoDB in Action" by Manning.
+%p Mongo Philly is a small one-day conference on April 26th at the same place as Philly ETE. Check it out at www.10gen.com/conferences/mongophily2011 I'll be there!

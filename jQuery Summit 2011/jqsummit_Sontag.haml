@@ -1,0 +1,22 @@
+%h2 Fixing These jQuery
+%i Adam Sontag
+%p http://fixingthesejquery.com - jQuery Debugging
+%p jQuery is JavaScript. You will have to debug it
+%ul
+  %li But... window.alert("blerg"); is bad debugging. For example, it makes debugging tooltips next to impossible.
+  %li JavaScript Debuggers exist. If you arn't using one, you are insane.
+  %li Firefox has Firebug
+  %li Chrome and safari have Webkit Inspector
+  %li Dragonfly and IE8 also have debugger for them.
+%p The debugger console SHOWS you the error you have on your screen.
+%p Use JSLint to scrub your code for syntax errors
+%h3 Basic Errors
+%ul
+  %li jQuery is not defined: load jQuery...
+  %li $ is not defined: Probably a conflict with another library (using jQuery.noConflict)
+  %li $.fn not defined: You might be using another library (like MooTools)
+  %li jQuery.fn.somePlugin not defined: Check to see if your plugin is 404ing in your debugger.
+%p Change your alert statements to debugger;
+%p debugger will set a breakpoint in your code, so you can go into the debugger and watch what is going on.
+%p The Watch window allows you to see what variables are set to in your JavaScript
+%p Using debugger; you can also step through your JavaScript code to see exactly what is going on.

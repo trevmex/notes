@@ -1,0 +1,67 @@
+%h2 Philly.rb January 2012 Meeting
+%p
+  Awesome talk by Dustin about continuations in Ruby. Check out the mailing list for his slides, and don't miss his talk at
+  %a{:href => "http://redsnakephilly.org/"}RedSnake Philly
+  next month on Feb.21st!
+%p
+  %a{:href => "http://mailcatcher.me/"}MailCatcher
+  is a private SMTP server/client you can you to test your email without spamming people! Check it out if you are making custom email applications.
+%h3 Ruby on Big Data
+%p What is "Big Data?" Sometimes it isn't always about size, sometimes it can be about CPU-bound processes that need to be processed, like Natural Language Processing.
+%p NoSQL storage is all about BASE:
+%ul
+  %li Basic Availability
+  %li Soft-state
+  %li Eventual consistency
+%h4 Cassandra
+%p Cassandra was taken from Dynamo (Amazon's Paxos implementation) and Google's BigTable, and mixed it together. Facebook then released it open source.
+%p Cassandra's Data Model
+%ul
+  %li
+    Keyspaces
+    %ul
+      %li
+        Column Families
+        %ul
+          %li
+            Rows (Sorted by KEY!)
+            %ul
+              %li Columns {Key: Value}
+%p This is a sparely populated data model, that means that you are able to add keys at will.
+%p Cassandra's Hash Ring implements the Paxos hash ring model. This allows you to distribute keys to various nodes in the hash ring, to solve for data replication and fast connections.
+%p You can have multiple consistency levels: one, quorum, and all.
+%ul
+  %li one: This will return right away, and replicate data later.
+  %li quorum: This waits until there are n/2+1 nodes that have written your data, where n is the number of nodes.
+  %li all: This waits until ALL nodes have written the data. This is the slowest, but most secure.
+%p You can store anything you want in your column values. That is nice, so you can define your own schemas there without major constraints.
+%h4 Hadoop
+%p Hadoop is the Apache implementation of Google's BigTable. To get info out of it, you have to write a map and reduce functions.
+%p
+  %a{:href => "https://github.com/tjake/Solandra"}Solandra
+  is a library that combines the Solr search library with Cassandra, so that your indexes are in Cassandra.
+%h4 Why use Ruby for Big Data?
+%b Because we LOVE Ruby!
+%p Ruby is simple enough that you can give it to clients to write map/reduce jobs. This is NON-TRIVIAL in Java. A map/reduce in Java is about 500 lines of code, in Ruby, it is 22 lines.
+%h4
+  %a{:href => "http://brianoneill.blogspot.com/2011/11/virgil-gui-for-cassandra-now-included.html"}Virgil
+%p Virgil is a REST client for Cassandra! Virgil let's you create Cassandra models with HTTP PUT calls.
+%p
+  Virgil also has a GUI to allow you to look into your Cassandra DB with about 200 lines of
+  %a{:href => "http://www.sencha.com/"}ExtJS
+  code.
+%p With Virgil you get both CRUD functions and Map/Reduce in Cassandra for the first time.
+%b "Use real-time systems for batch processing."
+%p
+  %a{:href => "https://github.com/dbalatero/typhoeus"}Typhoeus
+  is a concurrent HTTP client the runs really fast. This is a great gem to use for  massive HTTP calls, like adding info to Cassandra through Virgil.
+%h4 Bridging the gap between Java and Ruby
+%p Redbridge is the JRuby implementation of JSR 223, which is what bridges Ruby to Java. You can use that to hook into Java through JRuby.
+%h4 Super Columns
+%p
+  %a{:href => "http://arin.me/blog/wtf-is-a-supercolumn-cassandra-data-model"}WTF is a super column?
+%p It is an old (deprecated) way to add meta-data to Cassandra, but it is deprecated. Don't use it!
+%h4
+  %a{:href => "http://engineering.twitter.com/2011/08/storm-is-coming-more-details-and-plans.html"}Storm
+%p Storm is a way to do real-time processing with streams of data. Twitter uses this to push out all their data.
+%p Thank you to Brian and the other speakers for the great info!

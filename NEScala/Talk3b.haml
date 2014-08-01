@@ -1,0 +1,26 @@
+%h2 Programming isn't math
+%i Oscar Boykin
+%p You can build a mathematical model for EVERYTHING, but not everything is Math.
+%p Programming is more akin to building a building, as opposed to proofing a theorum.
+%p Good programming is like crafting a wooden chair. You are proud of the result. Programming is like making recipes.
+%i CoffeScript isn't hipster anymore, you have to use Roy to be hipster. :P
+%p Programmers give precise descriptions and instructions of how to transform input bit into output bits.
+%p Mathematicians prove (and care deeply about) theorums. Programmers don't (compilers do).
+%p Many abstractions from algebra or categoy theory have become very popular in programming: Mon(io|a)d, Semigroup.
+%p Abstractions over Monads allow you to do lots of great things in programming.
+%p We get free proofs of correctness when we use these mathematical ideas.
+%p Who proofs the theorums in your code? In clojure, the user (mostly) is responsible for the theorums. In Scala we want the compiler to prove some theorums for us.
+%p How do you make the tradeoff between having the compiler proof things for you and doing it yourself?
+%p So you can create new type classes (Monoid, Ring, etc.) that you write the proofs for once, and then you can use anywhere in the code, then your compiler takes care of proofing that you are doing it right.
+%p Linear algebra makes your life a lot easier when dealing with big data. Mental note, relearn matrix math.
+%p
+  OK, what is a
+  %a{:href => "http://stackoverflow.com/questions/12327004/how-does-the-hyperloglog-algorithm-work"}HyperLogLog?
+  That is wild. Twitter is using this algorithm to find the most popular second followers.
+%p A Semigroup is a partial group that will be later pushed together to get the full group. You can use that to get partial groups from a realtime system and combine them later.
+%b Most things you are aggregating are Monoids. Use monoids.
+%p Some people code Scala functionally, some write Java, some wirte Scala like it was Java. That is all OK. there are lots of different types of programmers.
+%p Sometimes you have to ignore the rules and jsut code. THAT IS OK. You can't be too pure all the time.
+%p PROTIP: Submit pull requests to Twitter. They will take the code.
+%p Leverage the type system for what it is. Humans can and must prove the theorums with or without the type system. That is OK. If you can prove a cast will never fail (or fail rarely) the compiler can be ignored.
+%b Thanks to Oscar for the great talk!

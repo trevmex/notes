@@ -1,0 +1,58 @@
+%h2 Effective Scala
+%i Joshua Suereth
+%p In Scala, you are writing expressions, not statements. Learn to think in expressions.
+%p Most of your methods will be a single expression. You don't need a lot of brackets in Scala.
+%p You are doing transformations on your data. for expressions yield things.
+%b USE THE REPL!!!
+%p If you run scala on the command line you have a repl that you can play with. Much better than Java.
+%p When you have a repl, you can rapidly prototype things much more so than Java.
+%p Maven has Scala support, this means that you can run your build and add a repl to it.
+%b Stay Immutable! Immutabe objects are...
+%ul
+  %li Safe to share across threads (no locking)
+  %li Safe to hash on attributes
+  %li Easier equality
+  %li Safe to share internal state with other objects
+  %li Co/Contra-variance (this is impossible with mutable objects)
+%p When you are not immutable you have to COPY your data to be safe.
+%p Using immutablity doesn't mean lack of mutation.
+%p (Don't use reflections, guy!)
+%p Use Option. This tells you that something can not be there. It is better than using Null. That makes it so you don't have Null pointer Exceptions.
+%b Scala is Scala!
+%ul
+  %li Scala ain't Java
+  %li Scala ain't Ruby
+  %li Scala ain't Haskell
+%p Please refer human readable names when you are writing Scala. Pick what styles are right for your team, and enforce your style with automatic tools.
+%p Use def for abstract members. In Scala, you can override def with val or var. You cannot override vals. By doing this you allow implementers to choose your implementation.
+%p Annotate non-trival return types for public methods. Don't force your users to guess what the return state is. Type inference is cool, but annotation is easier to understand.
+%p You can mark things as implicit, this allows you to add things to an implicit scope. The implicit scope is the fallback global scope for method calls.
+%p The downside of implicit scope is that you need to know what is on the implicit scope. So limit what is on the implicit scope.
+%p One of the most abused systems in Scala in the implicit system. Stop that!
+%p A lot of database transaction code uses implicit.
+%p Implicit scoping:
+%ol
+  %li Current Scope
+  %li Implicit values in companion types
+%p Avoid implicit views. They are considered very risky.
+%p Use implicits to enforce type constraints.
+%p Type traits are powerful and awesome. They allow you to inject classes after the fact. You can override your default options.
+%p Type trait benefits:
+%ul
+  %li External to class hierarchy (monkey patching classes you don't control)
+  %li Overridable at call site
+  %li Separate Abstractions
+  %li Can separate method arguments into roles
+%p Preserve specific types. This is a bit like using generic types n Java.
+%p Know your collections. The collections API is useful to understand.
+%p Use Vector for indexing (instead of ArrayList). It is immutable and good for performance.
+%p Scala's collections API is very rich. It has lots of good methods that will help you improve your code over time.
+%b Write interfaces in Java. Extend it in Scala.
+%p Prefer Java primitive APIs. If you use primitives in Scala, they will show up as objects.
+%p Functional Programming
+%ul
+  %li Applicative Functors
+  %li Monads
+%p
+  %a{:href => "http://www.manning.com/suereth"}Scala In Depth
+%p Thanks for the great talk!

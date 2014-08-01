@@ -1,0 +1,71 @@
+%h2 Philly.rb March Meeting
+%h3 Ruby Mendicant University
+%i Cark Leiby
+%p RMU is a free ruby course. It is a three week course where you have to complete 3 of 4 exercises, and make progress on a personal progress.
+%p There are weekly check ins, and if you fail to meet a check in, you are out of the course.
+%p Sign ups start on March 15th.
+%ul
+  %li To get in to the application process, you have to submit answers to puzzles at puzzlenode.com (to be created)
+  %li Then to get into the course itself, you have to submit your code that solves the puzzles
+%p It is REALLY HARD. That is NOT for beginners. You will have a 15-20 hour per week time commitment.
+%p But if you want to level up your ruby skills and have the time, this course is for you.
+%p Check it out at http://university.rubymendicant.com
+%p If you have any questions, talk to Carl at @carlism.
+%h3 Rails Class for Philly Tech Week
+%i Mat Schaffer
+%p Mat will be doing a one-day Rails Bootstrap Workshop from 12-4 in Conshohocken at 101 W. Elm St.
+%p Check it out at http://www.phillytechweek.com and contact Mat (@matschaffer)
+%h3 Clipik and Phillydev are tonight's sponsers
+%p Clipik is a startup from New York to crowdsource video editing with vetted video editors.
+%p Video editors are vetted by Clipik staff and then there is a job board. A user posts their video to Clipik, and video editors will take the job and do it. If the user is pleased, they pay for the edited video.
+%p This is a way to connect freelance video editors with users that want their videos edited. (cool idea)
+%p There a lot of technical difficulties behind the scenes that need to be solved. Clipik is looking for Ruby on Rails coders to help out. If you are interested, email jobs@clipik.com.
+%p They are a very early stage, but the concept is to be cash flow positive from day one.
+%h3 JavaScript is Real Code
+%i Len Smith (@ignu, http://iggy.nu, len.smith@live.com)
+%p Works for crowdtap. Check them out at http://crowdtap.it
+%p Why don't people think that JavaScript is real code? Well, actually, it is.
+%p JavaScript is a FUNCTIONAL language.
+%p Go read JavaScript: The Good Parts by Doug Crockford. It is amazing, and Doug is the man (wrote JSON, JSLint, and JSMin)
+%p So, JavaScript is awesome, but the DOM suck. It hurts to use.
+%p "JavaScript is the only language I'm aware of where people feel they don't have to learn it before they write it." - Douglas Crockford
+%p JavaScript has types. Number, Strings, Objects, and undefined.
+%p All objects are just a hash.
+%p The Chrome console is a lot like irb.
+%p "JavaScript is like LISP in C's clothing" - Douglas Crockford
+%p The most dangerous part of JavaScript is that if you do not use var for your variables, you are writing your variables to the global namespace. That can really mess you up. Use JSLint to check yourself on this.
+%p JavaScript allows you to pass anonymous functions.
+%p JavaScript is just as powerful as Ruby, but different.
+%p So, you can write tests in JavaScript. In fact. It is VERY important to do so.
+%p Len is using EnvJS with Cucumber to run JavaScript testing in integration tests.
+%p Testing JavaScript for the integration level is difficult. Akephalos and EnvJS are both tools to integrate JavaScript with Cucumber. They are slow, though. and It takes some time to run.
+%p Cucumber is for testing behaviors.
+%p UNIT testing is essential for feeling safe.
+%p When you write tests first, you feel a sense of progress. It feels good to see your tests go green.
+%p Tests are effective documentation for your code and your functions.
+%p Most importantly, the art of writing a test is the art of design. An artist may spend more time in the outline of a painting than the painting itself.
+%b The base of this is the Red, Green, Refactor cycle.
+%p You write a failing test first, then write the code to make it pass, then refactor your code.
+%p Evergreen supports writing tests in CoffeeScript. You should check it out.
+%p Evergreen is a gem that sits on top of Jasmine (for Ruby/Rails projects)
+%p Evergreen has an `evergreen serve` command line tool that allows you to run a server to view your Jasmine tests.
+%p You can also execute `evergreen run` or `rake spec:` to run your tests like rspec.
+%p You can monkey patch JavaScript to extend the grammer if you like:
+%pre
+  %code.javascript
+    Object.prototype.shouldEqual = function (result) {
+    expect(this).toEqual(result);
+    };
+
+    var MyObject = {name: "Trevor"};
+
+    describe("something", function () {
+    it("does something", function () {
+    myObject.name.shouldEqual("Trevor"); // instead of expect(MyObject.name).toEqual("Trevor");
+    });
+    });
+%p It is important to mock up your functions to test only what your functions really do.
+%p Testing like this should inspire you to write small functions. This is a GOOD thing. Small functions are easy to test. Small functions are easy to read and understand. Embrace it!
+%P You can add templates to Evergreen scripts to mock out web pages as well. That is very handy for unit testing functions that work on the DOM.
+%p Check out the code for this talk at http://www.github.com/ignu/
+%p Thank you Len!

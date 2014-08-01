@@ -1,0 +1,14 @@
+%h2 An introduction to the event-driven I/O framework that is changing the way we think about developing web applications
+%i Christian Sanz and Curtis Chambers
+%p Node.js is written in C++ and wraps Google's V8 JavaScript VM (the same as Chrome)
+%p The C++ stuff is in there to interact with POSIX. So your JS can touch the file system.
+%p Node.js uses evented I/O. This has been around in Ruby with EnevtMachine and Python with Twisted. Nginx uses it on the HTTP layer.
+%p The concept of the event loop has been around for a long time, but Node.js brings this to JS.
+%p JavaScript 12 years ago was nothing like it is now. It evolves with ActiveX and AJAX in the 1990s and 2000s, and now we are in the server in the 2010s!
+%p Node.js is single threaded, and uses an event loop. There is no form\king new threads.
+%p It uses a thread pool to schedule blocking I/O tasks asynchronously.
+%p The file descriptors are managed by lower level systems (like epoll)
+%p You can stream data with libraries like Socket.io which runs on Node.
+%p Node can handle streams with abstract interfaces. Streams are readable and writable. This abstract interface is implemented all throughout node, which gives you stream manipluation all throughout the Node infrastructure.
+%p Express.js is a simple web server for Node.js. If you are a Rubyist, think of Express like Sinatra for Node.
+%p Thanks for the great talk!

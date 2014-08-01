@@ -1,0 +1,20 @@
+%h2 Functional Patterns for the Asynchronous Web
+%i Josh Suereth
+%p The new WEB: Asynchrous event driven composition of services!
+%p Asychronous code is code that happens after something else. Asynchronous by itself sucks. You want async AND non-blocking, that is useful!
+%p In Scala, you can chain futures, in Java you cannot.
+%p map allows you to take a Future and do something with it. You can then map maps of things that allow you to not have to pull out the results of futures and still allow you to use them.
+%p flatMap allows you to do map futures of futures instead of explicitly declaring them.
+%p
+  In Scala you can use for expressions to do this mapping for you. It is syntactic suger around maps. This is what is called
+  %b monadic flow.
+%p Anytime you use for expressions you are using monadic flow.
+%p You can use zip to join two data flows together. Zipping two results together return you a future of a tuple of the two results. This binds the future to both flows.
+%p A fork join allows you take a list of things, apply a function to each one and get back a future of a list of those things. Future.traverse() allows you do just this.
+%p zip is an applicative functor. That is a set of operations that need to run, each operation depends on other operations, and those operations form an acyclic graph (i.e. no looping dependencies).
+%p Functional internal iterators allow you to traverse over each element of a collection and iterate over it.
+%p An external map is called a functor. This allows you to have a new context for any map.
+%p For flatMap we use a Monad to extrrnalize this context.
+%p For zip, we use Applicative Functors to externalize contexts.
+%p tl;dr you should learn how to the functional programming for easy async non-blocking programming. Eep!
+%b Thanks to Josh for the interesting (and advanced!) talk.

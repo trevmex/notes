@@ -1,0 +1,38 @@
+%h2 Style <=> Refactoring
+%b The Compleat Rubyist Session 4
+%i Gregory Brown (@seacreature)
+%p We don't only want to write correct Ruby, we want it to look nice and feel well-written.
+%p Code beauty is not of value for the sake of art, it is of value because it is UNDERSTANDABLE.
+%p Archaic "magical" code that "just works" is bogus code. Beautiful code is code that many people can understand.
+%p You start with where you are. Code what you know, and from there you think about if you need to show it off to others. That is when you want to refactor.
+%p People get discouraged when they see beautiful code. But, you can write this code too. You just write what you know, and then reach just a little farther each time you touch it.
+%p A good way to code is to focus on building something first, and worry about making it "right" as you proceed.
+%p (this is a more hands on class, so I think the notes)
+%ul
+  %li
+    Picking Nits: It's all in the details
+    %p Subclassing core objects in is a bad idea since some of the Ruby Core Objects call native C calls, in those cases, the methods you want to override can be skipped all together.
+    %p Instead of subclassing a class, you can include the things your really want.
+    %p Look into Forwardable::def_delagators to add functionality you want to your classes without subclassing.
+    %p Using this idea, you can avoid monkey patching your classes, so what you write won't mess with other objects.
+    %p Method calls in Ruby are really really slow.
+    %p When you send a block to a method, it creates a Proc, which is an object, thus slow, BUT you can call yield and that will just run the code of the block. This is much faster.
+    %p A block is nothing but a syntactic construct. A block is actually a Proc Object.
+    %p Using attr_accessors as opposed to using instance_variables when referencing can help you catch typos. @meembers = [] creates a new instance variable that is misspelled, but self.meembers = [] will throw an error if only attr_accessor :members is set.
+    %p attr_accessors are methods waiting to be born.
+    %p Having code that is solid and clear is preferable to having code that is beautiful.
+  %li
+    Whatchu Talkin' Bout Fowler?
+    %p We reviewed some of the refatoring at http://refactoring.com/catalog/index.html and refactored some real code
+    %p Our example used extract method on a name parser: http://gist.github.com/607875
+    %p Refactoring is about reducing dependencies and reducing complexity.
+    %b Before you start using a library GO AND READ THE DEVELOPER'S CODE!
+    %p If you read a library, you will learn about how it works better, and if it is bad, will tell you if you should even use it at all.
+    %p Core Ruby is really well-designed. It is worth your time to take a look at that code.
+    %p ActiveSupport::Concern is also a great library to look at.
+    %p Yehuda Katz is a great resource on detailed code review (http://yehudakatz.com/)
+    %pre
+      %code.ruby
+        z# you can use regexp in an array!
+        "foo bar baz"[/foo (\w+) baz/] # => "bar"
+%p Thank you to everybody at The Compleat Rubyist for the sessions! I had a great time!

@@ -1,0 +1,33 @@
+%h2 Raphael.js - A Festival of Treats
+%i Trotter Cashion
+
+%p Dmitry Baranovskiy wrote the Raphael and nows works at Sencha (formally ExtJS)
+%p Uses SVG and VML (which will allow it to work in IE6!!!), it basically works on everything (except the tweetie web browser)
+%p So, Raphael is a cool new way to make vector graphics in JavaScript!!!
+%pre
+  %code{:class => "javascript"}
+    var r = Raphael('cool-circle', 1024, 400) // a drawing area
+    circle = r.circle(500, 200, 100); // a circle
+    circle.attr({fill: "90-#f00-#0f0"}); // a gradient!
+    
+    setInterval(function () {
+    circle.rotate(1);
+    }, 10);
+%p You can draw lots of different cool stuff (circles, squares, etc.)
+%p You can use attr to add lots of cool stuff: stroke, fonts, opacity, rotation, etc.
+%p
+  You can make arbitrary paths with the
+  %pre path
+  command. It uses a format that looks a LOT like logo
+%p 
+  Using the
+  %pre animateAlong
+  call you can animate an object along an arbitrary path.
+%p The Raphael docs are very well organized with all live demos!
+%p
+  You can use jQuery on top of your Raphael animations. To access your raphael objects, you will use 
+  %pre r.node
+  (where r is the Raphael object) to call your jQuery on.
+%p This is plain old JavaScript, which you can unit test really well with JSpec.
+%p So basically, Raphael.js makes Flash totally useless.
+%p Checkout http://raphaeljs.com/ the demos are out of this world!

@@ -1,0 +1,35 @@
+%h2 Obective-C
+%p Obj-C it reflective
+%ul
+  %li It can observe and modify its own structure
+%p It is OO (yep.)
+%p It uses Smalltalk-style messaging
+%ul
+  %li Messages to objects drive the program
+%p Obj-C expands C
+%p Developed by Apple in 1986, and made famous by NextStep OS. Now it is in use with Mac OS X and iOS.
+%p You have to initialize and dealloc all the objects you use (joy).
+%p Obj-C also has built-in callback features
+%p @protocol
+%ul
+  %li Protocols are like method declarations
+%p Obj-C has dynamic . In the below example the message "setMyValue" can take anything (the first line), or a protocol called aProtocol (line 2), or an NSNumber pointer (line 3).
+%pre
+  %code
+    #- setMyValue:(id) foo;
+    #- setMyValue:(id <aProtocol>) foo;
+    #- setMyValue:(NSNumber*) foo;
+%p Obj-C has the concept of message forwarding so you can pass messages you do not want to process onto other methods.
+%p Categories are a way to extend a class at runtime without the needing the source code of the class. These categories have access to the class variables of the extended class.
+%p NSObject is the root object in Cocoa.
+%ul
+  %li This means that all the objects inherited from NSObject (like NSString) have the methods that NSObject has.
+%p Properties
+%ul
+  %li classes can have @properties
+  %li a property is like an instance variable in Ruby
+  %li in your class you can @synthesize your properties, this is the same as calling attr_accessor in Ruby
+%p Memory/Object Creation: The rule: if you alloc and init something, you MUST release it. Otherwise do not release.
+%p You can also autorelease an alloc/inited variable, which will dealloc when you are out of scope.
+%p Cocoa Frameworks: umm... there are a lot of them.
+%i (there was a lot of information here, and a lot of it was not geared towards an Obj-C n00b like me.)

@@ -1,0 +1,21 @@
+Let's kick off the new year with some sweet sweet full stack goodness!
+
+Ruby on Rails (http://rubyonrails.org/) is a full stack application framework built on the Ruby programming language (http://www.ruby-lang.org/en/). We will be holding a 6-week class starting Tuesday, January 3 through February 7, 2012 at 12 noon in Room 15.208.
+
+Rails is a great framework for not only standalone web application, but for interfacing with RESTful APIs. The training will be project based. We will be working together to learn Rails 3.1 and build a project together. At the end of the class, we will all have something to be proud to show off!
+
+I hope you can join us for this fun and educational ride. This is the second time we will be running a Rails training, the first one last year went very well, and I am looking forward to this time around in 2012.
+
+Please take some time to run through the pre-req tutorials. They are something you ca do on your own, and it will make the training much more fun for you. Optionally you can also work on the Ruby Kaons listed below for more information before the training!
+
+Pre-reqs:
+- Ruby in Twenty Minutes (http://www.ruby-lang.org/en/documentation/quickstart/): If you have never programmed in Ruby before, please run through this twenty minute tutorial. It will get you primed to learn Rails!
+- Getting Started with Rails (http://guides.rubyonrails.org/getting_started.html): This is a fantastic resource for learning the basics about Rails. It will take about two hours for you to complete, and will get you ready to code!
+
+Optional:
+- Ruby Koans (http://rubykoans.com/): Once you have run through the Ruby in Twenty Minutes tutorial, this is a great next step. It is fast and fun to do. If you run through the koans, you will be very well-prepared for the class!
+
+I'm really excited about this, and look forward to seeing you there!
+
+Yours,
+Trevor

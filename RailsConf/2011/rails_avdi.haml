@@ -1,0 +1,76 @@
+/ Confident Code
+%h3 #railsconf 2011 Notes
+%i Avdi Grimm, @avdi
+%p This is a code construction talk, in the sense of the book Code Complete.
+%p We will be talking about how to organize your methods.
+%p Confident code is NOT timid code.
+%p Timid code is like a timid story. It keeps going off on tangents. It has a lack of certainty. Your CODE have these issues as well.
+%p There is a lot of code out there that is unsure of it self, it goes off on tangents, it is prone to digressions. Business logic, error checking, input gathering all together.
+%p That makes code hard to read and hard to understand.
+%p Confident code is code that has a consistent narrative structure.
+%p All the ideas we see here come from real code.
+%p It is useful to annotate your code into four parts. A good method handles these four things IN ORDER:
+%ol
+  %li
+    Gather input
+  %li
+    Perform work
+  %li
+    Deliver results
+  %li
+    Handle failure
+%h3 Gather input
+%p When you see code that switches on type, that is sort of the opposite of duck typing, and it is a code smell.
+%p You want to structure your code in a way with no typecasing!
+%ul
+  %li
+    Coerce
+    %p When you are not sure what you are getting, but you know what you need, coerce your data wit .to_s, to_i, and Array()
+    %p Array() is a bit tricky, but it is better than to_a, since to_a is going away in Ruby 1.9
+    %h3 Decorate
+    %p You can use a decorator to add a bit of functionality around your objects.
+    %p If you have to accept multiple types, you can abstract away your type rules in a decorator. Making your code look much cleaner.
+    %p You can dynamically extend object or dynamically add methods as well.
+  %li
+    Reject unexpected values outright
+    %p Be assertive in your code.
+    %p Design by contract and reject things you don't want by default.
+    %p You can pull out your assertions and raise Exceptions instead of errors. That is important.
+    %p Check out FailFast for more on assertions. They are great for code documentation.
+  %li
+    Ignore values we can't do anything with.
+    %p A guard clause short circuits the function by stopping execution at the very beginning of the method.
+%p Check out the special case pattern. This says that your special cases should be classes themselves, not baked into your methods themselves. You can create a one-off object (with OpenStruct) to take care of your special case, instead of having logic inside your method to handle special cases.
+%p The most common special case issue in Ruby is the case of nil.
+%p A Null Object is not in the main Ruby language, but it should be. Null Objects are handy for taking care of the nil issue.
+%p If you use a Nul Object, you do not have to wrap your assignments in checks for nil!
+%b nil is really overused in Ruby code. It means too many things.
+%p Nil checks are the most common type of timid code.
+%p Eliminate nil and replace it with something more useful.
+%p fetch is a handy tool that is like the [] operator, but if a key doesn't exist, it will execute the block you give fetch. So handy! You can have an exception in the callback, and have better errors. You can also use it for default options. Making life better for the users.
+%p Avoid using nil as a default value for things.
+%p "You could grep for nil, but I dont recommend it"
+%p You can have your Null Object record where it is created from. Now you can inspect your null object and see where it was instantiated.
+%h3 Perform work
+%p Keep focused on your work. Remember the PIE principle: Program intentionally.
+%p Reserve conditionals for business logic only, and make it CLEAR that your conditionals are really business logic, not something else.
+%p Chaining your code together (jQuery style) allows you to write your code more confidently.
+%p The iterative style (again, like jQuery) is also a confident coding style. These are operations that work on 0 or more (not 1 or error) objects.
+%h3 Delivering results
+%p Dont' return nil to help your callers be more confident. Raise an error, return a default, tell the user something.
+%h3 Handle errors
+%p Put the happy path first, and handle the errors in the end.
+%p You can use rescue in your functions without begin and end, that gives you a really clear way of dealing with your errors separately and cleanly.
+%p We can do this with bouncer methods and checker methods.
+%p Bouncers check something, and raise an exception, or do nothing.
+%p Failure handling can really clutter up the flow of your process. It is a huge interruption in your code.
+%p Checker methods can wrap this error handling and hide it away in helpers.
+%p When we do this, we get a better story from the code, fewer branches in the code, but it is NOT necessarily shorter. The point is not conciseness, it is cleanness.
+%p Why should we care about this?
+%ul
+  %li When there are fewer paths in code you get fewer bugs
+  %li It is easier to debug code that will fail early or give you useful output.
+  %li It is more self-documenting. "Write code for the reader first and the machine second."
+%p These are just some techniques, you need to find your own techniques!
+%p Try to get rid of the nils and use exceptions.
+%p Thank you to Avdi for th great talk!

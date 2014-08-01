@@ -1,0 +1,25 @@
+%h2 Going Concurrent and Asynchronous, Exploring Scala and Play! Framework
+%i Michael Seid
+%p Scala and Akka allow you to create really nice async non-blocking code without the terror of callback hell (see node.js).
+%p Play! Framework is like RubyOnRails for Scala. 2.1 just came out, and they are making great progress with it.
+%p Scala and Play! make it really easy to make your websites really safe. Unlike something like Spring MVC, where you can get in trouble really easily if you do not know exactly what you are doing.
+%p Definitions:
+%ul
+  %li A thread is a process that does something.
+  %li A future is something that will be done sometime.
+  %li A promise is a placeholder that contains a future.
+  %li An execution context is a bunch of threads that you can do things with.
+  %li Actors are abstractions for creating futures and other async concepts.
+  %li For comprehensions allow you to chain futures and yield a result.
+%p Actors use supervisor hierarchies to handle fault tolerance. .fallbackTo() is the bread and butter of fault tolerance in Play!
+%p Play! uses Comet to do single-page JS applications, this is IE7-compatible as opposed to Websockets, although Play! can use WebSockets as well. If you have Websockets, use WebSockets.
+%p Enumerators are producers and Iteratees are consumers. You can use these to have a forever-open stream from either WebSockets or Comet to process web traffic.
+%p When you create an Actor, you just have to implement one function: receive. Receive is like a little switchboard for your actor.
+%p JSON was a big pain to deal with in Play! 2.0, but now in 2.1 thre is Json.format, which saves a ton of time when working with JSON.
+%p There are now filters for csrf, middleware, etc.
+%p Play! is getting better and better everyday. Check out Play! 2.1 and see the wiki on the github repo, it is very useful.
+%p
+  Check out
+  %a{:href => "http://twitter.github.com/scala_school/"}Scala School
+  by Twitter. It is very helpful to learn Scala.
+%b Thanks to Michael for the great talk!

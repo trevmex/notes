@@ -1,0 +1,78 @@
+/ HTML5 and 'The Living Standard'
+%h3 #phillyete Session 10 Notes
+%i Molly E. Holzschlag, http://www.molly.com/
+%p When the web was born, it was intended to exist independent of device. We need web standards that scale to devices.
+%p The challenge of ANY web developer is to deal with someone else's mistakes. That is a HUGE pain.
+%p There are about 135 platforms and an uncountable number of combinations of browsers/platforms.
+%b HTML5 is a vocabulary and set of application programming interfaces that make up a core declarative language for web sites and applications.
+%p HTML5 was born out of people that were fed up with the W3C's XHTML 2.0 Spec, so they formed WHATWG and started working on HTML5.
+%p The WHATWG is a group of passionate people that want to make sure that there is a "patent exclusion process" to the HTML5 standard. Only the W3C can do that.
+%p So the WHATWG is more of a think tank, and W3C is the ones that make it standardized.
+%p An open standard is one that has all patents removed from it.
+%p The WHATWG tells us that the "living standard" is HTML. BUT in the real world, we have to follow the W3C specs to play it safe.
+%ol
+  %li
+    Support Existing Content.
+    %ul
+      %li You have to have backwards compatibility!
+      %li You can drop HTML5 doctypes into any HTML document (that is valid), and it should be valid.
+      %li Rely on graceful degradation and progressive enhancement.
+      %li
+        %b If you must "sniff," sniff for features, not browsers!
+  %li
+    Ensure Interoperability
+    %ul
+      %li Make sure that you know WHY you do not validate, if you don't.
+      %li
+        %b OMG! Learn about accessibility! You HAVE to make your sites accessible.
+      %li Avoid proprietary methods that tie you to a browser or platform. It will bite you down the road.
+  %li
+    Define User Agent Behavior
+    %ul
+      %li We solve real problems in the real world.
+      %li Our user agents HAVE to obey the formal specs for HTML.
+      %li the HTML spec is extraordinarily explicit and verbose. The spec makes it very clear how it should be implemented.
+  %li
+    Better Handle Errors
+    %ul
+      %li We should not support "draconian" error handling. We need to infer things that might be mistakes.
+      %li The browsers need to handle errors in the code.
+      %li Errors need to be consistent. This is not what happens right now, but it has to change!
+  %li
+    %b Evolve, not recreate
+    %ul
+      %li We are not trying to rebuild, we are trying to evolve what we have.
+      %li We need to acknowledge what worked and what didn't.
+      %li It is important to avoid reinventing the wheel. XHTML was a mistake in this respect.
+      %li Try to make what we have better.
+%p Who is implementing HTML5? EVERYONE IS!
+%p The HTML5 spec is rapidly changing, it is truly emerging technology!
+%p We want to advance the core language. This lets the old school experience the new stuff without being disrespectful.
+%p HTML5 is a replacement of ALL HTML.
+%p HTML5 is a replacement of XHTML 1.0.
+%p HTML5 is a replacement of DOM2HTML.
+%pre
+  %code.html
+    &lt;!DOCTYPE html&gt;
+%p doctype can NOW be lowercase. This is cool, but sad that we lost the rigger of XHTML.
+%p HTML is much looser than XHTML.
+%p HTML5 has NO DTD! It is wide and deep. That makes it hard to validate.
+%p HTML5 is the cross-breeding of philosophy and science. It breaths and lives.
+%p Only the title element has to be there.
+%p Google's homepage does not close their html and body tags, to save time on download.
+%p The meta element has to be in the first 512 bytes or it will not be read. Good to know!
+%p Microsoft is implementing SVG in IE9. Awesome!
+%p There are lots of new cool HTML elements, so check them out and love them. Very cool stuff! It makes your city of divs more semantic!
+%p An article is a discrete piece of information, a section has many articles, etc.
+%p The WHATWG did a lot of analysis of class and id names of divs and that is where these new element names came from.
+%p autofocus is another cool feature of HTML5, autofocus allows you to focus on forms without JavaScript.
+%p The required attribute allows you to do form validations.
+%p HTML5 has embedded media concepts: canvas, video, audio.
+%p H264 comes with a $500k/year license. We should use something open and free instead.
+%p Accessibility issues abound with meia as well, more work needs to be done.
+%b Web Sockets allow you to open a direct connection from the browser. It is amazingly powerful, watch it!
+%p Native JSON support is in HTML5 now. W00t!
+%p There are lots of challenges ahead. HTML5 is a spec NOT an umbrella term! Stop buzzwording it!
+%p We all need to understand the HTML APIs, JavaScript, SVG, and CSS3, which is awesome!
+%p There is much better global support for JavaScript as opposed to SVG, but that might change in the future.
+%p Thank you Molly for the great talk!

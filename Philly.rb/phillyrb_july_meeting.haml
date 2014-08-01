@@ -1,0 +1,64 @@
+%h2 Philly.rb July Meeting
+
+%h2 Compojure Web Framework
+%p Compojure is a web framework for the Clojure language, which is a LISP that sits on the JVM.
+%p The routes in Compojure are very Sinatra-like.
+%p Clojure has a REPL, which is an interactive shell, like irb.
+%pre
+  %code
+    (defn trotter [a-thing] (str "Trotter smells like " a-thing))
+%p Square braces make a "vector", it is like a list of things.
+%pre
+  ["a" "b" "c"] ; A vector of a, b, c
+  (conj ["a"] "b") ; => ["a" "b"] adding b to the vector a
+%p Curly braces represent mapping (hashes)
+%pre
+  {:a :b} ; => :a maps to :b
+%p Sets tart with a hash and curly brackets
+%pre
+  #{:a :b} ; a set of :a and :b
+%p Compojure is a light framework that has routing like Sinatra or Camping
+%p Clojure uses (ns hello) to define a namespace for you to work in.
+%p the (:use library) command is like the Ruby require command. It loads clojure libraries.
+%p the (:require [this :as that]) command is like the include command in Ruby. It allows direct access to library classes.
+%p Ring is a low level HTTP-wrapper, it is like Rack. Compojure is written on top of Ring.
+%p to set up your Compojure namespace:
+%pre
+  (ns hello
+    (:use compoure.core
+          ring.adapter.jetty)
+    (:require [compojure.route :as route]))  
+%p to define routes in Compojure you use:
+%pre
+  (defroutes example
+    (GET "/" "<h1>Hello World!</h1>")
+    (route/not-found "Page not found"))
+%p To run the Compojure app:
+%pre
+  (future (run-jetty (var example) {:port 8080}))
+%p There is a package manager for Clojure called Leiningen, which can get all your dependencies for you.
+%p Adding params to a route:
+%pre
+  (GET "/" [foo] (str "<h1>Hello " foo "</h1>")) ; this makes http://localhost:8080/?foo=dude
+%p to put params in your path:
+%pre
+  (GET "/:trotter" [foo trotter] (str "<h1>" trotter " says " foo "</h1>")) ; this makes http://localhost:8080/Trotter?foo=dude
+%p You can use maven to manage the clojure/compojure jars, since they are just standard jar files. Clojars is the maven repository for Clojure jars.
+%p hiccup is an HTML templating library (like erb) for clojure
+%p This is an html page written in hiccup
+%pre
+  (defn my-page []
+    (html
+      (doctype :html4)
+      [:html
+        [:head
+          [:title (str "New Peet!")]]
+        [:body
+          [:h1 "Welcome to my page"]]]))
+%quote "Clojure is THE BEST WAY to write Java code" - Trotter
+%p the (slurp) command reads from a file.
+%p the (read-string) command takes a string and turns it into a clojure object:
+%pre
+  (defn num-str "(1 2 3)")
+  (read-string num-string) ; => (1 2 3)
+%p Awesome presentation!

@@ -1,0 +1,55 @@
+%h1 jQuery April Philly Meetup
+
+%h2 OOCSS by Stephanie Sullivan
+%ul
+  %li Check out for a methodology for organizing CSS
+
+%h2 JavaScript Micro-Templating
+%i Kevin Clough
+%ul
+  %li Written by Jason Resig, author of jQuery
+  %li
+    script type="text/html"
+    %ul
+      %li the html template goes here
+  %li &lt;#= varName #>
+  %li Like an inline replacement for ERB
+  %li (Grabbing and ID is faster than grabbing a CLASS) &lt;-- I should have known that.
+
+%h2 Authoring a jQuery UI Plugin (and Making it ThemeReady)
+%i Reed Lauber
+%ul
+  %li jQuery plugins are written for lists
+  %li
+    %pre
+      :plain
+        (function($) {
+          $.fn.log = function() {
+            return this.each(function() {
+              alert($(this)[0].innerText);
+            });
+          };
+        })(jQuery);
+  %li
+    jQuery UI adds a Widget functionality
+    %ul
+      %li Widgets limit the context to one element of the time (i.e. you don't have to worry about lists anymore)
+      %li provides standard functions like 'init' and 'destroy'
+      %li Allows you to add on custom functions to your plugin
+      %li widget names are in the formst 'ui.widget_name'
+      %li
+        three types of methods:
+        %ol
+          %li Reserved: _init, destroy
+          %li Public
+          %li Private
+      %li tip: this is confusing in JavaScript, if you make a var self = this for a scope can help
+  %li
+    Making your Plugins ThemeRoller-ready
+    %ul
+      %li Use the jQuery UI CSS classes in your widget
+      %li ui-corner-all &lt;-- rounds the corners for you instead of doing it by hand
+      %li use basic jQuery addClass and removeClass with the jQuery UI CSS classes
+      %li (check out TimeClicker jQuery plugin for selecting time)
+      %li http://jqueryui.com/docs/Theming/ThemeSwitcher &lt;-- good for testing your widgets against varying themes
+ 

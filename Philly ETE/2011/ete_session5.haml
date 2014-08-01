@@ -1,0 +1,62 @@
+%h2 Clojure: Lisp for the Real World
+%i Stuart Sierra, @stuartsierra
+%h3 Values
+%p 3 is a value. You can't change 3, you can't redefine 3. It is immutable.
+%p Values in the world don't changes.
+%p Clojure is a language based on values like numbers, strings, symbols, keywords, lists, vectors, maps, sets...
+%p A symbol is like a string that can represent anything.
+%p A keyword is a symbol the represents itself (like a constant).
+%p A list represents a list of things.
+%p A vector is like an array, you can get to any value in constant time.
+%p A map is a key:value store that lets you get a value in a constant time (a hash)
+%p A set is a grouping of things.
+%p All of these data structures are both immutable AND persistence.
+%p You can add something to a list and the result is a new list, but those two objects can SHARE storage in memory.
+%p Clojure data structures are 32-bit binary trees.
+%p That means access to any data structure is O(log_32 n) to get an element.
+%p O(log_32 n) is fast enough in the real world.
+%p Your data structures ARE your program. A list (+ 3 4 5) is both a list and a program that executes 3 + 4 + 5.
+%p A function definition is just another data structure (a list).
+%p You are writing with data structures. In a normal programming language you write with characters that are interpreted. Clojure brings you one level closer to the true implementation of the data structures.
+%p A macro is a way to implement a programming pattern.
+%p let allows you you store local variables in functions, etc.
+%p Writing macros is a true instance of metaprogramming. It is a program that writes another program. You are actually creating another abstract method tree.
+%p When you are working with macros you are truly working with metaprograming.
+%p Why do you make a date mutable! Dates aren't mutable in the real world. That is silly!
+%p When you program with mutable types you have to code defensively with things like locks and encapsulation. But when you program with immutable values you don't have these problems.
+%p But what about things that can change. Take today for example.
+%p Today will be a different value tomorrow!
+%p Today is an identity. An identity has a state, that is the value it for the identity right now.
+%p State can change, values cannot.
+%p How do you manage different mutable states? Make your transactions ACID:
+%ul
+  %li Atomic
+  %li Consistant
+  %li Isolated
+  %li Durable
+%p Clojure gives you atomic, consistent, and isolated values. Durability is not a language issue, it is a database issue.
+%p An atom is a mutable object that can only be changed by one thing at one time.
+%p A transaction is like a callback in JavaScript. With the addition that your transactions will retry on a conflict. That means that you have to make sure your transactions have no side effects.
+%p A var is bound to a root binding, and threads can spin off vars for specific purposes.
+%p An agent has a thread pool that returns automatically, and will eventually execute. This is like an AJAX call, it will eventually return.
+%p The set of actions an agent can respond to is not fixed. You can send anything you want to the agent.
+%p The state is always visible when you are working with Refs, Vars, Atoms, and Agents unlike actors.
+%p This is designed to work on a single machine, you do not have to worry about communications across machines.
+%p If you want to do messaging across machines...use a messaging queue like Akka, RabbitMQ, etc.
+%p Clojure is NOT object oriented.
+%p A multimethod is a way to add polymorphism to clojure.
+%p When you create a multimethod, you give it a dispatch method and many other methods, then the dispatcher tells the multimethod which method to call.
+%p There is also protocols. Protocols allow you to extend both new types AND new protocols.
+%p With protocols you can define new types and old objects as well. This is how clojure solves the expression problem in object oriented programming.
+%p You can have hierarchies of types that are completely independent from the objects themselves.
+%p Clojure is built on the JVM.
+%p That means you have access to tens of thousands of Java libraries.
+%p Anything you can do in Java, you can do in Clojure...but if you can't write it in Java, and then call it in Clojure.
+%p There is no boundary between Clojure and Java when calling things.
+%p Clojure is awesome. You should check it out!
+%p Usually the win of using Clojure is a way to write concise code that is available many places, since it goes to Java.
+%p Clojure is still a young language. There are great opportunities to get involved!
+%p Clojure is opinionated. You have to write in a certain way, and think in a certain way when using it.
+%p The clojure community is interested in solving large problems. Problems that computer science have been tackling for a long time.
+%p Mental note: Someone should write "The Little Clojurer"
+%p Thanks to Stuart for the great talk!

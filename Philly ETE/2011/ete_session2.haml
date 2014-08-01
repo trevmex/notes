@@ -1,0 +1,74 @@
+%h2 Polyglot Patterns
+%i Ola Bini, http://olabini.com/blog, @olabini
+%p The patterns people use when they use many languages.
+%p The JVM is the best place to do your ployglot programming right now.
+%p Ola is a core member of the JRuby team. JRuby is most definitely polyglot (Ruby on Java)
+%p What is a polyglot? A polyglot is a "mixture or confusion of languages."
+%p Why? Each language has different ways to do things. Things that they are strong and weak at.
+%p Java makes you repeat yourself a lot, that was make it easier for new programmers. It is quite verbose, and can be quick, but speed is not always the thing.
+%p In Java there is a lot of ceremony: completion, setup, etc.
+%p There is ceremony and essence. The essence is the heart of your code. The business logic you are trying to create.
+%p Another reason to use many languages is libraries. The JVM has access to a LOT of libraries. When you are writing your Rails app and now you have to hook up to a DB using JDBC, you have to use manhy languages.
+%p Sapir-Whorf: The language decided what you can think. (You cannot think of revolution without the word). This has been proven mostly false. BUT the weak version of this, that language INFLUENCES decisions, has some merit.
+%h3 Programming languages:
+%ul
+  %li Iverson = "Notation as a tool of thought"
+  %li Paul Graham - The Blub paradox: If you code in a language called Blub, you will think all other languages suck, and Blub rocks (so true!)
+  %li Ruby - Matz says one inspiration was novel Babel-17
+%p The turing tarpit: Most small languages move very slowly towards turing completeness.
+%p Ant is turing complete! (but Maven is not)
+%p How do you become a polyglot programmer?
+%ul
+  %li Adopt a new language!
+  %li But be careful about what languages you use. You have to think about it.
+  %li Google only allows 4 main languages: C++, Java, JavaScript, and Python, this allows them to focus their strengths.
+  %li When you start learning a new thing your productivity will get worse, but that's OK. It will get better.
+  %li There is new syntax and new libraries.
+  %li The leverage should increase quickly. And learning a new language shouldn't take more than a few weeks.
+%p An application should have a small stable layer (infrastructure, Java), a larger dynamic layer (your Rails framework, Ruby), and a large domain layer (business logic, DSL).
+%p Statically-typed programming languages should be minimized for cases that you REALLY need them. The closer to your domain layer, the more dynamic your language should be.
+%h3 Polyglot Testing
+%p Testing can be a gateway drug to learning a new system. You don't have to convince business people to use a new language for writing your tests.
+%p That also makes your tests creation faster. Cucumber test writing is pretty quick, and easier to read than JUnit tests.
+%p Cucumber step definitions can be written in about 15 different languages.
+%p Your tests become more manageable when you use tools like RSpec and Cucumber.
+%p Check out QuickCheck, it is a Haskel test framework that has been ported by a lot of languages.
+%p With QuickCheck, you can create a variance and have your tests try to break that variance.
+%p One way is to do exploratory testing using the REPL (if you have a dynamic language that has a REPL like Clojure or JRuby). The REPL will allow you to explore Java classes within the JRuby REPL. Awesome AND easy!.
+%h3 Build Scripting
+%p Is Maven or Ant the BEST way of building your system?
+%p Check out BuildR - it combines rake-style commands with a Maven-like pom.
+%p Polyglot Maven allows you to write your pom in different languages.
+%p GAnt - Ant in Groovy
+%p There are lots of gateways into making your build scripts cleaner with different languages.
+%h3 Alien Libraries
+%p If you need libraries from another language, you can access them if you have multiple languages on top of the JVM.
+%p Be careful though, you might complicate your build process if you are are mixing languages.
+%p Dependency injection can help when you are trying to combine languages together.
+%p DI allows you to write any part of your app in any language and declare the language in the configuration of the app.
+%h3 End User Scripting
+%p Lua is a great example of a scripting language that is used to make games, etc. very editable.
+%p Emacs is another example of an almost-completely configurable system.
+%b It is important to have one "main method" language.
+%p Most of the time one language will have to drive the bus.
+%p It is important to have your main language have access to the more robust language. (although sometimes you don't have a choice).
+%h3 Watch out!
+%ul
+  %li You can end up with multiple languages in a file, this is bad mojo.
+  %li The big ball of languages: If you are not careful, you can end up with a lot of languages in an app for bad reasons.
+  %li Impedance mismatch: Some languages have fundamental assumptions that don't let them play nice together.
+%p At the moment Java really is the best platform for polyglot programming.
+%p .net is also a fairly good platform for polyglot programming as well, but the thinking in the .net community is not as developed as in the Java community.
+%p parrot is supposed to be the next big thing...but not so much.
+%p Andriod is pretty good, but runtime reflection is really really slow, so it is not there yet.
+%p iOS is not there yet. It is ObjC and nothing else. ;_;
+%p V8 is turning out to be more and more a polyglot platform. ...because JavaScript sucks. E.g.: Rails 3.1 will ship with CoffeeScript, which is much nicer.
+%h3 What about language interoperability?
+%p JSON or XML (or HTML) as an exchange format.
+%p String templating the wal SQL does it.
+%p You can use things like JNI or FFI to hack into another language.
+%p Metaobject Protocol (MOP): A MOP provides an interoperability level and translation layers between languages. Cool!
+%b Learn languages recreationally!
+%p Note to self: Learn what a monad is... :)
+%p "Designing something big up front is usually not the way to go about things."
+%p Thank you to Ola for the great talk!

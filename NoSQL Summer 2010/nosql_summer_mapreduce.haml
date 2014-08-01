@@ -1,0 +1,46 @@
+%h2 MapReduce: Simplified Data Processing on Large Clusters
+%i Nick is MCing
+%p Dave for CIM is hosting!
+%p MapReduce is lie really large-scale data processing
+%p One of the important things is the existence of the GFS. Which is useful for controlling network bandwidth.
+%p There is a Map function which groups together all the values with the same key and groups them together to a temporary file as key/value pairs.
+%p The Reduce function aggregates the results of the mapped data.
+%p Why have two functions?
+%ul
+  %li The map function groups things together for the reduce function to utilize.
+%p All the functions are deterministic. This is useful in the case of failures.
+%h3 The Master
+%p The master is in charge of the whole state of the MapReduce universe.
+%p Does Hadoop allow you to have multiple masters? (Trotter)
+%ul
+  %li Unknown, but the master is unlikely to fail, so the Google paper does not consider it.
+  %li The main concern is that it handles multiple worker failures. Workers are more likely to fail because of how many there are.
+%p The master keeps all the task information in memory.
+%p Does all the map tasks have to be done for the reduce tasks to start? (Dave)
+%ul
+  %li No. You can start reducing as soon as you have a mapped result.
+%p What happens when a worker fails?
+%ul
+  %li There is a heartbeat from the master. If the worker does not respond, the work is given to another worker.
+%p The state information is small (M * R), why is that?
+%ul
+  %li The map task can produce R documents.
+%p There aren't that many things you can do with only one map/reduce function, you usually have to chain them together.
+%p Reducers are notified whenever a machine fails.
+%p The results of a map function are stored on the map machine, which the reducer is notified of.
+%p The final file names are deterministic, that will allow your data to be safe because rewriting in GFS is atomic.
+%p So long as the file system has an atomic move, you are safe.
+%p In a non-deterministic system, (i.e. a system where the data set changes), you have weaker results, but they can be pretty accurate.
+%p By using backup tasks, you can speed up slow machines by sending the operations they are using to other finished workers.
+%p You can customize your partitioning function to make all the reduced keys go to one file.
+%p The reduced workers sort before that do the reduce task.
+%p In MongoDB and CouchDB the ONLY way to get aggregate data is through MapReduce. The only other way to get data is to return the full documents and parse them. (bleh!)
+%p Skipping bad records: If there is bad input, all the workers will be aware of it, so the mappers will be aware of it and skip it.
+%p You can add a counter to the mapper which can give you added information (like a little map/reduce running on the Master)
+%p The master pings the workers so that the workers do not have to worry about when to talk back to the master.
+%p In the Google example, they are chaining map/reduce functions together to make it useful.
+%p Erasure coding: divide the object into M parts, and recode to N parts where N is greater than M. Then you can throw around the N parts (this is like the temp files in MapReduce)
+%p In the Erlang book by Joe Armstrong, they implement a MapReduce function, which is easy in Erlang.
+%p MongoDB and CouchDB implement MapReduce in Javascript.
+%p Hadoop is a Java implementation of the MapReduce library that is open source and in wide use.
+%p Next time is Google's BigTable! I will be MCing. w00t!

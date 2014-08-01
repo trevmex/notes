@@ -1,0 +1,105 @@
+%h2 Cucumber Tutorial
+%ul
+  %li JBehave -> RBehave -> RSpec Story Runner -> Cucumber (The Lineage)
+  %li There are about 130,000 downloads of Cucumber
+  %li Supports over 40 different languages
+  %li Cucumber only cares about the Scenarios, the Features are just like code comments
+  %li You write the cucumber test BEFORE you write the code!
+  %li Cucumber Features have Steps which are defined by Step Definitions.
+  %li You can think of a step definition as a function with a regex as a function name
+  %li You want to fails first. Create the test, watch it fail, fix it, watch it pass.
+  %li
+    %b Don't write any production code unless you have a failing scenario first!
+%ul
+  %li Gherkin is the programming language (not turing-complete) used to write Cucumber
+  %li You can make a Scenario Outline if you have many Scenarios that are the same
+  %li Step Strings: You can make blocks of text encapsulated by triple quotes ("""something""")
+  %li
+    Step Tables:
+    %pre
+      | email    | title   |
+      | trev@... | Awesome |
+  %li Background: this is the same as a before in RSpec, but it is in Gherkin Steps, not the Ruby Step Definitions
+  %li
+    You can also use tags:
+    %code{:class => "ruby"} @english
+    %ul
+      %li
+        to run only certain scenarios
+        %br/
+        %code cucumber -t @english doit.feature
+  %li
+    Hooks: Before and After (technical stuff that you have to do)
+    %br/
+    There are now Around hooks as well.
+  %li
+    Tags can also be used with Hooks:
+    %br/
+    %code{:class => "ruby"} After(@foo || !@bar) && @zap
+  %li Before and After Hooks can go anywhere under the features folder
+%p
+  To make your tests look nicer:
+  %br/
+  %code cucumber --format pretty
+%p
+  Making your tests go-go-go:
+  %br/
+  %code
+    rake db:migrate
+    %br/
+    rake db:test:prepare
+    %br/
+    autotest
+%p Group your step definitions by domains, not features.
+%p When do you use Cucumber vs. RSpec? It is a big debate. I think it might be a good idea to write RSpec for any new function in your Controller or Model, otherwise use Cucumber. But you should try for yourself.
+%p What about view specs? Overkill for the most part. Most people have moved over to Cucumber for this.
+%p Skinny controllers == Skinny controller tests
+
+%h2 Acceptance Testing
+%p The customer agrees that when this test passes, the application is acceptable.
+%p The acceptance test is sort of like a contract between the client and the team.
+%p Customer tests are written for the customer (Cucumber)
+%p Developer tests are written for the developer (RSpec)
+%p RSpec tells us the code is right, Cucumber tells us to write the right code.
+%p
+  An acceptance test is:
+  %ul
+    %li A Spec: what the code should do
+    %li A Test: does the code work
+    %li A Doc: what the code does
+%p
+  The Testing Spectrum
+  %ul
+    %li Imperative: Every single step is in the feature
+    %li Declarative: Much higher level (what you would write on the back of the envelope)
+%p
+  Macros!
+  %br/
+  %pre
+    %code{:class => "ruby"}
+      When /^I order a pizza$/ do
+      steps %q{
+      Add Cucumber steps here, or Ruby code directly
+      }
+      end
+%p
+  Should I test through the UI? If you use JavaScript, sure, but it is expensive.
+  %br/
+  Try testing right below the UI. So 90% or the time you are not running in a browser.
+%p Database Cleaner allows you to use the DB or just run your tests in memory.
+%p Factories are dynamically created fixtures. They actually create data to us in yours tests. This can be more useful than mocking and stubbing in certain instances.
+%p
+  Stubs are useful for:
+  %ul
+    %li Network Service
+    %li Web Services (FakeWeb)
+    %li File System (FakeFS)
+    %li Time (Timecop)
+%p DON'T MOCK when doing Acceptance testing in a tool like Cucumber. It is way too granular.
+%p
+  Check out the book
+  %i "JUnit Recipes"
+  for a great list of unit tests that can work in many different languages.
+%p Often "Given" steps interact directly with the model, this is called Direct Model Access (DMA)
+%p Don't assume you need a UI for everything. Only create UIs for the things your customer needs UIs for.
+%p culerity allows you to run Cucumber JavaScript steps in a headless browser.

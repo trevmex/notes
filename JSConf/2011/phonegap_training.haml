@@ -1,0 +1,60 @@
+/ Seriously Hardcore PhoneGap Training Part 1
+%h3 #jsconf Training Notes
+%p Symbian is treading downwards and Andriod is treading WAY up. iOS is flat, but whatever. Stats are bull...
+%p All the platforms have lots of different ways to code, but they ALL have a browser.
+%p The web IS native!
+%p PhoneGap is COMPLETELY FREE. No patents! Love it.
+%p The community is a lot like a flying wolf.
+%p PhoneGap is a transparent, you have full access to the roadmap and the bug issues.
+%p PhoneGap has lots of of cool people working on it. You can work on it too!
+%p As of right now 0.9.5 is the new hawtness.
+%p The 1.0 roadmap is all about a pluggable interface.
+%p We want PhoneGap to be totally pluggable.
+%p PhoneGap will be more about the UI (we think).
+%p Notifications are really interesting, we want to abstract away that awesome.
+%p Check out http://build.phonegap.com - You can get your apps compiled away for free. LOVE it.
+%p Supported platforms:
+%ul
+  %li iOS 3.2
+  %li Android 1.5
+  %li Blackberry 4.6
+  %li webOS 1.4.5
+  %li Symbian 1
+%p Windows Phone 7 is coming soon, and desktop apps are in the future.
+%p All a PhoneGap plugin is an app that gets called to PhoneGap.
+%p How do you call into native code from JavaScript:
+%pre
+  %code
+    PhoneGap.exec();
+%p "iOS is prolly the LEAST secure mobile system."
+%p To call to the native code we use a "gap://" url and send it to document.location.
+%p The Andriod callback server is crazy cool.
+%p Blackberry has some crazy namespacing.
+%p document.cookie was the bridge in 4.2, but now there is actually a bridge! Woot!
+%p The Device API WG (This is the DAP) from the W3C.
+%p WAC is a carrier consortium of telcos that made a lot of crazy specs as well.
+%p Browser media APIs are a mess, but PhoneGap fixes that.
+%p The DAP system calls can get a lot of info from your phone.
+%p If you really need a task manager, you can write your own.
+%p "Web-ish SDKs are treading..."
+%p There are a lot for web APIs, but they are ALL different. Why The Face!
+%p So everyone is using JavaScript, and PhoneGap will/does shim them all.
+%p PLUGINS! Plugins mean you don't have to care what we have built.
+%p There are plugins out there, but they are all written in different ways.
+%p There will be 3 types of plugins: Core, Community, and Partner.
+%p Phones tend to have browsers. And we can hack them.
+%h3 Blackberry Stuff
+%p Check out https://github.com/brianleroux/Cordova for an easier way to build PhoneGap apps.
+%p Blackberry PhoneGap uses an ant build script that will only work on Windows.
+%p The Blackberry simulator is pretty awesome, you can customize just about everything about it. (It might be about to integrate this into a CI server)
+%p There is a config.xml that is defined by the W3C widget spec defining what features a phone app will have. Blackberry has adopted this with their WebWorks SDK.
+%p You will now be able to build your plugins as widget features that are puled from an external repo (like Maven or Ant).
+%h3 PhoneGap Build
+%p http://build.phonegap.com/
+%p PhoneGap Build allows you to not worry about all that SDK set up and just go.
+%p Check out https://github.com/phonegap/phonegap-start
+%p XUI is a really small UI library, it is a good enough alternative to a heavier framework, like jQuery.
+%p None of the local build chains will be deprecated, but the build server will be a convenient way to build on all SDKs without having them all.
+%p (Man this is a scary complex world, doing mobile dev.)
+%p Dang. I think I fell into an Advanced PhoneGap talk. I am jonesing for some intro level hawtness.
+%p Until after lunch.

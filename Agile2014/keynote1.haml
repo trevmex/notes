@@ -1,0 +1,38 @@
+%h2 #Agile2014 Opening Keynote - Journey to Cloud Cadence (Notes)
+%i Sam Guckenheimer, Microsoft
+%p Conway's Law - "You ship your org chart," this is not always the best thing, but it is a fact of life. So mold your org chart to ship better.
+%p Conway's Law leads to a lot of dysfunctional tribalism. It is a lot of us vs. them, which leaves your company in the lurch.
+%p One of the biggest problems that dysfunctional teams generate is a lot of waste. People waste a lot of time with the blame game and passing the buck.
+%b WHO CARES WHO MADE THE PROBLEM, FIX IT!
+%p With lots of waste and dysfunction you get a lot of delay. Very long release cycles and bloat disguised as "ensuring quality."
+%b The unspoken horror: Tech debt
+%p When you have a goal of 0 bugs at release, you have teams that just defer bugs to the "next release." Zero bugs is a total misnomer.
+%p "We were bad, but we weren't completely stupid." - How Microsoft adopted Agile.
+%p Throw out broken tests. Create new tests. Full-stop on "new features" to fix open defects.
+%p Make sure that you have a well-defined definition of done, which MUST include a clean suite of tests that were runnable and pass every time.
+%p When defining user stories for a product backlog, think about "what if" questions, like "what if I could make an application that does this?"
+%p Make sure to have shippable products at the end of each sprint, and make sure you USE your product. If you don't use your own products, you will never know what needs to be fixed.
+%p Using bugs as a metric for code quality is pretty crappy and one-sided. Code quality metrics need to be more nuanced, and less "game-able."
+%p Customer feedback matters! Make sure that your customers are deeply involved in the design process of your products. When your customers are telling you that they care a lot about something, but they don't like the way you are doing it, that is the time to pivot, but you can't know that without talking to your customers.
+%b Cloud Cadence - What is it?
+%p Cloud cadence allows you to deliver rapidly and change constantly. This is the concept of moving from making a box product to making a service in the cloud. When you are developing a service that is cloud-based (a.k.a. the software lives on a server farm not your local computer), you can spin out software faster.
+%p The scrum teams stay together for 8-12 months, co-locate, and contain a dev lead, a test lead and a project lead. Having the team small and together for a long time is key.
+%p 18 months - There is a north star document that defines the vision of what will be in existence in the software 18 months in the future.
+%p 6 months - There is a 6 month season, that is much more firm. We promise that we can deliver complete features in this time line.
+%p 3 sprints - Planning chats occur every 3 sprints to plan the work to be done.
+%p 3 week sprints - At the end of the sprint there will be something shippable. And the 4th week, your software is deployed. At the end of the 3rd week, you are done.
+%p At the end of a sprint, each scrum team makes a video telling managers what they have accomplished.
+%p There is an opening mail saying what the team is committing to, and ant the end there is a mail explaining what happened.
+%p In the cloud, there is no downtime. You have to be up 24/7 all the time. This means that your deployment needs to be fully automated, your services need to be highly decoupled and have very clear contracts.
+%p
+  %b Feature flags
+  become VERY important when shipping products consistently at the end of a sprint. Feature flags help avoid merge-debt.
+%p To let customers know what is available in the product, they use a blog to update customers.
+%p How do you connect this process to business success? Pull in customers to review your changes and how it affects them. Watch to see how many people use your product, if it increases, good. The key is metrics.
+%b Actively seek out your top customers.
+%p Listen to Twitter, your customers use it, you should pay attention to it.
+%p When you concentrate on infrastructure and performance, your uptime increases. All devs should deeply care about operations.
+%b If the service is out, it doesn't matter how many features you have.
+%p Expose your instrumentation! If you are collecting metrics, your customers might also care about those metrics as well.
+%p We are in a second generation of agile technologies. It is an incremental change. :)
+%b There is no place like production!

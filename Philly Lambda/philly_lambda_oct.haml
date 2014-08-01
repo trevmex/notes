@@ -1,0 +1,70 @@
+%h2 Protocol XIII: Clojure
+%b Philly Lambda October Meeting
+%i Sean
+%p October 22-23 there is a Clojure conference coming up. This talk is a preview of the talk Sean will give them.
+%p A month ago Clojure 1.2 has come out.
+%p The newest feature is Protocols. A protocol is clojure's nod to an object oriented system. Rich Hickey doesn't really like OO, but the demand from the community was there, so here it is.
+%p All of Clojure's data structures are implemented in Java, and there is a .NET version being created by Dave Miller.
+%p It is important that Clojure will be able to be hosted on multiple environments (.NET, Java, maybe JavaScript in the future)
+%p BUT the real goal is to have Clojure that is written in Clojure. That is the main drive behind protocols and new data types.
+%p Example time: There are a lot of different ways to talk about dates:
+%pre
+  %code
+    (ns demo
+    (:require [chrono [core :as chrono]])
+    (:use lib.sfd.same))
+    
+    (def dates
+    "2008-08-13T11:21:48Z"
+    [2008 8 13 11 21 48]
+    {:year 2008
+    z:month 8
+    z:day 13
+    z:hour 11
+    z:minute 21
+    z:second 48
+    z:ms 0}
+    (chrono/date))
+%p These are ALL the equal. But we need a class that will treat them all as equal. They are not to a computer, but they are to a human (at least a human that can read clojure).
+%p Often to get around this, you can make a to_date factory function that takes in string and spits out a date, another that takes a vector, etc.
+%p Once you have a to_date factory function, you can have generic functions for comparing dates together (is date a greater than date b, this works as long as dates are normalized with the factory function)
+%pre
+  %code
+    (defn compare-time
+    [a, b]
+    (.compareTo (date a) (date b)))
+%p
+  The Problem: 
+  %b If I give you a library with this info, you cannot extend it.
+%p Clojure Protocols give us a solution to this, allowing you to expand on libraries.
+%pre
+  %code
+    (take 2 "abcdef") ; returns the set (\a \b)
+    ; but we want something that returns the same type, so Sean wrote a same function:
+    (same take 2 "abcdef") ; returns "ab"
+%pre
+  %code
+    (empty {:a 1}) ; returns an empty set
+    (into '() [1 2]) ; returns (\1 \2)
+%p For same, we want to use these two functions over and over again, BUT empty (returning an empty version of your data type) and into (inserting into your data type) is different for each data type, e.g. inserting into a string is different than inserting into a list.
+%p To get around this, you can create a protocol (which is like a class) that has two functions (my-empty and my-info), then you can extend the protocol to implement these two functions for various data types.
+%p By doing this, it allows your code to express the pure algorithm and removes the need to have conditionals for the various data types.
+%p The other useful thing with this approach is that you can extend (i.e., add new data types) to your protocol on the fly. It does not have to be a part of the file where the protocol will be defined. You can even add extend your protocol in the REPL.
+%p This replaces the multimethod in Clojure, which was the only way to extend on type before, but you couldn't extend to new object types with multimethods. The other thing with multimethods is that they are very slow.
+%p (although multimethods still have their place, since protocols can only act on the extended data type, whereas multimethods can have any arbitrary logic in them)
+%pre
+  %code
+    (defprotocol samep
+    (my-into [to from])
+    (my-empty [coll]))
+    
+    ; now you can our extend these two methods to new data types
+    (extend java.lang.String
+    samep
+    {:my-into (fn[to from] (apply str to from))
+    z:my-empty (constantly "")})
+%p Now you can get ride of your if statements and replace them with extensions to your protocols.
+%p The big thing for Clojure 2.0 is that all your data types will be defined in Clojure, so you won't be using native Java types, that will allow us expand to other environments, like .NET
+%p You can query a data type to see what it has been extended with using the extends? method
+%p The code for this presentation will be in github soon!
+%p Thank you to the Philly Lambda crew and Sean.

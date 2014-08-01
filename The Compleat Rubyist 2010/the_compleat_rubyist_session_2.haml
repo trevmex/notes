@@ -1,0 +1,81 @@
+%h2 Testing and testability
+%i Jeremy, David, and Gregory
+%h3 A Fireside Chat on Testing
+%ol
+  %li
+    %b Accessors and API
+    %ul
+      %li Avoid nasty instance_variable_set calls by making an attr_accessor method instead of mocking out instance variables.
+      %li It makes stubbing things easier.
+      %li The important part is that you do not want to mock up the INTERNALS of your classes.
+  %li
+    %b Feedback loop
+    %ul
+      %li Tight feedback loop == Faster code
+      %li You want to have a fail early runner. There is one for Test::Unit called leftright (http://github.com/jordi/leftright). That allows you to stop your test suite from running when they hit their first failure. SO useful.
+      %li Local CI: Check out watchr for autotesting (http://github.com/mynyml/watchr)
+  %li
+    %b Acceptance
+    %ul
+      %li Cucumber isn't the only rodeo in town...
+      %li Steak (http://github.com/cavalle/steak) is pretty cool, and it integrates with RSpec and Capybara.
+      %li Cucumber would be cool IF my clients could write cucumber tests...
+      %li Having something like Pivotal Tracker can help, but whatever you use, you NEED someone on your team that can understand BOTH the technical language and the business language.
+      %li Users don't submit bugs as user stories (As a user, I want the project not to break...)
+      %li Coulda is another option that works well with Test::Unit
+      %li RSpec 1.x and Cucumber are great for ideas, but the implementation is too poor to use in production code.
+  %li 
+    %b Performance tests
+    %ul
+      %li We would all like to use them, but we don't...
+      %li Rails has a cool performance testing framework
+      %li There is a Benchmark class in Ruby Standard Lib. USEFULed!
+      %li Jeremy made a cool Test::Unit hack to test performance and allow you to write failing performance tests.
+      %li Performance testing is hard. It actually involves some math (brain hurtiness!)
+  %li 
+    %b Data data data
+    %ul
+      %li Keeping useful data about tests can be super helpful.
+      %li Logging errors and analyzation can be really helpful.
+      %li Use git notes to analyze run times. Git notes allow you to add notes to any git commit without an extra commit.
+      %li BuildHawk uses git notes to add build time data to git commits. http://github.com/xaviershay/buildhawk
+  %li 
+    %b Stupid git tricks
+    %ul
+      %li
+        You can use git notes for other things.
+        %pre
+          %code
+            git notes add HEAD
+      %li git bisect can save your soul!
+      %li git bisect lets you walk through your commits and pick out only the good commits.
+      %li
+        You can actually run tests and ignore those commits with failing tests!
+        %pre
+          %code
+            git bisect start HEAD a18d7df
+            git bisect run ./run_tests.rb
+      %li git clean -f # will kill anything that is not tracked right now.
+%p More resources: Rails Test Prescriptions, Ruby Best Practices, and Jeremy's Github account.
+%p There is no reason to test a private method. They have no meaning by itself. If you have a private method that is complex enough, you can make it a public method for a more basic class and have your class inherit from it.
+%p object.send() can circumvent privacy, but you really shouldn't abuse it.
+%p There is no such thing as a piece of business logic that belongs in a private method. Private methods should be helpers that are meaningless outside of the class they are in.
+%p In the end, tests are code.
+%p Designing for testability is not the same as designing your code for your tests. The former is better than the latter.
+%p Writing "just enough code" to fulfill your tests can help you avoid unnecessary generalizations, but it is often impractical in production systems. That being said, it is a useful exercise to do every now and again.
+%p The culture of testing that has given a lot to our community, but it might be hurting our productivity. "No amount of testing can prove the nonexistence of bugs."
+%p There is a lot of OVERtesting going on, but...
+%b don't leave any code that you are touching without tests.
+%p If you start having problems with untested code, and you don't write a test, there is no excuse for that. Your bug is a unit test right there.
+%p If you want to make sure something works, write a test for it. You do not need 100% code coverage, but you need tests for the important things.
+%i
+  %b Greenfield:
+  A brand new project without a code base.
+%p Try to take one day a week or one day a month and do test first development. It is hard, but it is good to help you think in a new way.
+%p Testing can make you focus like a laser on a piece of code. This can be a good thing, but it also can make you lose site of the forest for the trees.
+%p Pairing can help with that problem. You can have one laser-focused developer, and another developer holding the lantern (to see the bigger picture).
+%p Tests cannot tell you what the code is meant to do, but it does a great job of telling you what it does.
+%p A great source of Ruby exercises is to try to implement anything in class Enumerable in Ruby itself. It is a good challenge.
+%p Put as many levels of abstraction into your code to make private methods that are nontrivial impractical.
+%p Nokogiri is useful for validating XML in tests.
+%p Again, a big think you to Jeremy, Greg, and David!

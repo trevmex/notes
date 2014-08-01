@@ -1,0 +1,37 @@
+/ DSLs: Does Expressiveness for Domain Experts Have to Comprimise the Underlying Implementation?
+%h3 #phillyete Session 9 Notes
+%i Debasish Ghosh, @debasishg
+%p It is important to realise an expressive domain model, but that sometimes makes for a hard to maintain and sloppy code base.
+%p The model is the underlining domain model of the DSL. And the view is the syntax you give to your users.
+%p It is important to choose good abstractions in making a DSL.
+%p We ave to have good language idioms as well.
+%p The model of the DSL translates your language to code.
+%p The view is a user-friendly syntax for the domain user.
+%p The view or syntax is a veneer of abstraction over the model.
+%p The view or syntax can be multiple over the same model.
+%p The model has to be independent of the views.
+%p When making a DSL, your syntax is something that the user will understand easier than reading code.
+%p Not all transformations can be done with simple regular expression based string processing.
+%p Your model has the semantics, and you have to parse syntax correctly.
+%p The abstractions you choose will effect how you write your DSL.
+%p The key here is that you want to have your semantic (model) and syntactic (view) to be decoupled.
+%p We need abstractions that generalize over computations. This creates reusability.
+%p The more generalized your abstractions the faster they will be adopted.
+%p Naming your processes correctly is important.
+%p The domain user will not be able to program. The domain user should be able to write something close to plain English and use that to drive business logic.
+%p A map is fundamentally powered by type classes.
+%p (I am not grokking this so much, sorry for the sparse notes)
+%p Debasish created a "map" function that is a combinator that takes any type of function and combine them together.
+%p The domain model needs to be designed for compositionally.
+%p So I think the point of this talk is that the DSL shouldn't be for the business users to write, but they should be readable by business users.
+%p I think you want your domain users to be able to write business logic. Your domain programmers shouldn't have to worry about the details of the implementation of the DSL.
+%p We can use partial functions as a strategy design pattern to make domain functions easier to write.
+%p It is useful to choose the right language when writing a DSL.
+%p Ruby is more dynamic than Java, you can use metaprogramming to make writing DSLs easier.
+%p Clojure is more functional, using higher order functions, and uses macros to make metaprogramming work out better.
+%p Once you have a clean DSL over a clean model, you can add DSLs to DSLs making larger DSLs.
+%p You do not want to change the core business logic when you extend or add onto a DSL.
+%p You take your semantics and abstract them out so that you can have a different implementation of the DSL regardless of the syntax.
+%p That is called polymorphic embedding. And that gives you pluggable compositions for the semantics of your DSLs.
+%p A DSL has a syntax for the user and a model for the implementer.
+%p Thanks to Debasish for the talk!

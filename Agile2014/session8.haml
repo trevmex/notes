@@ -1,0 +1,31 @@
+%h2 Mutation Test: A New Way to Improve Code and Test
+%i Joseph Yao
+%p If your body is your code base, your test code are monitors on your body telling you that you are getting sick. Mutation test is a way to help you build your tests around your code.
+%p What is a mutant? A mutant is someone that has changed genes to make them different.
+%p What is a mutant in your code? - It is literally any change in your code.
+%p So, what is a mutant test? - It is literally making any change in your code, and running your tests. If your change makes the tests pass, it is a survived mutant. If the tests fail after the mutation is introduced, it is a killed mutant.
+%p If you have tests that still pass after you change your code, or mutate your code, you have a survived mutant in your code. THAT IS BAD.
+%p If you change the logic in your code and do NOT change your tests, it is bad news. Your goal is to kill mutants. You want your tests to fail when you change the logic in your code. If they do not, you have more tests to write.
+%p When you remove a line of code, and then run your tests and they all pass, that means one of two things:
+%ol
+  %li You are missing a test
+  %li The code is actually not needed (rare)
+%p We hope that automated tests are a safety net for writing buggy code. Therefore, a mutation test is a safety net for writing buggy tests.
+%p Common mutations to test your tests:
+%ul
+  %li Reverse your loop exit conditions
+  %li change your conditionals to always true or always false (remove conditionals mutant)
+  %li Change your minus signs to plus signs (math mutant)
+  %li Change your incrementation to decrementations (increments mutant)
+  %li Change constants to magic numbers or strings (in-line constant mutant)
+  %li Change your return value of your method, null for example (return value mutation)
+  %li Change your code to do nothing (void method call mutant)
+%p Check out the PokerHands Kata - Given some poker hands, find the winning hand. Use TDD.
+%p If you mutate your code and your tests still pass, you have to ask yourself: What the hell? Do I need better tests? Is my code useless?
+%p With TDD, you add a test, make it fail then make it pass. Well, that makes it so that you will not be able to make exhaustive tests. You need more than just TDD to have robust code and tests.
+%p Mutation tests allow you to harden your test cases. The goal of your tests have to be to never survive any mutation tests.
+%p
+  Check out
+  %a{:href => "http://pitest.org/"}Pitest
+  to help automate your mutation tests! So cool!
+%b Mutate your code to test your test!

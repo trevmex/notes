@@ -1,0 +1,29 @@
+%h2 AppCache: Douchebag
+%i Jake Archibald (@jaffathecake)
+%p Why do we need offline file access? Because for many of us, online mobile access is addictive, and we want to make our sites work well offline as well.
+%p The Application Cache is a bit of a douchebag.
+%p There are two types of sites out there. the "Get Stuff" sites, and the "Do Stuff" sites
+%p Get stuff sites have a lot of content, and the heavy lifting is on the server (google, twitter, facebook, etc.)
+%p Do stuff sites have a little bit of content, like games, linters, etc. Their heaving lifting is on the client. (this is what app cache is really good for)
+%pre
+  %code{:class => "html"}
+    &gt;!DOCTYPE html&lt;
+    &gt;html lang="en" manifest="offline.appcache"&lt;
+%p Your "offline.appcache" file must start with "CACHE MANIFEST" then a list of cached files.
+%p AppCache is avaiable in almost all the major browsers.
+%p Lame thing #1: If you have something in your cache, it will never get back for updates...that is annoying.
+%p i.e. if the html is on the application cache, it will be served from the appcache, always. Even if you are online.
+%p AppCache has a second level of caching. So the only way to make the cahce stall is to touch your cache manifest. (actually more than that, you have to CHANGE your app cache manifest file, annoying!)
+%p App caching has poor caching heristics. You still need your caching headers. That means that you have to make sure your app cache manifest file is not HTTP cached.
+%p NEVER EVER CHANGE YOUR MANIFEST FILE REFERENCE IN THE HTML! If you do that, you will never get new versions of your html files ever again.
+%p You have to update your site twice when you update your manifest to get the changes. That is a bummer, but you can add messaging to the page to update using the "updateready" DOM event.
+%p The application cache doesn't like things that are not in the app cache! (In section 6.6.6 of the app cache spec) To fix this, add a * to your NETWORK: section of the manifest file.
+%b What about offlining a a "get stuff" site?
+%p Ideally we want to show up-to-date content to the user while they are online, but this is really difficult.
+%p You cannot update/create AppCache without also hosting the host page. So only put a small iframed offline page with the manifest file on it. You can do this with the FALLBACK: section fo the AppCache.
+%p The lame part about this is the FALLBACK: doesn't work with Opera (Opera, fix that!)
+%p You can use local storage for getting around this as well to cahce pages.
+%p When you have XHR requests on your site, offline access will fail. :(
+%p There are also bad error handling. Your error handling can get a little vague.
+%p The AppCache is hard to use...but it very useful! We should learn how to use it.
+%p Thank you to Jake for a fantastic talk!

@@ -1,0 +1,83 @@
+/ The Asset pipeline and our post-modern, hybrid, JavaScript Future
+%h3 #railsconf 2011 Notes
+%i DHH
+%p Rails 3.1 is just around the corner.
+%p All the things that Rails was created for was created because of some PAIN. The annoyances drive the features.
+%p Why is code a mess? That is why we make new versions, trying to make coding more pleasurable.
+%p Focus on the pain of what you see in your framework.
+%p Rails tries to not have too much stuff!
+%p One of the annoying things about Rials is the static JavaScript directory. There is no organization for your JS out of the box. It is just in flat files in a flat directory structure.
+%p The public directoy is just a junk drawer right now. We can do better.
+%p If you have more than 13 things together, that is TOO much. You have something wrong there.
+%p When you have more than 13 of anything (classes, functions in a file, directories, files, etc. is a bad smell.
+%p Things never start out bloated. They grow with time.
+%p You want a rule in place to make your junk drawer cleaner.
+%p We did this with controller and REST. With REST you have 6 functions and that is it.
+%p The javascript_include :all made it easy to dump everything into one big folder. That is why we are in this mess.
+%p People do what is easy.
+%p The REAL problem is that we are treating css and javascript as second-class citizens. We need to get over that.
+%p Frontend and Backend engineers have to combine. We have to make the CSS and JS clean like the Ruby behind it.
+%p Empty folders and empty files are the two things in Rails that has made our Ruby so clean.
+%p Right now the public folder is like a broken window, no one cares about keeping it clean.
+%p BUT if you have a place for things, people will want to stay organized.
+%ul
+  %li app/assets # for JS and CSS specific for your app
+  %li lib/assets # for global JS and CSS
+  %li vendor/assets # for vendor JS and CSS
+%p You can add paths to your asset pipeline using:
+%pre
+  %code.ruby config.assets.path &lt;&lt; "yourPath"
+%p You can now have a require statement in your JS files using //= require your_js
+%p This is good for dependency management.
+%p Now we can use Bundler to manage all your dependencies for not just Ruby gems, but JS and CSS dependencies as well.
+%p This means that you no longer need to copy assets into public directory, they are managed by their gem now.
+%p There is a new jquery-rails.gem gem that puts jquery into the vendor/assets/javascripts directory.
+%p jQuery is the new default JavaScript framework for Rails 3.1
+%p But all you have to do to change from jQuery to Prototype is to change your Gemfile!
+%p All of this applies to not only JavaScript, but CSS frameworks as well!
+%p For example, if you wanted to use blieprint, you just have to include it.
+%p It is not enough to solve the problem, we have to have the pleasure as well!
+%p On April 13, 2011 josh added Included CoffeeScript into Rails Gemfile. This created a HUGE controversy on Github.
+%p When Rails defaults change, people flip out.
+%b "CoffeeScript is well done and more convenient to use than JavaScript." - Brenden Eich, creator of JavaScript
+%p CoffeeScript has a lot less line noise than JavaScript.
+%p There is a lot less cruft you have to deal with in CoffeeScript.
+%b "Looking at CoffeeScript was the first time I got a little language envy" - DHH on CoffeeScript
+%p Check out CoffeeScript, it is really the way JavaScript is moving towards.
+%p CoffeeScipt is to JavaScript as Ruby is to C. It is the first step for moving JavaScript into the direction of the JVM.
+%p Sass/SCSS is the new default for Rails CSS work.
+%p Sass was created by Hampton Catlin (creator of Haml). (I really like Haml, that is what I take all my notes in!)
+%p SCSS is like Haml's cute friend. A lot of people love SCSS, but not Haml.
+%p SCSS adds just a little bit of programming into CSS, like nesting and variables.
+%p The CSS to SCSS switch is like a baby step. It is a step in the right direction.
+%p The default assumption in Rails is that you will want to write CoffeeScript and SCSS instead of JavaScript and CSS.
+%p You will get helpers and tests by deafult. This means that your JavaScript and CSS are now JUST AS IMPORTANT as your Ruby code.
+%p One of the really cool things is that you can now do something like style.css.scss.erb and add erb to your stylesheets and javascript!
+%p You can also swap Less, etc. to for SCSS really easily.
+%b Defaults win!
+%p Rails is opinionated. We will ALWAYS have intelligent defaults in Rails.
+%p Rails will NOT be a construction kit. It is a finished system, that makes your life easier.
+%p Rails is a curated framework. You can use the defaults out of the box, but you can take out the things you don't want by just taking out the scss and coffeescript dependencies in your Gemfile.
+%p There is an asset precompiler rake assests:precompile
+%p The precompiler compiles your js and css to one flat file, as you would expect from a good web app.
+%p The precompiler is now file-based, not param-based. It uses MD5 instead of a timestamp. This makes caching easier.
+%p There are compressors built straight into Rails ulgyfier for JS and SCSS for CSS.
+%p All this work is built on Sprokets v2. Thanks to the awesome guys that built that!
+%p This is all in Rails 3.1 which is being released this week.
+%h3 Our Post-modern, Hybrid, JavaScript Future
+%p We are moving to a world where there is more and more moving towards a fat client in JavaScript.
+%p We are moving into a platform-independent world.
+%p We want to write things for the WEB. Not for mobile, but for the web on mobile. No walled gardens.
+%p We have a lot of heavy frontend stacks running and it seems that we are moving into a direction where Frontend and Backend are separate.
+%p There is another solution: Node.js
+%p There is an instinct for developers that having one stack (JavaScript), is nice!
+%p Sinatra is great for small apps, and so is node.js, but when there is over 13 things, this approach gets bloated.
+%p Google Postmodern Larry Wall for a good talk.
+%p We want Rails to be a postmodern framework. It is important to realize that we are moving towards a polyglot word.
+%p There is no reason that you need to have everything in your site have a technology stack.
+%p Parts of your site work fine with vanilla HTML, where others need something more advanced.
+%p Check out PJAX to see a faster way of loading a part of your pages. PJAX allows you to ignore reloading your entire page.
+%p Backbone.js is a great way to have a full MVC in JavaScript.
+%p eco is like erb for CoffeeScript, very handy.
+%p There is MORE Than one approach to your solutions. You many languages. The right tools for the right jobs.
+%p Thank you to DHH for the great talk.

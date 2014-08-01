@@ -1,0 +1,41 @@
+/ App vs Web - Lessons from Zappos.com
+%h3 #jsconf Notes
+%i Ray C. Morgan
+%p An app is a native application in a compiled language
+%p An web app is an application built on top of a web browser.
+%p There is a strong balance we need to strike between apps and the web. There are advantages and disadvantages of each.
+%p Native apps aren't that hard to write. We web guys actually CAN write native applications.
+%p There is a lot of great documentation for iOS programming. And StackOverflow is full of great answers.
+%h3 Making an iOS app
+%p An IBOutlet is a way to hook into Interface Builder.
+%p IBAction is like an event listener. It can check when you press a button.
+%p Remember to @synthisize your variables to create getters and setters.
+%p Also, don't forget to set your variables to nil in the viewDidUnload function.
+%p Once that is all set up, you have to open the nib and add your elements to the screen.
+%p Then you have to connect the elements up to the code you wrote by dragging and dropping.
+%p So the moral of the story is that you shouldn't be afraid to branch out to other languages. You can do it.
+%p Native Apps are easy to get performant.
+%p Should mobile web really be trying to emulate native apps? Is it right? Maybe not.
+%p It takes a lot of code to make your mobile web site look like a native app.
+%p Something as simple as the back button can be confusing and hard to implement. On top of that, every phone will be different. An Andriod, iOS, and Windows 7 Phone all have different expectations.
+%p Let's get back to the basics of the web: Semantic HTML!
+%p It feels wrong to make websites feel like native apps.
+%p Progressive enhancement: You don't have to support everything, but you have to support your users. Not all of them have the latest and greatest hardware. We HAVE to test on old hardware, inexpensive hardware, etc. You might be really surprised.
+%p Usability: We cannot forget about people that don't have all the advantages we have, either physically or mentally.
+%p Simplicity: We need to go back to simple clean websites. Those are always the best. Do one thing and do it well.
+%p The Flickr mobile site looks really well-done. It is super simple and clean.
+%p The Facebook mobile site is also a good example of a clean interface.
+%p The point is that these sites are not trying to emulate a native application, but they are simple and to the point.
+%p Although there are some enhancements that users expect from a mobile website, like pinching to zoom and swapping. And that is OK.
+%p media queries are your friend:
+%pre
+  %code.css @media only screen and (min-width: 480px) {/* Do Stuff */}
+%p There are some other cool things like:
+%pre
+  %code.css
+    select, button {-webkit-appearance: none;} /* wipe out the default appearance of buttons and select boxes so you can style them the way you like */
+    html {-webkit-text-size-adjust: none;} /* Disable the text size adjustments for mobile, this can be helpful */
+    button.awesome{-webkit-user-select: none;} /* Disable copy and paste pop up */
+%p Boxsizing is also amazing, check it out!
+%p Why limit this discussion to mobile? This argument should be extended out to native desktop apps as well. Good idea!
+%p Thank you to Ray for the great talk!

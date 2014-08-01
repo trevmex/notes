@@ -1,0 +1,31 @@
+%h2 Philly.rb August Meeting
+%h2 CSS + JS in a War Zone
+%i Randy Schmidt, @r38y
+%p Bauer Publishing is a magazine publishing company, Randy does the website for them.
+%p Each of the websites have lots of tabs and skins.
+%p Two Axes
+%ol
+  %li
+    First Axis: One "Site"
+    %br/
+    Fanfic app, Quiz app, pool app, news app, etc. but all on one "Site"
+    %br/
+    The apps are Rails, Movable type, etc.
+  %li
+    Second Axis: One "App"
+    %br/
+    Many sites: J14, m, etc. but each app is written once and used on all the sites.
+%p When integrating apps into sites, your CSS and JS (which is perfect) has to mingle with other people's CSS and JS (which suck). Oh noes!
+%p Injecting can turn into a real nightmare.
+%i Side note: adding a comment count increased comments!
+%p Injection tips
+%ul
+  %li Make sure you get your styles from distinct places: The main page styles in www.j-14.com, the comments widget styles are in profiles.j-14.com, etc.
+  %li Once you figure out where your styles belong, wrap all your styles in a div unique to the feature set.
+  %li reset your CSS using the namescaped CSS ID! That way your parent styles never bleed over
+  %li namespace your CSS class names by prefixing your classes with the div id that you reset.
+  %li namespace your JavaScript variables/functions/files as well.
+  %li Use Sprokets to concatenate and manage your JavaScript files!
+%p Compass can use namespaces natively. Might be worth checking out.
+%p yui-compresser gem allows for Ruby YUI compression.
+%p Some GREAT tips here. Thanks Randy!

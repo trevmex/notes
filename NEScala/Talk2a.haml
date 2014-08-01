@@ -1,0 +1,18 @@
+%h2 Advanced stream processing: parallelism, nondeterminism, and distributed programming
+%i Paul Chiusano
+%h3 Process1: A 1-input stream processor
+%p A 1-input stream processor has one of three states: Halt, Emit, and Await.
+%p Halt ends the world, Emit sends data out, Await get data in.
+%p The processor is a simple state machine with these three states.
+%p We can define lots of functions on processes like this: concat, flatMap, map, reduce, etc. Basically anything you can do with a list you can do with a process.
+%p You are also able to simply lift processes out and compose processes together.
+%p this is pretty limited, we want to have something that can have N input streams.
+%h3 Generalizing Process1
+%p Instead of having a predefined input type, you can generalize the input type by wrapping it with a type constructor (F[_]).
+%p You can have an IsA trait that bounds your generic types to a specific type for process functions.
+%h3 Tee: A 2-input stream process
+%p This works the same as a Process1, but you can add the zip function that zips two process1s and make a Tee.
+%b Mental note: relearn monads.
+%p ...
+%p (sorry, the "advanced" in this talk is demanding my attention... It is lots of complex code examples on the screen...)
+%i Got "Functional Programming in Scala" from manning.com for half price today only with the code "scalawkd5" It should explain this better.

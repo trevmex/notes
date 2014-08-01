@@ -1,0 +1,51 @@
+%h2 GOOOOOO(AL)
+%i Toby DiPasquale (@codeslinger)
+%p Go is a higher level language created by Rob Pike at Google that lets you do some pretty powerful stuff. Go originally comes from a language called Limbo.
+%p Go is about:
+%ul
+  %li speed (but not as fast as C, on par with Java speed)
+  %li simplicity (a LOT easier to use C)
+  %li scale
+%p There is native cross-compilation support for amd64, x86 and ARM. You can compile for any platform ON any platform.
+%p The memory footprint is right on par with C. Very small!
+%p The compilation times are extremely fast. The entire language was designed for fast compilation. It uses incremental building, but you get that for free (e.g. no special code changes to build incrementally).
+%p There are built-in profiling and benchmarking tools baked into the language. There is no real excuse NOT to be profiling your code with Go.
+%p
+  Rust is another C/Java replacement, but it is much more complicated than Go. You can learn the syntax and conventions of Go in about a day by going to
+  %a{:href => "http://golang.org/"}the Go language website.
+%p Go is garbage-collected, so you have to care about pointers a LOT less.
+%p There is no inheritance in Go, but it is object oriented. Everything is built with composition.
+%p Concurrency is built into the language. Unlike C or Java, you get the advantages of concurrent programming without the pain of thinking about concurrent programming.
+%p There is no dynamic linking in Go. All your dependencies are statically linked. That is like a JAR, in the sense that when you compile, you will never have external dependencies.
+%p Go is strongly typed in a way that C is not. The compiler will scream at you if you try to mix types without casting.
+%p There are no compiler warnings in Go, only compiler errors.
+%p Everything in Go is a value type. There is no boxing, there is no memory that is wasted with headers that are not represented in your code. What you write is what you get. Nice!
+%p There are many data structures built in that you can use without outside libraries:
+%ul
+  %li Array - always a fixed size
+  %li Slice - a view on top of an array, like a pointer
+  %li Map
+  %li Linked List
+  %li Suffix Array - a search data structure, an inverted index
+  %li Ring Buffer
+  %li Heap
+%p Like Python or Ruby, you can have multiple return values
+%p Public functions are capitalized, package private functions start with lower-case.
+%p There are no exceptions in Go. Exceptions are very expensive for the CPU, so, cuss that. That means that (basically) all your functions have to return error codes. That happens in Java as well, but Go forces you to deal with the errors as you see them, closer to the source.
+%p Go is all about composition over inheritance. There are no classes, no subtype inheritance, and structural typing only. Structural typing is better to code around than duck typing for making your code very clear-cut in what you want to do.
+%p If you have a type that satisfies an interface, then it can be used as that class in your code. There are no required interfaces, but to satisfy an interface, you have to implement all the functions of that interface. There are no abstract types.
+%p There is no function overloading within a package.
+%p If you don't care about a return value, you have to use "_" to ignore those values.
+%p Go uses CSP-style concurrency, which is like the Pi-calculus. It is a lot more robust than Erlang's concurrency model.
+%p In Go Routines work like Actors in Erlang or Scala/Akka, and Channels work like Futures.
+%p "select" allows you to listen on multiple channels at once in your Go program.
+%p You can make simple message queues by making channels with buffers that allow you to pull from.
+%p "defer" is used like finally in Java or trap in shell scripting. Even in the case where your function panics, defer will be called.
+%p The standard library has a lot of great stuff in it. Most of the tools you will need to get started with right away.
+%h3 Some downsides
+%ul
+  %li Unused variables and imports are errors. That is awesome (but a bit of a pain in the butt).
+  %li The Go tools assume that you are organizing your code as a single massive repo. The downside to this is that your Go projects HAVE to have Makefiles to make it actually work.
+  %li There is no concept of versioning your dependencies. Go assumes that you will always be using the latest version of everything. There is a prototype that is trying to make something like Sonatype Nexus for Go, but it is not out in the wild yet.
+%p Go is great for little services. Little things that you would have used Python or Ruby for, but with a lot less memory and a lot faster, but just as easy to learn. The real win here is that you don't have to have Go installed on your computer to run compiled Go programs.
+%p Thank you to Toby for the great talk.

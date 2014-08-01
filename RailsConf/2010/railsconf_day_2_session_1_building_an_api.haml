@@ -1,0 +1,48 @@
+%h2 Building an API with Rails
+%i (this is very relevant since we just created an API in Rails for #PhillyGiveCamp)
+
+%h3 Authentication
+%p OAuth is a more secure authentication for the web.
+%p Twitter implemented OAuth 1 and then 1a, but it is very difficult to implement for developers. The signature algorithm is hard to implement for many devs.
+%p The OAuth 2 is soon to come out and Twitter is working on supporting it. All the traffic is passed through SSL, making the communication a lot easier.
+%p Authentication vs. Authorization: when you use OAuth, the authorization is taken care of for you. If your user can login with OAuth, we do not have to worry about authorizing our users, we pass that off to the OAuth engine.
+
+%h3 Input and Response Formats
+%p JSON vs. XML vs. HTTP hashes
+%ul
+  %li Twitter is moving towards only JSON since it is small and fast.
+  %li Hoptoad is only XML.
+  %li 37signals like to make all the formats available, which is how Rails works using the respond_to blocks.
+
+%h3 Versioning
+%ul
+  %li Versioning is a really hard problem. After a lot of thought, Twitter has decided that versioning is unnecessary. 37signals agrees, you can extend your API instead of modifying it.
+  %li How do you put a value on change? You let your clients know early and beforehand it might be ok.
+  %li But some devs will not upgrade unless it breaks. That should not stop you from moving forward.
+
+%h3 Scaling
+%ul
+  %li Scaling an API is a bit different than scaling an app because you can get a lot more requests per second.
+  %li New York Times uses Varnish and loves it (http://varnish-cache.org/)
+
+%h3 Code Separation
+%p Do you have two applications (one for API, one for the app), or do you have it all in one?
+%p GitHub uses separate API controllers for each API.
+%p The Rails Way is to keep it together, but sometimes there is different logic you need just for APIs that differ from the app. At that point it makes your main code messy, and it makes sense to split the API out.
+%p Jeremy from 37signals disagrees. Keep it simple. For most cases it makes sense to have your API be exposed alongside your other resource through respond_to.
+
+%h3 Security Concerns
+%p Be paranoid!
+%p Don't use cookies and sessions in your API requests.
+%p Don't let others touch usernames and passwords.
+
+%h3 Developer Communication
+%ul
+  %li Write good documentation!
+  %li Have a status site to make sure your developers know what is going on.
+  %li Make sure your documentation is accurate for the version of the API you have.
+  %li Treat the people that use your API as customers. They are just as important as your app users.
+  %li
+    %b Write a sample app using your API to better understand what your API users are going through.
+  %li Set up a community around your API. Devs are willing to help out when you allow them to.
+  

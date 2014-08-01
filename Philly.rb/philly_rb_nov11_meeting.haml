@@ -1,0 +1,67 @@
+%h2 Refactor Like A Boss
+%i Greg Sterndale
+%p A few techniques for everyday Ruby hacking.
+%p Refactoring is the process of changing the code you write without changing the behavior of your code.
+%p If there is a refactoring method that you think makes the code harder to read, DON'T USE IT!
+%p Use Profile to make sure your refactoring is not hurting performance.
+%p Refactoring is not about making your code brief. It is about making your code better.
+%p Refactoring is NOT about adding design patterns. You might take out a design pattern IF it makes your code easier to read.
+%h3 What Ruby give you
+%p DRY Assignment: in Ruby you can assign a variable to a result of an if else statement, or a switch statement.
+%p Ternary operators (condition ? true result : false result) can make simple if statements easier to read.
+%p You can use !!variable to map a variable a Boolean (true/false)
+%p Parallel assignment can make it so you can return multiple things from a method:
+%pre
+  %code{:class => "ruby"}
+    @foo, @bar = "baz", "buzz"
+%p You can remove the begin from a begin/rescue block if it is wrapping the entire function:
+%pre
+  %code{:class => "ruby"}
+    def foo
+    /# do stuff
+    rescue
+    /# catch the rescue
+    end
+%p
+  %a{:href => "http://pragdave.pragprog.com/pragdave/2005/11/symbolto_proc.html"}Symbol to Proc
+  is a way to convert symbols to a proc.
+%p
+  %a{:href => "http://railspikes.com/2008/8/11/understanding-map-and-reduce"}MapReduce
+  is the Ruby reduce method will allow you to run a map reduce function. These are really useful sometimes, once you get your head wrapped around it.
+%p Regexp in Ruby looks a LOT like regexp in Perl. :)
+%p
+  %a{:http => "http://tea.moertel.com/articles/2007/02/07/ruby-1-9-gets-handy-new-method-object-tap"}tap
+  is a handy method for to allow you to do method chaining.
+%p Good old sprintf works here as well, like Python's sprintf.
+%p Using case statements can be really handy. You can use "when Classname" to check if a value is an instance of a class. To alter the meaning of a case statement, you can have your class override the "===" method.
+%p Case statements can also use regexp for the when statements.
+%p
+  %a{:href => "http://endofline.wordpress.com/2011/01/21/the-strange-ruby-splat/"}splat
+  is a way of taking a list of parameters and turn them into an array to work with. This is similar to the way that JavaScript creates an arguments array when passing into a function.
+%h3 What ActiveSupport gives you!
+%pre
+  %code{:class => "ruby"}
+    name.blank? # true if name is emtpy of nil
+    name.present? # the inverse of blank?
+    name.presence # this is the non-boolean version. It will return name if it is present
+%p truncate allows for you truncate a long string.
+%pre
+  %code{:class => "ruby"}
+    "A long long time ago".truncate(5, :separator => " ")
+%p
+  %a{:href => "http://api.rubyonrails.org/classes/Object.html#method-i-try"}try
+  allows you to run a command only if what is passed to it in not nil.
+%p
+  %a{:href => "http://www.simonecarletti.com/blog/2009/12/inside-ruby-on-rails-delegate/"}Delegate
+  allows you to delegate certain functions to other functions in your classes.
+%p
+  %a{:href => "http://www.railway.at/articles/2008/09/20/a-guide-to-memoization/"}ActiveSupport::Memoizable
+  allows you to call a function only once for the lifetime of a class instance. This is awesome for caching, but you do not want to use it on functions that mutate data.
+%p
+  %a{:href => "http://erniemiller.org/2011/02/03/when-to-use-alias_method_chain/"}alias_method_chain
+  allows you to take a method, and wrap it with another method. You have to use the _with_var and _without_var names of methods to use the chain.
+%p
+  %a{:href => "http://blog.obiefernandez.com/content/2010/04/tr3w-highlights-activesupport-class-class-attribute.html"}class_attribute
+  allows you to create class attributes like attr_accessor, but for class functions.
+%p Hash#symbolize_keys allows you to take a hash that has string values, and turn them into symbols. Hash#stringify_keys does the opposite. And HashWithIndifferentAccess makes a hash that can be accessed with both strings and symbols.
+%p Array#forty_two will get you the forty-second element of an array. ...Rubyists are nerds. :D

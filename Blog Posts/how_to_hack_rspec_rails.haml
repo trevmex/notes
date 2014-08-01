@@ -1,0 +1,96 @@
+%h2 How to start hacking a ruby project
+%p
+  OK, so I wanted to play around with the 
+  %a{:href => "http://github.com/rspec/rspec-rails"}rspec-rails
+  code a little bit, but I didn't have a setup for it. Since it was a non-trivial setup (for me at least), I thought I would share how I did it.
+  %br/
+  %i Note: all the commands here are issued from a 
+  %a{:href => "http://en.wikipedia.org/wiki/Apple_Terminal"}Terminal
+  window.
+%ol
+  %li
+    First we have to set up our environment. We might not want the system ruby to be muddled with our beta gems, so it makes sense to have another ruby installed for this. Fortunately 
+    %a{:href => "http://rvm.beginrescueend.com/"}rvm
+    allows us to do this very easily. To set it up, just do the following:
+    %pre
+      %code
+        gem install rvm
+        rvm-install
+        rvm install ree
+        rvm use ree
+    %h4 Notes:
+    %ul
+      %li
+        %i I keep my systems gems local in ~/.gem and add that to my path. If you like your system gems global, you can run `sudo gem install rvm` instead.
+      %li
+        %i
+          I like 
+          %a{:href => "http://www.rubyenterpriseedition.com/"}ree
+          , but you can use whatever you want.
+  %li
+    Great! Now you are running on a separate ruby instance, but you might still want a separate set of gems for hacking. Again, 
+    %a{:href => "http://rvm.beginrescueend.com/"}rvm
+    to the rescue with the 
+    %a{:href => "http://rvm.beginrescueend.com/gemsets/"}gemset
+    feature. Using gemsets, you can isolate a set of gems just for use in one environment. Let's set up an "rspec-dev" gemset:
+    %pre
+      %code
+        rvm gemset create rspec-dev
+        rvm gemset use rspec-dev
+    %h4 Notes:
+    %ul
+      %li
+        %i
+          You have to set your ruby version and gemset each time you open a new shell, you can do this quickly by doing this:
+          %pre
+            %code
+              rvm use ree@rspec-dev
+          If you want this to be your default ruby version and gemset each time you load your terminal, you can set it by doing:
+          %pre
+            %code
+              rvm --default ree@rspec-dev
+  %li
+    Now that our ruby version and gemset are set up, we can fork the project we want to work on in 
+    %a{:href => "http://github.com/"}github
+    (or wherever you have the repo you want to hack). I'll set this up for 
+    %a{:href => "http://github.com/rspec/rspec-rails"}rspec-rails.
+    We will make a code directory, fork the repo, and clone it:
+    %ol
+      %li Log into github (or get an account).
+      %li
+        Fork the repo (
+        %a{:href => "http://github.com/rspec/rspec-rails"}http://github.com/rspec/rspec-rails
+        )
+      %li
+        Clone the repository locally:
+        %pre
+          %code
+            mkdir -p ~/code/rspec-dev
+            cd ~/code/rspec-dev
+            git clone git@github.com:your_github_name_here/rspec-rails.git
+            cd rspec-rails
+  %li
+    Now we have to install the gems we will need for rspec-rails. If you look at the rspec-rails 
+    %a{:href => "http://github.com/rspec/rspec-rails/blob/master/Gemfile"}Gemfile
+    , we have to install a number of gems and custom git repos to get it all working. Here we go:
+    %pre
+      %code
+        gem install bundler --pre
+        mkdir vendor
+        cd vendor
+        git clone git://github.com/rails/arel.git
+        git clone git://github.com/rails/rails.git
+        cd ../..
+        git clone git://github.com/rspec/rspec.git
+        git clone git://github.com/rspec/rspec-core.git
+        git clone git://github.com/rspec/rspec-expectations.git
+        git clone git://github.com/rspec/rspec-mocks.git
+        cd rspec-rails
+        bundle install
+  %li
+    Finally, we can run the rspec-rails test suite:
+    %pre
+      %code
+        rake
+%p
+  %a{:href => "http://pfuca-store.stores.yahoo.net/haphackeylit1.html"}Happy hacking!

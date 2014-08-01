@@ -1,0 +1,56 @@
+%h2 Ruby DCamp 2010 Session 2: AREL
+%i Snuggs
+%p
+  Edger F. Codd - the inventor of the 
+  %a{:href => "http://bit.ly/csCIUY"}relational database
+%p This is about using Arel, instead of using Arel like ActiveRecord. (harnessing the power of the relational algebra)
+%p What is relational algebra?
+%ul
+  %li Operations: select, rename, union, project, product, difference, join, intesection, aggregate
+  %li Closure: A set is closed IF the result of the operation on the set products a member of the set
+  %li e.g. Addition is closed for integers, since any integer added to another integer produces an integer (e.g., 1 + 1 = 2).
+  %li BUT division is NOT closed for integers, since one integer divided by another integer is not always an integer (e.g., 3 / 2 = 1.5, not an integer)
+%p There are a LOT more relationships you can use in Arel besides 'where'
+%p Arel gives you a Ruby implementation that matches very closely the relational algebra represented in SQL
+%p The COOL thing about Arel is that it will not execute your relationships until you need to use them, i.e., it is an in-memory engine.
+%ul
+  %li That means that you do not hit the database unless (or until) you need to.
+%p ActiveRecord::Relation != Arel::Relation
+%ul
+  %li Arel uses a lot of things that ActiveRecord does not use. ActiveRecord is stuck with a lot of legacy stuff. If you can, having Arel as a core gives you a lot more power for manipulating your data.
+%p Arel is database-agnostic!
+%p Arel::Relation::Operable::Writable is the class that handles side effects through Arel (side effects are what make programming languages useful)
+%p Arel Algebra is a Query Evaluator, and GenericCompiler is a Query Optimizer
+%p Arel runs with many different engines: Memory, SQL, and ... whatever you can make it.
+%p What is a set? A set is a collection of things.
+%ul
+  %li hi-hat is an element of Cymbals
+  %li U is the universe of all sets
+  %li 0 is the empty (or null) set
+  %li
+    T is a set relation, which is a subset of U
+    %ul
+      %li If T is vowels, then (T) = {a,e,i,o,u}
+      %li a is in the set T
+      %li z is NOT in the set T
+%p A tuple is a heterogeneous set of sets, like a row in a database. It is any collection of anything.
+%pre
+  %code{:class => 'ruby'}
+    How to use Arel without ActiveRecord!
+    require 'rubygems'
+    require 'arel'
+    
+    class YourClassName
+    include Arel::Relation
+    
+    Your code here
+    t = Arel::Table(:cars) # this is a new set relation
+    t.attributes # returns a header, this contains all our attributes
+    
+    t[:tires] # Adds the tires attribute to cars
+    t.project(t[:tires]) # this creates a projection that will get the tires attribute from the cars table.
+    
+    four_tires = t.where(:tires => 4) # this returns a Table where tires equals 4
+    sedans = four_tires.where(:type => 'sedan') # nothing is executes on the database yet, it is 'lazy'
+    end
+%p A GREAT way to learn Arel is to study the Arel tests. They are very verbose and easy to understand (written in RSpec).

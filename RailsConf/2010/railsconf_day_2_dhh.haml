@@ -1,0 +1,54 @@
+%h2 DHH Keynote
+%p This is the 5th RailsConf. 378 proposals, 63 talks, 85 speakers from all over the world.
+%p Not as many proposals for REST/Rack/Rails 3, more on Dev processes, NoSQL, etc. Most of the proposals are about using Rails for business purposes.
+
+%h2 Rails 3.0
+%p NOW is the time to use Rails 3 for your production applications.
+%ul
+  %li One annoyance with pervious versions of Rails is that you have to have lots of dependencies.
+  %li Thanks to #carlhuda, Bundler solves this problem.
+  %li A bundle is a bubble. That means nothing you don't tell it to be there is there.
+  %li i.e. If you don't tell Bundler that mysql is there, it is not there.
+  %li You can think of the system gems as a holding area for gems, not a place to use gems from.
+%ul
+  %li ActiveRecord queries are a whole lot prettier:
+  %li
+    %pre
+      %code{:class => "ruby"}
+        Old Way
+        users = User.all(:conditions => {:name => "david"}, :limit => 20)
+        New way
+        users = User.where(:name => "david").limit(20)
+  %li All queries are lazy. You only call the DB when you need to.
+%ul
+  %li Scoping is much prettier as well.
+  %li You can decorate scopes with other scopes to make the syntax easier to read and use.
+%p The most awesome part of Rails 3 is that the barrier of entry is much lower than Rails 2, but it add more powerful tools.
+%ul
+  %li Router has had a huge overhaul. The router as it is in 2.3 had REST (resources) hacked into it on Rails 1.2.
+  %li The Rails 2 format for routes are hard to read at a glance.
+  %li Rails 2 has "Hasheritis" => Too many hashes everywhere.
+  %li We are trading line length for code simplicity. Rails 3 code is more lines, but easier to read.
+  %li 
+    %pre
+      %code{:class => "ruby"}
+        map.with_options(:controller => "aCon", :action => "anAct")
+        becomes
+        scope(:to => "aCon anAct")
+  %li do NOT use wildcard mappers anymore!
+%ul
+  %li ActoinMailer got a huge makeover
+  %li Now ActionMailer act a lot more like ActiveRecord Models and Controllers
+  %li Adding attachments is now a lot like adding cookies.
+  %li Making everything look alike makes it easier to use.
+
+%p What about Rails 3.1?
+%ul
+  %li Asset pipelining:
+  %li
+    %pre
+      %code{:class => "ruby"}
+        app/* # the importnat stuff
+        public/* # the junk drawers
+  %li We want preprocessing to happen: Preprocess JS to push into public. We should no longer be writing raw JS.
+  %li CSS is now code. you can preprocess CSS with erb/haml

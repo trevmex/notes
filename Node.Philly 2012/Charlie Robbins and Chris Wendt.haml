@@ -1,0 +1,31 @@
+%h2 Real-world deployments in business-critical systems and why some of the world's leading companies are choosing Node
+%i Charlie Robbins and Chris Wendt
+%p The powers of 10 of node facts:
+%ul
+  %li (10^1)*n: Thank you to the node.js core team.
+  %li (10^2)*n: Of days since node.js was created (a little less than 1000 days!), also the # of requests in Ruby
+  %li
+    %p (10^3)*n: # of requests in node! (an order of magnitude faster than Ruby on Rails!), also # of users and packages in npm.
+    %p npm is written in couchDB. Which is awesome.
+  %li (10^4)*n: Of servers that node.js is installed on.
+  %li (10^5)*n: Of deployments made on nodejtsu.
+  %li (10^6)*n: Of messages logged in winston everyday.
+  %li (10^7)*n: Of requests nodejitsu process every month.
+  %li (10^9)*n: Of requests proxied with node-http-proxy.
+%p Node is fast, cheap, and magical. Why wouldn't you use it?
+%p Thanks for the talk, Charlie!
+%h3 Chris Wendt on how Comcast uses Node.js
+%p How many web-enabled devices do you use? It is a lot!
+%p Pervasive computing is the concept that anything in your world can be connected to the web. Wild. It is like we live in the future.
+%p Information dashboards are going to be much more important in our daily life as we move on.
+%p Those dashboards will pull from many different data sources. That creates a sort of personal device cloud for you, the user.
+%p How do all of these things connect? Communications routing and ushing from the cloud into a browser or mobile device.
+%p Caller-ID is one of the earliest examples of push notification.
+%p Web sockets is a culmination of a web stndard to create a persistant connection to a device over HTTP. It is extremely powerful, especialy with Socket.io in Node.
+%p What about peer communications? Peer to peer tunnels are quite powerful, and the W3C is working on webrtc (Web Realtime Communications) that allow you to use UDP to stream time critical network adaptive data, like A/V streaming and time critical gaming.
+%p webrtc is not equal to rtcweb. webrtc is W3C, rtcweb is IETF. Don't mix them up. :P
+%p Check out the new JavaScript interfaces with webrtc: MediaStream, PeerConnection, and DataChannel. These will be available soon in browsers like Chrome and Firefox.
+%p The webrtc group is working on standardizing thr javascript model, the security model, A/V transport, etc.
+%p Using UDP solves the NAT/firewall problem with TCP peer-to-peer connections.
+%p The good news is that web developers will not have to worry about these details. They will be able t just use webrtc to make realtime communications on the web stack.
+%p Great talk, Chris!

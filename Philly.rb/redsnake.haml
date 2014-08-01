@@ -1,0 +1,199 @@
+%h2 RedSnake
+%i PhillyPUG/Philly.rb Meetup
+%p CrtterCase.com - Angel's awesome iPad cases. Coming soon!
+%p Thanks to Sunguard for hosting tonight!
+%p The PhillyPUG group is doing a mentoring meeting next month where the group will be building the PhillyPUG website together. Come check it out!
+%p This is the first (at least) annual RedSnake meeting! W00t!
+%h3 RVM
+%i Hector Castro
+%p Ruby Version Manager.
+%p RVM is a command line tool written in bash that allow you to have rubies and multiple versions of ruby.
+%p Why have this? Well, There are a LOT of different versions of ruby. RVM lets you use any one encapsulated.
+%p The best part of RVM is gemsets. Gemsets, allow you to manage sets of gems in isolation.
+%pre
+  %code
+    rvm gemset create redsnake
+    rvm gemset use redsnake
+    gem install bundler # or whatever
+%p You can also use RVM to run tests across multiple rubies. E.g.: this will run the following ruby script across all the rubies you have:
+%pre
+  %code
+    rvm ruby test.rb
+%h3 iPython
+%i John from Susquahanna
+%p iPython is an extended shell for interacting with python.
+%p iPython will allow you to have a nice bash-like python interpreter from Windows.
+%p Tab completion works as expected, like irb.
+%p you can view the documentation and source code as follows
+%pre
+  %code
+    math? # see the doc string for math
+    math?? # see the source code for math
+%p There are magic commands that start with % which allow you to extend the syntax beyond python for useful commands.
+%p There is a history function, just like bash, as well as ctrl-r for reverse history searches.
+%p There is a which command that finds executables in the PATH.
+%pre
+  %code
+    a = !dir # sorts the results of the MS DOS dir function
+    a.grep("\.py").fields() # you can grep and do other functions to the results!
+%p To run pyhton code with a debugger you can use the run command.
+%p This will run test.py and stop on line 4 so you can debug with ipdb, which is a lot like gdb:
+%pre
+  %code
+    run -i -d -b 4 test.py
+%h3 SASS and Compass
+%i Thibut Assus, Milesrock
+%p Sass is a CSS version of Haml (I write my notes in haml!)
+%p Why use sass? Why use compass?
+%ul
+  %li It is important to have semantic html using well designed CSS class names.
+  %li You shouldn't name you classes things like "red" or "right." That makes your divs as bad as the old days of inline styles.
+  %li The problem with semantic CSS, is that CSS is not the best language for organizing your stuff. You get really verbose, really fast.
+%p sass gives you:
+%ul
+  %li functions
+  %li variables
+  %li data structures
+%p Compass is a CSS framework that uses Sass.
+%p Sass files look a lot lie Haml. Indentation matters.
+%p Having variables allows you to change your code in one place, instead of global find and replaces for simple things like color changes (something you cannot do in straight CSS)
+%pre
+  %code
+    $main-color: lighten(#892328, 10%)
+%p Functions allow you to make complex CSS classes
+%pre
+  %code
+    \=my-fancy-box($color)
+    \...
+
+    \/* to call */
+    +my-fancy-box($main-color)
+%p Compass is a way to package common sass libraries together and use them as a group in your projects.
+%p Sass and compass is not a verbose language, it is just a way to make CSS a little bit better!
+%p Check out SCSS, if you want to write sass in a more CSS-style way.
+%h3 VIRTUALENV
+%i Jonh
+%p Virtualenv is a way to create sandboxed python installs.
+%p It was created by Ian Bicking (a really smart python guy)
+%p So, messing around with the system python can be bad mojo, so virtualenv helps with that.
+%pre
+  %code
+    easy_install virtualenv
+    virtualenv mynewpython
+%p easyinstall is the default way of installing python packages.
+%p virtualenv also comes with pip, which is another python package installer.
+%p pip allows you to uninstall, where easyinstall does not.
+%p pip freeze will give you a list of packages that you can use as a requirements file to duplicate your environment, just like bundler.
+%p it is called freeze because it shows a frozen version of your environment as it is right now.
+%pre
+  %code
+    pip freeze
+%p easyinstall makes eggs (zip files) for packages, but pip lays out packages in the file system, like ruby gems.
+%p You can create pristine python environment, if you want as well, aka: you can exclude the system packages, if you want.
+%h3 Ruby Metaprogramming
+%i Trotter Cashion, Mashion, LLC
+%p Three interesting methods in ruby:
+%ol
+  %li
+    define_method: remove that duplication!
+    %pre
+      %code
+        %w(user email food).each do |meth|
+        define_method(meth) do
+        @data[meth.to_sym]
+        end
+        end
+  %li
+    method_missing: make up functions on the fly!
+    %pre
+      %code
+        def method_missing(meth, *args, &amp;block)
+        if meth.to_s =~ /^find_by_(.+)$/
+        run_find_by_method($1, *args, &amp;block)
+        else
+        super # VERY IMPORTANT!!!
+        end
+        end
+    %p This will call run_find_by_method when you type find_by_blah
+  %li
+    instance_eval: execute a block within the content of another block
+    (the code for this is craziness, it allows you to access code from one class in another class)
+%h3 Concurrency with Multiprocessing in Python
+%i Gavin, myYearbook.com
+%p green threads in threading: When you run threads they go through the same process.
+%p To use threading in python, you just extend the Thread class and define a run function, then you are good to go!
+%p Threading in Python has the GIL problem. The GIL processing is a problem where you waste time with the thread switching, when you could be using that processing power for running the code you want.
+%p So Python has a NEW Multiprocessing module that works almost exactly like the Thread module, but fixes the GIL problem.
+%p Multiprocessing lets you do everything the threads do, as well as queues, pipes, shared states, pooling, logging, exchanging, and more.
+%p Thread code and Multiprocess code looks almost identical, but it is much more powerful.
+%h4 multiprocessing.reduction
+%p An underlining support library that allows you to pickle information and pass it from one process to another. (i.e. reduce and rebuild information for process passing).
+%h3 Cucumber
+%i Mat Schafer
+%p Cucumber is a testing tool that lets you write tests in human-readable English!
+%p Writing cucumber tests allows you to focus on the feature of something.
+%p There is a feature statement, and three commands: Given, When and Then.
+%p This allows you, as a developer, to concentrate on the problem, instead of the solution.
+%p Cucumber can hook into more than just web stuff. Mat has it working with RedCar and SWT, as well (super cool!)
+%p iCuke is an iPhone mapping to use cucumber with iPhone apps.
+%p Lettuce is the Python equivalent.
+%h3 Python in System Administration
+%i Brian Jones, myYearbook.com
+%p Python was was made by Guido van Rossum, he was an awesome sys admin.
+%p Why Python? Because Perl sucks.
+%p Python has a lot of cools stuff built in for sys admins:
+%ul
+  %li sys: system calls, stdin, stdout, stderr
+  %li os: bash calls/DOS calls, OS-agnostic
+  %li log: logging
+  %li and much more!
+%p the datetime module: VERY handy for sys admins (e.g. backups)
+%p Cool stuff:
+%pre
+  %code
+    python -m SimpleHTTPServer # spin up an HTTP server
+    pydoc -p 9090 # spin up a doc server
+%p Python is easy and fun! Use it!
+%h3 Ruby FFI
+%i Angel Pizarro
+%p FFI is the Ruby C Extension API
+%p Use SWIG to wrap a C API, but it is non-idiomatic Ruby ;_;
+%p So FFI is a foreign function interface that you can use across rubies, where SWIG does NOT work across rubies.
+%p FFI allows you to wrap your C API in Ruby, and it is pretty straightforward.
+%p FFI allows you to define enums, typedefs, etc. so that you can make your ruby wrapping close to identical to your C API.
+%p FFI will figure out endian-ness for you!
+%p Structs can translate directly to Classes in Ruby
+%p Beware of libraries that use STDIN and STDOUT, they will hose your Ruby.
+%p Multidimensional arrays are not supported.
+%p Really, Ruby FFI is just writing in C with just a better interface.
+%h3 Interfacing C and Python
+%i Tom Panzarella, @tpanzarella
+%p Extending is creating new python modules in C.
+%p Embedding is creating python modules that you can access in C.
+%p Extending is cool. It allows you to hook into C libraries!
+%p Use ctypes, it has ALWAYS been in python. Check it out!
+%p You can also write a C-extension module using something like SWIG, or write an extension module yourself.
+%p (Check out Cython!)
+%p Tom's example creates an XBOX 360 Kinect connector withpython. V. awesome.
+%h3 PEP 20 (The Zen of Python)
+%i Hunter Blanks
+%pre
+  %code
+    import this # read it. It is deep.
+%p Beautiful code is better than ugly code.
+%p Explicit is better than implicit.
+%p Simple is better than complex.
+%p Complex is better than complicated.
+%p Flat is better than nested.
+%p Sparse is better than dense.
+%p Readability counts.
+%p Special cases aren't special enough to break the rules.
+%p Although practicality beats purity.
+%p Errors should never pass silently.
+%p Now is better than never.
+%p If the implementation is hard to explain, it's a bad idea.
+%p if the implementation is easy to explain, it may be a good idea.
+%p Namespaces are a good idea. Use them.
+%p Check out the presentation at http://www.artifex.org/~hblanks
+%hr
+%p Thank you for everybody for presenting!

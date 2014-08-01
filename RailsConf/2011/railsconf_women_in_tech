@@ -1,0 +1,128 @@
+Dreamer3: More women this year than last
+jumex: 2.5% of the conference!
+Dreamer3: I need to find a career where men are in the minority
+jumex: Hopefully more next year. We NEED more women in tech!
+necromancer: they should call that movement to try and get more females into programming "boner-driven development"
+mike-burns: Discussion gender in tech is tricky because someone always says a negatively-sexist remark within five minutes.
+necromancer: mike-burns: do you think the fact that men outnumber women in tech is itself sexist?
+necromancer: or merely a product of how men & women are handled in this country?
+jumex: We are all sexists, but we have to realize it before we can control it.
+jumex: mike-burns: I totally agree with you there.
+mike-burns: That fact isn't sexist, but discussing it is acknowledging the existence of gender.
+jumex: That is important.
+necromancer: haha
+rsanchez joined the chat room.
+necromancer: i mean...gender exists
+mike-burns: Sure.
+necromancer: if you don't believe me, try to fuck a tranny?
+mike-burns: OK.
+mike-burns: I'm not really one of those "gender exists" people, but this is very non-Rails now.
+jumex: 2 minutes to a sexist joke!
+necromancer: i mean i could care less whether there are female or male programmers...
+Dreamer3: We need balance
+mike-burns: Do we?
+Dreamer3: Balance is always good, no? 
+Dreamer3: -expecting to quickly be contradicted-
+necromancer: yeah, but it doesn't really matter in this case
+jumex: We need recognition of inherent sexism in the way we work.
+necromancer: like...programming and being good at programming is about how well you think, and how well/efficiently you can solve problems
+necromancer: my genitalia and physiology has nothing to do with that at all
+mike-burns: I can't watch this conversation again. Be back later.
+necromancer: haha
+jumex: necromancer: Correct, but what you are not realizing is the stigma attached to being a women doing the same thing you do.
+necromancer: no i mean this is just my opinion on the matter. i could care less whether there are or aren't women programming
+necromancer: i mean i don't even know what most coders' faces look like
+necromancer: i just see they made something on github or whatever
+necromancer: for all i know they could be aliens
+necromancer: aliens.github.com
+jumex: I care that IF there are women that WANT to be in tech, that they are welcomed here.
+necromancer: is where they hang out
+necromancer: jumex: do you think girls don't feel accepted within the programming community?
+necromancer: i'd like to think that women just have better things to do than sit in front of a screen and talk to a computer via text files and a compiler..
+jumex: necromancer: I do. I work with many women in tech, and it is hard for them.
+necromancer: that sucks
+jumex: You might not realize it, but it is a pretty big boys club.
+necromancer: well i'm not real deep into the tech community
+jumex: It DOES suck. And that is why I care about it.
+necromancer: i happen to work with people i went to burning man with...we do have girls working here, just not doing programming
+benhamill: jumex: +1000
+necromancer: interesting
+jumex: First step: girls are under 18. Women aren't. They are women, not girls.
+jumex: It might be silly to you, but it matters.
+necromancer: it's silly to the women i work with too 
+necromancer: they call us boys too
+benhamill: it's one thing when you are talking about someone you know. It's another when you're refering to women in general.
+tonyc: heh @ irls
+tonyc: girls
+necromancer: i guess we are also friends first
+tonyc: 'girls' I mean
+jumex: benhamill: corrent.
+necromancer: yeah i guess
+necromancer: well anyway, we have WOMYN working here
+benhamill: indeed.
+necromancer: women in tech's safe haven: graphic design
+necromancer: it's like an oasis in a field of dicks
+jumex: bullshit
+juliehache: so, I'm a girl/woman/female whatever. The Ruby/Rails community is pretty awesome
+necromancer: haha
+juliehache: the worst I have to deal with is awful pickup lines.
+jumex: juliehache: I think it is, too.
+necromancer: juliehache: oh man they must be hilarious
+listrophy: juliehache: do you have a standard rebuff?
+linoj left the chat room. (Ping timeout: 258 seconds)
+necromancer: "hey babe, lemme bundle yo gems"
+juliehache: heh
+jumex: sigh.
+Anarki: i suppose this is why we dont have as many women in programming?
+juliehache: Anarki: people do that everywhere
+Anarki: gee, i doubt you'd ever get asked "lemme bundle yo gems" anywhere else 
+juliehache: so generally speaking, I feel included and treated like any other developer. I value and appreciate this.
+jumex: Anarki: There are a lot of reasons why...
+juliehache: Anarki: fine, not that specific. but I really don't think this is a harsh environment
+jumex: You guys should check out Sistas: http://www.digital-sistas.org/home.shtml
+Anarki: naah...its not...we're not well understood and the media loves to portray us as weird
+jumex: This is better than some, but we still have our issues.
+benhamill: I wonder if there is an issue of socially seeing programming as a valid career for a woman. Like, when you're a kid and absorbing images and ideas about being an adult... There just aren't a lot of images (figurative) of female programmers, engineers, comedians. Those are al changing at different rates, but I feel like it's a real force.
+Anarki: i wish they'd make more movies like "hackers" to show that women can be geeks and hot at the same time
+jumex: benhamill: word.
+jumex: Why the fuck does being hot matter?
+jumex: OK. Enough of this heavy talk.
+benhamill: Basically, society-at-large's perception of programming as a thing that white men do maybe keep non-white, non-males from even considering it as a life path. Subconsciously, like.
+jumex: Sorry for being a troll on it (you just hit a passion point of mine)
+• benhamill fears he is too tired to articulate this idea well.
+jumex: benhamill: I agree.
+dfr|bohc_: Anarki: women _are_ hot
+dfr|bohc_: especially geek women
+dfr|bohc_: but what they protray as "hackers" is false 
+gaja: "Dora the explorer" should grow up to be "Dora the coder"
+Anarki: ok...sorry, the hackers reference was a joke...what im saying is that women are great just as they are...it doesnt change if they become programmers
+dfr|bohc_: Anarki: they're even more awesome if they're laughing at your geeky/nerdy jokes
+Anarki: hey i love those kinds of women...thats my kind 
+swerter: it's very difficult to get rid of the IDE drug @luislavena
+swerter: RubyMine somebody?
+listrophy: so the question becomes: do we actively attempt to encourage more women into our field to make it more balanced at the risk of being perceived as pandering?
+jumex: swerter: I was thinking the same thing.
+jumex: listrophy: We do. It isn't pandering.
+jumex: (damn...must stop trolling)
+listrophy: I'm not saying it is. But some might perceive it as such.
+ystael: listrophy: you could think of it as trying to understand why women leave -- you can look at statistics for sex ratios in study of computer science/interest in programming in grade school, high school, university, career, and see the proportion of women go down at every step.
+ystael: same for mathematics and physics.
+listrophy: ystael: is that because girls are leaving, boys are joining, or (likely) both?
+jumex: I think more of us men should go to the Grace Hopper conference: http://gracehopper.org/2011/ It might help us understand what it feels like to be such a big minority in a tech community.
+ystael: listrophy: i seem to remember reading one study that tracked a university CS major cohort and saw female students leaving the major at a higher rate over time.  no reference, sorry.
+ystael: i just wish it were easier to have discussions of gender parity issues without instantly hitting people's emotional buttons and having them jump to conclusions.  the issues are complicated and one needs to actually analyze their causes
+jumex: ystael: I agree (even though, I am one of those emotional guys)
+benhamill: ystael: And be open to the idea that you may inadvertently be part of the problem and that doesn't mean you're automatically the Worst Person Ever.
+ystael: if you say "there are X, Y, and Z structural problems" that's neither an assertion that all men are pigs nor that no men are pigs (in fact, some men are pigs)
+apeiros_: in fact, some people are pigs
+apeiros_: that's not a gender related thing 
+ystael: correct, of course, but not the idiom as it flows 
+ptulskie: here's the thing though... no matter where you go, that's going to be the case
+benhamill: Man. I'm hungry now. Bacon.
+• jumex is Pocco Rosso
+bct: whoa intelligent discussion about gender issue in #railsconf, i am impressed
+apeiros_: bct: we must. more women here now. we can't be pigs anymore 
+jumex: ptulskie: Right, but WE aren't everywhere, we are here. This is where we can make a difference.
+ystael: discussion of pigs, talk given by german guys, now i want a bratwurst
+• apeiros_ hands ystael some sauerkraut to it
+ystael: yum

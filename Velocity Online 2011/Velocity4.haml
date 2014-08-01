@@ -1,0 +1,14 @@
+%h2 Velocity Online - Visibility into Mobile Performance
+%b http://en.oreilly.com/velocity-mar2011/public/schedule/detail/18634
+%i Steve Souders, Google
+%p (Abstract) The first step in improving performance is measuring performance. The last few years have witnessed the birth of numerous performance tools including Firebug, YSlow, Page Speed, HttpWatch, Speed Tracer, dynaTrace, WebPagetest, Web Inspector, and Chrome Dev Tools. But none of these tools measure mobile performance. Although the offering for mobile performance tools is small, some do exist. Join Steve Souders as he shows what's available today for gaining visibility into mobile performance.
+%p Demo time! Check out http://www.souders.org/
+%h3 Blaze.io
+%p Check out http://www.blaze.io/mobile/ Blaze took the webpagetest framework and connected it to mobile browsers for performance testing. That is awesome. It is an early version, but it performs exactly as you would expect it to.
+%h3 pcapperf
+%p pcapperf (http://calendar.perfplanet.com/2010/mobile-performance-analysis-using-pcapperf/) is a way to track the TCP traffic that is coming and going from your mobile device. It is a long process to set this up (you have to set up a wifi hotspot and then connect your mobile device to the wifi hotspot, run your test, and get a low-level PCAP file.
+%p Then you can use the pcap2har translator to create a HAR file to analyze the performance in a nice way using a Firebug-type format (with waterfall charts, etc.). Very cool!
+%h3 Jdrop
+%p Jdrop allows you to store JSON data in the cloud to store performance data gathered from mobile devices. This allows you to store performance data from REAL devices on REAL data networks, and then you can access the data later on your desktop.
+%p You can gather the data on a mobile device by using a Jdrop bookmarklet, like the Mobile Perf bookmarklet, and then display that info on the desktop, or download it for further analysis.
+%p Thanks to Stete for the great talk!

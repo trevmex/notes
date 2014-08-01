@@ -1,0 +1,163 @@
+%h2 Scala Lift
+%i David Pollak, author of Beginning Scala
+%p Lift is a web framework written in Scala, but it is different than other frameworks. It is NOT MVC! It is designed for rich internet applications.
+%p Scala is an OO language with powerful constructs.
+%p It runs on the JVM, and you can use all your Java classes, and you can use all Scala classes in Java. They are fully interchangeable.
+%p Scala code runs at native Scala speeds.
+%p Scala also has a command line interpreter with tab completion.
+%p Scala is a typed language, unlike Ruby, but it is smart with typecasting. Like ML, it will understand what your type is for inference.
+%p Scala has built-in immutable data structures like lists and vectors.
+%p Everything in Scala is an object (just like Ruby! Hooray!)
+%p Therefore:
+%pre
+  %code
+    1 + 1
+    z// is the same as 
+    1.+(1)
+    z// which equals Int = 2
+%pre
+  %code
+    z// A simple class to dup a string 3 times.
+    class Foo(v: String) {def +(i: Int) = v * 3}
+    %br/
+    val f = new Foo("Hello ")
+    f + 3 // =&gt; String = Hello Hello Hello
+%pre
+  %code
+    Vector(1,2,3).map(_.toString) // makes a vector of Strings
+    Vector(1,2,3).map(_.toDouble) // makes a vector of Doubles
+    %br/
+    def makeItADouble(i: Int) = i.toDouble
+    %br/
+    Vector(1,2,3).map(makeItADouble) // makes a vector of Doubles
+%p Functions close over local scope, and we can reference everything over the local scope.
+%pre
+  %code
+    var x = 0
+    %br/
+    Vector(1,2,3).map{a =&gt; x += a; a + 10} // makes Vector(11, 12, 13)
+    %br/
+    x // becomes Int = 6
+%p A var is a variable, a val in immutable.
+%pre
+  %code
+    val m = Map(1 -&gt; 2, 3 -&gt; 4, 5 -&gt; "Hello") // Makes a Map[Int, Any]
+    %br/
+    m.get(3) // gets Option[Any] = Some(4)
+    %br/
+    m.get(3).map(_.toString) // gets Option[java.lang.String] = Some(4)
+    %br/
+    m.get(66) // gets Option[Any] = None (since it is anything that doesn't exist.)
+    %br/
+    m.get(66).map(_.toString) // gets Option[java.lang.String] = None (Now it is a string that doesn't exist.)
+    %br/
+    m.map(a =&gt; a._1) // Gets a list of the keys (List(1, 3, 5))
+    %br/
+    m.map(a =&gt; a._1 * 4 -&gt; a._2) // Gets a map. Scala knows that THIS is a map, not a list, like the above example.
+%p There is a REPL, but it is still a compiled language.
+%h3 The Lift Framework
+%p (we will be creating a chat app)
+%p Lift gives you menus for free.
+%p Security is enforced. With every Lift app, you get security for free, access controls are enabled by default.
+%p Lift has authentication and authorization hooked in from the start. You do not have code auth work yourself for basic web app.
+%p All of your dynamic page creation is done by transforming XML to XML.
+%p The chat server view:
+%pre
+  %code.html
+    &lt;lift:surround with="default" at="content"&gt;
+    &nbsp;&nbsp;&lt;lift:comet type="Chat"&gt;
+    &nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;chat:line&gt;&lt;li&gt;&lt;chat:message/&gt;&lt;/li&gt;&lt;/chat:line
+    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;
+    &nbsp;&nbsp;&lt;/lift:comet&gt;
+    %br/
+    &nbsp;&nbsp;&lt;div&gt;
+    &nbsp;&nbsp;&nbsp;&nbsp;&lt;lift:form&gt;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;lift:ChatInput/&gt;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="submit" value="Chat" /&gt;
+    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/lift:form&gt;
+    &nbsp;&nbsp;&lt;/div&gt;
+    &lt;/lift:surround&gt;
+%p Comet is Lift's version of a library to make AJAX calls. It can do long pooling to the Internet, as well as all the complex things that a live HTTP connection needs to do to stay alive correctly.
+%p Lift takes and makes comet easy. Lift takes and makes comet possible. Lift abstracts out all the messiness of comet and does what you want it to do without worrying about the details too much. All you have to think about is: push changes here, get changes there. That it is!
+%p An object is a singleton within its scope of reference in Scala, unlike a Java static.
+%p Objects can have traits that are like mixins in Ruby.
+%p Vectors are immutable, and have O(1) append and remove from head and end.
+%p The Stairway Scala book is a great resource of information on Scala.
+%p The chat server guts:
+%pre
+  %code
+    package code.comet
+    %br/
+    import net.liftweb._
+    import http._
+    import actor._
+    %br/
+    import scala.xml.NodeSeq
+    %br/
+    object ChatServer extends LiftActor with ListenerManager {
+    &nbsp;&nbsp;private var messages = Vector("Welcome")
+    %br/
+    &nbsp;&nbsp;def createUpdate = messages
+    %br/
+    &nbsp;&nbsp;override def lowPriority = {
+    &nbsp;&nbsp;&nbsp;&nbsp;cases: String =>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;messages = messages :+ s
+    &nbsp;&nbsp;&nbsp;&nbsp;updateListeners()
+    &nbsp;&nbsp;}
+    }
+    %br/
+    class Chat extends CometActor with CometListener {
+    &nbsp;&nbsp;private var messages: Vector[String] = Vector.empty
+    %br/
+    def registerWith = ChatServer
+    %br/
+    override def lowPriority = {
+    &nbsp;&nbsp;case m: Vector[String] =>
+    &nbsp;&nbsp;&nbsp;&nbsp;messages = m
+    &nbsp;&nbsp;reRender()
+    }
+    %br/
+    def render = bind("chat", "line" -> line _)
+    %br/
+    def line(html: NodeSeq): NodeSeq =
+    &nbsp;&nbsp;messages.flatMap(m =>
+    &nbsp;&nbsp;bind("chat", html, "message" -> m))
+    }
+%p The chat input file:
+%pre
+  %code
+    package code.snippet
+    %br/
+    import code.comet._
+    import net.liftweb._
+    import http._
+    import js._
+    import JsCmds._
+    import JE._
+    import util._
+    import Helpers._
+    %br/
+    object ChatInput {
+    &nbsp;&nbsp;def render = SHtml.text("", s => {
+    &nbsp;&nbsp;&nbsp;&nbsp;ChatServer ! s
+    &nbsp;&nbsp;&nbsp;&nbsp;SetValById()"chatty", "")
+    &nbsp;&nbsp;}) % ("id" -> "chatty")
+    }
+%p The above compiles to a working chat client by running it with sbt. (warning, there may be typos in my code. I was copying live)
+%p Scala has no preprocessor, so you have to import all the libraries you need in every file. Twitter has solved this by preprocessing Scala code with ERB.
+%p Lift takes care a lot of the drudgery of writing web apps. With a small amount of code you can do a lot of things. This is pretty advanced.
+%p Lift supports parallel threads as well as lazy loading of parts of the page.
+%p Lift has a Wizard object like JBoss Seam that takes care of multi-page input forms with all the magic (like back arrows, etc.) working as you would expect.
+%p Lift apps are small but pretty powerful. It is a lot more consist than Rails code by giving you more logical defaults.
+%p One of the most interesting things is that it is secure by default. Pretty cool. Oh, and foursquare uses it. Neat, huh?
+%p Lift is:
+%ul
+  %li Dynamic
+  %li Secure
+  %li Scalable
+%p You will invest more time developing up front with Lift, but it will pay off down the road in utility.
+%p What is an Actor? Check out the Concepts and Structures on Programming Languages book based off the Mozart language.
+%p (Sorry if I missed some stuff, Toby and David got into some crazy stuff that is way over my little brain, but I hope that the notes I have taken are useful some of you!)
+%p What is a good Scala book? Read the Staircase book (it is the Pickaxe book for Scala), and then go read Beginning Scala by our speaker, David.
+%p Thanks to David for a great talk!

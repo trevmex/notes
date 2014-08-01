@@ -1,0 +1,36 @@
+%h2 Selenium 2 + Jenkins = (Almost) Pain-Free UI Test Automation
+%i Mike Reedell (@mikereedell), Developer at MCA (http://mcasolutions.com)
+%p Selenium was a Thoughtworks project, check it out at http://seleniumhq.org/
+%p Selenium was written with Mecury (makers of Quality Center) in mind, and it is called Selenium because selenium is the cure for mercury poisoning. :D
+%p Selenium 2 uses WebDriver that allows you to interact with Selenium from many languages (ruby, java, python, etc.).
+%p Selenium Grid is a system that allows you to run Selenium on different OSes, different browsers, and different browser versions.
+%p Building a grid is really easy to do, and spinning up new nodes is fast.
+%p Almost everything in a leaf node is configurable!
+%p Your test will talk to your grid hub, and then the hub will connect your worker boxes to the tests. You can think of the hub as a switchboard.
+%p It is a good idea to make your tests run on VMs to make your life easier.
+%p Mike started with Mercury QuickTest Pro (QTP), which is a click recorder that is used for UI testing and it is Windows-only. It is a pain to use, but a lot of QA departments use it. Mike wanted to switch off it because only one QA person knew QTP, and DEVELOPERS HATE IT!
+%b Seriously, developers hate QTP.
+%p And QTP is VERY expensive...and Selenium is free.
+%p The big win for the team at MCA is that they could use the existing knowledge of developers that use Java to drive UI testing, so training costs go way down.
+%p The goal at MCA was to have a completely data-driven architecture. Going to Selenium allowed the team to quickly change over to a test suite that was completely driven by data in Excel spreadsheets!
+%p They built out a library that could take data from an Excel document and using that, generate a test page for UI testing with Selenium. This allows them to set up their data once and run the tests against many different data sets.
+%p Their library allows for dynamic data. That means that their UI tests are not always bound to hardcoded data. This makes their tests much more flexible. Dynamic data allows you to have different mock data depending on the state of other mock data.
+%p They use Apache POI to take all your data from Excel and allow you to use Java and XML to manipulate Excel spreadsheets.
+%p There was some work to make Selenium and POI to work together. One of the key things Mike did was make their tests run within a context that tells the developer how to exactly reproduce any errors found.
+%p There was also some work that had to be done for scrapping pages with their custom DOM objects.
+%p Scrapping on an AJAX-heavy site is really difficult, there are open questions on how to handle this with UI testing, There is no silver bullet with automated UI testing, especially with AJAX, sometimes you just have to do manual checks along with your automation suite.
+%p Check out the ievms project on Github (from xdissent).
+%p The great part about using Selenium Grid is that you only have to set up your VMs once and your grid hub will take care of sending tests to them.
+%p But how should you run your Selenium tests?
+%b Jenkins of course!
+%p Jenkins is the automator's automator. Jenkins is a CI server that allows you to run your Selenium tests running on a setup that is identical to your production environment.
+%b Make sure to install the XVNC plugin for Jenkins to get it to run your Selenium.
+%p Jenkins is very easy to set up and run. It is basically the most amazing CI server in the universe. You will love it!
+%h3 Gotchas
+%p Make sure you set up Firefox profiles to run your tests with. That makes your tests more consistent. Make sure you check your profiles into source control.
+%p Selenium cannot click on native dialog boxes (because they are outside th DOM!) So don't use those. :P
+%p If your tests run slow locally, they will run REALLY slow in the grid.
+%p Using XPath selectors is REALLY slow. Use either named selectors or CSS selectors for good performance.
+%p WebDrive throws exceptions for elements that it can't find! User be warned!
+%p Sometimes your tests will fail. Nothing is perfect, that is still a bit of hand holding with it, but it is not too bad of a trade off.
+%p Thank you to Mike for the great talk, and thank you to Greg for recording the talk (it should be up on the site soon!).

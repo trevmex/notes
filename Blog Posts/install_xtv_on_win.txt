@@ -1,0 +1,31 @@
+Download and install Java (http://download.oracle.com/otn-pub/java/java_ee_sdk/6u2-wjdk-6u26/java_ee_sdk-6u2-jdk-windows.exe).
+Install all updates needed to Java.
+Download and extract Maven 2.2.1 (http://www.apache.org/dyn/closer.cgi/maven/binaries/apache-maven-2.2.1-bin.zip).
+Copy the contents of the apache-maven-2.2.1 folder to C:\apache-maven-2.2.1\.
+Open Control Panel and type "environment" in the search bar.
+Click "Edit the system environment variables".
+Click the "Environment Variables..." button.
+Click on "New..." under System variables.
+Add a new variable with the name "JAVA_HOME" and the value "C:\glassfish3\jdk\jre".
+Add another new System variable with the name "MAVEN_HOME" and the value "C:\Program Files\apache-maven-2.2.1".
+Double-click the "Path" under System variables and add the following to the front of the value: "%JAVA_HOME%\bin;%MAVEN_HOME%\bin;".
+Close the Control Panel.
+
+Download and install TortoiseSVN (http://tortoisesvn.net/downloads.html)
+Restart you computer when prompted.
+Navigate to your user folder in Windows Explorer.
+Right-click and create a new folder, call it "Code".
+Double-click on the "Code" folder.
+Right-click and create a new folder, call it "xtv-trunk".
+Double-click on the "xtv-trunk" folder.
+Right-click and select "SVN Checkout".
+Type "http://source.dev.cim.comcast.net/svn/xtv/trunk" as the name of the repository and click "OK".
+Enter in your Subversion user name ans password. (if you do not have Subversion access, contact Joe Campbell <Joseph_Campbell@Comcast.com>)
+Click "OK" when the repository has been checked out.
+
+mkdir .m2
+copy Code\xtv-trunk\cTV\maven_settings.xml .m2\settings.xml
+cd Code\xtv-trunk
+mvn clean install
+cd cTV
+mvn -Xmx2048m -XX:MaxPermSize=300m -DCIM_ENV=dev -Dvideo.feed.type=videoBob compile war:inplace tomcat:run

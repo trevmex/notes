@@ -1,0 +1,17 @@
+%h2 Simplicity in Scala Design
+%i Bill Venners
+%p Ten rules of thumb! Programmers are people, remember you are designing for them.
+%ol
+  %li
+    Design for busy teams. Interesting software is written by teams, not people. There will be different levels of people. How will theyt read your code. You cannot assume that all your users will be experts in your library, or the way you are thinking. They are busy doing their own things. You want your users to use your APIs without reading the documentation. They want to use your library to get things done.
+  %li
+    Make it obvious, guessable, or easy to remember. You should write Scala code to be really obvious what it is doing. If yu cannot do that, write it in a way that you can guess what it does. And if you can't even do that at least make it easy to remember. I think a lot of Scala developers write hard to understand code, but that shouldn't be what it is all about. Good programming languages are meant to make programmers' lifes easier, not harder.
+  %li Design for readers, not writers. Don't optimize your code for quick writing, optimize it for ease of reading.
+  %li Make error impossible or difficult. You should make errors hard to code. If your users can screw up, they will (over time), so make your errors clear and difficult to code for your users. Scala has a very rich type system, make your code give type errors when a user does something wrong, they are caught early, at compile time.
+  %li Explloit familiarity. Leave the stuff your users are doing the same, and only change the things you really care about. Make them feel comfortable, and change their bad habits slowly.
+  %li Document with examples. No one wants to read documentation. But EVERYONE LOVES EXAMPLES! Users love to copy and paste. Use that.
+  %li Minimize redundancy. Minimize redundancy. There should be one --and only one-- right way to do it. (from The Zen of Python). Not all redundancy is bad (e.g. there are lots of different types of lists with different performance metrics), but redundent syntax that does the same stuff is no good. Telling your users what the intended use cases of your APIs are can be very handy.
+  %li  Maximize consistency. If you have similiar things make the same calls do thw same things on them (don't send a mutable type by default if the standard is to send an immutable type).
+  %li Use symbols when your users are already experts in them. If your users all understand the "+" sign for adding integers, use that, not andInt(), that is silly. On the other hand, don't use obscure symbols that no one understands (e.g. don't use /:, instead use foldLeft).
+  %li Minimize the magic. Scala don't just give you a magic wand, they give you a magic baseball bat. Don't use too much of the magic, it can actually slow your compile time if you use too much of it.
+%b Thanks to Bill for the great talk!

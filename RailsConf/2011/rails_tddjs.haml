@@ -1,0 +1,57 @@
+/ Why Can't I Test My JavaScript?
+%h3 #railsconf 2011 Notes
+%i Greg Moeck (gregmoeck)
+%p The Ruby community has made TDD/BDD accessible.
+%p Why can't we do TDD/BDD inJavaScript?
+%p What is the problem? There are LOTS of excuses:
+%ul
+  %li The tools suck
+  %li The browser sucks
+  %li The DOM sucks
+%p But actually, there is another issue. Are tests are talking to us.
+%b The problem is the way we write JavaScript. JavaScript is NOT inherently untestable. WE ARE THE PROBLEM.
+%p There is no structure for your JavaScript code. That is the problem with your code. Without structure, you cannot write tests.
+%p People tend to think of JS as CSS. But it is not.
+%p JavaScript is not jQuery! JavaScript is not just a way to manipulate the DOM.
+%b You need objects if you are going to test. JavaScript is VERY object oriented language.
+%p You are putting logic in your DOM. The DOM is just another object.
+%p jQuery is an adapter that goes over the DOM to make it easier to work with.
+%p The DOM is just an object.
+%p How do you test JavaScript? The same as everything else.
+%p You have to write your JavaScript in a testable way. You have to write in functions.
+%p What do your tests do?
+%ul
+  %li Your tests catch bug?
+  %li Your tests ensure value?
+%p Your tests really should ensure value, catching bugs are a good side effect.
+%p We want eternal value: we want the app to do what we want it to do.
+%p We also want internal value: We want to be able to change things with confidence.
+%p Integration tests (with cucumber, etc.) gives you external value. You are able to understand the domain-level value.
+%p Acceptance tests do NOT give you internal quality. You want to make your acceptance tests the way to start testing on legacy code.
+%p To ensure internal quality, you need isolate unit tests in your codes.
+%p When you write unit tests, you get feedback on the quality of your code. How easy is it to isolate your units?
+%p You need to decouple your objects. If we can isolate your tests, isolate your objects, you know they are easily replaceable.
+%p The big benefits of unit tests is that you refactor without fear.
+%p You need both unit and end-to-end acceptance tests to get full coverage.
+%p "Unit tests tell you that you built the system right. Acceptance/Integration tests tell you that you've built the right system."
+%p When you write acceptance tests you have to write in a DSL that allows you to use the system as the user would.
+%p When you write unit tests, you want to use objects as a collaborator (another object) would.
+%p (I love Jasmine spies!)
+%p Your unit tests also want to make sure that state modification occurs correctly.
+%p Every object will either:
+%ul
+  %li Modify its own state
+  %li Call to another object to do something.
+%p We have to limit our dependencies to make your unit tests cleaner.
+%p Again, your main problem with JS testing is that your JavaScript does not have a clear structure.
+%p When you actually have structure, testing becomes much easier.
+%p (check out Fictum and Simulo for making Cucumber-like tests in JavaScript)
+%p We are not writing JavaScript in a structured way. That is the biggest issue.
+%p JavaScript is a lot like Ruby. We cannot abandon our practices when we go into a new environment.
+%p the reason it is hard to write JavaScript tests is because we are writing our code in a poor way.
+%p The problem is not JavaScript, it is the way we write JavaScript.
+%b JavaScript is going to be the lingua franca of programming.
+%p We need to make the JavaScript community love testing and good code practices that we have learned in Ruby.
+%p Some good ways to impassion your coworkers is to get your acceptance tests into you CI server and to pair with your coworkers to get them involved in the TDD/BDD workflow.
+%p If you are just decorating the DOM, you do not need unit tests. That is good place for acceptance tests.
+%p Thank you to Greg for the great talk!

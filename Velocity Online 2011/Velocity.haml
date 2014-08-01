@@ -1,0 +1,67 @@
+%h2 Velocity Online Conference
+%i http://en.oreilly.com/velocity-mar2011/
+%h3 Web Standards to Measure Real-world Performance
+%i Speakers: Anderson Quach, Microsoft IE and Tony Gentilcore, Google Chrome
+%p (Abstract) In the summer of 2010, Microsoft and Google announced the formation of the Web Performance Working Group. Since then, we’ve been hard at work developing interoperable interfaces to measure web application performance. In this session, we’ll discuss the problems we’re solving, the challenges we’re facing, what we’ve done and where we’re going.
+%p Give comments on web perf stuff to the peeps at the W3C at public-web-perf@w3.org.
+%p Thanks to Anderson and Tony for the talk!
+%h3 Above the Fold Time: Measuring Web Page Performance Visually
+%i Jake Brutlag, Google
+%p (Abstract) Above the fold time (AFT) measures web page performance by applying heuristics to a video or filmstrip view of a page loading. It focuses on what the user sees while at the same time producing consistent results across multiple runs and different browsers. This presentation will cover (1) the motivation for AFT, (2) overview the algorithm, and (3) how to collect AFT on webpagetest.org.
+%p Zoe Abrams and Pat Meenan have been the primary engineers on this project.
+%p The holy grail of web timing metrics is to get closer to what the user thinks is fast. To do this we want to increase the "Above the fold" time.
+%p The AFT is all about how fast the page "finishes rendering" That is to say, when has all the content on the page stop changing (gotten into a stable state).
+%p We often go by page load time (PLT), or DOM load time, but there are other things on a wb page that are still being loaded even after the DOM is loaded.
+%p PLT is not always on the mark, though. PLT can both overestimate and underestimate the ATF time. Where AFT is the time the page is actually completed loading. We need something better.
+%p The AFT is the time at when all of the visible items on the page have loaded.
+%p The PLT will wait until all (even non-visible) elements have loaded on the page. This can result in an overestimation of the PLT.
+%p The PLT will NOT wait for elements that are loaded through JavaScript (AJAX). This can result in an underestimation of the PLT.
+%p Browser events are not cross-browser. That means that the DOM OnLoad event (what the PLT goes off of), is not uniform. Another problem with PLT.
+%h4 Estimating AFT
+%p We separate the pixels between dynamic and static pixels.
+%p You must have an upper bound (some large number like 45 sec. for DSL) for the amount of time it will take the page to load.
+%p We will then classify a static pixel that changes less than 5 times after the upper bound.
+%p And a dynamic pixel is one that changes 5 or more times after the upper bound is hit.
+%p The number of 5 was picked through emperical data from the Alexa Top 200 pages.
+%p Check out http://www.webpagetest.org/ to learn your AFT data on your site using the AFT info in the Video tab under Advanced Settings.
+%p The results of the test for your pages will now have the Above the Fold time as well as a filmstrip view of your page and the AFT diagnostics screen.
+%p If you have very small changes (like a timer tick-down), you might want the AFT test to ignore that.
+%p AFT time analysis is very useful since it allows you to see something a bit closer to what users expect, BUT it is not the end-all-bee-all of performance testing. Your web page might need to measure other things as more important.
+%p Contribute to the conversation at http://www.webpagetest.org/forums/
+%p Web Page Test IS open source, so you can check out the AFT algorithm yourself to see exactly what it is doing behind the scene.
+%P Thanks to Jake for the great talk!
+%h3 Introducing Next-gen YSlow
+%i Betty Tso, Yahoo! and Marcel Duran, Yahoo!
+%p (Abstract) In addition to existing Firefox/Firebug add-on, YSlow will be available for many browsers – Chrome, IE, Safari, Opera, as well as Mobile browsers and command-line. Please come join us to explore behind-the-scene techniques used to make this “universal” performance measurement tool possible, also find out how you can get involved in next-gen YSlow. There will be a quick sneak peak of upcoming features!
+%p Betty is the manager of the Y! Property Performance team. They work on the YSlow product.
+%p Marcel is the tech lead for the YSlow. YSlow is a web performance analysis tool for Firefox.
+%p YSlow was tightly coupled to Firefxo, so they had to totally rewrite it to make it work cross-browsed. So they decided to go with a MVC model to devorce the heavy lifting from Firefox.
+%p Last week, Y! announced YSlow for Chrome, but the Firefox version is still a bit more accurate, since Firefox plugins can span across domains, where Chrome cannot.
+%p Another downside with the Chrome version is that there is no connection to the Chrome network panel, like we have with Firefox.
+%p So the Chrome version is awesome, but the Firefox version is STILL more accurate, so looks like you can't junk Firefox just yet. :(
+%h4 What about mobile?
+%p Just now, Y! is announcing that there is a new YSlow bookmarklet that will allow you to run YSlow on ANY mobile browser!!!
+%p It is a bookmarklet that is injected using YUI without modifying the web page itself.
+%p But AJAX cannot go cross-domain, so how can the bookmarklet actually work?
+%p The solution is to use YSL, it is an open table that simulates the web browser on the server to get all the HTTP headers for YSlow to work.
+%p The bookmarklet will load an iFrame to the page that will load the YSlow stats onto the iFrame for testing speed information. Marcel will write up more information at a later date.
+%p The bookmarklet looks just like the desktop version of YSlow, but they are working on a mobile version on the YSlow views.
+%p They will be open sourcing YSlow soon on GitHub!
+%p Soon YSlow will be able to be translated in multiople languages!
+%p One of the big things coming is the idea of exporting the tests and integrating them in your Continuous Integration solutions, like Hudson.
+%p There will also be versions available as standalone JavaScript and a command line interface through node.js.
+%p Thank you to Betty and Marcel for the talk!
+%p{:style => "display: none;"}http://smushit.com/demo/yslow/ is where the Alpha demo is.
+%h3 Visibility into Mobile Performance
+%i Steve Souders, Google
+%p (Abstract) The first step in improving performance is measuring performance. The last few years have witnessed the birth of numerous performance tools including Firebug, YSlow, Page Speed, HttpWatch, Speed Tracer, dynaTrace, WebPagetest, Web Inspector, and Chrome Dev Tools. But none of these tools measure mobile performance. Although the offering for mobile performance tools is small, some do exist. Join Steve Souders as he shows what's available today for gaining visibility into mobile performance.
+%p Demo time! Check out http://www.souders.org/
+%h4 Blaze.io
+%p Check out http://www.blaze.io/mobile/ Blaze took the webpagetest framework and connected it to mobile browsers for performance testing. That is awesome. It is an early version, but it performs exactly as you would expect it to.
+%h4 pcapperf
+%p pcapperf (http://calendar.perfplanet.com/2010/mobile-performance-analysis-using-pcapperf/) is a way to track the TCP traffic that is coming and going from your mobile device. It is a long process to set this up (you have to set up a wifi hotspot and then connect your mobile device to the wifi hotspot, run your test, and get a low-level PCAP file.
+%p Then you can use the pcap2har translator to create a HAR file to analyze the performance in a nice way using a Firebug-type format (with waterfall charts, etc.). Very cool!
+%h4 Jdrop
+%p Jdrop allows you to store JSON data in the cloud to store performance data gathered from mobile devices. This allows you to store performance data from REAL devices on REAL data networks, and then you can access the data later on your desktop.
+%p You can gather the data on a mobile device by using a Jdrop bookmarklet, like the Mobile Perf bookmarklet, and then display that info on the desktop, or download it for further analysis.
+%p Thanks to Stete for the great talk!

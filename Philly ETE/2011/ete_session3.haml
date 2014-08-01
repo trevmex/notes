@@ -1,0 +1,39 @@
+%h2 Maintaining balance while reducing duplication
+%i David Chelimsky, http://drw.com
+%p David is the maintainer of rspec. Rspec is awesome. Check out the book.
+%p This talk is about duplication.
+%b Duplication is bad.
+%p "Duplication is the root of all evil in software design."
+%p Go read Martin Flower's Refactoring book.
+%p "Code smell" is code that is not right.
+%p Duplication is a code smell.
+%p We need to stay DRY (Don't Repeat Yourself)
+%p Leaky abstractions are when you reach into non-public code to do something tricky. That is code smell, too.
+%p Tightly coupled methods make for hard to find bugs.
+%p When you REDUCE duplication, your INCREASE coupling by introducing new dependencies.
+%p Dependencies NEED to be managed.
+%p DRY and some other principles sometimes works against each other.
+%p The SOLID principles (check out Uncle Bob's Clean Code book).
+%p The Dependency Inversion Principle: Depend on abstractions. You should depend on things that are less likely to change.
+%p Code is easier to understand when it all operated on the same level of abstraction.
+%b DRY: Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.
+%p Code generation can help you create more DRY code by this definition.
+%p Some types of duplication is perfectly fine. "DRY is not about typing the same CHARACTERS twice, it is about duplication of concepts."
+%p We want to isolate changes. (I.e.: does your team have 10 different cookie libraries. ;_;)
+%p So not ALL duplication is evil. How do you tell which duplication is bad?
+%ul
+  %li Evaluate the risk of duplication.
+  %li Is the risk of missing something duplicated great, then DRY it up.
+  %li If it isn't rethink your DRYness.
+%p Duplication isn't always obvious. You have to root it out.
+%p Another type of duplication is when you have things with the same name, but DIFFERENT meanings.
+%p Then there is the same meaning assigned to different APIs.
+%p When writing unit tests, removing duplication can be MORE harmful than helpful. When looking at a test, having it all together makes it easier to understand as a unit.
+%p The goal is to make the code you write should be easy to understand. You don't want to sacrifice clarity (readability) for DRYness. You have to strike a balance.
+%p Less duplication often means more indirection, which makes it harder to reason about your code.
+%p Helpful tools can be harmful when used in the wrong context.
+%p Don't abuse before_filters in Rails to DRY up your controller code, it can make your code confusing.
+%p So not all duplication is bad. Think before you make your code DRY.
+%p Code evolves. If your code DOESN'T change, what are you doing? And as code evolves duplications will occur.
+%p Context matters. There is no one true way to code. Think before you jump.
+%p Thanks to David for the great talk!

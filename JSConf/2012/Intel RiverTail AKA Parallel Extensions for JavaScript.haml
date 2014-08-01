@@ -1,0 +1,22 @@
+%h2 Intel RiverTail AKA Parallel Extensions for JavaScript
+%i Stephan Herhut
+%p There is no concurrency in the browser. It is completely serial.
+%p What about web workers? They implement simple actors, but they are very heavy-weight. You have to communicate via messages.
+%p Web workers are great when you do not habe to worry about shared state.
+%h3 Data-Parallel Programming
+%p Express independent computation on data instead of using control statements to steer concurrency. This is what a "map" does.
+%b River Trail - Data-Parallel Programming For JavaScript
+%p This allows us to tell JavaScript's JIT that a piece of code can be run concurrently (e.g. a function has no side effects)
+%p River Trail looks and behaves like JavaScript
+%pre
+  %code{:class => "javascript"}
+    var pa = new ParallelArray([1, 2, 3, 4]);
+    var pa1 = pa.map(function (a) { a += 1; });
+%p A ParallelArray is immutable, dense, and homogeneous
+%p ParallelArrays have six methods: map, combine, reduce, scan...
+%p River Trail uses representation analysis to compute bounds, do type inference, etc.
+%p The JavaScript is compiles into OpenCL to run on Gecko
+%p River Trail is now coming into the EcmaScript standard for data parallelism in JavaScript.
+%p
+  %a{:href => "https://github.com/RiverTrail/RiverTrail"}River Trail GitHub
+%p Interesting stuff. It is nice to see parallelism coming to JS.

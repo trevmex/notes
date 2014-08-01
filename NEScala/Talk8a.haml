@@ -1,0 +1,22 @@
+%h2 shapeless meets implicit macros
+%i Miles Sabin
+%p
+  Prereqs:
+  %a{:href => "http://lambda-the-ultimate.org/node/1160"}What is polytypic programming?,
+  %a{:href => "https://github.com/milessabin/shapeless"}shapeless,
+  %a{:href => "http://goo.gl/pR1OV"}Scrap your Boilerplatewith Class.
+%p Macros: the new hammer in Scala. Even better, implicit macros which is so new it is only in a "macro paradise" fork of Scala.
+%p (none of this is available in the Scala compiler. It is a proposal to make these a reality).
+%p
+  %a{:href => "http://www.haskell.org/haskellwiki/Type_arithmetic"}Type-level arithmetic
+  is a bit clunky in shapeless. For example, using type-level encoding of real numbers (i.e. church numerals) is really slow. For example. it is O(n) for adding numbers, and multiplying them is O(n^2)!
+%p
+  Scala has
+  %a{:href => "https://blogs.oracle.com/sundararajan/entry/mis_understaning_scala_s_singleton"}Singleton types,
+  but it is not very expressive. A singleton type is a type that is used exactly once, and does not represent others classes of that type. This isn't so useful, BUT you can use a type macro to get a type class from an object. Yay!
+%p The Scala compiler is very eager to widen singleton types to non-singleton types. Singleton types evaporate very quickly. We need a way to keep them around. If we wrap our singleton type in another type, we can keep them around a little longer.
+%p This wrapping allows you to extend your numerals out without the penalties of the original church numerals.
+%p
+  Check out
+  %a{:href => "http://en.wikipedia.org/wiki/Peano_axioms"}Peano numerals.
+%b Thank you Miles for the great talk!

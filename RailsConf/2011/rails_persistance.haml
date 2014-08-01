@@ -1,0 +1,57 @@
+/ Mixing a persistance cocktail
+%h3 #railsconf 2011 Notes
+%i Adam Keys, @therealadam, http://www.therealadam.com/
+%p Gowalla has FIVE databases! Good grief!
+%p Imagine a world where your application is growing and your DB won't cut it (won't scale).
+%h4 The Story of Scaling
+%ol
+  %li
+    Create a prototype.
+    %p Don't worry about scaling first. Just get it out there! You will probabaly be using something like MySQL or Postgress, or MongoDB, because it has great ad-hoc queries.
+  %li
+    You have to ship your application!
+    %p Then you have to do a lot of non-agile scaling: figuring out what parts of your product your users like, etc.
+  %li
+    You will find hot spots to find slow queries and then create indices to speed up your queries.
+    %p Most apps stop here.
+  %li
+    If you keep growing, you start digging into specialized storage system.
+    %p For example, you might have some data that works a lot better in a key:value store, or a graph database.
+    %p This is a place to add quick caching with something like memcached or redis.
+    %p Check out ketard for accessing cache keys easier.
+  %li
+    You then run into really slow processes. It is time for queues and workers!
+    %p You can throw jobs into another thread with things like delayed_job, RabbitMQ, etc.
+  %li
+    The next step is relaxing your consistency requirements.
+    %p You will have to live with EVENTUAL consistency.
+    %p You have to ask yourself, "Is it OK for your users to see old data?"
+    %p You need to find where in your code you can cheat and make things non-consistent. There are a lot of great stores out there, Riak, Cassandra, Dynamo, etc. That help you with this problem.
+%p But how do you integrate that hawt new database out there? (MongoDB, CouchDB, Riak, etc.)
+%b "All these databases are going to whisper sweet nothings in your ear, and eventually punch you in the face."
+%p Know the shortcomings of the DBs you choose!
+%p An important part of selecting your DB is to select a good client library for it. Usually, going with the most popular works fine, but you have to make sure in your situation.
+%p You have to configure your DB in your application. Rails makes it easy with databases.yml, but you can do it with a simple case statement to start, if you like.
+%p There are many ways to wrap your connection to your new DB. Check out your ORMs, but you don't need them to get started.
+%p Most of these new databases have no query language, you just use an API, and that works pretty well.
+%p It is important that your Controller code NOT know where your data is coming from, abstract that into your model.
+%p Deployment time! You have to think about deployment, check out tools like Capistrano and Chef for this.
+%p You have to worry about data migration if you are switching to the new hawtness. A simple solution to this is using versioned keys. When you version you can migrate your data gradually instead of all at once.
+%p Repair the data when you read it, or only on update. Another way is to role the dice and only update randomly. (what!)
+%p There is a lot of fear to overcome when switching to a new database. We have to overcome the fear.
+%ul
+  %li Find a training wheel project that is low-risk and proof that you can do it with that before going whole hog on your sites.
+  %li Make sure that you can turn the features on and off.
+  %li Instrument and log EVERYTHING with pretty graphs that are easy to read and learn the hot spots in your application.
+  %li Log as much as you can. You have NO idea where things will show up. Learn to love grep, sed, and awk for this.
+  %li ActiveSupport makes instrumenting your apps really easy. You can add instruments to calls and observe whatever you like.
+  %li Use Rails.backtrace_cleaner.clean(e.backtrack).take(5).join(" | ") to print out nice clean rails logs.
+  %li Slowjam is a gem for logging slow queries, check that out.
+  %li
+    %b Feature switches are KEY!
+    %p being able to turn features on or off gives yourself a HUGE safety net when deploying new technology.
+    %p The rollout gem gives you feature switches in Ruby (these are like JMX switches in Java)
+    %p Rollout also allows you to deploy your switch to only a percentage of your users, VERY useful.
+  %li Do double writes and dark reads: Write to both your old system and your new system, then you read from your new system for testing and discard the results. This is done for testing and backups.
+  %li Iterate! Always try to move the ball forward with your new plans to deliver business value with a database change or addition.
+%p Thank you to Adam for the great talk!

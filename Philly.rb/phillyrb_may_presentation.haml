@@ -1,0 +1,191 @@
+%h2 Philly.rb May Presentation
+
+%p
+  Colin is hosting (thanks Colin!)
+  %br/
+  There will be a joint pub night/presentation June 21st with the gang from Engine Yard about Rails 3.
+  %br/
+  Global Employment is tonight's sponsor.
+
+%h2 MongoDB
+%p Randy Schmidt (@r38y / randy@forge38.com)
+%ul
+  %li Where does MongoDB fit?
+  %li MongoDB is a Document datastore
+  %li
+    Document Datasoures
+    %ul
+      %li Any number of fields
+      %li Fields can have multiple pieces of data
+      %li a document is like a hash, so you can have embedded documents (like a hash within a hash)
+      %li There are no migrations (for better or for worse)
+      %li The datastore looks a lot like a JSON object
+      %li
+        %code{:class => 'javascript'}
+          %pre><
+            {
+            "_id": "12345",
+            "title": "sample blog post",
+            "author": {
+            "name": "Trevor Menagh",
+            "id": "33"
+            }
+            }
+  %li
+    Pain Points
+    %ul
+      %li It is hard to modify a large table (160 million rows) (it is slow in a relational DB)
+      %li Caching complex objects can be messy.
+      %li Caching does not always help with response times, since you still have to pull from the cache and convert cached data into objects in code.
+      %li Randy tried CouchDB, but he didn't find that it had ad-hoc querying, so it was hard for non-technical users to make different queries.
+  %li MongoDB is sponsored by 10gen
+  %li It was originally going to be a cloud platform, and the database came out of that.
+  %li It is open source with lots of drivers in various popular languages
+  %li You can write queries on basically anything
+  %li There are atomic operations, but no transactions
+  %li It uses Map/Reduce for aggregation
+  %li There is a JavaScript shell for admin use
+  %li There is replication
+  %li You can shard your data across disks as well (eep!)
+  %li Get it with Homebrew, or if you have Ubuntu or Debian, there are packages for that as well.
+  %li You can use the command 'mongoimport' to import data from tsv, csv, or JSON
+  %li There is great documentation on the MongoDB website, check it out!
+  %li
+    A find call:
+    %code{:class => 'javascript'} db.col.find({'last_name':'Menagh'})
+  %li Atomic operations (that means an operation that return as success or failure)
+  %li It uses indexes, which speed up things a lot! (but they are case-sensitive, so beware)
+  %li Adding indexes are done asynchronously, and are pretty quick to add compared to MySQL
+  %li
+    Capped Collections are like tables, but you can have any data there you want
+    %ul
+      %li The capped collection is capped in size, once the collection grows larger than the size, the oldest data is dropped
+      %li this can be used for logging, or caching
+  %li
+    Really fast to write
+    %ul
+      %li It achieves this because the initial write is only to memory, and then later (up to 60 seconds later) that information is written to disk
+      %li This means that you might lose 60 seconds in a worst-case scenario
+  %li Security is off by default, but you can specify a username/password for a db if you want (by starting the db process with --auth)
+  %li GridFS is a spec for storing large objects
+  %li Data is stored as BSON (Binary JSON)
+  %li Supports more datatypes than JSON
+  %li Better for querying
+  %li It takes up more space than MySQL (about 100% more space than MySQL)
+  %li There is a Ruby driver called 'mongo' and an addition called 'mongo_ext'
+  %li mongo_ext is like a speed booster pack
+  %li Mongoid is a Ruby object mapper for MongoDB, made by Durran Jordan (Hashrocket)
+  %li
+    MongoMapper is another Ruby object mapper by Railstips creator, John Nunemaker
+    %ul
+      %li This is very much like ActiveRecord
+      %li There are some minor tweaks you have to make for more complex ActiveRecord
+      %li Unfortunately there is zero documentation
+  %li Testing is very similar to testing ActiveRecord
+  %li
+    Limitations
+    %ul
+      %li There is a limit of 40 indexes
+      %li 2gb database size if using 32 bit
+      %li 4mb document size
+  %li Who uses it: Harmony, Foursquare, Etsy, Github, Disqus, GILT, and Randy!
+  %li It feel a lot like a relational database, so the learning curve is lower than with other NoSQL solutions
+  %li http://www.mongodb.org/
+  %li http://mongotips.org/
+  %li http://railstips.org/blog/archives/2009/12/18/why-i-think-mongo-is-to-databases-what-rails-was-to-frameworks/
+
+%hr/
+
+%h2 Homebrew
+%h3 The missing package manager for OS X
+%p Aaron Feng (King of Philly Lambda / @aaronfeng / aaron.feng@gmail.com)
+
+%ul
+  %li Homebrew is a package manager for the Mac
+  %li The approach taken with Homebrew is unique among package managers
+  %li
+    Package managers should...
+    %ul
+      %li be self-contained
+      %li not require sudo
+      %li be easy to use
+      %li have lots of new packages
+      %li be able to create new packages and redistribute
+  %li Running sudo can be dangerous, don't trust other's installers!
+  %li Aaron likes to install everything in a predefined location and not associated with the base OS
+  %li Compiling all this by hand can take a long time to set up from scratch, it can be a big hassle.
+  %li He would write small bash scripts to compile and install software to help him remember the small tweaks to each piece of software
+  %li ...but now he uses Homebrew!
+  %li Homebrew has all the bleeding edge stuff, but it is not the best for stable systems (most of the packages install from HEAD)
+  %li
+    It is simple and clean
+    %ul
+      %li
+        %code brew install git
+      %li
+        %code brew remove git
+      %li
+        %code brew list
+      %li
+        We can easily create brew formulas (packages):
+        %br/
+        %code brew create http://foo/x.tar
+  %li Installation: http://gist.github.com/323731
+  %li Installing in /usr/local is the default, but you do not have to use this. It is a good idea to change this, just make sure homebrew/bin is in your path
+  %li You can also install by forking the github code
+  %li
+    Requirements:
+    %ul
+      %li Working Ruby installation
+      %li Intel CPU
+      %li Snow Leopard
+      %li XCode with X11
+  %li Homebrew can play nice with other package managers (like Macports and Fink)
+  %li
+    Writing your own formula is easy. It is just Ruby!
+    %ul
+      %li
+        Formula - a file that describes the packaged application
+        %ul
+          %li Your formula will inherit from the Formula class
+          %li Every formula need a homepage, url, and md5 within the class
+          %li You have to implement the install method
+          %li You can also write patches and caveats functions as well
+          %li The order of execution is download -> patches -> install -> caveats
+      %li Keg - Installation prefix of a formula
+      %li Cellar - storage location for Kegs
+  %li
+    There are many types of homebrew formula types
+    %ul
+      %li Formula <-- this is the basic version
+      %li ScriptFileFormula
+      %li GithubGistFormula
+  %li
+    The debugger:
+    %code brew install -vd foo
+  %li The formula has the same information as a hand-rolled install script, but it is more concise
+  %li There are a lot more packages for macports and fink, but there are downsides to it
+  %li e.g. you need to be root to install a lot of these packages
+  %li Macports are a bit more current than Fink
+  %li Homebrew is more bleeding edge. In homebrew, there really is no easy way to get older versions.
+  %li Homebrew is really young, only 744 formulas (not as much but easy to create new formulas)
+  %li Macports has 6856 ports (Good in-between, but you do not have as much control)
+  %li Fink has 10797 packages (most packages, but not as up-to-date)
+  %li Homebrew is very popular, lots of watchers and forks on Github, easy to add new stuff to it.
+  %li
+    Useful commands:
+    %ul
+      %li
+        Find what is wrong with your brew: 
+        %code brew doctor
+      %li
+        Update your brews: 
+        %code brew update
+      %li
+        This is the homebrew homepage: 
+        %code brew home
+      %li
+        Interactive mode (see what is happening before it commits):
+        %code brew install -i
+  %li http://mxcl.github.com/homebrew/
+  %li Freenode: #machomebrew

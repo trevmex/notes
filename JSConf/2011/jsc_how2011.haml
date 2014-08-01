@@ -1,0 +1,55 @@
+/ How 2011-era JS engines compile your scripts (and why it matters)
+%h3 #jsconf Notes
+%i Marijn Haverbeke
+%p JavaScript performance became something serious with the wide-spread adoption of AJAX.
+%p The JS engines are over 100X faster than JS engines from 2001.
+%ul
+  %li
+    Compiling to machine code
+  %li
+    Cleaver value representation
+  %li
+    Caching property access
+  %li
+    Better garbage collection    
+%ul
+  %li The old way to parse is to interpret a syntax tree, keep explicit scope maps, and resolve variables at run time.
+  %li Next we started compiling to bytecode. You compile high-level operations to simpler bytecode (assembly).
+  %li The next step is compiling to machine code.
+  %li Everything is compiled right away.
+  %li Your code compiles on demand.
+  %li In JavaScript, each variable can be assigned a static location on the heap at compile time.
+  %li ...except if you use "with"
+  %li "with" ALWAYS gives you a dynamic scope. So don't use "with" unless you want to pay the price.
+  %li Handling "eval" is a bit better, but still pretty slow.
+  %li
+    %b with is no good.
+  %li
+    %b eval is AWESOME!
+  %li A local eval is like magic.
+  %li
+    If you treat eval like a value, you get global eval, which is much nicer:
+    %pre
+      %code.javascript var geval = eval; geval("x++");
+%p If you use 64-bit floating point numbers, you no longer have to box your floating points. Only Firefox does this right now. (http://blog.mozilla.com/rob-sayre/2010/08/02/mozillas-new-javascript-value-representation/)
+%p As the heap grows, garbage collection becomes more and more difficult.
+%p The way we do this is mark and sweep. We mark dead things, and sweep.
+%p The downside is that we have to stop the world when we do a sweep. This is also how Ruby does garbage collection.
+%p One good way to manage this is by splitting the domain heaps, that makes stopping the world specific to a domain.
+%p Generational GC is a way to mark up old and new objects on the heap and wiping out older objects, this could be faster.
+%p Properties are NOT static.
+%p Anything can be dereferenced.
+%p JavaScript uses polymorphic online caches to store properties.
+%p Each function has a hidden class with properties:
+%pre
+  %code.javascript
+    function point(x, y) {
+    ;// 'this' is of class {}
+    this.x = x; // now {x}
+    this.y = y; // now {x, y}
+    }
+%p FF4 and IE9 don't handle lookup misses well.
+%h3 Type Inference!
+%p JavaScript doesn't currently do type inference, but this is something we are looking into.
+%p Type inference is tough with globals, etc.
+%p Thank you to Marijn for the awesome talk!

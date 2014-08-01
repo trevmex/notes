@@ -1,0 +1,51 @@
+%h2 Styling for SASS Addicts
+%i Pam Selle
+%p SASS is a CSS pre-processor. It makes CSS more like a programming language with mixins, variables, and scoping.
+%b Preprocessers don't magically make your code better.
+%p Mistakes!
+%ol
+  %li
+    %p Styling with ids.
+    %p You cannot have more than one id on a page. You can have many classes.
+    %p ids are more powerfull than classes, and classes are more powerful than elements.
+    %b The inception rule: you shouldn't have more than 4 selectors!
+    %p Seriously, just don't style your ids. Style is for classes.
+  %li
+    %p Fear of classes.
+    %p More markup is not bad. use classes liberally.
+  %li
+    %p Redundancy.
+    %p You keep your Ruby code DRY, you need to make your CSS as well.
+    %p You can use @extend to DRY up your code.
+    %p A mixin without an argument is suspicious (try @extend).
+    %p Avoid overwriting styles! Keep it simple!
+    %p Print your stylesheets, if they look bad on paper, you might have bad code!
+    %p
+      Use
+      %a{:href => "http://csslint.net/"}CSS Lint
+      to make your code better!
+  %li
+    %p Forgetting fallbacks!
+    %p
+      You cannot forget IE. Go to
+      %a{:href => "http://caniuse.com/"}Can I use
+      to learn what you can use on your browser.
+  %li
+    %p Taking it too seriously
+    %b FACT: You will fuck it up!
+    %p Don't be high and mighty about your code.
+    %p SASS doesn't create bad code. Bad coder create bad code.
+%p
+  Check out the GREAT chart at
+  %a{:href => "http://www.standardista.com/css3/css-specificity/"}standardista.
+  They relate CSS specificity to fish. It is mega-cool.
+%p Nesting too much in SASS is confusing! Don't do it.
+%p
+  Check out
+  %a{:href => "http://html5boilerplate.com/"}HTML5 Boilerplate
+  to kickstart your beautiful html pages!
+%p
+  %a{:href => "http://compass-style.org/help/tutorials/spriting/"}Spriting in Compass
+  is awesome! Check it out, and never edit a sprite sheet in Photoshop ever again.
+%p Thanks to Pam for the great talk!
+

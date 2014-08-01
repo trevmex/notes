@@ -1,0 +1,80 @@
+%h2 Philly Lambda May Meeting
+
+%h2 Living on the Bleeding Edge In The Financial Industry
+%i Aaron Feng and Kyle Burton
+
+%ul
+  %li Algorithmics, Inc.
+  %li Most of the banks and companies that do collateral management still do transactions on the phone, little automation.
+  %li Most of Algo's customers are big banks.
+%ul
+  %li
+    What are some of the problems of using new tech?
+    %ul
+      %li Programmers are skeptical of new and evolving tech
+      %li Managers are a bit unsure, if the programmers are unsure
+  %li
+    How did they do it?
+    %ul
+      %li Aaron wrote a prototype in about 4 weeks
+      %li He leveraged the Philly Lambda group for talent
+      %li
+        %ul
+          %li RabbitMQ for messaging
+          %li Management wanted support, which was provided by LShift, the makers of RabbitMQ.
+          %li Clojure
+          %li JRuby
+      %li Very small team (4 people)
+      %li 2-week sprints
+      %li
+        %ul
+          %li Automation, automation, automation
+          %li There was no sys admin, so having a lot of sys admin work work automated was a big plus
+          %li Created a bash script to provision their server, but then migrated to Chef
+      %li They used RSpec and Cucumber to do unit and integration testing
+      %li QA and business users were able to look at the RSpec and Cucumber tests and understand what the tests were doing
+      %li They would meet with the business user and create Cucumber tests from their conversations
+      %li RubyMine IDE has a Cucumber step integration piece
+      %li
+        Agile Processes
+        %ul
+          %li Used pair programming: NO production code was written solo!
+          %li One of the best parts of this is that when one of their best members resigned, but that was alright, because no one had unique data
+          %li Ten minute stand up
+          %li First pair in the morning, switched at lunch
+          %li The weakest member took the lead when pairing
+          %li This also made it so that when one person left on vacation, the project was not greatly affected
+          %li The setup: two keyboards, two mice,one machine
+          %li One problem is that the weaker willed individual will have less time on the machine, so they used a chess clock set to 15 minutes for getting the pair to work equally
+          %li When you are pairing, you are more focused. You don't check your email, you don't check Facebook, you don't browse the web. The pairing makes you more accountable.
+          %li They ping-ponged: one dev writes a test, the next writes just enough code to make the test pass and writes the next test, etc.
+      %li
+        JRuby
+        %ul
+          %li Using the css validator and jslint was a life-saver
+          %li They used the css validator and jslint as rake tasks!
+          %li Google's Clojure Compiler is also a good way to check out and catch errors
+      %li
+        Clojure
+        %ul
+          %li Immutability is strongly encouraged!
+          %li Since it is sitting on the JVM, it is easy to reach into Java to leverage various libraries
+          %li You could access the running production system by going straight into the REPL to see what is going on
+      %li
+        AMQP
+        %ul
+          %li JPMorgan tried to make AMQP an open standard for financial messaging
+          %li RabbitMQ is an implementation of AMQP
+      %li Automated Provisioning allowed them to get a full stack up and running in about 3 hours after a fatal server outage
+      %li sloccount - a line of code counter
+      %li Using sloccount they showed that using pair programming they were 45% more efficient than working alone
+      %li Pair programming is a big hit to your ego.
+      %li Every mistake you make, someone can see what you are doing.
+      %li When you don't know what you are doing, the person you are with knows.
+      %li Hiring is really hard: you HAVE to fit in with the other people on your team, because you WILL be working together.
+      %li They were pairing 80-90% of the day
+      %li The agile process makes it really hard to plan long term, since iterations are very short (many managers are nervous about this)
+      %li Clojure is very new, Functional Programming is not mainstream, so finding experienced resources is pretty rare
+      %li They would actually get into the flow as a pair.
+
+%p The morale of the story is that you can do things to make you and your team more productive if you all have the will to do it.

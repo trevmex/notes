@@ -1,0 +1,93 @@
+/ Refactotum
+%h3 #railsconf 2011 Notes
+%i Relevance, http://thinkrelevance.com/, @thinkrelevance
+%p Open Source is an absolute force of moral good in the universe.
+%p Sharing ideas is a fantastic way to be a part of the community.
+%p Relevance has an Open Source Friday every week. Every Friday, they work on open source exclusively.
+%p Today, we will be working on some open source projects. We will actually commit some code. W00t!
+%ul
+  %li
+    %h3 Git for Refactotum
+    %i Rob Sanheim
+    %p Back when SVN was king, it was hard to get a server up and running. For small projects it was often not worth it.
+    %p Git and GitHub changed the game. It allowed you to work locally and source control your work.
+    %p Relevance switched to git from svn, but it was painful, although once they switched every developer loved it.
+    %p Git is a very deep tool, you don't have to know a lot to get your work done, but you can dive pretty deep into it.
+    %p Git is powerful, fast, and convenient.
+    %p Branches are very cheap and fast to merge. This is much better than svn or cvs.
+    %b How do you convert to git?
+    %p Use git-svn to use git with your svn repos.
+    %p You should work in small bits. Commit often.
+    %p When in doubt, branch. Branches are cheap, you should create branches whenever you want to do any work.
+    %p Commit a lot. Each change you make should be a new commit. Make fine-grained commits.
+    %b There should not be any ANDs in your commit messages.
+    %p Always be pushing to a remote branch. Pushing your branch remotely helps others work on your stuff as well.
+    %p Always work on the smallest amount possible and push out often.
+  %li
+    %h3 Open Source Workflow
+    %i Jared Pace
+    %p Why use Github?
+    %b Everyone is on it.
+    %ol
+      %li
+        Pick It
+        %p Check out Explore GitHub to see treading repos.
+        %p Featured repos and the podcast are also good ways to pick a project.
+        %p Check out Github issue tracker on projects you are interested in to find problems that have not been worked on yet.
+      %li
+        Pull It
+        %p You want to fork the repo to your own username.
+        %p You then want to clone the git repo, and add an upstream remote of the original.
+        %p Make a branch.
+      %li
+        Code It
+        %p Check out the readme for contributing.
+        %p Optimize for readability.
+        %p Follow the code conventions of the app. Always fall back to their way of coding.
+        %p Write tests for the code you contribute. Authors ignore code fixes without tests.
+        %p Make sure your feature branches are really just ONE feature!
+      %li
+        Push It
+        %p First pull the latest from the source.
+        %p You want to push your branch.
+        %p Write a comment on the pull request. Make it descriptive.
+      %li
+        ???
+        %p You just have to wait for the author to pull your code in. Sometimes it doesn't happen, that is OK.
+      %li
+        Profit
+        %p Open source doesn't work without you and me working on projects. Do it!
+  %li
+    %h3 Metrics... Get Some!
+    %i Aaron Bedra
+    %p Why do you measure quality of your code?
+    %p Test coverage, finding code smells, finding code you forgot you wrote, measuring complexity.
+    %p RUN METRICS ALL THE TIME!
+    %p What to measure:
+    %ul
+      %li
+        Code Coverage
+        %p rcov (1.8.x) is the coverage tool for Ruby 1.8
+        %p simple cov (1.9.x) is the coverage tool for Ruby 1.9 (it is much easier to use)
+        %p rcov only c0 code coverage. c0 only tests if a line of code was covered.
+        %p c0 code coverage is not accurate if you have more than one function on a line.
+        %p a good way to start contributing is to write tests. Find holes in test coverage and fill them.
+      %li
+        Code Complexity
+        %p check out flog for complexity.
+        %p flog tells you how much your code is doing. It adds up points in your code, and reports how complex your code it.
+        %p flog is about locating code complexity.
+        %p Try changing your case statements to hashes.
+        %p Try to think of the real content of your code when reducing complexity.
+      %li
+        Code Volume (Shape)
+        %p Check out rake stats
+        %p rake stats shows you how big your controllers, helpers, etc. are.
+        %p Look at how big methods are. Look at some samples in your project before diving in.
+      %li
+        Code Churn
+        %p Check out churn
+        %p churn allows you to see how often files in your code have changed.
+        %p It is much easier to get a patch accepted quickly, use churn to find the hot spots in a project, and work there!
+    %p Getting context in a project is hard. You can use these tools to find areas in the project to see where you can best contribute.
+%p Thank you to all the guys for the presentations!

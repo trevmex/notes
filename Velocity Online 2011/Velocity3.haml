@@ -1,0 +1,22 @@
+%h2 Velocity Online - Introducing Next-gen YSlow
+%b http://en.oreilly.com/velocity-mar2011/public/schedule/detail/18635
+%i Betty Tso, Yahoo! and Marcel Duran, Yahoo!
+%p (Abstract) In addition to existing Firefox/Firebug add-on, YSlow will be available for many browsers – Chrome, IE, Safari, Opera, as well as Mobile browsers and command-line. Please come join us to explore behind-the-scene techniques used to make this “universal” performance measurement tool possible, also find out how you can get involved in next-gen YSlow. There will be a quick sneak peak of upcoming features!
+%p Betty is the manager of the Y! Property Performance team. They work on the YSlow product.
+%p Marcel is the tech lead for the YSlow. YSlow is a web performance analysis tool for Firefox.
+%p YSlow was tightly coupled to Firefxo, so they had to totally rewrite it to make it work cross-browsed. So they decided to go with a MVC model to devorce the heavy lifting from Firefox.
+%p Last week, Y! announced YSlow for Chrome, but the Firefox version is still a bit more accurate, since Firefox plugins can span across domains, where Chrome cannot.
+%p Another downside with the Chrome version is that there is no connection to the Chrome network panel, like we have with Firefox.
+%p So the Chrome version is awesome, but the Firefox version is STILL more accurate, so looks like you can't junk Firefox just yet. :(
+%h3 What about mobile?
+%p Just now, Y! is announcing that there is a new YSlow bookmarklet that will allow you to run YSlow on ANY mobile browser!!!
+%p It is a bookmarklet that is injected using YUI without modifying the web page itself.
+%p But AJAX cannot go cross-domain, so how can the bookmarklet actually work?
+%p The solution is to use YSL, it is an open table that simulates the web browser on the server to get all the HTTP headers for YSlow to work.
+%p The bookmarklet will load an iFrame to the page that will load the YSlow stats onto the iFrame for testing speed information. Marcel will write up more information at a later date.
+%p The bookmarklet looks just like the desktop version of YSlow, but they are working on a mobile version on the YSlow views.
+%p They will be open sourcing YSlow soon on GitHub!
+%p Soon YSlow will be able to be translated in multiople languages!
+%p One of the big things coming is the idea of exporting the tests and integrating them in your Continuous Integration solutions, like Hudson.
+%p There will also be versions available as standalone JavaScript and a command line interface through node.js.
+%p Thank you to Betty and Marcel for the talk!

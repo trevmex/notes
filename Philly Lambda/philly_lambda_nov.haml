@@ -1,0 +1,77 @@
+%h2 Large Data and Clojure
+%h3 The Middle Ground Between RAM and EC2
+%i Kyle Burton
+%p Working with data sets that are too large fit on a single box without getting into distributed computing is what this is all about.
+%p The example today is getting a sample set from a large set.
+%p Using GNU Tools you can do sorting from the command line.
+%pre
+  sort -r in.tab &gt; out.tab
+  head -n 20000
+%p BUT, it sucks up a lot of space, if you do this. And it takes a really long time with large files.
+%p Taking a random sample for a large population, you can just flip a coin, but that isn't always ideal.
+%p Another way is to use streaming sampling, which will allow you to always hit your sample set size. Kyle has written a Clojure library to do just this.
+%pre
+  (sequence/random-sample-seq
+  (ds/read-lines "phone-book.tab" 10000 500))
+%p Using the library, getting the sample set was much faster than using SQL or the GNU tools.
+%p Databases are not designed to do this stuff well, so Clojure can help us parse this data in a more effective manner.
+%p A big issue can be parsing log files, which is a hard thing to deal with in a timely manner.
+%p Another big issue is importing and exporting large datasets throughout data centers, which is also very time consuming.
+%p The sequencing algorithm is a O(n) algorithm that will ensure you will get a sample set which will be unique.
+%p The disadvantage is that you cannot run this program in parallel, it only works if the dataset is not split up.
+%h3 What other issues do we have?
+%p When dealing with other people's data, you can get stuck with default info like...:
+%ul
+  %li "NULL"/"N/A"
+  %li (000) 000-0000
+  %li nobody@nobody.com
+  %li 123 Main St.
+  %li John Q. Public
+%p How do you find the needles in theses haystacks.
+%pre
+  (defn find-dupes-native [inp-seq]
+  (reduce (fn [res item]
+  (assoc res
+  item
+  (inc (get res item 0))))))
+%p This works...BUT you have to load your entire dataset in memory, which just doesn't work.
+%p how about GNU tools?
+%pre
+  cut -f2 |\
+  sort |\
+  uniq -c |\
+  grep -v '  | ' |\
+  sort -nr &gt; counts.txt
+%p BUT, you have to read your entire dataset three times to get this to work. Again, very expensive (although less so than writing to disk for each operation)
+%p WTF, there HAS to be a more awesome way to do it...
+%h3 Bloom Filter
+%p Bloom filters are designed to be put in front of a large document stores to see if they should go to disk to find a document.
+%p A bloom filter is a set that can be used to match data.
+%p The bloom filter is a fixed size, it uses a bit array to store the set data. The downsize of this, is that you can get false positives in your results.
+%p The bloom filter is a probabilistic set, so you run a hash and get a result. The advantage is no false negatives.
+%p The optimal size of your bit array depends on your dataset size and your false positive rate.
+%p The advantage of using the bloom filter is that you use a LOT less memory, but you will have singletons if you are trying to find duplicates.
+%p The hashing function you use in a bloom function should have evenly distributed probabilities, otherwise, your false positive rate will be increased.
+%p Kyle has a Clojure library that uses the bloom filter for finding dupes.
+%h3 Summary Counts
+%p How do you find counts of like data, e.g. a state count in a set of users (NY 100, PA 55, etc.)
+%p This makes a LOT of sense for a map/reduce function.
+%p You could split up the large set and map/reduce, BUT that is still expensive, since you have to cut up the file, which takes up IO.
+%p BUT Java and Clojure has a way to randomly open a file without splitting it to do the same thing:
+%pre
+  (reduce
+  (fn [res counts]
+  (merge-with + res counts))
+  (pmap (fn [[start end]]
+  (count-area-codes
+  (io/read-lines-from-file-segment
+  inp-file start end)))
+  (partition 2 1
+  (io/byte-partitions-at-line-boundaries
+  inp-file
+  (* 1024 1024)))))
+%b "pmap" in Clojure is the same as "map" but it will utilize all the cores of your machine and run in parallel, thus speeding up your mapping function.
+%p WideFinder by Tim Bray (http://tbray.org) is a tool for parsing files in parallel that is similar to this.
+%h3 Clojure Wins
+%p You can do ALL these things in any language out there, but Clojure makes your life a bit easier here.
+%p Thanks to Kyle for a great presentation!

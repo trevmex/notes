@@ -1,0 +1,56 @@
+/ StandardsNext Unconference
+%h3 #standardsnext Unconference Notes
+%h3 Unsexy CSS3: Getting Work Done Faster
+%i Tim McElwee, @beardchamp
+%p New and useful options that aren't discussed as often as their flashier brethren.
+%p These things make you get your work done faster.
+%b Box Sizing
+%p box-sizing: border-box; + fluid layout is super awesome!
+%b Flex Box
+%p Flex Box is great. It is a cool way to do tabs. It is a way of doing floats without doing floats.
+%p Flex Boxes give you equal height columns for free, you also get to add more boxes for free and you don't have to change a bunch of CSS.
+%b Multiple Backgrounds
+%p You can have CSS backgrounds that are one or more background images. That is crazy useful!
+%p Not all browsers support multiple browsers, but you can use them in most of the modern browsers.
+%p Check out http://www.caniuse.com/ Awesome sauce!
+%b Nth-Child &amp; Nth-of-type Selectors
+%p div p:nth-child(2) will effect every other child.
+%p Most of the time when you use nth-child, you WANT to us the nth-of-type:
+%p div p:nth-of-type(2) - does the nth child of one type.
+%b Attribute Selectors
+%p button[disabled] - select the unselected buttons, etc. These are really useful CSS2.1 features.
+%b Direct Child Selectors
+%p #contentEditor &gt; fieldset &gt; legend - Will select the direct children. Very awesome!
+%p Let's all fight &lt;div&gt;itis!
+%p DO NOT USE THE TERM "Div-based Design." Please!
+%h3 HTML 5 Geolocation
+%i Andy Pemberton
+%p Wait, I mean W3C Geolocation. :D
+%pre
+  %code.javascript
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options); // hawtness!
+%p Go out and read the spec. It is super cool!
+%p Geolocation is a JavaScript API that gives you a lat. and long. for where you are right now.
+%p A website that is your GPS, that is pretty cool!
+%p http://www.andypemberton.com/geo
+%p Sometimes your IP address doesn't matter for geolocation. It is a fallback (depends on how the browser implements it.)
+%p The "Old Way" to do geolocation is IP range checking.
+%p Geolocation is baked into the browser.
+%p As far back as IE7, this stuff has been around. Creepy (and cool)!
+%p I want to opt IN and out and have it not be persistent. And the web standard is enforcing that. That is a good thing.
+%p LULZ: http://owlsnearyou.com/
+%h3 User Privacy Concerns
+%i Ying Pan
+%p Airports allow users to opt out sending user's location to their central server.
+%p How much tolerance do you see users have on privacy issues?
+%p Should there be standards on what should be sent to servers and what can be stored on user's computers?
+%p These are big issues right now and there are a lot of opinions.
+%p The tolerances for privacy issues are all over the map right now. Privacy is a personal issue, and everyone is different.
+%p If there ARE standards and regulations on this, where do they come from? Governments, extra-governmental organizations, standardizations?
+%p Good questions.
+%p There are a lot of unethical people out there, we have to be the good guys and make privacy a real issue.
+%p One of the things that is really creepy is that a lot of web apps assume what you want. And a lot of us will blindly follow.
+%p There is an amount of information available in public records that go FAR DEEPER than anything we have seen in the websphere.
+%p Cross site tracking, sites sharing your information with other sites, are very interesting.
+%p To advertisers, you are not a person, you are an experience segment. (Weird!)
+%p Thanks to ALL the great speakers for the unconference! You guys (and gals) make all the difference!

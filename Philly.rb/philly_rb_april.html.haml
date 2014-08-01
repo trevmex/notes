@@ -1,0 +1,206 @@
+%h1 Philly.rb April Meeting
+
+%p
+  Watir -Ruby Functional testing in Firefox
+
+%p
+  Angel presented a 15-minute intro to Ruby session
+  %br/
+  http://robozzle.com -good interview puzzle tests (?)
+
+%h1 I Don't Trust Your Code (And How We Can Fix That :) )
+%i John Trupiano
+
+%ul
+  %li Working with other people's RubyGem libraries can be frustrating
+  %li
+    We will learn about the right ways of writing gems:
+    %ul
+      %li Proper gem structure
+      %li Release management
+  %li
+    RubyGems != Ruby
+    %ul
+      %li RubyGems is a library on top of Ruby
+  %li
+    ruby/lib/site_ruby/1.8 is where Ruby extensions is loaded
+    %ul
+      %li rubygems.rb
+      %li ubygems.rb: so you can type: irb -rubygems.rb, instead of irb -r rubygems.rb
+  %li rubygems.rb overrides the require method
+  %li Gems are sorted by name, then version
+  %li
+    once a gem is found, gem. activate loads the gem into the load path
+    %ul
+      %li pp $: will print the load path
+  %li
+    Anatomy of a RubyGem
+    %ul
+      %li bin/
+      %li
+        lib/ &lt;-- code goes here
+        %ul
+          %li gemname/
+          %li gemname.rb &lt;-- make sure this is EXACTLY the same as the gem, there should be no other .rb files here.
+      %li test/
+      %li gemname.gemspec &lt;-- This is just Ruby
+  %li
+    Lots of RubyGem workflows: Jeweler, Hoe, etc.
+    %ul
+      %li They are mostly the same, just pick one
+  %li
+    House everything under a single module
+    %ul
+      %li e.g. gemname &lt;==&gt; GemName
+      %li You do not want your classes to leak out into the global namespace
+      %li (check out John's new_constants method
+  %li
+    Leave the load path alone
+    %ul
+      %li RubyGems manages the load path, you should not mess with it
+  %li
+    Minimize Dependencies!
+    %ul
+      %li try to do it yourself if you can.
+      %li or, try to choose your dependencies wisely (e.g. why do you need all of ActiveSupport?)
+  %li
+    Pessimistic Dependencies
+    %ul
+      %li ~> this breaks IF you make backwards breaking code
+  %li
+    Development Dependencies
+    %ul
+      %li Your users do not need Jeweler or Hoe (which you use for RubyGem workflow)
+      %li Use a Gemfile, instead of adding Development Dependencies
+  %li
+    Plan your Public API
+    %ul
+      %li Document, Document, Document!
+      %li RDoc and YARD are your friends
+      %li use #:nodoc: to hide private APIs
+      %li protected/private is just a matter of preference in Ruby
+  %li (check out timecop for time-based testing)
+  %li
+    Show examples in your README
+    %ul
+      %li Write TESTS for your examples!
+  %li
+    Gem::Specification#post_install_message
+    %ul
+      %li Shows a message after a gem is installed see rvm for an example)
+  %li
+    Versioning
+    %ul
+      %li 1.2.3.4.5.6.7.8 is a valid Version
+      %li 1.2 == 1.2.0.0.0.0.0
+      %li An alphanumeric sort with numbers lower than letters
+      %li
+        a good way:
+        %ul
+          %li 1.2.3.a: major.minor.patch.build
+          %li
+            1.0 means stable
+            %ul
+              %li 1.0 is a commitment to NOT breaking the API
+          %li
+            Patch version bumps
+            %ul
+              %li introduce deprecation warnings
+              %li introduce new functionality
+              %li fix bugs, add docs
+          %li
+            Minor version bumps
+            %ul
+              %li break planned and backwards compatibility
+              %li eliminate deprecation warnings
+          %li
+            Major version bump
+            %ul
+              %li Breaking backwards-compatibility
+              %li introduce functionality
+          %li
+            Prereleases
+            %ul
+              %li update a build letter, not official
+              %li introducing a new feature you are not sure about
+              %li big rewrite that you are not sure will work on all platforms
+      %li
+        Release Principles
+        %ul
+          %li Never, ever release different code with the same version number!!!
+          %li Yank your botched release: gem yank your_gem -v 1.0.0
+          %li Fix the version number
+          %li push the gem back up
+      %li Adhere to a consistent versioning policy.
+      %li
+        Keep a changelog
+        %ul
+          %li If someone doesn't have a changelog, how serious can they be?
+          %li as easy as adding your git commit logs
+          %li (check out the RSpec Changelog talk)
+      %li Immediately bump the version post-release (1.0.1 --> 1.0.2.a)
+  %li
+    Community Involvement
+    %ul
+      %li Make it easy for people to contribute
+      %li use github
+      %li provide a Gemfile
+      %li provide tests
+  %li (check out showoff for doing presentations, uses MarkDown for coding)
+  %li http://i-dont-trust-your-code.heroku.com - the talk
+  %li rate this talk at http://speakerrate.com/talks/3015-i-dont-trust-your-code
+
+%hr/
+
+%h1 TelVue are the sponsors for this week (telvue.com)
+
+%ul
+  %li they make off the shelf linux boxes with Rails front-ends
+  %li 1 C guy, 2 Ruby geeks, 1 QA guy
+  %li They are looking for a Rails nerd
+  %li 24 employees all together
+  %li Based in Mt. Laurel, NJ
+
+%hr/
+
+%h1 Chef
+%i Trotter Cashion
+
+%ul
+  %li See the Philly ETE Talk for more details...
+  %li Moral of the story: AUTOMATE EVERYTHING!
+  %li
+    The Chef DSL is pure Ruby (like Rails)
+    %ul
+      %li So you can extend the DSL with pure Ruby
+  %li Chef is mostly idempotent: Will only do thing one time
+  %li No more need for runbooks
+  %li
+    devs give sys admins code that "works on my machine"
+    %ul
+      %li but if you hand off chef cookbooks as well as your code, your sys admin will be happier
+  %li Start out with Chef-Solo
+  %li (check out Trotter's spatula gem!)
+  %li (try forking spatula to work with Mac OS X)
+  %li Chef uses port, it would be awesome if we could get it to use homebrew...
+  %li
+    Chef Resources to learn up on:
+    %ul
+      %li Template: makes templates
+      %li Directory: makes directories
+      %li RemoteFile: pushed files to your server
+      %li
+        Deploy: deploys your rails app
+        %ul
+          %li The Deploy Resource can replace Capistrano (might have to try this...)
+    %li
+      Other provisioning systems:
+      %ul
+        %li Mozilla uses Puppet
+        %li
+          Chef for just getting stuff done
+          %ul
+            %li Chef is a fork of puppet
+        %li Puppet for when you want to control your environment
+        %li cfengine is less used today
+  %li To test, spin up a VMWare image on your Mac and run it there.

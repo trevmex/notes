@@ -1,0 +1,65 @@
+%h2 Are You Satisfied with Your Tests?
+%i Jim Weirich
+%p Refactoring by Martin Fowler and Extreme Programming Explained by Kent Beck changed Jim's life.
+%p TDD changes EVERYTHING!
+%p TDD gives you confidence in your code. You now know that your code does what you want it to do.
+%p It also allows you to change the way your code works while allowing you to make sure you do not break how it works.
+%p Your tests test the OUTPUT of your code, NOT how the code is implemented.
+%p We are moving to an environment where testing is the norm, not the exception. We should all feel guilty.
+%b Slow tests depress coders.
+%p Your unit tests should take less than 10 seconds. When your unit tests run in over 30 seconds Jeff Nielsen found that coders will test dramatically less.
+%p So get your tests under ten seconds.
+%p Checkin tests should take less than ten minutes. Ten minutes are about the amount of time a coder will wait at the end of the day before leaving.
+%b Blase Attitude towards Failing Tests.
+%p Lots of people just don't care if they have failing tests.
+%p Why is the lord's name would you check in FAILING CODE!
+%p If you keep your tests green all the time, you are golden.
+%p What do you do when there is a framework upgrade? Make a new branch.
+%p Failing tests make developers ANGRY!
+%b Over Mocking
+%p Do not use a lot of mocking in your tests. Use them when:
+%ul
+  %li Using an external protocol (e.g. mocking authorization).
+  %li Verifying a protocol.
+%p If you are doing a lot of unit tests, decouple yourself from the Database, it will be a lot faster.
+%p Do not mock out the code you are testing!
+%p Don't create mocks that return other mocks.
+%p Don't create fantasy tests. Fantasy tests:
+%ul
+  %li Pass when the code is wrong.
+  %li Fail when the code is right.
+%p That is easy to happen when you mock out your objects TOO much.
+%p If your object model build is complex, do not hide that with a mock.
+%b Complex Object Builds
+%p One of the ways to deal with complex object builds is to use factories (e.g. using FactoryGirl).
+%p Factories allow you to create object mocks quickly, but actually there is a problem with factories tied to big objects and factories. It is slow.
+%p But it is even FASTER to create raw new objects.
+%p TODO: Write a factory builder that creates faster in-memory complex objects.
+%b Gratuitous Use of the Database
+%p I like to treat my objects as objects and only write out to the database explicitly.
+%p If you are not testing the database, or that you save to the database, then use in-memory objects.
+%p Aviod the DB if you possibly can.
+%b Custom Assertions
+%p Create assertions (or exceptions) that work on a higher level. It makes your tests more readable.
+%p Custom assertions are your friend.
+%p TESTS ARE CODE! Treat your test code base just as you would your real code base!
+%b Over Meta in your Tests
+%p Don't code against the future.
+%p Readability is better than writing your tests using metaprogramming.
+%p Metaprogramming might lose your stack trace. So user be warned.
+%b Testing Private Methods
+%p Avoid pathological coupling!
+%p Don't bypass privacy controls.
+%p It is a code smell to feel that you need to test private methods.
+%p Instead of testing a private method, think about splitting the private code out to another class that IS testable.
+%b Incorrect use of Describe/Context
+%p Even though describe and context are programatically identical, contexts are used to describe the context of a text.
+%p Use describe with things, use context with situations.
+%p Make your tests readable!
+%b Refactoring Tests
+%p Tests are CODE. Refactor them as such.
+%p Check out the rspac-given gem, it makes your rspec tests look like cucumber.
+%p Writing tests are SO IMPORTANT, that we should be very clear when writing them.
+%p What behaviors are most important when using your software.
+%p Test are specs. Test the why, not the how.
+%p Thanks to Jim for a great talk!

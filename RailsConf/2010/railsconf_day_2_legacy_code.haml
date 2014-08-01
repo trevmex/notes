@@ -1,0 +1,25 @@
+%h2 Working with Legacy Rails Code
+%p Michael C. Feathers wrote "Working Effectively with Legacy Code"
+%p Do you think you write good code?
+%ul
+  %li How do you know that you know you write good code?
+  %li Functions that are short are pretty.
+  %li Good code should read like English.
+%p Expert vs. Novice Code
+%ul
+  %li Good design is good because it maps to the way our brains work.
+  %li We are all novices when working with code.
+  %li Even good programmers can start to introduce cruft into their code. Once you get comfortable in your code, you start to get messy, and there is a tipping point where you have to step back and refactor to make it make more sense.
+  %li A lot of code becomes a big ball of mud. (Read the white paper on the big ball of mud design pattern)
+  %li We mess up, but we still try to write clean code: because the alternate is horrible.
+  %li Our code entropies, we fight against it, even as we make it worse.
+  %li Just write tests for the things you want to change.
+  %li There are areas of code that matter more than other areas of code.
+  %li Use your commit history! Take the areas that have the most change and work to improve those areas.
+%h3 Three Experiments
+%ol
+  %li Find the most executed paths and hammer them (make them very clean).
+  %li Play Open/Closed Whack-A-Mole. (I have to look into Bertrand Meyer's Open/Closed principle).
+  %li Run Dojo Experiments: Take the same piece of code and have 30 devs add a piece of code to it. Watch to see how those devs make the change to that code and compare. Repeat. This way we can learn how we react to a piece of code.
+  %li Research your Repository! You can learn from what has already happened!
+%p There is a new empiricism out there about learning about how we write code, and how the development process works.

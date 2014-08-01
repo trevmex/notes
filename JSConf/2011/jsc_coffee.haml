@@ -1,0 +1,80 @@
+/ JS.next and You
+%h3 #jsconf Notes
+%i Jeremy Ashkenas and Brendan Eich
+%b JavaScript Wants You!
+%p JavaScript, the language is starting to become unfrozen.
+%p ECMAScript Harmony (and beyond) (http://wiki.ecmascript.org/doku.php)
+%p "No fate but what we make it." - Sarah Conner, T2
+%p You have power to help invent the future!
+%p CoffeeScript, and all the other languages targeting JS are changing the landscape.
+%p Compile ES.next -&gt; JS of today with Harmony.
+%p The goals of Harmony are to be able to write complex application, write complex libraries, and awesome code generators.
+%p We need better tests, if not executable tests in specs.
+%p We want to adopt de facto standards.
+%p Keep versioning simple!
+%p Security matters.
+%p Things in ES.next
+%ul
+  %li let, const, function in block scope.
+  %li destructuring: let {x, y} = pt; let [s, v, o] = triple()
+  %li parameter default values: function (x, y=0, z=1) {...}
+  %li rest, spread
+  %li proxiers, weak maps
+  %li modules
+  %li iterators, generators: function* gen() { yield 1; yeild 2; }
+  %li comprehensions
+  %li Binary data as typed arrays. There will be typing in JavaScript: ArrayType, StructType.
+%p Hot, but not yet in Harmony:
+%ul
+  %li Arrow function syntax, instead of lambda(f), or hash (#) (Want to save # for later)
+  %li Just like CoffeeScript: let identity = (x) -&gt; x
+  %li Expression body: const square = (x) -&gt; (x * x)
+  %li Statement body: let countUsed = str =&gt; { ... }
+  %li Fat arrow, too: callback = (msg) =&gt; (this.vmail.push(msg))
+  %li Binding forms: let f() -&gt; "writeable"
+%p People want classes for prototypical inheritance sugar. The way CoffeeScript does it is awesome.
+%p Coffee's @foo for this.foo is also some awesomeness.
+%p Paren-free syntax: if x &gt; y return x; while i &lt; n { a.push(i++); }
+%p More operators: ?? ??= div mod divmod is isnt
+%p We do not want to be creating things in committee, that is a nightmare.
+%b Word of the day: Transpiler
+%p A transcompiler is a special compiler the translates the source code of a programming language into the source code of another programming language, e.g. from Pascal to C.
+%p CoffeeScript does exactly this.
+%h3 CoffeeScript as a (hypothetical) JS.next
+%p A little language that compiles to JavaScript that shows the good stuff, and hides the bad stuff, and does the right thing.
+%p "It's just JavaScript"
+%p JavaScript has a very simple and clear object model.
+%p Flexible objects, first-class functions with closure scope. JavaScript just rocks!
+%p You can stretch and tweak JavaScript.
+%p There are a LOT of languages that compile into JavaScript.
+%b Let's not go there.
+%p Let's take a non-JS language and compile it to nice looking sensible language.
+%p CoffeeScript should compile into the same JavaScript that you would write anyway.
+%ul
+  %li Significant whitespace
+  %li Everything is an expression and be assigned to a value
+  %li Bound Functional Literals
+  %li Class Sugar for Prototypes
+  %li Loops are also Comprehensions, what is a loop is an expression
+  %li Destructuring assignment, like Harmony
+  %li An Existential Operator, is something null or undefined?
+  %li Splats (Variadic Parameters)
+  %li Default Parameters, like Ruby
+  %li Heredocs, Heregexes, Hercomments - ways to write blocks.
+  %li Automatic Lexical Scope, this makes shadowing forbidden!
+%p Much less wordy code:
+%pre
+  %code.javascript square = (x) -&gt; x * x
+%p This is a really good demo of CoffeeScript features. Cool language!
+%p B.Y.O.J. - Build Your Own JavaScript!
+%p Scratch your own itches with JS, you CAN make a difference!
+%p All good writing is rewriting.
+%p The CoffeeScript source code is all annotated. OMG that's awesome. So if you want to use CoffeeScript as a starting point for your own Transpiler, go for it!
+%p To write a compiler, you lex your text to make tokens, then the tokens are sent to the parser.
+%p It is OK to cheat. You are writing the language, you can define what you are parsing.
+%p There are a lot of libraries out there that can help you write your own JavaScript-compiled language. Check out Jison!
+%p Don't be afraid to design a language. You can give yourself a language that you want right now.
+%p We cannot afford to let the companies ad working groups define our language.
+%p JavaScript is the pulse of the web, and it is your to define. Mae that happen! WRITE A LANGUAGE!
+%p It looks like there are some opportunities to write a unit test suite for CoffeeScript.
+%p Thank you to Jeremy and Brendan for the AMAZING talk.

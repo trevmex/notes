@@ -1,0 +1,31 @@
+/ Double-Shipping Software for Profit
+%h3 #railsconf 2011 Notes
+%i Zach Holman, @holman, (GitHub)
+%p Github FI is a non-hosted system for putting Github into your enterprise.
+%p Double shipping is about shipping the same product to different markets. E.g: There are different pricing for different customers, like enterprise.
+%p Github:FI is a totally installable Github. That is awesome!
+%p Github:FI was launched about 1.5 years ago, but it is a HUGE mental switch for the team at Github.
+%p It takes a while to get a service industry into a product industry.
+%p FI is:
+%ul
+  %li on JRuby
+  %li Its own branch (a mistake!)
+  %li Has an installer (outsourced, changing soon)
+  %li Has special features: LDAP, bitches! (lots of enterprisey hawtness)
+  %li Is maintained by one developer (what!, but now there are more...)
+%p Our secrets are our secrets! Github doesn't want their code out there. Github:FI is all precompiled bytecode (boo hiss)
+%p Rubinius is really cool, check it out!
+%p Both JRuby and Rubinius allow you to precompile Ruby into byte code. Using MRI to make byte code is hacky at best.
+%p Large companies move slowly. You need salesmen to be able to sell your stuff to the enterprise. It is a different ballgame.
+%p When you go into the enterprise, you HAVE to have enterprise-level support.
+%p When you ship a product to a customer, fixing bugs take a LOT longer to fix than when you have a product that is on the cloud. A simple bug fix takes: more humans, more time, and more money. How do you support this? Make the enterprises pay for it!
+%b Differences suck!
+%p github.com has files on many different file servers, but Github FI only has one local filesystem. Much simpler, but you have to change how you interact with stuff.
+%p You should not handle your different cases in a bunch of conditionals. Abstract as high up as you can.
+%p FI uses strategy design patterns to have FI use all the power of the web version, but the methods underneath are different. That means that your API is exactly the same for each backend.
+%p You can use feature flipping to make your life easier. That way you can test gradually, and flip the switch all the way when you are ready.
+%b Mistakes in FI
+%p Having FI in a different branch that you never merge back is horrible.
+%p You need really good documentation when you send out a product to a customer.
+%p Versioning REALLY matters in shipped software. Check out semantic versioning for the right way of doing things.
+%p Thank you to Zach for the great talk!

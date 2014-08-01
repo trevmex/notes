@@ -1,0 +1,40 @@
+%h2 #Agile2014 - Implementing Continuous Delivery: Evolving your Architecture (Notes)
+%i Rachel Laycock
+%p Why do continuous delivery? - To get feedback from your customer, reduce the risk of releases and the get real project progress.
+%p Sometimes you can't have continuous delivery. When you have a huge and complex code base with a large amount of coders and testers.
+%p Conway's Law is THE LAW. You will always ship your org chart. If your org chart is large you can't deliver fast.
+%p You have to design your systems so that it is made of many small pieces that can be shipped independently, but work closely together.
+%p It turns out there is a lot to continuous delivery. It is about not only architecture, it is about organizational alignment, release management, QA, CI, config management.
+%b Architecture is stuff that is hard to change.
+%p Architecture has to deal with inescapable truths, like: networks are always unreliable.
+%p Software architects are like town planners. They have to think about the big systems, and let the tech leads and devs design the buildings.
+%p Be careful not to be an ivory tower architect (also known as an enterprise architect). Fortunately, most architects today work closely with devs. YAY!
+%p Conway's Law dictate who is "them" vs. "us" in your organization AND your code.
+%p Fred Brooks said that the design that occurs first is almost never the best solution.
+%p Your organization has to be flexible enough to allow you to redesign, because YOU WILL GET IT WRONG (and that is okay).
+%p The most common type of architecture: The Ball of Mud.
+%p Balls of mud lead to dependency hell, and architecture failures.
+%b Everybody gets tech debt. Just don't be reckless about it!
+%p We are all dealing with legacy code. If you can't do continuous delivery on GREENFEILD code, you are doing something wrong. It is legacy code that makes the problem difficult.
+%p The strangler pattern says that you should have a facade around your project, and slowly replace old modules with new modules one at a time. The trap there is that most folks stop halfway through, leaving you with a much worse system then you started with.
+%p The rub is that if you don't change the structures of your teams, you can never really restructure your architecture and have it stick.
+%b Keep things small!
+%p Micro-services: SOA done well. When you create small decoupled services, it is good for everybody!
+%p Your services should have smart modules and dumb pipes.
+%p Your services should have language-agnostic APIs: REST, AMQP, ...SOAP (lulz) Regardless all your services should agree on how to shake hands.
+%p The application shouldn't know how you communicate with other applications.
+%b The golden rule: Can you deploy without changing other parts of your system painlessly!
+%p When your services live independently, if one service fails it doesn't take down every other service... but you have to BUILD it that way!
+%p There is a trade-off to micro-services and SOA: your systems get VERY complex across services. That is not too easy.
+%p What helps here is standardization of communications and frameworks makes your systems easier to conceptualize.
+%b Evolve your architecture!
+%p When you design your architecture in the beginning of your project, the irony is that you don't know about your system at the beginning.
+%ol
+  %li Delay your decisions until the last responsible moment: Don't make all your decisions all at once, or all up front. Care about the priorities. Don't be an enterprise architect! One of the important things to think about are what your system shouldn't do.
+  %li Architect for evolvability. Use metrics on your code. Use tools like Sonar, New Relic and the like to see where you are going wrong.
+  %li Postel's Law: "Be conservative in what you send, be liberal in what you accept." (and validate the hell out of what you get)
+  %li Architect for testability. Don't put code in stupid spaces, like your database. Write test harnesses that act like real users.
+  %li Conway's Law. You can't fight it. You have to make sure your org chart looks like what you want to ship.
+%p To write a well-architected system, you really are developing well-architected people.
+%b Job satisfaction is the number one predictor of well-archtected systems.
+%p There is no easy way to do continuous delivery on legacy systems easily. But it is doable!

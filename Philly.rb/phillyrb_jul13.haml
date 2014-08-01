@@ -1,0 +1,43 @@
+%h2 Five Ruby Things
+%i Kevin Skoglund
+%ol
+  %li
+    %h3 Array#uniq
+    %p creates a new array with duplicate elements removed.
+    %h3 Array#uniq!
+    %p same as Array#uniq, BUT it will return nil IF no changes are made.
+    %p Both of these methods can also take a block to filter on new uniqiue array.
+  %li
+    %h3 Array#compact, Array#compact!
+    %p This is similiar to Array#uniq, but instead of removing duplicates, it removes nil items.
+    %p It is very useful with Array#map, and a second step after mapping an array.
+  %li
+    %h3 Array#flatten, Array#flatten!
+    %p If you have an array of arrays, this will remove the internal arrays and add their items in the flattened array.
+  %li
+    %h3 General Delimited Syntax
+    %p %w{ foo baz bar } # This is the same as an array of strings
+    %p This can be nice for cleaning up how your code works.
+    %p The character after %w can be anything except alphanumerics or spaces.
+  %li
+    %h3 Unary Ampersand
+    %p "Symbols to Procs to Blocks"
+    %p &amp;foo converts a Proc to a Block.
+    %p &amp;:bar converts a method name into a Proc for use in passing functions in other functions.
+%h2 Trolls of 2013
+%i Dan
+%p
+  Go check out
+  %a{:href => "http://confreaks.com/videos/2343-mwrc2013-trolls-of-2013"}Ryan Davis's MountainWest RubyConf 2013 talk, Trolls of 2013.
+%h2 Middleman
+%i Greg Sterndale
+%p
+  %a{:href => "http://middlemanapp.com/"}Middleman
+  is a static site generator. It comes with support for SASS and CoffeeScript right out of the box. When you want to make a simple site and Rails is overkill, Middleman is a nice way to go. Good for microsites and brochureware.
+%h2 Historical Details
+%i Nate Davis Olds
+%p
+  Go watch
+  %a{:href => "http://www.infoq.com/presentations/Datomic-Database-Value"}Database as a value by Rich Hickey.
+%p (I'd have more notes here, but this is a pretty heavy talk, have to pay close attention!)
+%p Thank you to all the speakers for the great talks!

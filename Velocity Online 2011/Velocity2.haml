@@ -1,0 +1,26 @@
+%h2 Velocity Online - Above the Fold Time: Measuring Web Page Performance Visually
+%b http://en.oreilly.com/velocity-mar2011/public/schedule/detail/18692
+%i Jake Brutlag, Google
+%p (Abstract) Above the fold time (AFT) measures web page performance by applying heuristics to a video or filmstrip view of a page loading. It focuses on what the user sees while at the same time producing consistent results across multiple runs and different browsers. This presentation will cover (1) the motivation for AFT, (2) overview the algorithm, and (3) how to collect AFT on webpagetest.org.
+%p Zoe Abrams and Pat Meenan have been the primary engineers on this project.
+%p The holy grail of web timing metrics is to get closer to what the user thinks is fast. To do this we want to increase the "Above the fold" time.
+%p The AFT is all about how fast the page "finishes rendering" That is to say, when has all the content on the page stop changing (gotten into a stable state).
+%p We often go by page load time (PLT), or DOM load time, but there are other things on a wb page that are still being loaded even after the DOM is loaded.
+%p PLT is not always on the mark, though. PLT can both overestimate and underestimate the ATF time. Where AFT is the time the page is actually completed loading. We need something better.
+%p The AFT is the time at when all of the visible items on the page have loaded.
+%p The PLT will wait until all (even non-visible) elements have loaded on the page. This can result in an overestimation of the PLT.
+%p The PLT will NOT wait for elements that are loaded through JavaScript (AJAX). This can result in an underestimation of the PLT.
+%p Browser events are not cross-browser. That means that the DOM OnLoad event (what the PLT goes off of), is not uniform. Another problem with PLT.
+%h3 Estimating AFT
+%p We separate the pixels between dynamic and static pixels.
+%p You must have an upper bound (some large number like 45 sec. for DSL) for the amount of time it will take the page to load.
+%p We will then classify a static pixel that changes less than 5 times after the upper bound.
+%p And a dynamic pixel is one that changes 5 or more times after the upper bound is hit.
+%p The number of 5 was picked through emperical data from the Alexa Top 200 pages.
+%p Check out http://www.webpagetest.org/ to learn your AFT data on your site using the AFT info in the Video tab under Advanced Settings.
+%p The results of the test for your pages will now have the Above the Fold time as well as a filmstrip view of your page and the AFT diagnostics screen.
+%p If you have very small changes (like a timer tick-down), you might want the AFT test to ignore that.
+%p AFT time analysis is very useful since it allows you to see something a bit closer to what users expect, BUT it is not the end-all-bee-all of performance testing. Your web page might need to measure other things as more important.
+%p Contribute to the conversation at http://www.webpagetest.org/forums/
+%p Web Page Test IS open source, so you can check out the AFT algorithm yourself to see exactly what it is doing behind the scene.
+%P Thanks to Jake for the great talk!

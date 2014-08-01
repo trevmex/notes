@@ -1,0 +1,123 @@
+%h2 Lightening Talks
+%h3 gfxCardStatus
+%i Keith
+%p Productivity tools for a Mac.
+%b gfxCardStatus
+%p What Apple is saying about their power consumption is not true.
+%p Your MacBook had two video cards, an Intel one and an Nvidia one.
+%p Your Nvidia card sucks a TON of power.
+%p gfxCardStatus lets you control which one of your video cards to use.
+%p Using the Intel card saves a LOT of battery power.
+%b JumpCut
+%p JumpCut is a multi-level clipboard that is in your toolbar. The hawtness!
+%h3 Formtastic
+%i Jim
+%p Better rails forms with Formtastic! It is a bunch of helpers for creating Rails forms.
+%p Why use it? It makes the forms easy to create AND accessible by default (coolness)
+%p it is SO easy!!!1!:
+%pre
+  %code.ruby
+    &lt;% semantic_form_for(@person) do |f| %&gt;
+    &lt;%= f.inputs %&gt;
+    &lt;%= f.buttons %&gt;
+    &lt;% end %&gt;
+%p Be wary, it is VERY opinionated code.
+%h3 Super Postgress Funtime
+%i Nic
+%p Rails can do interchangeable data sources, BUT Rails hides the cool features Postgres.
+%p Postgres has full text search for you! It is the hawtness. You don't need a stupid plugin for it. Postgres is so cool!
+%p Postgres can give you geospatial encoding for free in Postgres (Actually this is just PostGIS)
+%p There are compound indices that let you index on many fields at once.
+%p There are trees and hashses, XML validations, ISBN validations, etc.
+%p It can encrypt password fields FOR you!
+%p Wow. I had no idea... Why are we using MySQL again? (nono, I know there are some reasons)
+%h3 Crabgrass
+%i Andrew
+%p It is an open source social network platform based on Rails
+%p The interface gives you something a lot like a simple facebook. It lets you get a social network up pretty fast.
+%p Unfortunately, it is not very active, but it is quite mature and ready to use.
+%p You can use Rails plugins, but Crabgrass has a "tools" directory, that are Crabgrass specific plugins.
+%p There are also "mods" that you can use to override views and partials without modifying the core Rails app. This allows you to pull down the core updates and still have your site customizations be unmodified.
+%h3 Ralph Waldo Emerson is for Hackers
+%i Adam
+%p Emerson wrote a lot of stuff that resonates with us today.
+%p Listen to what is going on around you and record it. Write things down. It can help you. As soon as it is on paper, you can expand on it.
+%p Non-conformity as a goal and practice is valuable. Attaching yourself to a practice can make you less unique.
+%p Your mind is as only as big tomorrow as it is today. Say what you say today, but don't be afraid to change them tomorrow.
+%h3 Kickass Gem
+%i Avdi
+%p Kickass makes your life easier with style and buzzwords!
+%p (Avdi makes fun of gem designers and their self-promotion talks, comedy gold)
+%h3 Making Things
+%i Eliza
+%p A lot of devs that like to create new projects, start, but NEVER finish these great projects.
+%p The goal: Pick SOMETHING and finish it.
+%p Take 15-minutes a day and work on it, even if you think that it is boring. Gun through it, try it. You CAN do it, if you try.
+%h3 5 Gems and 5 Minutes
+%i Advi
+%p fattr: declare an instance variable, default value, and dynamic blocks. It defines getters, setters, and test methods for you. Sweet!
+%p main: A DSL for writing command-line ruby apps. Define a run method to tell the command what to do. It also creates a nice document for you.
+%p arrayfields: You want to treat an array like a hash. you can assign array positions to variable names
+%p orderedhash: Want your hash to be ordered (hashs aren't). Use this.
+%p shared: You want to have class and instance level methods included in your modules. This is a shorthand to do this.
+%h3 LISP in Ruby (I was drunk...)
+%i Nathan
+%p car and cdr in Ruby
+%pre
+  #code.ruby
+    require 'cadar'
+    
+    [1, 2, 3].first
+    [1, 2, 3].rest
+    [1, 2, 3].car
+    [1, 2, 3].cdr
+    [1, 2, 3].rest.first # => 2
+    [1, 2, 3].cadr # => 2, you can chain a's and d's
+%h3 Fibers in Ruby 1.9
+%i Nic
+%p A fiber s like a thread...but different. What the hell is it?
+%p The ruby thread scheduler is completely fair, which allows all threads the same amount of processing time. That means if one thread is dependent on another, it still has to wait for that thread to run.
+%p Fibers are more like a relay race. Your fiber passes control off to other fibers, instead of having a scheduler control which fiber will run.
+%p This CAN be dangerous, if your fiber does not give up control, you are stuck. 
+%h3 cucumber-farmer
+%i Matt
+%p There are things that are really hard to test for a computer, but really easy to test for a human.
+%p This allows a person to monitor your cucumber tests that you can have a tester interact with the tests to verify that a human-perceivable test has passed or not.
+%p It uses a simple popup dialog where the tester says if the test has passed and cucumber records the results.
+%h3 Managing your global gems
+%i Matt
+%p ree@global: using RVM you have a default global gemset
+%p Use bundle install --gemset ~/Gemset.global to allow you to have gems that are universal for all your rubies.
+%h3 Ruby Mendicant University (RMO)
+%i Ashish
+%p This is a great place to improve your Ruby skills. There is an entry exam to get into the university, and then you can help out and learn.
+%p There is a google group and IRC channel where you can learn more about RMO and get involved.
+%p Talk to @seacreature on Twitter for more information.
+%h3 Twitgres
+%i Snuggs and Andrew
+%p Cross-engine joins in Arel
+%p What if you want to join your set of people in a local DB with a set of people on Twitter
+%p cap_pi((P)bowtie(small_delta(T))) # WTF? This is relational algebra
+%p Basically, they created a way to join a twitter feed with a Postgres (or MySQL) database table.
+%p (Sorry guys, Arel looks cool, but it is a bit too greek for me to grok right now)
+%h3 What I learned about Rails 3 Engines
+%i Adam
+%p Rails 3 Engines are interesting. Here is how you do it.
+%p A Rails engine is like a plugin, but it is a whole Rails app.
+%p It is like a Rails app, but everything is namespaced in your lib directory, when you add it as an engine.
+%p That allows you to make portable chunks of rails code you can use in many Rails projects.
+%h3 RTF
+%i Camille
+%p How do you convenience you team to be more agile? Collect the right metrics.
+%p Running Tested Features (RTF) metrics are easy to collect.
+%ul
+  %li If your feature is running AND tested, it is a 1, otherwise 0.
+%p With Waterfall your graph is flat until the end.
+%p With agile, your graph grows.
+%p For a 1, it MUST be a real feature, it MUST have automated testing, and it MUST be running.
+%p Gaming the system by making smaller features, or writing simple tests are a GOOD thing. They improve your codebase inadvertently.
+%p Check out Ron Geoffrey, he invented this idea, and managers LOVE it!
+%h3 Ruby Nuby
+%i Mark
+%p Ruby Nuby is a google group that promotes Ruby awareness.
+%p They are in a contest with British Airways to help defer the cost of Ruby Nuby by flying n00bs around the world to go to Ruby Conferences.

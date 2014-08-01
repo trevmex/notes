@@ -1,0 +1,83 @@
+/ Lightening Talks
+%h3 #railsconf 2011 Notes
+%h3 Phil Nash from Mint
+%p Performance: what matters is getting HTML, CSS, and JavaScript to users on less than optional networks.
+%p To do this we have to minimize requests. Mint.com did this with asset hat.
+%p asset hat minifies and bundles JS/CSS, it has CDN support, supports YUI and jQuery, LabJS, and Rails 3.1
+%p Usinging asset hat they improved their speed on ALL the sites they loaded it on.
+%p To get started with it, all you have to do get started is:
+%ol
+  %li gem "asset_hat"
+  %li Add asset.yml
+  %li And change to use asset hat includes.
+%h3 We value pretty a LOT
+%p We Ruby developers value beautiful code a lot.
+%p Ruby has a lot of best practices, but it seems that we are talking about code that communicates in an immature way.
+%p Programming languages are still languages. We need to look at disciplines that study language.
+%p Knowing your audience matters when you write AND when you code. When you code you are writing for the computer, you are writing for you, you are writing for your team, and you are writing for your users. That is HARD!
+%p (Check out Docco for commenting your code, this is what CoffeeScript does)
+%p We are all craftsmen here, don't forget it.
+%h3 Ryan Bigg
+%p Ryan is know as Radar, he is famous online. :D And he is writing Rails 3 in Action.
+%p How can we help out n00bs? We have to help the new guys.
+%p Rails and n00bs. Have a RailsCamp! RailsCamp is a way to introduce Rails to n00bs.
+%p We can also lower the barrier of entry with documentation, github, etc.
+%p If you think that the Rails docs suck SUBMIT A PATCH!
+%p We need to make n00bs feel welcome. That really matters!
+%h3 "Vendor Everything" still applies
+%p You should check in you .rvmrc file. It tells your users which ruby to switch to.
+%p RVM Gemsets are overated (shock!), there is a better way:
+%p Let Bundler follow the --path: bundle install --path vendor
+%p We go back to vendoring everything. Save your gems in vendor/cache and bundle package.
+%p Interesting idea!
+%h3 Startups are ruining my life
+%p Aren't start-ups cool? NO! We lose lots of devs to stupid start ups!
+%p Over focusing on start-ups generate some bad attitudes.
+%p The point of a start-up is to get to profitability? That is really hard!
+%p Some of us want to have outside interests (besides writing code).
+%p A lot of the things that we do is not glam, but it is fun.
+%p People think that start-ups make you all rich, but they don't?
+%p You can be doing everything right, but people will still leave (Son of a...)
+%h3 Landlord
+%p Multitendency in ActiveRecord: multitendency is a way to let you scope your table queries if you have multiple scopes in one table system.
+%p Landlord allows you to set up scope from URLs. That's pretty cool.
+%p Check it out on github.
+%h3 Corey Haines
+%p Fast Rails Tests: LIVE CODING!
+%p In test-driven design, change the design, NOT the test.
+%p Your tests are slow because you are loading too much crap.
+%p Don't let your code use ActiveRecord finders, they violate encapsulation.
+%p When you do this your tests are less fragile. You do NOT have to load Rails.
+%p So Fast!
+%h3 ActiveAdmin
+%p The admin framework for Rails.
+%p As the complexity of your app goes up, the complexity of your administration goes up.
+%p CRUD isn't enough for all the things that your ops guys really want.
+%p Administration should be fast to work on, the UX should be really key to the admin site, and it has to be very extendible.
+%p To use it, you can just add the gem to your app, and you have a /admin panel for yourself.
+%p This is like scaffolding on crack.
+%p It looks a lot like rails admin. :D
+%h3 @dabit
+%p Come to MagmaRail 2011! It is a Rails conference in Mexico!
+%p We ALL love conferences, and there were not many in Mexico.
+%p It is hard to organize a conference, but it was really fun!
+%p They are looking for speaker right now! So apply!
+%h3 Data Analysis with JRuby
+%p In a relational data model, we have SQL. SQL is good for detailed data queries.
+%p But SQL is complex for analysis.
+%p NoSQL is also pretty bad at analysis.
+%p So that is when OLAP technologies come in. The mondrian-olap gem allows you to hook into these data analysis tools.
+%p You write your queries in MDX, that looks like SQL, but it is a bit different.
+%p You can also use MDX in Ruby in an Arel-like format.
+%h3 Your face
+%p Jeff has a rant for us. It is about our face.
+%p Why does your github have your FACE on there? When you put your face on the internet, we can recognize you.
+%p @j3 will have a full light kit at BohConf, so he will take a nice picture of you.
+%h3 POW!
+%p POW! is a 0-configuration rails and rack server for Mac OS X.
+%p POW! allows you to spin up many rails on one desktop.
+%pre curl get.pow.cx | sh # do this to install
+%p POW! is written in CoffeeScript!
+%p OMG, that is EXACTLY what I need!
+%p This works really great with RVM, and all you have to do to add a server is to add a symlink to your .pow directory. That is it!
+%b Thank you to EVERYBODY for the great talks!

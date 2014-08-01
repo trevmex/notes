@@ -1,0 +1,20 @@
+%h2 Splitting your Monolith #rubydcamp
+%p Hypermedia as the application of state (HATEIOS?)
+%p Check out the restfully gem to add discover-ability to your APIs.
+%p Rawr is gem built on top of the restfully.
+%p The JSON Schema project is a standard for putting links into you JSON. One of your attributes is an array called 'links' that has all the attributes that an 'a' tag has in HTML.
+%p The xforms spec is an XML specification for declaring how to fill in forms.
+%p Check out http://www.getsomerest.com/ for more information on hypermedia.
+%p The concept behind hypermedia is to add the concept of linking to what your API returns.
+%p Check our REST in Practice for more details with hypermedia.
+%p One of the best reasons for splitting up your app to many smaller apps is to be able to scale up the higher traffic parts of the application independently.
+%p This sounds a lot like Service-oriented architecture, but WSDL/SOAP/RPC are too abstracted. All the attempts to make RPC simple turned into something too complex.
+%p How do you tell when you break something out?
+%ol
+  %li When the tests take too long
+  %li When your app starts to break the single responsibility principle.
+  %li When your app is doing two totally different things.
+  %li When different teams are stepping on each others toes when implementing features.
+%p Communication matters when you split up your app. When you split your app and have the parts communicate as services, you MUST have a clear understanding of how the pieces communicate with each other.
+%b Make sure your clients are implementing your APIs asynchronously!
+%p Thanks to everyone for the interesting discussion!

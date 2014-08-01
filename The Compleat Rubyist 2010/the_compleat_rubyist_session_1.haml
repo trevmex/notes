@@ -1,0 +1,148 @@
+%h2 Ruby and Demeter and Friends
+%i David A Black
+%p The law of demeter is a principle of OO programming that has some usefulness in dynamic languages
+%p The "friends" here are other principles we have heard in OO programming, that are confusing or misunderstood. This is a talk to clarify these things.
+%ul
+  %li
+    Type vs. class in Ruby
+    %ul
+      %li The word type and the word class are not synonyms in ruby
+      %li The whole notion of type in a dynamic language is a bit misunderstood.
+      %li We will write some Ruby code without classes an an exercise.
+  %li
+    The Law of Demeter
+    %ul
+      %li We will unlearn some of the myths about the law of demeter.
+      %li We want to make it "the very good suggestion of demeter"
+      %li We will examine some code with demeter violates in it, and learn how to repair it.
+%h3 Type
+%p type != class
+%pre
+  %code.ruby
+    puts 'a string'.type # => String
+    
+    z# in Ruby 1.0
+    'a string'.class # => this made an error
+    
+    z# not until Ruby 1.6, was there a 'class' method
+    puts 'a string'.class # => String
+    
+    z# now in Ruby 1.9.1, the type method is gone
+    puts 'a string'.type # => method missing error
+%p What is type in Ruby
+%ul
+  %li For any ruby object O, the type of O is the type that objects of the type that O is of are of. (brain meltdown)
+  %li Ruby objects of the same class, can behave differently.
+  %li Asking for an Object's class will not always tell you everything that the object can do.
+  %li An object's classes can have modular extensions on it that make it do more, so the object's class matters less than what the object can DO at runtime.
+  %li The class is what the object is born with, and as the object grows, more things can be added to it.
+  %li In ruby, type is more of a mental construct, than a semantic concept.
+  %li Sometimes there is a suggestion in the core team that says we should have static typing in Ruby... (like Java)
+  %li
+    But...you can use
+    %pre
+      %code.ruby
+        object.respond_to?(:blah)
+    to know what an object can do, if you must.
+  %li Jirah: is a strongly typed implementation of Ruby by the JRuby guy.
+  %li In practice, strict type checking in Ruby tends to just get in the way when programming Ruby.
+  %li
+    %pre
+      %code.ruby
+        class Person
+        def method_missing(m, *args)
+        m = m.to_s
+        if m == "name"
+        puts "My Name"
+        else
+        super
+        end
+        end
+        end
+        
+        david = Person.new
+        puts david.respond_to?(:name) # +> false, oh no!
+        david.name # => "My Name"
+        david.blah # => method missing error
+  %li respond_to? seems like a code smell. It would be better to try, catch and do something else. You might not need method_missing all that much in production code.
+%p Duck Typing
+%ul
+  %li If it walks like a duck and quacks like a duck, it is a duck.
+  %li a.k.a. If you can pass the right messages to an object, and it returns what you want from it, then that is the right object for you.
+  %li So, the case statement is a perfect example:
+  %li 
+    %pre
+      %code.ruby
+        class Person
+        attr_reader :name
+        def ===(other)
+        other.name == self.name
+        end
+        end
+        
+        david = Person.new
+        david.name = "David"
+        second = Person.new
+        second.name = "David"
+        third = Person.new
+        third.name = "Greg"
+        
+        case second
+        when third; puts "It's case equal to Greg"
+        when david; puts "It's case equal to David"
+        end # => "It's case equal to David"
+  %li This means that the case statement uses === under the hood.
+  %li === (threequal) is meant for corner cases where regular equality won't cut it.
+  %li
+    %pre
+      %code.ruby
+        String === "abc" # <= true
+
+        case "abc".class
+        when String; puts "yes"
+        end # => nil
+        
+        z# This is an example of overreaching, you actually want to say:
+        case "abc"
+        when String; puts "yes"
+        end # => "yes"
+  %li In Ruby, we don't usually "fail early" which implies more strict type setting. We know that there will be a failure of NoMethodError, if you pass a message to an object that doesn't know what to do with it. Then you can try, catch it.
+  %li The errors that can be raised on an object at the time of running sort of defines the type of an object at that time.
+  %li Errors are something that can give you meaningful information about an object.
+%p You can use OpenStruct to mock classes quickly. OpenStruct is the awesomeness. Use it. Abuse it.
+%h3 The Law of Demeter
+%p "The goal of the Law of Demeter is to organize and reduce dependencies between classes. Informally, one class depends on another class when it calls a function defined in the other class."
+%p The concept is that you should not reach over classes to get into methods in subclasses. This makes your classes too tightly coupled.
+%p One solution to this is method lifting. Instead of calling another classes methods directly, you can make an accessor method to access the subclasses methods.
+%p In all message expressions inside method M the receiver must be one of the following objects:
+%ul
+  %li an argument object of M, including objects in psuedovariables Self and Super
+  %li an immediate part of Self
+  %li an object that is either an object created by Self
+%p
+  Rule of thumb:
+  %b One way you can tell if your code is by counting the dots.
+%p but that sometimes that breaks down, for example:
+%pre
+  %code
+    12.add(2).multiple(4).subtract(3) # this is OK, because we are always manipulating self
+%p This on the other hand smells:
+%pre
+  %code.ruby
+    person.brother.wife.mother.sister.son
+    
+    z# which is a violation of Demeter, it is actually looks like:
+    def distance_relative(person)
+    b = preson.brother
+    bw = b.wife
+    bwm = bw.mother
+    bwms = bwm.sister
+    return bwms.son
+    end
+    z# yuck!
+%p David Bock on the Law of Demeter: http://www.ccs.neu.edu/research/demeter/demeter-method/LawOfDemeter/paper-boy/demeter.pdf
+%p Violations of the Law of Demeter makes mocks a lot harder to create in your tests. You will have to make mocks that return mocks that respond to the right messages. (This is really annoying, trust me, I know)
+%p If your TESTS are getting bulky, that your bulkiness needs to go in another place.
+%p When you fix your Demeter violations, you will be able to change pieces of code with less cascading side effects.
+%p It is almost always an anti-pattern if you use dup (or clone) in Ruby.
+%p Thank you to David, Greg, and Jeremy for a great first session!

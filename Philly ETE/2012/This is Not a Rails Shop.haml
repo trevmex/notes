@@ -1,0 +1,55 @@
+%h2 This is Not a Rails Shop
+%i Chad Fowler
+%p "You should be aiming for joy."
+%p Don't be a "Mort," someone who just does what the company wants you to do.
+%p There is always that ONE PERSON in the company that wants to change things. That person that wants to fight against the machine.
+%p At some point, you stop fighting and move to a place where everyone agrees with you.
+%p When you are that guy, you develop a mentality that you are always pushing to make things better and no one else gets it.
+%p We start to develop a "value rigidity" around the technology and process that you KNOW is GREAT!
+%p That value rigidity is there to combat the Morts of the world that are usualy wrong...
+%p But when you are so rigid, you start to develop a closed mentality. You start to become a Mort for your new (or current) technology.
+%p You don't want to be ridigedly stuck to any one technology, even Rails. Even the ones you are passionate about.
+%p Rails at its core is a MVC framework for websites. It is created with a limited mindset that you will do all your stuff in Ruby.
+%p For example, Rails is single threaded, and it was meant to be like that...
+%b Rails is not a batch processor.
+%p ...and it is SO not a message queing system, event processing system, or an analytics engine.
+%p It is not a perfect SOA framework. It is optimized for making MVC frameworks.
+%p The problem with thinking you are a "Rails Developer" is that you try to fit all you do within the mindset of one limited framework.
+%b Very few applications are just MVC web aplications.
+%p You are probably doing a LOT more with your web applications than just MVC.
+%p Your web app, even a typical Rails app is a lot more than Rails: HTML, JavaScript, SQL, ElasticSearch, Redis, Memcached, unicorn, nginx...Rails alone doesn't cut it.
+%b Don't use MVC where it doesn't make sense.
+%p A lot of people writing Rails apps for real write a lot of raw SQL. If you are not writing raw SQL, you might be a Rails Mort...
+%p Evented I/O (Node.js, Goliath/EM) is an example of something that Rails sucks at. There are many better Ruby solutions (Erlang, Clojure-based) that are just better.
+%p Caching with redis or memcahced (both written in C!) are much better than the Ruby offerings.
+%p We are not, and should not be, Rails programmers. Or Java programmers, or even Erlang programmers. We should be ENGINEERS. Engineers use the right tools for the right jobs.
+%p Twitter is a great example. They set out to create a message bus framework and started with Rails, but it eventually didn't fit the MVC model, so they pivoted.
+%b Don't be afriad to throw away your work!
+%p Almost all projects out there are all about decoupling, NOT coupling. Decoupled stacks are easier to change.
+%p For business software, most projects are dead within five years. Although Joel on Software says it takes about ten years to make good software.
+%b No one will remember your work when you die. (sad face)
+%p How do we create "legacy" code? That is code that will last, not code that is bad.
+%p Fear, statis, and difficult to change: That is how you create "legacy" code.
+%p But sometimes you keep things around because they work well: i.e. UNIX and the unix philosophy (do one thing and do it well).
+%p There is an overemphasis on test coverage in the Ruby community (but that is better than no testing at all).
+%p
+  %a{:href => "http://michaelfeathers.typepad.com/michael_feathers_blog/2007/03/your_code_its_a.html"}Your code is alive
+%p Code that is difficult to replace and adds value.
+%p Why can our complex crazy bodies work for as long as they can? Why do our software systems die so fast.
+%p Think about homeostatis: your body has a system that persists and handles the bad parts and makes them better.
+%b Why not thing of our software like a body? Our bodies are completely replaced every 7 years. Your software systems should be able to die off and be reborn as well.
+%p Kill and replace the cells of your software regularly. Not just refactoring, really destroy and rebuild. It makes your system stronger.
+%p The standard should NOT be a single language or framework. The standard should be use hetrogenous systems. Always.
+%p Make your interfaces simple. Make communication between components VERY clear.
+%p Rails is NOT a cure all. Nothing is, only by working together can your systems be robust.
+%b Downside: It is hard to hire ployglots.
+%p You he to train people to become ployglots. You have to hire the best and the brightest in the field, and make life better.
+%p There are AMAZING PHP programmers out there, you do not have to fit everyone into one way.
+%b Learn a different way of of thinking. Go out and learn a new proramming language. Once a year.
+%p That applies to TEAMS as well. Have your teams learn new technologies. It is quite powerful.
+%p Go read "Enterprise Integration Patterns" by Gregor Hohpe and Bobby Woolf, it is all about message queuing.
+%p Go play with some alternative data stores (memcached, redis, etc.) Go read "Seven Databases in Seven Weeks."
+%b LEARN HTTP REALLY REALLY WELL! We should all really understand how HTTP works, and so few of us understand it.
+%p Build an app in the browser. (Try with ClojureScript, just for fun!)
+%p Again, learn a new language!
+%p Thanks to Chad fo the great talk!

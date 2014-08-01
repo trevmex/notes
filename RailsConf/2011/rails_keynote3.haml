@@ -1,0 +1,91 @@
+/ Ruby Through the Ages (or, A Brief History of Ruby)
+%h3 #railsconf 2011 Notes
+%i Dr. Nic Williams
+%p We love Ruby. Ruby must win!
+%p We like Ruby because we care about people. Everyone that is not using Ruby is dying a little inside.
+%p The places I WANT to use Ruby, I can't (mobile).
+%p Hopefully MacRuby will hit 1.0 and we will have Ruby on iOS. Unfortunately it is private now.
+%p We want to be able to write iPhone apps in Ruby!
+%p We worry is that people will not choose Ruby over other languages.
+%P Feb 1993 Matz started Ruby, and by the end of 1993, we had Hello World.
+%p We started to build standard libraries to do lots of great things.
+%p But then there were the dark ages, ruby-dev was in Japanese, and ruby-talk was in English.
+%p Then the Pickaxe book came, and the first Ruby conference was in 2001.
+%p Finally RubyGems was born, and we were able to write a lot of standardized gems quickly.
+%p What about now, though? The singularity is coming!
+%p The fear is that people will pick other languages by default.
+%p Problems:
+%ul
+  %li We have no real threads
+  %li We have an old Garbage collector
+  %li It is slow...
+%p We need WORLD CLASS RUBIES!
+%p We have lots of rubies: Rubinius, JRuby, MRI 1.8, 1.9, etc.
+%p Is JRuby ready? YES! It has:
+%ul
+  %li real threads
+  %li multiple GCs
+  %li and you get JAVA!
+%p Is Rubinius ready? Soon...
+%ul
+  %li It is 1.8.7 complete.
+  %li It has a modern GC.
+%p Rubinius 2.0 will have real threads, a modern GC, 1.8, and 1.9 support.
+%p We need lots more people working on Rubinius and JRuby.
+%p Pick a winner: Rubinius or JRuby!
+%p Participate! Bust open Rubinius and add features. If you get a commit to Rubinius, you get a cool sticker.
+%p This is the future of Ruby, and we have to participate in it!
+
+/ Double Dream Hands: So Intense!
+%h3 #railsconf 2011 Notes
+%i Aaron Patterson
+%p Aaron enjoys working for a big corporation! (Me too, actually)
+%p What would Freddy Mercury do? (He would rock!)
+%p Aaron is the only person on the Ruby core team and the Rails Core team.
+%p New features in Rails 3.1
+%ul
+  %li API strategy: either don't change the API (make them faster), or extend them (make them backwards compatible)
+  %li There are a lot of new generators in Rails.
+  %li
+    Prepared Statement caching support is now in Rails 3.1
+    %p This allows us to execute query plans to the database. This reduces the DB calls from 4 to 4 calls for any one DB access call.
+    %p What is the impact:
+    %ul
+      %li In SQLite3 the performance bump was about 4k queries per second
+      %li Postgres had a bump of around 3k queries per second
+      %li
+        On MySQL the performance actually DEGRADED for simple queries, but it was a little better for complex statements.
+        %p Why? MySQL does NO query planning. And it is expensive (two network roundtrips)
+        %p The MySQL prepared statements work very differently than other DBs.
+    %p The great think is that the syntax in Rails is the same! You get prepared statements for free!
+  %li
+    ActiveRecord was very tightly coupled to YAML.
+    %p We can now serialize data to the record without YAML, you can use any type of storage.
+  %li You can now store unstructured data in Rails, but only in Postgres. (It is dangerous though.
+  %li We can NOW implement a coder that can serialize using encryption (e.g. using bcrypt). That is VERY useful!
+  %li We want to have stdlib serialization APIs for dumping and loading.
+  %li Now you get to choose your serialization library.
+%p Good abstractions make for good features. When you write good abstractions you will find good features.
+%p Consistency is freedom and flexibility.
+%p has_secure_password: gives your model a password field. Hooray! BUT there is a ot of magic behind this method. It is not reusable, nor configurable.
+%p When you design API, you have to go green. You have to make APIs that you can reuse. WRITE REUSABLE CODE!
+%p Streaming responses
+%ul
+  %li someone can make a request from your web server, and you can immediately get data. We spit out data as soon as it is ready, no waiting.
+  %li Using Body#each, we use delayed responses to do this.
+  %li The problem is middleware! When you pass through middleware you have to implement body proxies. That sucks!
+  %li
+    We need to embrace diversity. There are three types of middleware:
+    %ul
+      %li Generators
+      %li Filters
+      %li Lifecycle Handlers
+%p Rails is getting slower. It is getting slower because it is doing more work.
+%p Rails 2.3 is significantly faster than Rails 3.0 (and 3.1)
+%p The reason is that the middle ware stack has increased. We are doing more work, but it is making the GC work hard.
+%p The reason the GC has to work harder is because we have a big middleware stack.
+%p We need to change the rack API. We have to have something that is evented. Create Generators, filters, and lifecycle hooks that are not all on the same stack.
+%p If we decrease the stack size, we can increase the performance without losing features.
+%p A message to the rails core team: We need to refactor the internals of Rails to get more people into rails core.
+%b Go forth and code!
+%p I love Aaron's talks, they make me think and they are funny to boot!

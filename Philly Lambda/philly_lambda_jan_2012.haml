@@ -1,0 +1,75 @@
+%h3 @phillylambda January Meeting
+%i
+  Andrew Larkin (@ALarkinDesign),
+  %a{:href => "http://www.cimlife.com"}Comcast Interactive Media
+%h3 The basics of NLP
+%p NLP is a subset of artificial intelligence. We are trying to give an appearance of a machine that thinks.
+%p NLP also mixes in cognitive science and linguistics to understand grammers.
+%p NLP also needs statistics and probability to figure out.
+%p Language does not always mean what we think it means. Human language has a lot of ambiguity, NLP has to do its best to limit that ambiguity.
+%p NLP is a key component for better human-computer interaction. We tend to forget that WIMP is not a "natural" or intuitive way of interacting with the world.
+%p There are different levels of interpreting text when dealing with natural language processing
+%ul
+  %li Phonology - The analysis of sounds, useful in speech recognition.
+  %li Morphology - The study of how words break down into their base parts to learn works (e.g. preregistration = pre - registratra - tion)
+  %li Lexical - The understanding of an ambiguous word as it is used in a lexical context. Building a class structure for a word.
+  %li Syntactic - A look at the grammatical structure of a sentence. This allows us to parse sentences and understand grammers.
+  %li Semantic - A way to understand words by the structure of the sentence around it (like the word 'It' in 'I like programming. It makes me happy.')
+  %li Discourse - A way to tag words as they relate to the entire system (or paragraph, for example).
+  %li Pragmatic - It is important to make your NLP be knowledgeable of the subject matter of your topic. That helps to narrow and define your system.
+%p The NLP pipeline goes: phonology -&lt; Morphology -&lt; Syntax -&lt; Semantics -&lt; Reasoning.
+%h3
+  NLP Toolkit - 
+  %a{:href => "http://www.nltk.org/"}NLTK
+%p NLTK is a python library that you can use to interpret text!
+%p NLTK has a huge corpora of text that have been organized and cut up for your use. Everything from presidential addresses to classical books. Amazing!
+%p The brown corpus is VERY diverse. Check it out!
+%pre
+  %code{:class => "python"}
+    import nltk
+    from nltk.corpus import brown
+    
+    brown.categories() # List out categories of pre-processed text in the brown corpus
+    brown.words(categories='news') # An array of ALL the words in the news category
+    brown.sents(categories='news') # An array of all the sentences in the news category
+    
+    genre_words = [(genre, word)
+    for genre in ['news', 'romance']
+    for word in brown.words(categories=genre)
+    ]
+
+    cfd = nltk.ConditionalFreqDist(genre_words) # All of the words in news and romance categories with their frequency in the text.
+    cfd.tabulate(samples=['Monday', 'Tuesday', 'Wednesday']) # A table of how often Monday, Tuesday, and Wednesday occurs in the news and romance categories.
+%h3
+  %a{:href => "http://wordnet.princeton.edu/"}WordNet
+%p WordNet is a like a thesaurus. It has a list of SynSets (Synonym Sets)
+%p A SynSet provides a tree of specificity for words (e.g. a more specific "motor vehicle" is a "motorcar," a less specific synonym is "artifact")
+%p A more specific synonym is called a hypernym (e.g. motorcar).
+%p A less specific synonym is called a hyponym (e.g. artifact).
+%p Using the lowest_common() function, you can compare SynSets to see how closely related two words are to each other.
+%h3 Working with raw text
+%ol
+  %li HTML - NLTK can parse HTML and read the NL in it.
+  %li ACSII - The HTML will be converted into ACSII text.
+  %li Text - The ASCII text will then be tokenized into words, sentences, etc.
+  %li Vocab - The text will then be built us to give you a vocabulary to use and understand.
+%h3 Identifying parts of speech
+%pre
+  %code{:class => "python"}
+    tagged_sents = brown.tagged_sents(categories='news') # A list of tagged sentences.
+    size = int(len(tagged_sents) * 0.9)
+    train_sents = tagged_sents[:size] # Make a sample set of training sentences.
+    test_sents = tagged_sents[size:] # Make the rest a test set.
+    unigram_tagger = nltk.UnigramTagger(train_sents) # A unigram tagger looks at a single word and tries to assign meaning of that word, it does not look at the words around it.
+    unigram_tagger.evaluate(test_sents) # This tells us how accurate our tagger is.
+    t0 = ntlk.DefaultTagger('NN') # Default to nouns.
+    t1 = ntlk.UnigramTagger(train_sents, backoff=t0) # Tell the tagger that if it doesn't understand something, guess that it is a noun.
+%h3 Chunking
+%p There are noun phrases and verb phrases that you can chunk text into.
+%p Grammers and parsers take sentences and turn them into noun parts and verb parts.
+%b NLP is a way to interpret language logically!
+%p
+  Check out the 
+  %a{:href => "http://www.nlp-class.org/"}Stanford Online Course 
+  on Natural Language Processing. You can take it for free, it starts January 23rd!
+%p Thank you the Andrew for the great talk!

@@ -1,0 +1,58 @@
+/ Controlled Chaos: A Case Study Of Introducing Rails Into An Operational NASA System
+%h3 #railsconf 2011 Notes
+%i Dan Pilone (@danpilone) and Jason Gilman (@jasongilman)
+%p Why do we want to change to Rails? The problem had changed. Their front end had changed, and that gave them the opportunity to change the middleware as well.
+%p They had an old front end in Perl and C with lots of old versions and legacy code, and TONS of static pages.
+%p They had a SOAP client, but they wanted something easier, like REST!
+%b They started to lose developers.
+%p It was pretty clear that they couldn't get good developers to work on such a legacy stack.
+%p The management allowed the engineers to switch. The engineers started prototyping...
+%p Prototyping is hard.
+%p Developers are harder. Working with developers that don't want to work on something is tough.
+%p When you present your technology with CONFIDENCE, you get a lot farther.
+%p Enthusiasm trumps all. Be excited when you make your pitch.
+%p Why Rails
+%ul
+  %li The Rails community is GREAT
+  %li JRuby is a great transition
+  %li NASA went to RailsConf and was convinced that Rails will last for the new 20+ years.
+%p How do you go from Java to Ruby? What are the pain points?
+%p Java devs are good at what they do and they have a safety net. A LOT of devs were resistant to it.
+%p Stages of learning a new language:
+%ul
+  %li Novice: You can write hello world.
+  %li Intermediate: You can write, but you write like your previous language.
+  %li Advanced: You start writing in the way the language was meant to be written, but you are still translating in your mind.
+  %li Superior: You are now thinking in the new language, there is no more translation layer.
+%p We ALL start at the bottom.
+%ul
+  %li To get to novice, 0 days.
+  %li To get to intermediate: 2 weeks to 2 months
+  %li To get to advanced: 3-6 months
+  %li To get to superior: 1+ years
+%p As your developers are working on learning these new tools, it was really stressful to new developers.
+%p What makes developers happy?
+%ul
+  %li Developers need to GET THINGS DONE to be happy!
+%p Brown bags, chat rooms, pair programming, the wiki. These are all things that helped get devs up to speed.
+%p Once you get to idiomatic Ruby, you end up with a LOT smaller code, and once you start getting into metaprogramming you start writing much closer to the domain problem that are there.
+%p Deliberately slowing things down really helped everyone move forward at a better pace.
+%p What they worried about:
+%ul
+  %li Maintainability
+  %li Technical longevity
+  %li Learning curve and developer buy-in
+%p They really didn't have to worry about maintainability. The Ruby code was MUCH more maintainable than the Java code. It is just a lot less code.
+%p Technical longevity is not a worry. Rails is being used EVERYWHERE.
+%p Developer buy-in became a non-issue. Ruby is FUN TO WRITE!
+%b The learning curve was the biggest problem.
+%p They folded the test team into the dev team. The key was good communication! That helped a lot.
+%p Constant refactoring. Refactors were scheduled.
+%p Cucumber testing is HARD to do right.
+%p Once the team got confortable with Ruby, they were able to move a LOT faster.
+%p Metaprogramming allowed them to write DSLs very close to the problem domain.
+%p The community ROCKS!
+%p JRuby is a GREAT platform for Ruby. You get all the advantages of the JVM and it keeps Ops happy (with Warbler, it is just a WAR!)
+%p When you do this, it will impact EVERYTHING! Communication is essential.
+%b You HAVE to have manager buy in, and you have to make developers stay productive!
+%p Thank you to Dan and Jason for the fantastic talk!

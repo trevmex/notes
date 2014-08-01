@@ -1,0 +1,40 @@
+%h2 #Agile2014 - Managing Technical Debt (Notes)
+%i Fadi Stephan
+%p When your requirements are rigid, you start to accrue debt. When you are prohibited to change the system, it gets worse.
+%p When the system is fragile (a.k.a. no tests), changing one thing can make the entire house of cards fall.
+%p When the devs play whack-a-bug, a.k.a. constant bug fixing, the system suffers from death from a thousand cuts.
+%p When a system is full of cut-and-paste changes it makes it hard to change the system as a whole.
+%b The number one reason we add technical debt is DEADLINES.
+%p When we over-architect solutions, we build overly complex architectures that make small changes very difficult.
+%p Bad Design - When your code base is built on a fundamentally flawed design you are going to have a bad time. DO NOT just fix the bugs. Make the change.
+%p Poorly skilled developers also help to add to tech debt.
+%b Technical Debt = Principle + Interest
+%p The interest is the pain we have when trying to work with the system as it exists. Without the interest, it is not tech debt, it is just deferred work.
+%p Adding tech debt to a product effects the cost of changes to the product for the worse.
+%p With no design up-front you can move faster early on, but if your product is long-lived it will hurt you in the long-run. With good design, you will be slower up-front, but be able to increase longevity.
+%p There is no such thing as a controlled environment.
+%b Never skip your unit tests!
+%p Whenever you say, "I'll go back and fix it later," you are fooling yourself.
+%p The key is that not all debt is bad. Sometimes debt is needed, like to buy a house or a car. When you know how much debt you are taking on and you know you can afford it, it is OK.
+%p Reckless tech debt is when you have no time to design something (bad), inadvertent tech debt is when you just don't know what you are doing (bad), prudent tech debt is when you know what you are doing when taking on debt (not so bad), or when you made a mistake and realize it later (not so bad).
+%p Only short-term focused debt and long-term debt are good times of debt. Focused debt is confined to one well-defined area.
+%p Valid reasons to take on tech debt: "You can't move Christmas." Some deadlines are real. (Some are not!)
+%p In software development, bankruptcy is a total system rewrite. That is painful!
+%b Add tech debt estimates to user stories (High/Medium/Low).
+%p Adding tech debt to user stories allows us to better understand the prioritization of stories.
+%p Using Sonar to evaluate the complexity of your code bases is a great way to evaluate tech debt. You can use that to attach a dollar amount to fixing tech debt. That helps you convince non-technical people that dealing with tech debt is important!
+%p
+  There is a
+  %a{:href => "http://docs.codehaus.org/display/SONAR/Technical+Debt+Plugin"}Tech Debt Plugin
+  for Sonar. How fun!
+%p
+  %a{:href => "http://www.squale.org/"}SQUALE
+  is another tool for identifying tech debt automatically.
+%p ROI = (Value - (Technical Debt + Cost))/(Technical Debt + Cost)
+%p How much debt is too much debt? - When there are opportunities that pass you by because you are dealing with too much tech debt, THAT is too much debt. If you do not have the bandwidth to pivot, that is too much debt.
+%b Pay debt with high interest first.
+%p Code with a lot of churn should be the places you focus your efforts.
+%p Do one thing at a time, and do it based on the skill sets of the team! And train the team on the things they do not know right now.
+%p Tech debt is not only for code, you can attack tech debt on your PROCESSES as well!
+%p You want the team that is producing the code addressing the tech debt. Make sure that EVERYBODY works on tech debt, not just one member of the team.
+%p Dedicate 10% of your team's time on tech debt. Make sure that every user story takes tech debt into account!

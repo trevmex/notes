@@ -1,0 +1,29 @@
+%h2 System Testing Rails Itself
+%i Sam Ruby, author of Agile Web Development with Rails
+%p (I got here late, eep!)
+%p Sam is keeping a list of differences between the code in the book and different versions of Ruby and different versions of Rails
+%p Things not to do
+%ul
+  %li Don't test the beta
+  %li Wait until the release
+  %li Complain when the released code doesn't work
+%p If you do that. You suck. Man up and use the edge!
+%p So Sam started testing the betas so he could get ahead of the curve and tell his book readers what is different with new versions of Ruby/Rails
+%ul
+  %li To do this, Sam created a system to test rails on many different bersions of Ruby
+%h3 gorp
+%ul
+  %li gorp is a common library that can parse xhtml using nokogiri for use to verify that rails generated html the way it should.
+  %li lots of handy commands to receive rails test results and put them in log files, track bugs and communicate with the Rails core team
+  %li And finally Gorp can actually run the rails test suites themselves
+  %li gorp can do some basic text editing so your logs, and such can look pretty for readers.
+%p Testrails gem
+%br
+This gem will get rails from git, test rails, build a new rvm, delete old rvms, update bundler, run the scripts (tests) and issue reports to gorp. (cool)
+%p There is a dashboard to see what what is going on when it is happening.
+%p If you are interested. Help out with the project!
+%p The sauce for this goodness is $free.99
+%p The moral is: use, test, report.
+%p Before you bitch about your errors to the Rails team, make sure that it isn't a PEBCAK.
+%b Yehuda uses Sam Ruby's test suite all the time. In fact a lot of the core team uses Gorp. BONUS!
+%p Project idea: plugging in Gorp to cucumber. Or ties into webrat might be nice.

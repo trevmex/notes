@@ -1,0 +1,270 @@
+%h2 The Well-Grounded Nuby
+%h3 Advice for Ruby newcomers (and their mentors)
+%i David A. Black (@david_a_black)
+%p We want to learn the major points of confusion in the Ruby language and how to navigate them.
+%p There are 7 big points that hurt. Understanding these 7 points can help you along the way while working through your Ruby education:
+%ul
+  %li
+    Point #1: 
+    %b Every expression evaluates to an object
+    %ul
+      %li Not everything is an object (i.e. if statements, argument lists, keywords, etc.), but there is just enough non-objects to make ALMOST everything an object...
+      %li
+        BUT everything, every statement, will
+        %b evaluate to 
+        an object. The result of any code block will be an object. Even 
+        %i nil 
+        is an object.
+      %li
+        Use 
+        %i irb.
+        It is awesome.
+      %li
+        %i puts
+        ALWAYS returns 
+        %i nil, 
+        it does NOT return its argument: It prints the argument.
+      %li a failed if statement returns nil
+      %li
+        %pre
+          %code{:class => 'ruby'}
+            /# in Ruby 1.8:
+            p 'string' # evaluates to nil
+            %br/
+            /# but in Ruby 1.9 it evaluates to the argument:
+            p 'string' # evaluates to 'string'
+      %li Class definitions return nil.
+  %li
+    Point #2: 
+    %b It is ALL about message passing
+    %ul
+      %li all the infix syntax is actually shorthand for message passing:
+      %li
+        so...
+        %table
+          %tr
+            %th This...
+            %th is actually executes this code!
+          %tr
+            %td 3+2
+            %td 3.+(2)
+          %tr
+            %td 5*3
+            %td 5.*(3)
+          %tr
+            %td a[2]
+            %td a.[](2)
+          %tr
+            %td +x
+            %td x.+@
+      %li What is cool about this, is that you can roll your own infix operators by just defining them as message.
+      %li
+        %pre
+          %code{:class => 'ruby'}
+            case some_string
+            when "abc"
+            /#...
+            when /def/
+            /#....
+            end
+            %br/
+            /# is the same as...
+            %br/            
+            if "abc" === some_string
+            /#...
+            elseif /def/ === some_string
+            /#...
+            end
+            %br/
+            /# which is actually...
+            %br/
+            if "abc".===(some_string)
+            /#...
+            elsif /def/.===(some_string)
+            /#...
+            end
+      %li
+        That means if you override the === method, you can create your own case statements!!! (That is pretty awesome.) Like so:
+        %pre
+          %code{:class => 'ruby'}
+            class Person
+            attr_reader :name
+            %br/
+            def initialize(name)
+            @name = name
+            end
+            %br/
+            def ===(other_person)
+            self.name == other_person.name
+            end
+            end
+            %br/
+            trev = Person.new('trevor')
+            trevor = Person.new('trevor')
+            bob = Person.new('bob')
+            %br/
+            case trev
+            when bob
+            /# not yet...
+            when trevor
+            /# this will work, since we overrode the === method!
+            end
+      %li The === method is mostly the same as the ==, but it is meant to be overwritten for this use.
+      %li
+        %pre
+          %code{:class => 'ruby'}
+            String === String # is false, but...
+            String === "abc" # is true
+      %li So, don't do: case "abc".class
+  %li
+    Point #3: 
+    %b Objects resolve messages into methods
+    %ul
+      %li Objects do not "have" methods
+      %li They have the intelligence to find methods when they are required to do so.
+      %li Methods are stored in classes and modules, not in the objects themselves.
+      %li
+        Every object has a lookup-path to find methods in that objects class hierarchy:
+        %ul
+          %li
+            The singleton class: this is where you define a method for an individual object. (Woah, this is cool)
+            %pre
+              %code{:class => 'ruby'}
+                str = "abc"
+                def str.make_big
+                str.upcase
+                end
+                %br/
+                str.make_big # this works
+                %br/
+                str2 = "def"
+                str2.make_big # this does not work, since make_big is defined for the str object only
+          %li Then it looks for any modules in the object's singleton class
+          %li Then it looks at the object's class
+          %li Then it will look at the object's class' included modules
+          %li Then it will move on up the tree (class, module, class, module) until you reach the Object class (or BasicObject in Ruby 1.9)
+      %li
+        Lookup-paths are dynamic. Objects created before a module is added to the base class will have access to the added methods.
+        %pre
+          %code{:class => 'ruby'}
+            class Person
+            end
+            %br/
+            trev = Person.new
+            %br/
+            class Person
+            def talk
+            "rubyrubyruby"
+            end
+            end
+            %br/
+            trev.talk # is "rubyrubyruby", since the lookup happens at RUNTIME, not object creation time.
+      %li There is an extend method that will add a module's methods to one object, using the singleton object.
+  %li
+    Point #4: 
+    %b Classes and Modules are objects
+    %ul
+      %li "The answer to 75% of all questions about Ruby is: classes are objects, too."
+      %li You can send messages to them.
+      %li They can be put in arrays.
+      %li They can be assigned to local variables
+      %li They have their own instance variables, just like other objects. These are instance variables for the CLASS, not the objects instanced by the class.
+      %li
+        Class variables are hierarchy-scoped globals. Don't use them. They are evil, like 
+        %a{:href => "http://blogs.msdn.com/b/ericlippert/archive/2003/11/01/53329.aspx"}eval 
+        evil. They are mini-
+        %a{:href => "http://c2.com/cgi/wiki?GlobalVariablesAreBad"}globals!
+      %li Of course, classes are special beings, but they and still objects.
+      %li So, treat you classes as normal objects!
+  %li
+    Point #5: 
+    %b
+      There is always a
+      %i self
+    %ul
+      %li self is the default receiver of messages
+      %li self owns instance variables, and, by definition, any instance variables you see belong to self.
+      %li
+        The value of self changes:
+        %ul
+          %li in classes, it is the class
+          %li in methods, it is the object running the method
+          %li outside of objects, it is main (this is just a holder for objects)
+        %pre
+          %code{:class => 'ruby'}
+            class C
+            self # I am the class C
+            %br/
+            def m
+            self # I am an instance of the class C
+            end
+            end
+            %br/
+            self # I am main
+      %li instance_eval swaps out self for the duration of the code block.
+      %li class_eval is a special flavor of instance_eval
+  %li
+    Point #6: 
+    %b Variables contain references to objects
+    %ul
+      %li In Ruby, every variable contains a reference to an object. And every object can have access to any number of variables.
+      %li
+        This means that every variable is passed by reference, not as a copy of the object.
+        %pre
+          %code{:class => 'ruby'}
+            str = "abc"
+            str2 = str
+            str2 << "def"
+            str # is "abcdef" since both str and str2 point to the same object
+      %li
+        Ruby exposes references to instance variables in objects, so you can abuse this, unless you write some extra code
+        %pre
+          %code{:class => 'ruby'}
+            class Person
+            attr_reader :name # this should not be writable
+            %br/
+            def initialize(name)
+            @name = name
+            end
+            end
+            %br/
+            trev = Person.new('trev')
+            trev.name # this is 'trev'
+            trev.name << " j00 have been hacked!"
+            trev.name # this is 'trev j00 have been hacked!'
+            %br/
+            /# To stop this, don't use attr_reader:
+            class Person
+            %br/
+            def initialize(name)
+            @name = name
+            end
+            %br/
+            def name
+            @name.dup
+            end
+            end
+            %br/
+            trev = Person.new('trev')
+            trev.name # this is 'trev'
+            trev.name << " j00 have been hacked!"
+            trev.name # this is 'trev', since it is just a dup of the instance variable @name
+  %li
+    Point #7: 
+    %b 
+      %i true 
+      and 
+      %i false 
+      are objects AND 
+      %i true 
+      and 
+      %i false 
+      are states
+    %ul
+      %li
+        If a test evaluated to the object 
+        %i nil 
+        or the object 
+        %i false:
+        it is false, otherwise it is true.
+%p Thanks to David A. Black, and the entire Philly.rb crew for a great talk!

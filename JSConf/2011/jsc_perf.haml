@@ -1,0 +1,34 @@
+/ Feature Detection, Performance, and Why You Need to Care
+%h3 #jsconf Notes
+%i Alex Russell
+%p We want to build robust sustainable code, so feature detection is awesome.
+%p We don't want to make Steve Souders sad.
+%p JavaScript loading and execution HAVE to be deferred!
+%b Things that block SUCK!
+%p And guess what? Feature detection BLOCKS!
+%p We need a rich UI on a constrained (mobile) environment.
+%p Mobile High-End Is Evolving, but it is still slower than what we are used to on the desktop.
+%p and now for the REAL talk:
+%h2 JavaScript: Say it like you mean it
+%p We need to move the language forward!
+%p The power of libraries are limited in fixing the language. Only the language can do that.
+%p People are writing real applications with JavaScript.
+%p A lot of the libraries out there are solving the same problems over and over again.
+%p "Language design is library design and library design is language design."
+%h3 What is needed?
+%p We need to be able to write large applications in JavaScript.
+%p We need components: reusable pieces of software: classes and inheritance.
+%p All the libraries have solved this problem in different ways. What we want is a syntax that reads like what we want to actually do.
+%p Modules are very important. Once you put the syntax in the language, you can have a lot more power here.
+%p Monkey patching is great, but they conflict a lot. Unfortunately, we cannot do that today.
+%p A solution is scoped object extensions using imports.
+%h3 Async Programming
+%p The callback pattern allows us to write non-blocking code.
+%p Callbacks are really not composite.
+%p A solution is a deferred object, or a promise. With deferred objects we can have compositely.
+%p There are a LOT of new features that are being talked about in TC39 to go into ES.next. There is a lot you can do to make JS better.
+%p When can I use this stuff?
+%p Google wrote a compiler to take the new features of ES.next and allow you to translate it into JS that would work RIGHT NOW! So give these new features a try and let TC39 know if it will solve your problems.
+%p Traceur is Google's ES.next to JS compiler. You can get it at http://code.google.com/p/traceur-compiler
+%p Try it out NOW!
+%p Thank you to everybody for the great talks!

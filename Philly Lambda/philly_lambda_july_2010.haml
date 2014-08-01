@@ -1,0 +1,65 @@
+%h2 Scaling & PostgreSQL at myYearbook.com
+%h3 Philly Lambda 2010-07-28
+%i michael.glaesemann@myyearbook.com
+%br/
+%p This talk is NOT about scaling PostgreSQL, this is about scaling myYearbook.com while using PostgreSQL.
+%p myYearbook.com is a causal social network founded in 2006. Currently the forth largest social network in the world. 52% female, %48 male.
+%p The target market is the teen set. The site is about dating and meeting new people. 55MM visits in April 2009. High time-on-site.
+%br/
+%p Relational databases goods and bads
+%ul
+  %li data impedance mismatch
+  %li a good ecosystem of tools
+  %li good at relating data
+  %li they are the status quo
+  %li they never scale
+%br/
+%p PostgreSQL has UTF-8 support!
+%p The PostgreSQL is very conservative. They want to make sure that the data that is given is correct, then they worked on speed. This is the opposite of MySQL.
+%br/
+%p PostgreSQL is big on Codd. Codd wrote a paper on relational databases in 1970. The relational theory is based on values & operations, logical structure.
+%p One of the big things is NORMALIZATION. Normalized DBs make for a lot of joins, which can get slow and expensive.
+%p You want to make sure that the logic works, but you might not care about what happens in the backend.
+%p This leads to a declarative language, a.k.a. SQL.
+%p Regular expressions are another example of a declarative language (others are Quel, Prolog, Datalog, etc.)
+%p BOOM: Berkeley Order of Magnitude Project: Work on orders of magnitude more data with orders of magnitude less code.
+%p Hadoop: a MapReduce implementation in Java, one of the first MapReduce implementations out there outside of Google.
+%br/
+%p Declarative languages are written in thoughts that are then translated into deeds.
+%br/
+%p Postgres was written by Michael Stonebreaker (he has made a lot of companies: c-store, h-store, VoltDB, Vertica, Ingres, Illustra, Postgres, ...)
+%p Postgres is open source (Berkeley BSD License), which has allowed many companies to use it as a base to expand.
+%ul
+  %li Aster Data: built a lot of java on top of Postgres for bulk loads into the system. They made a really space-efficient semi-join over a network.
+  %li Greenplum
+  %li EnterpriseDB: Makes gridSQL
+  %li Truviso
+%p Aster and Greenplum claim MySpace as a client, but Greenplum is their main DB in use.
+%p Postgres is really big in Japan (Fujitsu, NTT Data, NTT OSS, SRA all use it)
+%br/
+%p PostgreSQL was a very early on object relational database.
+%p You can make your own C-level object types, and extend the data types.
+%p MVCC: Multi-version Version Control, it i a way to ark versions of data in the system, so you can have a constant view of the data. This makes Postgres crash resistance.
+%p Rollbacks are instantaneous in Postgres.
+%p Postgres uses VACUUM to mark dead or unused sections in the journal. This will allow the journal to be reused.
+%p Transactional DDL: If something in a transaction fails, or a schema change, you can just roll it back and nothing is affected.
+%br/
+%h3 Does it scale?
+%p Can it handle a really high load?
+%p Use fsync to help it scale. Do not run without it. fsync forces the database to sync to disk.
+%p It is OLPT: It will run a lot of little transactions, instead of saving up for a big transaction.
+%p myYearbook runs with fsync off (which is dangerous)
+%br/
+%h4 Skype runs on Postgres
+%p They have open sourced  PL/Proxy and pgbouncer
+%p PL/Proxy maps functions to connection strings. It allows you to add scripting languages to the database.
+%p pgbouncer is a connection pooling configuration tool. Every connection starts up a backend process, so this allows you to pool connections together to limit the number of connections.
+%br/
+%p They use a 1TB memcached to get about 140K/s and set 15K/s
+%br/
+%p They partition data for sharding (splitting up a table into smaller tables). IF your tables are smaller, you can return queries faster.
+%p They roll off old data (treat it as dead).
+%p Postgres likes memory. myYearbook uses 3.3TB of memory.
+%br/
+%p The main problem with relational databases are that the implementations still map logical blocks to physical blocks. What you can do with a well-designed relational database is make the logical blocks that interact frequently closer together physically, but unfortunately, none do this right now.
+%br/

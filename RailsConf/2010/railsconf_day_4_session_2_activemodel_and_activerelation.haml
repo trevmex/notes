@@ -1,0 +1,53 @@
+%h2 ActiveModel and ActiveRelation
+%i Adam Keys (@therealadam)
+%p These libraries reduce the difficulties of linking up your models
+%p It is a lot of boilerplate cope and nice stuff to add to your classes
+%ul
+  %li ActiveSupport is the cake that ActiveRecord is the icing on top of. (delicious!)
+  %li It allows you to cherry-pick the functionality you want in your models, etc.
+  %li That means that it is a lot easier to tighten up your classes by abstracting out all the things your class doesn't need to do.
+  %li It allows your class to concentrate on the core if what it does, not the cruft around it.
+%p An easy way to get started in making a DSL is to write some code the way you think it should look, and only then write the Ruby code to implement your pretty-looking DSL. (Good idea)
+%h3 Extract-Concern
+%p extent ActiveSupport::Concern
+%ul
+  %li What is a concern? It is something that is not core to your class, but you still need it.
+  %li You create an other class to mixin, and just call include ClassName to get that functionality. Woot.
+  %li Accessors + concerns = sliming effect on your classes Makes your core code readable again.
+%h3 How to make your models look good and talk better.
+%p ActiveModel takes the hawkness of the new ActiveSupport and lets you use it in ANY CLASS you want.
+%ul
+  %li e.g. include ActiveModel::Validations # now you can use all the Rails validations
+  %li You can also extend ActiveModel to add more features to the bases (e.g. extend to have more validations)
+%p ActiveModel gives you easy hooks to serialize your objects (using to_json, to_xml, etc.)
+%ul
+  %li You have to set your attributes to tell the serializers what to serialize, then just include ActiveModel::Serializers::JSON and you have access to .to_json
+%h3 ActiveRelation
+%p This implements the relational algebra for making SQL queries.
+%ul
+  %li So if you want your class to make queries the same way rails does, for consistancy.
+  %li To do this you: include Arel:Relation
+  %li This makes your object a first-class citizen to the relation engine
+  %li This gives you a whole slew of query functions (like insert, where, order, etc.)
+  %li Arel does lazy querying: That means that the query is not executed until you run .call on the query.
+  %li (WTW is Marshal, I have to check that out...)
+  %li To implement Arel, you have to have an Engine to tell Arel what your class will implement. That means your Engine will have CRUD functions that build up Arel queries for your class. (This looks like a strategy design model)
+  %li (Adam has a standard CRUD Engine you can steal as a starting point)
+%p Keys to Success
+%ul
+  %li Try ActiveSupprt
+  %li Make your classes awesome with ActiveModel
+  %li Hook up your classes with query hawkness with ActiveRelation
+%h3 BONUS TRACKS!
+%p How jokes work
+%ul
+  %li Making jokes are a tricky thing
+  %li Why do jokes make us laugh?
+  %li Our brains are giant pattern matching machines (we see and hear and patterns connect in our brains)
+  %li What makes humor work is... surprise!
+  %li It is setting up a pattern in someone's head and twisting it at the last second.
+  %li There is also timing. Timing is some important.
+  %li A self-replicating joke: "What is the most important thing about a joke? Timing."
+  %li Being funny 30% of the time is awesome (it is like baseball)
+  %li You are writing schtick all the time. All you have to do is extrapolate it into joke hawtness.
+%p The moral of the story is: THINK before you speak. What YOU think is funny might not be funny at all. :P

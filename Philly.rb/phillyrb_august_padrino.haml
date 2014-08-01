@@ -1,0 +1,68 @@
+%h2 Philly.rb August Meeting
+%h2 Padrino and Sequel for lightweight web apps
+%i Angel Pizarro, UPenn
+%h3 Padrino
+%p Rails is a hog, but when you need something small and simple, something like Sinatra is much more lightweight.
+%p But when you start working with Sinatra, you will find that there are a lot of things you tend to do over and over again for setting up.
+%p Padrino is aimed at giving the dev a more robust feature set for Sinatra without being overweight.
+%p Padrino tries hard to be agnostic, you should be able to use any type of ORM, templating, etc.
+%p Padrino started out as the "sinatra-more" gem. It gives Sinatra some rails-style helpers.
+%pre
+  %code
+    command line to get Padrino up and running
+    padrino gen project -h #help
+    padrino gen project todo1 -e haml -d sequel -i
+    cd todo1
+    bundle install
+    padrino gen # lists the things you can generate
+    padrino gen model item body:string sessionid:string
+    touch app/views/application.html.haml
+    touch app/views/index.html.haml
+    padrino gen admin # Django-inspired admin dashboard
+    padrino gen admin_page item # Add a page for your model in one step
+    rake -T # show the rake 
+    rake sq:migrate:up
+    padrino rake seed
+    padrino start
+%pre
+  %code{:class => 'ruby'}
+    in app/app.rb
+    enable :sessions
+    before do
+    unless session[:uid]
+    session[:uid] = Activeupport::SecureRandom.hex(10)
+    end
+    end
+%pre
+  %code{:class => 'ruby'}
+    in app/controller.rb
+    get :index do
+    render :index
+    end
+%pre
+  %code{:class => 'haml'}
+    /!!!XML
+    /!!!
+    / index.haml
+    /%html
+    /%body
+    /%h1 TO DO
+    /== Session ID #{session[:uid]}
+%pre
+  %code{:class => 'ruby'}
+    in config/app.rb
+    Padrino.mount("Todo1").to('/')
+
+%p Changes to the model will be auto-reloaded, unlike Rails      
+%p padrino-gen started out with no options selected, you can define everything the framework will use (e.g. haml, jquery, sequel, etc.)
+%p
+  http://www.padrinorb.com
+  http://www.sinatrarb.com
+  http://sequel.rubyforge.org
+
+%h3 Sequel
+%p Sequel is a database toolkit for Ruby. It is a lightweight wrapper for SQL and it has support for basically every database you can think of (read Oracle, MYSQL, etc.), unlike ActiveRecord.
+%p Sequel allows for more logical and straightforward queries, unlike Rails when you have to use variable substitution.
+%p Sequel works with raw SQL, you can also give regular expressions for arguments.
+%p Sequel lazy loads the result sets, like Arel. So you will only make the database call when it is used, not when it is declared.
+%p There is a LOT of APIs, you can check it out on the website.

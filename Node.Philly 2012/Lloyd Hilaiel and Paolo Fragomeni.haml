@@ -1,0 +1,20 @@
+%h2 Approaching a real time web
+%i Paolo Fragomeni
+%p What is realtime? (Sounds like a buzzword...)
+%p Realtime is a precision of duration.
+%p Hard-realtime is when a loss of precision represents a total system failure,
+%p Soft-realtime is when a loss of precision degrades the quality of the system, but it is not a complete failure.
+%p How real is realtime without evidence?
+%p Instrumentation is a really big deal. It is permanent code at intersections where interesing data points are produced. We need to have visibility into running systems for good debugging.
+%p Winston is a good way to add process level instrumentation, but that gives you a lot of overhead, which is a bit of  non-starter.
+%p Dynamic tracing is a way to add realtime instrumentation without adding cruft for your code.
+%p Go to Terminal.app and you can check out all the cool DTrace apps on your Mac OS X:
+%pre
+  ls -la /usr/bin/*.d
+%p Awesome!
+%p Check out `sudo iosnoop` for an example. And make sure to view the source.
+%p
+  Node has bindings for DTrace called
+  %a{:href => "https://github.com/chrisa/node-dtrace-provider"}node-dtrace-provider
+  which is really cool!
+%p Thanks for the talk!

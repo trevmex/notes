@@ -1,0 +1,48 @@
+%h2 Philly.rb July Meeting
+
+%h2 A/B Testing with A/Bingo
+%p A/B Testing have two things
+%ul
+  %li A Test
+  %li A Conversion Event: something that defines success.
+%p Advantages:
+%ul
+  %li A/B Testing seeks a quantitative answer over test.
+  %li Looking to avoid HIPPO (Highest Paid Persons Opinion)
+%p A/Bingo is a Rails plugin that helps you!
+%pre
+  sg abingo_migration
+  rake db:migrate
+  sg controller abingo_dashboard
+%p You have to set up a before_filter that sets up the ABingo identity, like a user ID. This lets you track a conversion event per user. In your ApplicationController:
+%pre
+  def set_abingo_identity
+  blah
+  end
+%p (check out Railscast Episode 214 for an A/Bingo Example)
+%p in your view to run a test:
+%pre
+  &lt;% ab_test("signup_title", ["Sign Up", "Register", "Let's Go!"], :conversion =&gt; "signup") do |signup_title| %&gt;
+  &lt;h1&gt;&lt;%= signup_title %&gt;&lt;/h1&gt;
+  &lt;% end %&gt;
+%p In the controller:
+%pre
+  def index
+  bingo! "signup_title"
+  blah
+  end
+%p You can setup your A/B options explicitly using HTTP parameters for controlled tests.
+%p The dashboard shows the results of your tests in a web view.
+%p A/Bingo uses stats to let you know if a test was significant or not. Generally a difference of 95% or more is probably significant. Using this, you can see what really matter.
+%p A/Bingo supports both client and server-side tests. So you can track client-side event by sending back results using AJAX.
+%p No URL changes are required, once your choices are made, there is no need to change the code.
+%p You can track tests across multiple requests or sessions because you are tracking on an identity (like an application-defined user ID).
+%p (a downside) You can't cherry-pick the users you want to test (i.e. no cohort selecion), although you can just wrap your tests in an if to solve it.
+%p If you have multiple tests on one page, you cannot match multiple tests together.
+%p Another downside with A/B testing is that it makes customer service hard (you have to say to the user "click the button that says 'this' OR 'that'", confusing)
+%p Size == Confidence: You should be running thousands of tests to start to see a good result.
+%p You have to decide in a good conversion. If your conversion is too far away from your test, it might not convert as well.
+%p The result of your test is only as good as the group you test on (e.g. if you are a travel site, you will get a non-representative result if you run your test two weeks before July 4th)
+%p Be careful when you add multiple tests together, it can make the results uncertain.
+%p A/B Testing is more a tactical move than a strategic move. It will help you out right now, but remember that things could change. It is not an end-all be-all.
+%p Check it out at http://www.bingocardcreator.com/abingo

@@ -1,0 +1,159 @@
+%h2 Exploring the dynamics of Ruby objects
+%i Jeremy (@jm)
+%p Code opbjects
+%ul
+  %li Lambdas, procs, and blocks are Ruby code that is stored in objects.
+  %li
+    %pre
+      %code.ruby
+        l = lambda { |x, y| x.to_i + y.to_1 }
+        p = Proc.new { |x, y| x.to_i + y.to_1 }
+  %li The difference between procs and lambdas is that lambdas check for the right amount of arguments, but a proc doesn't care.
+  %li The great thing about it is that these closures can be wrapped up and passed around.
+  %li Using yield to call code in a block is almost 15% faster than calling call on the block
+  %li 
+    %pre
+      %code.ruby
+        def blk_method(&blk)
+        puts "first"
+        my_method(&blk)
+        end
+        
+        def my_method
+        puts "second"
+        yield
+        end
+  %li
+    You can use define_method to assign a lambda or Proc to a name, like a regular method.
+    %pre
+      %code.ruby
+        l = lambda { |x, y| x.to_i + y.to_1 }
+        define_method(:add, l)
+        
+        add(1, 2) # => 3
+  %li It is usually a good idea to use lambdas to get the argument checking
+%h3 The Dynamics of Ruby Objects
+%p Evil allows you to modify ANYTHING in Ruby http://rubyforge.org/projects/evil
+%p Ruby objects are extremely flexible. You can do pretty much anything with it.
+%pre
+  %code.new
+    o = Object.new
+%p 3 simple rules for Ruby Objects
+%ol
+  %li Everything is an object. There are no primitives, only objects.
+  %li Objects have behavior.
+  %li That behavior can change.
+%pre
+  %code.ruby
+    1.times { puts "yay" }
+    "".reverse
+    nil.nil?
+    true
+%p All of these things have methods.
+%p Every object has behavior that is unique to it and dependent on its class.
+%p The chain: Singleton Class -> Included Modules -> Class -> Included Modules -> Superclass -> Included Modules -> ... -> Object -> Kernel -> not found (method_missing called)
+%p The behavior of an object comes to the closest point to the object, starting with the singleton class.
+%pre
+  %code.ruby
+    class C
+    def singleton_class
+    class <<self; self; end
+    end
+    end
+    
+    c = C.new
+    c.singleton_class.methods.sort # a list of the singleton methods on this object
+%p (The previous code is not needed in 1.9)
+%p You can use send(:undef_method, :method_name) to undefine a method from a class, or a singleton class, etc.
+%p Class objects can have their own singleton class, since they are also an object.
+%p Never ever monkey patch Object or Kernel, you will be playing with fire.
+%p In Ruby 1.9, the base is not longer Kernel, there is a BasicObject above Kernel that is the last resort.
+%pre
+  %code.ruby
+    module X
+    module Y
+    module Z
+    module F
+    require 'pp'
+    pp Module.nesting
+    end
+    end
+    end
+    end # => [X::Y::Z::F, X::Y::Z, X::Y, X]
+%p Module nesting is useful yo see your call tree from where you are at right now.
+%pre
+  %code.ruby
+    ObjectSpace.each_object(String).to_a.length # all the strings in the environment
+%p You can make an object do anything.
+%pre
+  %code.ruby
+    o = Object.new
+    
+    class <<o
+    def wat
+    puts "yah"
+    end
+    end
+    
+    o.wat # => "yah"
+%p You can change the behavior of any object by using the above technique.
+%p There are two ways to remove a method from an object:
+%ul
+  %li remove_method: allows you to remove the method from this level, but still search up the inheritance tree.
+  %li undef_method: wipes the method from the face of the earth (or at least the ObjectSpace)
+%p class << self will give you your own constant scope, but self.whatever doesn't give you scope outside the method you are creating.
+%b Remember, classes are objects too!
+%pre
+  %code.ruby
+    class <<String
+    def hello
+    puts "hello"
+    end
+    end # => creates a class method
+    
+    String.hello # => hello
+    "abc".hello # => undefined
+    
+    class String
+    def hello
+    puts "hello"
+    end
+    end # => creates an instance method
+    
+    "abc".hello # => hello
+%p You can change the behaviors of class at runtime, just like any other object.
+%p p self very, very useful so you know who is going to interpreting your method calls
+%p We worked on an exercise to create a class with a method that will create a new class with any given method removed. Here is my solution (with big help from @jm): http://gist.github.com/607672
+%h3 Metaprogramming in Ruby
+%p Get ready for METALPROGRAMMING!!!1!!
+%p Generating new behavior
+%ul
+  %li 
+    Ruby code can be evaluated in two ways:
+    %ol
+      %li By passing blocks of code.
+      %li By evaluating (eval) strings that generate code.
+  %li
+    %pre
+      %code.ruby
+        eval("puts 'Evaluated cooooode!'")
+        z# is the same as
+        puts 'Evaluated cooooode!'
+  %li Kernel.const_get("Fool") will get you only a constance, but eval("Fool") will eval anything, including a constance.
+  %li
+    The family of eval methods:
+    %ul
+      %li eval
+      %li class_eval
+      %li instance_eval
+  %li instance_eval allows you to reach into the instance methods of an object and call anything you want (including private methods)
+  %li You can pass instance_eval and sting or a block.
+  %li Instance variables always resolve according to self.
+  %li Classes are an instance of the class Class, but they have a special eval: class_eval. This allows you to create methods inside the CLASS of the object, not the object.
+  %li So, if you create a method in a class_eval you are creating an instance method; and if you create a method in an instance_eval, you are creating a class method.
+  %li You can execute class bodies in Ruby. One of the great things about Ruby is that you can execute anything.
+%p The next exercise: write your own attr_accessor (my solution is not perfect, but it works: http://gist.github.com/607711)
+%h3 Composing behavior
+%p You can compose behavior by calling methods that add functionality to a class using instance_eval.
+%p BUT don't use this often. It can confuse your code. Make it simple first.
+%p Thanks to Jeremy and the crew fir the great talk!

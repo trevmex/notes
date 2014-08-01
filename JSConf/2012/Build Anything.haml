@@ -1,0 +1,43 @@
+%h2 Build Anything
+%i Remy Sharp (@rem)
+%p There are a lot of awesome tools in browsers that you can use today.
+%p We are at a place today where we should be able to build desktop and mobile apps completely with HTML/CSS/JS
+%p What we need:
+%ul
+  %li Data Storage
+  %li Real-time notifications
+  %li Desktop integration: You can drag and drop into the browser
+  %li Access to hardware: what is your GPU?
+  %li local "install": I should be able to write something I can give you on a floppy!
+  %li go naked: I shouldn't NEED a browser
+%p MAKE SURE YOU USE &gt;!DOCTYPE html&lt;!!!
+%p There is native JSON parsing in the browser, use JSON, not XML!
+%p Use session storage and local storage, NOT COOKIES!
+%p If you are putting a 2.5MB file in local storage, you are doing it wrong. Treat it like cookies.
+%p The great thing about web storage is that there is a 'storage' event that you can listen to...and it is in IE8! So use it!
+%p Use &gt;input type=email&lt; for email. It is FREE VALIDATION! (Only IE8 doesn't have this)
+%p The History API is an awesome API for fixing the back button. You now have th ability to change the URL without reloading an entire page (see github code browser).
+%p progressive enhancement basics:
+%ul
+  %li build a non-js version
+  %li detect feature support
+  %li use js alternatives
+  %li use latest HTML tags
+%p Use the Appcache for performance, it is better than the browser's built in cache.
+%p Eventsource: web sockets are VERY sext, eventsource is like the ugly brother. This is real-time events to the client from the server OVER HTTP.
+%p Eventsource is fully implementable over HTTP, so it is polyfill-able, and the API is really easy to implement. You cannot polyfill web sockets.
+%p Eventsource is perfect for push-only based apps.
+%b IMPLEMENT DRAG &amp; DROP!
+%p It is easy:
+%ol
+  %li Create a drop handler that cancels the dorp event.
+  %li Create a 'dragover' event handler that adds a drop handler.
+  %li Create a 'dragend' event that adds a drop handler.
+%p Your web experience should NOT be limited to the browser window.
+%p Real-Time Communication: navigator.getUserMedia('audio, video', callback);
+%p (Thank you W3C WebRTC WG!)
+%p Going chromeless: mkae it so you don't have to have the browser experience at all. This is not a headless browser. This is a web app that does not use a web browser (like iTunes).
+%p Opera has W3C widgets that are pretty close to having a chromeless browser.
+%p WebRT is a manifest file that also is getting close to giving us a chromeless solution for Firefox.
+%p The dream is to have a .webapp file that will run chromeless in any browser.
+%p Thanks to Remy for the great talk!

@@ -1,0 +1,42 @@
+/ Mining Rails - Learning from your App's Lifeline
+%h3 #railsconf 2011 Notes
+%i Michael Feathers &amp; Corey Haines
+%p We need to learn more about the code that we have today.
+%p What do we know about how we write code?
+%p We have been working more about the process instead of the design of the code.
+%p But we can look a lot about the code we got right now.
+%p Code Metrics can be very handy, but it historically sticky.
+%ul
+  %li Lines of code is generally a poor metric. But it was the first metric we had.
+  %li Cyclomatic complexity: This is a bit of a dated metric, but it is still handy! Finding nested ifs and loops are useful.
+  %li Halsted Complexity Measures: Halsted found lots of interesting things to measure on, but now we have...
+  %li flog: Flog allows you to weigh known bad code practices and tell the coder where the smell is.
+%p The problem with all these methods is that they only take a snapshot of RIGHT NOW.
+%p But we are all working with version control. We have history. We can now measure metrics over time!
+%p It is hard to find universal truths from metrics across the board, BUT you CAN look at your own history and find out about your code patterns, and the code patterns and metrics for your team.
+%p We want to believe that we make decisions for rational reasons. But when we actually make decisions,and track them we see some irrational patterns emerge.
+%p What don't we know about ourselves when we write code?
+%p It seems coders commit the most around 5pm. Interesting.
+%p You should be able to track complexity of code as it correlates to hours to the day, etc.
+%p You have to look at your data for noise as well.
+%p We can graph the complexity of functions in a class over time. That can be useful to limit complexity and see actual results.
+%p You can do this time of analysis on your own!
+%p https://github.com/michaelfeathers/repodepot-ruby/ is a set of scripts that allow you to do investigations on your own repos.
+%pre
+  %code.ruby r = RepoDepot::Repository.new('ma_data', events) # This is how you get started
+%p Check it out! (I think it would be interesting to adapt this to JavaScript complexity in SVN...)
+%p Often we assume uniform distributions, but that is not always the case. It is worth checking out the metrics to see.
+%p Generally you only want to care about high complexity functions for refactoring.
+%p When you look at the lifeline of a function, you can see when refactoring occurred, and when it is really needed. You can then examine those times where complexity dropped and talk about it with your team.
+%p You cannot see patterns in your code if you are just looking at static views of your code.
+%p This isn't a tool to find who your rock stars are? This is NOT about individual developer productivity (although it is an interesting side effect).
+%p Instead of managing to the metric, we really want to learn from the metrics, not judge.
+%p Too many small methods can be a bad thing. You cannot go from metrics alone.
+%p The open/close principle: Classes should be open to extension and closed to modification.
+%p Some things about your code are true just for your own team, and that specific knowledge can be important.
+%p One of the things you need to watch out for when you use metrics is that when you pair, you might not look like you are committing much.
+%p When you have tests tied to metrics, you can have people trying to game the system. That is one of the biggest risks of metrics.
+%p But if you use your metrics informationally, not tied to money, they become more useful.
+%p It is good to have small commits. Two files: the one you are changing, and the spec for that change.
+%p You can use very lightweight techniques to get started with code metrics. Try it out!
+%p Thank you to Michael and Corey for the great talk and demo!

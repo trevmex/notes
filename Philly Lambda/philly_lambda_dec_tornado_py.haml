@@ -1,0 +1,130 @@
+%h2 An Introduction to Tornado
+%i Gavin M Roy, CTO, myYearbook.com
+%p Philly Lambda December 2010 Meeting
+%p Torado is a scalable, non-blocking web server and micro-framework that was created by FriendFeed.
+%p This is similar to web.py as a framework.
+%p It is very fast and allows you to write simple asynchronous web applications quickly.
+%p You can get as many as 1,500 requests/sec on a vanilla Tornado install. (Hello World)
+%p myYearebook uses Tornado for a virtual currency system system that can be used across sites.
+%ul
+  %li That means the Tornado app serves as an API for the currency exchange.
+  %li They also have a URL shortener written in Tornado
+  %li The Image Upload Service is also run off of Tornado
+%p They chose Tornado because it was very fast to develop in and very scalable.
+%p There is a very small barrier to get started with Tornado. It takes about 5 lines of code to get a web server up and running (it reminds me of Sinatra)
+%p Features
+%ul
+  %li there is OAuth 1 and 2 support, as well as Twitter, FriendFeed, etc. API support.
+  %li There is also built in XSS support
+  %li There is also Google App Engine and WSGI support.
+  %li It is stuck on Python 2.5 because of the Google App Engine support.
+  %li Simple templating system
+%p There is really good documentation, which is rare for Python projects (a generalization)
+%p That being said, if you really want to learn Tornado, you should read the source!
+%p What it is not:
+%ul
+  %li It is not a full stack framework like Django
+  %li It is based on Twisted, but it is its own project.
+  %li It is not a replacement for a front-end web server. You need a reverse proxy server in front of it to manage it well (like nginx or Cherokee.
+%p The FriendFeed architecture uses many Tornado applications the run off of nginx.
+%p Tornado vs. Twisted Web
+%ul
+  %li Tornado does not have to be asynchronous, you can just have it be a small web server.
+  %li There are not a lot of asynchronous drivers out for it yet, but more are coming soon (MongoDB, RabitMQ are already out, more are on the way).
+  %li The problem with not having the drivers is that it can create blocking issues with data sources that have no drivers.
+  %li It is much smaller code base than Twisted. Twisted is much more of a beast, where Tornado is much more basic, and closer to traditional Python as opposed to Twisted, which is become a superset of Python in and of itself.
+%p Although started by FriendFeed, it is now fully Open Source, and is not actively developed by FriendFeed (now Facebook).
+%p The core of Tornado is the tornado.io_loop
+%ul
+  %li The IO loop is protocol independent.
+  %li there is a built in timer function that allows you to add timeouts (tornado.io_loop.set_timeout)
+  %li You create an io_loop, add a handler, and then set functions for the handler to call when fired.
+%p Tornado.web mankes it easy to write a simple web app
+%ul
+  %li To do this you extend the tornado.web.RequestHandler class
+  %li RequestHandler has hooks on init, prepare, and close.
+  %li it also allows you to do all the things you would expect from HTTP protocols (get, post, put, delete, redirects, etc.)
+  %li there is built in JSON en/decoding support for parameters as well.
+  %li Tornado is great for making a quick REST API.
+%p Tornado.template
+%ul
+  %li The Template system is not required to use.
+  %li It is similar to other templating engines.
+  %li It allows for single line python commands in the template
+  %li There are built-in supports for calling RequestHandler, so you do not have to instantiate it yourself.
+  %li It also handles caching and version control of JavaScript, etc.
+  %li
+    The code:
+    %pre
+      %code.python
+        def get(self):
+        self.render('home.html', username="trev");
+    The template:
+    %pre
+      %code.html
+        &lt;html&gt;
+        &lt;body&gt;
+        Hi {{username}}, Welcome to the site!
+        &lt;/body&gt;
+        &lt;/html&gt;
+  %li Templates also have simple logic (if, else, etc.)
+  %li using <tt>{{ static_url('filename.js') }}</tt>, you can have hashes connected to the file for cache busting purposes
+  %li It is very similar to Freemarker or ERB.
+  %li You can internationalize the template with <tt>{{_("String to i18nize")}}</tt>
+  %li You can also include other html files with <tt>{{% include "my.html" %}}</tt>
+  %li Cross site forgery protection: <tt>{{ xsfr_form_html() }}</tt> inside your login form. (it is that easy!)
+  %li The engine will error out, if you do not pass the cross site forgery token as well as other form data.
+%p UI Modules
+%ul
+  %li You import the module once, and Tornado will take care of importing it everywhere you need it.
+  %li In your templates, you can call module functions by using <tt>{{ modules.HTTPSCheck() }}</tt>
+%p Tornado.locale
+%ul
+  %li The locale files are in a very strict locale.csv format, e.g. en_US.csv
+  %li <tt>tornado.locale.load_translations(path_to_locale_files)</tt> will allow you to replace all <tt>{{_("Whatever")}}</tt> with what is in your locale file.
+  %li To add specialized locales (controlled by the user), you have to extend the RequestHandler.get_user_locale method to check the user preferences.
+  %li If locale is loaded and not extended, it will just use the Accept-Language HTTP Header.
+  %li
+    Locale File Format (DE_DE):
+    %pre
+      %code.csv
+        "New","Neu"
+        "Donate","Spenden"
+        "New Paste", "Neuer Paste"
+%p Tornado.auth
+%ul
+  %li Built in mixins for OpenID, OAuth 1 and 2
+  %li BUT you have to extend the RequestHandler to use them, you don't get them for free.
+  %li That is, you have to extend the functions that OAuth, etc. expects to be there (i.e. you need to write the callbacks that the API will call)
+  %li All services (Google, Twitter, FriendFeed) return and expect different results, so you really can't write a universal callback catchall. (well, you could, but...)
+%p Other modules on note
+%ul
+  %li tornado.database: MySQL wrapper (because there is no other database :P)
+  %li tornado.escape: Escaping for URI, HTTP, HTML, etc. Exposed in tornado.template
+  %li tornado.httpclient: Based on libcurl. It is an...http client. But it has been rewritten to use liburl2 (which is good for Google App Engine, since it is pure Python)
+  %li tornado.iostream: an io socket wrapper for using the io_loop
+  %li tornado.options: an alternative to opt_parse...but it is lame
+  %li tornado.testing: Very crappy test support. ;_; V. immature. BUT it is easy to mock stuff out, since tornado is such a micro framework.
+  %li tornado.websocket: v. immature, it is changing with the websocket standard based on Chrome and Firefox. You treat the websocket as a RequestHandler.
+%p Tinman
+%ul
+  %li It needs some serious help.
+  %li Tinman is a meta-framework around Tornado
+  %li It is like Padrino for Sinatra.
+  %li Written by Gavin and the guys at myYearbook.
+  %li Session handling is supported.
+  %li you set it up with simple YAML files
+  %li Has a great Memoize function for dynamic content with decorators.
+  %li It is on github, check it out!
+%p
+  Follow Gavin on Twitter 
+  %a{:href => "http://www.twitter.com/crad"}@crad,
+  his blog is at http://gavinroy.com
+%p myYearbook.com is hiring, and they LOVE polyglots, so language geeks, please apply (and New Hope is a great little town).
+%p
+  %a{:href => "http://github.com/gmr/Pika"} Pika: RabbitMQ/AMQP support for Tornado
+%p
+  %a{:href => "http://github.com/gmr/Tinman"} Tinman
+%p
+  %a{:href => "mailto:gmr@myyearbook.com"} Email Gavin
+%p Thank you to Gavin and the entire Philly Lambda gang for another great talk!

@@ -1,0 +1,22 @@
+%h2 Seven at one blow
+%i Lars Hupel
+%p New and polished features in Scalaz 7!
+%p Scalaz has purely functional data structures for Scala and the type classes known from Haskell.
+%ul
+  %li
+    %p A-la-carte implicits: You can have implicit type class instances and infix operators.
+    %p All type classes have companion objects, so you don't need to write imlpicitly to import things. So now you have to have a lot more imports to get things done in Scalaz. But you can import all the things with the all package.
+    %p Yes, you will have to write more imports, BUT now you don't have to import all the things if you are not going to bneed them. It should make compile-time debugging easier, and increases compilation speed.
+  %li
+    %p Unapply: This solves the problem of Higher-order Unification. Scala adds subtyping, the problem with that is that everything is an Any, so yu get a lot of ambiguity.
+    %p So we use aproximation to solve the issue.
+    %p Using unapply, you can omit types a lot, but I have to admit, I don't fully grok this guy...
+  %li
+    %p Laws: In Scalaz 6, you could declare something as a Functor even if it isn't a Functor. That is a no-no. In Scalaz 7, you cannot do that, there are laws the dictate what types can do what. You have to implement to those standards now.
+    %p ScalaCheck is a test suite that checks to make sure that you are writing Scalaz code that applies to the laws of what you are writing (Monads, Monoids, Functors, etc.).
+    %p Just call .checkAll on your classes in Specs2 and you can check your classes against these laws.
+  %li
+    %p Community imvolvement: There have bee over 200 issues opened and pull requests. The Scalaz community is very active and getting better everyday.
+    %p Scalaz 7 makes validation of your code even easier. Check it out!
+%p Use Scalaz 7!
+%b Thank you to Lars for the great talk!

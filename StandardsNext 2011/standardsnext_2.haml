@@ -1,0 +1,45 @@
+/ Enterprise UA Detection
+%h3 #standardsnext Session 2 Notes
+%i Mike Taylor, @miketaylr
+%p How to detect user agent capabilities in an increasingly less terrible fashion
+%p Why do we use user agent detection?
+%ul
+  %li After-thought mobile sites.
+  %li DHTML and the DOM were differently implemented in different browsers.
+  %li Fix UI bugs on older browsers.
+  %li See if something is a trusted device, etc.
+%h3 User Agent Sniffing
+%p Snort: a collection if really terrible UA sniffs (check it out at http://github.com/miketaylr/snort)
+%p There is a UA String on the navigator object. Most of them lie.
+%p There is a bug in IIS that make Opera 10 lie and tell you it is Opera 9.8.
+%p So the story is these UA Strings are VERY fragile. You should not depend on them.
+%p UA String Detection sucks. Don't do it.
+%h3 Feature (Weak) Inference
+%p If you assume a browser by detecting a FEATURE of the browser, you might not ACTUALLY be that browser.
+%p If you are inferring a feature, you could get in trouble.
+%h3 Feature Detection
+%p Detecting that features actually exist and work is awesome.
+%p From Modernizr:
+%pre
+  %code.javascript
+    tests['geolocation'] = function () {
+    return !!navigator.geolocation;
+    };
+%p If you turn off your geolocation feature in your browser, OR you have a browser that cannot do it, you still have something that cannot break.
+%h3 Feature Testing.
+%p This is more awesome than feature detection.
+%p Check out the has.js (https://github.com/phiggins42/has.js) library. It checks out not only IF you have a feature, but it makes sure that you the feature works.
+%p ECMAScript5 has an isArray function that checks if something is an array (finally!).
+%p So feature testing is the ultimate in awesome in making sure that your features will work the way you think they should.
+%h3 But in the real world...
+%p Believe it or not, but browsers are filled with bugs.
+%p It is amazing that any of them actually work.
+%p Sometimes you HAVE to do it the wrong way, because bugs make you do it.
+%p Sometimes you have to do bad things to get things done. Even if you feel dirty doing it.
+%p Check out yepnope.js (http://yepnopejs.com/) it is awesome.
+%p Check out line 25 of https://github.com/SlexAxton/yepnope.js/blob/master/yepnope.js: Even really cool guys that are really smart are having to do browser detection because of stupid browser bugs.
+%p We all have to live and work in the real world, so don't feel bad.
+%p The key is that you should future proof your hacks. Think about it and check with your friends/coworkers when you code it up.
+%p "If you don't want to think about it, use Modernizr (http://www.modernizr.com/). It is awesome!
+%p The Taylor Corollary: "The faster your feature detection runs, the larger the JPEGs your executives will want on the page."
+%p Thank you to Mike for the great talk!

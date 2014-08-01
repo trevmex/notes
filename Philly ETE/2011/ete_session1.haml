@@ -1,0 +1,86 @@
+%h2 An App Within An App: Rails 3 Engines, and What's Coming in Rails 3.1
+%i Yehuda Katz, @wycats
+%p (warning this is an advanced Rails talk)
+%p This is how apps within apps are going to work in 3.1.
+%p Rails Engines allow you to have engines inside of engines inside of engines.
+%p So in RailsConf (we hope) Rails 3.1 will be released.
+%p @drogus - Piotr is an awesome resource that has picked up the slack and made all of this possible.
+%h3 What do Rails 3.0 engines look like today?
+%ul
+  %li An Engine attaches its code to your app in the global namespace.
+  %li The middlewarestack, the router, and the plugins are all globally shared. So Engines cannot have any of these things.
+%p The router is basically one big lookup table. So if your engine has a non-namespaced route, it could be clobbered.
+%p ...unfortunately, that still is in the main global lookup, which isn't perfect. So conflict abound.
+%p There is a lack of control in the process that turn into defensive coding, that makes for really ugly code.
+%p The load order matters, and engines' routes are always last. This creates non-deterministic behavior within your routes, if you have lots of engines.
+%p helper :all - Most Rails apps put all their helpers in one helper file.
+%p So now all the helpers are now included everywhere, so again you run into namespace issues.
+%p That makes for stupid long names in the global namespace.
+%p Also, how do engines deal with migrations? Assets? There are lots of ideas, but most are all hacks.
+%h3 The solution: Isolated Engines
+%p A rack app tells the server what to send to an app and vice versa.
+%p From the point of view of the app, the rack middleware makes the app no longer care what server it is talking to, and vice versa.
+%p A Rack app, like a logger, can sit in the middle between the app and the server, as long as it sends and receives the right things from and to the right place.
+%p From the sever's point of view, the middleware IS the app.
+%p From the app's point of view, the middleware IS the app.
+%p On top of that, each piece of middleware is like and app, no one cares where things are in the stack, since the interface is the same.
+%h3 What is a router?
+%p A router is like middleware, but instead of pointing to ONE application, the router points to many applications based on some decision.
+%p From the server's point of view, the router is just another app.
+%p Form the individual app's the router is the same as the server.
+%p So the Rails 3 router is a router like this.
+%b posts#index == PostsController.action(:index)
+%p Every line in the routes.rb file is ACTUALLY a rack app.
+%p A router chooses which Rack endpoint to send and receive information from.
+%p A cool thing about this is that you can now have routes that run individual rack apps (say a Sinatra app or example).
+%p There is a problem, though. Every rack application assumes that it is coming from the root.
+%p There is an API called mount, that will allow you pull out the root path from the rack apps you are passing to. This means that you do not have to duplicate your path in the sub-app (in rack).
+%p Well-behaved Rack apps will look at the PATH_INFO to see where to start.
+%p BUT if you use this you HAVE to prepend the SCRIPT_NAME to create full paths in your Rack apps. Remember it!
+%p mount allows self-contained sub-apps. Sweet!
+%p These are called "Mountable Apps"
+%p A mountable app is an app inside of another app.
+%h3 The difference with Rails 3.1
+%p Engines are now Rack applications.
+%p Engines are now self-contained, like the sinatra app above.
+%p This allows the user of the top-level Rails app to clearly set paths. It is not hidden inside the engine.
+%p This makes the order of routes explicit, and easier to discover.
+%p Now your helpers are clearly namespaced, so you do not have to make crazy helper names. No more global namespace worries.
+%p The main application helper namespace is "main_app"
+%p Engines should NOT use the main_app namespace, if you are make SURE that you communicate this to your users. They need to know that. It is all about transparency.
+%p Isolated applications do NOT include helpers outside of the current namespace.
+%p So you have to register a namespace for a specific app. Then all your helpers will be part of the namespace.
+%p Migrations, use "rake railties:copy_migrations"
+%p Migrations are there to provide a history of the past, so this makes isolating migrations a hard problem, it would muddle the main concept of migrations.
+%p So now you copy migrations from apps to the main app.
+%p Assets have changed since the summer. We want things to change without configuration.
+%p Rails 3.1 Sprockets: This makes your JS and CSS top-level concerns:
+%p //=require("jquery");
+%p Engines, therefore, can have their own assets (JS/CSS) as well. Awesome!
+%p New Template Handlers: SCSS and CoffeeScript.
+%p SCSS is an noop on CSS. So now you can use SCSS for free on the front end. AWESOME!
+%p CoffeeScript is now built-in. You are not FORCED to use CoffeeScript, but you can now. That is wicked cool.
+%p So Rails is finally pushing new cool technology. Love it or hate it, you should check it out.
+%p Sub-applications can have JS/CSS that can be pulled into a main app. This is cool, but we should make sure that the engine's assets should be for the engine, not so much as for an API.
+%p SCSS allows you to @import assets from routes.
+%pre
+  %code
+    rails plugin new blog --mountable
+%p To test this, it creates a dummy engine in the test dir to test against.
+%p to opt in do this in your new plugin.:
+%pre
+  %code
+    isolate_namespace Blog
+%p So when you are inside a plugin and you run a scaffold generator it will generate the right code.
+%p An engine is a full app tha doesn't know how to boot itself.
+%p The cool thing is you can spin up your engine with the dummy app for testing.
+%p piotrsarnacki.com - Check out his blog posts. There are some amazing detail here about the entire process and how it was developed.
+%p Check out Octopus for linking engines to databases. It could be useful to link Octopus to Active Record, since it is not part of Rails core right now.
+%p One thing to note is that if your are writing in Rails, you will not have to worry about Rack (in general).
+%p If you mount to static paths, mountable apps are easy, but if your root has a dynamic path, your engine would have to be aware and handle that. (it is rare, though).
+%p When you write engines MAKE SURE YOU WRITE API POINTS FOR ACCESS!
+%p Assets will be passed through the Rails frontend, including static files, like images.
+%p Check out the Rails Admin Engine. It is a dream to have a unified Rails Admin.
+%p It is also a dream that devise become a standard for authentication.
+%p Yehuda believes that we should start coming up with standards for using Rails. But we are a lot of free spirits, so... :D
+%p Thank you to Yehuda for the great talk!

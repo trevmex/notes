@@ -1,0 +1,42 @@
+%h2 The MongoDB Metamorphosis: Data as Documents
+%i Kyle Banker
+%p Changing over to a new type of database is kind of scary. But is can be worth it.
+%h3 Outline
+%ol
+  %li Design Principles on MongoDB
+  %li Using rich documents
+  %li Simplifying relations
+  %li Embed vs. Reference
+  %li e-commerce
+%p 10gen originally started out trying to make a full app engine, but it turned out that people were more interested in a database model.
+%p try.mongodb.org - to check out how MongoDB works
+%p The MongoDB gem is also a good way to start exploring Mango
+%h3 What sort of problem does MongoDB solve?
+%p To build a database between two extremes: key-value stores and full relational database systems.
+%ul
+  %li mongoDB gives you a sophisticated data model, like a RDBS
+  %li while still giving you the speed and power of key-value store
+%p Anything that can be represented in JSON is a document (in mongoDB). MongoDB uses BSON (Binary JSON).
+%p What is the basic unit of data: Blobs, Rows, Columns, Documents. In Mongo it is Documents.
+%p How can we operate on the data: Dynamic queries (you have this in MySQL, but not memcached), Secondary indexes, Atomic updates (you can update parts of the database), Map-Reduce
+%p What are our app access patterns?: What is the read write model, how is the data updates, what kind of queries do you want?
+%h3 Rich documents (a document that encapsulates an entire thought, like an order)
+%p What can we do with a rich document?
+%ul
+  %li Make robust queries
+  %li Make atomic updates: add items to a document in one operation (db.orders.update)
+  %li Map-Reduce: A way to go over a document, aggregate it, and output it in a different way.
+%p MongoDB doesn't do joins.
+%p With rich documents, you get a holistic representation of an idea (an order is on rich document)
+%h3 Simplified Relations
+%ul
+  %li Tags: an object's tag is just an array of strings, and you can index on an array. So you can do something like a many-to-many using tagging.
+%p The mongoDB primary id is a UUID called ObjectID
+%h3 Embed vs. Reference
+%ul
+  %li When you embed references, you add actual data to the parent object, instead of just adding a reference.
+  %li Embedded documents are really fast.
+  %li Embedded and nested for complex hierarchies
+  %li Completely referential: only if you really need it.
+%h3 e-commerce as an example
+%p (check out the slide for details)

@@ -1,0 +1,70 @@
+%h2 Rails i18n
+%i Thibaut Assus
+%p Philly.rb January 2011 Meeting
+%p i18n is important because English is not the only language in the world.
+%p the i18n of the app and the i18n of the data are the main parts of i18n.
+%h3 
+%p In Rails i18n is easy as pie! Just add config/locales.en.yml (or fr.yml)
+%pre
+  %code.ruby
+    jp:
+    one: "ichi"
+    other: "hokano"
+%p you call it by doing:
+%pre
+  %code.ruby
+    t("one")
+    t("other")
+%p To set locale:
+%pre
+  %code.ruby
+    class ApplicationController
+    before_filter :set_locale
+
+    private
+    def set_locale
+    i18n.locale - params[:locale]
+    end
+
+    def default_url_options(options={})
+    {:locale =&lt; options[:locale]}
+    end
+%p
+  Then on your page you just have to add the query string:
+  %b ?locale=jp
+%h3 i18n of the data
+%p
+  This is hard, but there is a gem that does it all for you called
+  %b puret
+%p The code:
+%pre
+  %code.ruby
+    z# models/post.rb
+    class Post &lt; ActiveRecord::Base
+    puret :title, :description
+    end
+
+    z# models/post_translation.rb
+    class PostTranslation &lt; ActiveRecord::Base
+    puret_for :post
+    end
+
+    z# db/2011...post_translations.rb
+    create_table(:post_translations) do |t|
+    t.references :post
+    t.string :locale
+
+    t.string :titile
+    t.text :description
+
+    t.timestamps
+    end
+    add_index :post_translations, [:post_id, :locale], :unique =&lt; true
+%p You can do this in a generator (oh life in Rails is SO easy!):
+%pre
+  %code.bash
+    rails generate puret:model Post title:string description:text
+%p globalize is another gem for i18nizing your Rails projects.
+%p There is a meta_search gem that is like searchlogic for Rails 3 that has i18n support.
+%p So you should use i18n from the beginning of your project!
+%p The slides are done with slidedown and the slides are available at http://github.com/tibastral/i18n-pres

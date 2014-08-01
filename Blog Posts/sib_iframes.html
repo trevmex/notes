@@ -1,0 +1,46 @@
+<h2>Reloading Sibling iFrames from a link inside an iFrame</h2>
+<p>I recently came across an interesting problem. I had a page on one domain that has two iFrames on it from the same domain (e.g.: a header and a footer).</p>
+<p>I needed to have a button on the header iFrame reload <b>both</b> the header <b>and</b> the footer iFrames with new or augmented query string parameters.</p>
+<p>Well, I didn't think that one iFrame could effect another iFrame, but I was wrong! <b>If</b> both the iFrames are on the same domain <b>and</b> they have <i>name</i> attributes, it is possible. I'll show you how:</p>
+<h3>The Setup</h3>
+<p>First, we have a parent page with the iFrames we are pulling in from www.somedomain.com. It is <b>important</b> to note here that both iFrames are from the same domain. This will not work with iFrames from different domains.</p>
+<h4>The Parent</h4>
+<script src="https://gist.github.com/1130689.js?file=parent.html"></script>
+<p>The header and footer are just simple HTML files. We have links in the header that we will click to reload the header and the footer.</p>
+<p>I have also added a console log so you can see the href string of both the header and the footer.</p>
+<h4>The Header</h4>
+<script src="https://gist.github.com/1130689.js?file=header.html"></script>
+<h4>The Footer</h4>
+<script src="https://gist.github.com/1130689.js?file=footer.html"></script>
+<h3>The Helper</h3>
+<p>The above code will reload the header iFrame only, leaving the footer in the dust. To solve this, I created an iFrame helper function called <b>reloadIframesOnClick</b> that will reload multiple iFrames with new query string parameters, based on their name.</p>
+<p>The iFrame Helper JavaScript file does not rely on any external libraries and has been tested in IE 7, 8, 9, Chrome Stable and Dev Channels, Firefox 5.0, and Safari 5.1. You can find it at <a href="https://gist.github.com/1130689#file_i_frame_helper.js">http://tinyurl.com/iFrameHelper</a>.</p>
+<p>Using is is pretty straightforward. You just include the iFrameHelper script inside your iFrame code (in this case, the header) and call it with an object with two arrays: triggers and iframes.</p>
+<pre><code class="javascript">iFrameHelper.reloadIframesOnClick({
+  triggers: [
+    {
+      className: "state_1",
+      qsObj: {state: "1"}
+    },
+    {
+      className: "state_2",
+      qsObj: {state: "2"}
+    }
+  ],
+  iframes: ["header", "footer"]
+});</code></pre>
+<ul><li><b>triggers</b> is an array of objects containing the class of the element you want to bind the click event to (<i>className</i>), and an object containing query string key/value pairs you want to add or update on the iFrame reload (<i>qsObj</i>).</li>
+<li><b>iframes</b> is an array of iFrame names (the name attribute of the iFrame) that you wish to reload on click. Remember these have to be on the same domain.</li></ul>
+<h3>The Solution</h3>
+<p>With the helper file in place, all we have to do is update the header to include the iFrame helper and call <b>reloadIframesOnClick</b>.</p>
+<h4>The Fixed Header</h4>
+<script src="https://gist.github.com/1130689.js?file=header_complete.html"></script>
+<p>Note that the <b>reloadIframesOnClick</b> function has to be called <b>after</b> the link tags have been loaded onto the DOM.</p>
+<p>With that in place, when we click the links, <b>both</b> the header <b>and</b> the footer update.</p>
+<h4>The Demo</h4>
+<p>Check out <a href="http://jumex.sdf1.org/test/parent.html">the demo page</a> to see this in action.</p>
+<p>To see the iFrame URLs update, open your debugger (<a href="http://getfirebug.com/">Firebug</a>, <a href="http://www.opera.com/dragonfly/">Dragonfly</a>, <a href="http://trac.webkit.org/wiki/WebInspector">Webkit Inspector</a>, <a href="http://msdn.microsoft.com/en-us/library/dd565622(v=vs.85).aspx">F12 Developer Tools<a/>), and go to the console.</p>
+<p>When you click on the links in the header, you will see console messages with the updated header and footer URLs!</p>
+<p>I hope you find this useful. It was a big weight off my shoulders when I figured it out. Enjoy!</p>
+<h3>The Thanks</h3>
+<p>I want to give a big thanks to the lord and master of <a href="http://bromidic.net/">Bomidic.net</a> for pointing me in the right direction, and <a href="http://softwareas.com/">Michael Mahemoff</a> for his awesome post on <a href="http://softwareas.com/cross-domain-communication-with-iframes">Cross-Domain Communication with IFrames</a>, without which I could not have done this.</p>

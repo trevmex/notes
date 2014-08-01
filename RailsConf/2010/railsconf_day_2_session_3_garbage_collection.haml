@@ -1,0 +1,45 @@
+%h2 Garbage Collection and the Ruby Heap
+%i Joe Damato (timetobleed.com)
+
+%ul
+  %li Ruby is slow
+  %li Ruby loves eating RAM
+  %li What does Ruby DO with all that RAM?
+  %li The Ruby heap is a freelist of ruby slots
+  %li When you need an object it is pulled off the free list
+  %li If the freelist is empty, the garbage collector (GC) is run
+  %li The GC is:
+  %ul
+    %li Conservative: the VM hands out raw pointed to ruby objects.
+    %li Stop the World: When GC is running, no ruby code can be run
+    %li Mark and Sweep: mark all objects in use, sweep away unmarked objects
+  %li more objects = longer GC, longer GC = less time for ruby code to run, so: fewer objects = faster ruby code
+
+%h3 Tools
+%ul
+  %li ltrace: for tracing memory usage on garbage collection. Only for linux, though.
+  %li REE allows you to tune the Ruby GC settings:
+  %ul
+    %li malloc_limit = 60MB # the default is 8MB, which makes the GC run a lot more often, annoying the user.
+    %li HEAP_MIN_SLOTS = 500k # the default is 10k
+    %li a new rails app boots up with almost 500k objects on the heap (mostly code)
+    %li HEAP_SLOTS_GROWTH = 1 # default is 1.8x
+    %li that makes the slabs really big.
+  %li gdb.rb # gdb hooks for REE, but it is linux only
+  %li bleak_house: tells you what is leaking AND where it is leaking from.
+  %li
+    %h4 memprof
+    %ul
+      %li easy to use, detailed, and simple analysis
+      %li gem install memprof
+      %li works with Mac OS X, woohoo!
+      %li it rewrites the Ruby binary in memory
+      %li
+        %ul
+          %li memprof.track: track memory leaks
+          %li memprof.dump: dumps out ruby object information in json
+          %li memprof.dump_all: dumps out EVERY SINGLE object in the ruby heap.
+          %li memprof.com: a web UI for reading memprof dumps to analyze memory leaks
+          %li This tool can actually show you the piece of your code that the memory leak is coming from.
+          %li memprof has actually been used to find leaks in the Rails 3 core
+          %li config.middleware.use(Memprof::Tracer) => realtime tracing for rails apps that you can leave running all the time with no serious impact to performance.

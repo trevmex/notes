@@ -1,0 +1,62 @@
+%h2 The Bakery from the Black Lagoon
+%i Daniel Spiewak
+%p The Cake Pattern, it has been around since traits have in Scala.
+%p There are SO maky things that the cake pattern can do for you besides dependency injection.
+%p Modules are what the cake pattern is all about.
+%p The essence of modularity is information hiding.
+%p A trait is a module. Packages are terrible, they are not a very good tool for programming.
+%p Traits give you truely explicit dependencies, as opposed to packages.
+%p Traits also give you compllete encapsulation. You can encapsulate types as well as data. The implementor does not have to know what the type you use internally.
+%b OOP: The Good Parts&tm;
+%h3 How to Cake
+%ol
+  %li
+    %h4 Stage One
+    %ul
+      %li Split your code base into top level traits (modules). One per file.
+      %li instead of import, use extends and with.
+      %li you bare functions whereever you want within your trait.
+      %li Namespacing still has it's purpose.
+      %li We shouldn't be doing overloading, it is gross.
+      %li Use inner objects for namespacing. Namespacing is useful for avoiding names conflicting.
+  %li
+    %h4 Stage Two
+    %ul
+      %li With Stage One, testing is hard. So...
+      %li Refactor functions to abstract methods, this allows you to create multiple concrete forms, that allows to to test a lot easier, and have different implementations for different forms.
+      %li Refactor your classes to abstract types (a.k.a. virtual classes).
+      %li You can use type bounds for successive refinement of your types.
+      %li
+        %b Do not ever put side effects in trait construstors, you will hate yourself for it.
+      %li Abstract all the things!
+      %li Use "abstract override" to access "super" inside a trait.
+      %li Once you get your codebase to this level you are at a really good place.
+  %li
+    %h4 Stage Three
+    %ul
+      %li Composition over inheritance (sometimes). There are times when you need composition, like when you have modules that need to retain state.
+      %li This will lead to you nesting modules within modules (this can get a little brain-melting).
+      %li "Is an A a B?" If it is, use inheritance with traits, if it is not, use composition (trait vars within traits).
+      %li You do not want to tie together two traits that will have different lifecycles.
+      %li
+        %b Traits make modules first-class.
+%h3 The problems
+%p A lot of the problems come from sitting on the JVM.
+%p
+  vals will be executed at compile-tile eagerly. This makes overriding vals in parent traits do not work the way you think. These are mostly
+  %b initialization order
+  issues. They show up as bizarre NullPointerException(s) in your code.
+%p You will find unexpected JVM zeros (for example false)
+%p The solution is to use "def" or "lazy val" instead of val to avoid these issues. Be careful though, lazy vals are not very performant.
+%p
+  You can have
+  %b initialization deadlocks
+  when you have objects within objects. The solution is using val instead of lazy val. (Yeah Scala :P).
+%p Compilation time sucks with the cake pattern (it sucks with Scala anyway, but it is worse with the cake pattern).
+%p The presentation compiler does not work with the cake pattern.
+%p There are compilation bugs that thw cake pattern exposes in the scala compiler.
+%p Scaladoc does not deal with the cake pattern.
+%h3 Q&amp;A
+%p You can you packages for organizing code files, but don't use them for modularity.
+%p The nuclear option: turn your traits into abstract classes. It works, but you lose a lot of the pattern.
+%b Thank you to Daniel for the great talk!

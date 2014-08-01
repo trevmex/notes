@@ -1,0 +1,73 @@
+%h2 Graph Technologies and User Recommendations
+%i @mdeiters (theagiledevelopers.com)
+%p Advertising back in the day was very different than what it is now.
+%p Why is that? The TV was invented.
+%ul
+  %li This lead to focusing advertisement to your customers.
+  %li How does that relate to us in software engineering?
+  %li We have been doing CRUD for 30+ years. That is boring.
+  %li We are in the thralls of a creative revolution. Recommendations are the new hawtness.
+  %li Recommendations = Traffic = Profit(?)
+%ul
+  %li Is a message feed really just a message feed? No, it is a list of things I LIKE. It is a list of recommendations.
+  %li Using user recommendations, we can find out useful things, like who will have the most influence to your customers. Or who will be an influential new member of your team.
+  %li It is interesting to see which users view which pages.
+  %li You can gaze at this data and learn things about your customers.
+%p Relational databases just do not work to get this interesting information out.
+%ul
+  %li Finding people in your network 2 degrees away in SQL gets really ugly.
+  %li Why? Because doing recursion in SQL is a bad thing. It is hard and bitchy.
+  %li What is the solution? Graphs.
+%h3 Graphs
+%p Rows == Nodes (or actors, or vertexes)
+%p Relationship == Edges (or links)
+%ul
+  %li Graphs are less complex and 100% natural.
+  %li Graphs are "whiteboard friendly"
+  %li Graphs are really really fast. (coolness)
+%p In Memory Ruby Graphs
+%ul
+  %li Great for small static datasets or ad hoc querying
+  %li gem rgl # this is hard to understand, boo!
+  %li RGL loads graph data into memory, and you can use it there, but it doesn't scale well.
+  %li
+    %pre
+      %code{:class => "ruby"}
+        graph.add_edge "mary", "john" # (adds a relationship between the two)
+  %li 2000 nodes and 1MM edges = 300MB, a query took a few milliseconds.
+%p Persistent Graphs
+%ul
+  %li Neo4j: The hawtness, but it is Java NOOOOOO
+  %li So, you can use Neo4j.rb to link into Neo4j BUT you have to use JRuby
+  %li It is tailored to use Neo4j as your primary datastore
+  %li It is like a key-value store with relationships
+%p What if you already have a relational DB? And you don't want to use Java
+%ul
+  %li Neo4jr-social: More REST, less Java
+  %li They are using Neo4j just for their relations
+  %li Neo4jr-social is like Sunspot for Solr.
+  %li sudo gem install neo4jr-social; start-neo4jr-social
+  %li This guy runs on JRuby, BUT your app doesn't have to run on JRuby (woohoo!)
+  %li That means it runs independently and you call into it using REST calls.
+%p IDEA! Write Neo4j for Ruby => Neo4r...or something
+%h3 Gremlin G=(V,E)
+%p An XPath-like way of querying your graph
+%ul
+  %li Works on Neo4j, will work on MongoDB, CouchDB, etc.
+  %li Before it was a bitch to make a query in a graph.
+  %li Now you can just use XPath to get into it.
+%h3 Graph Path Algorithms
+%ul
+  %li AllSimplePaths & ShortestPath: gets you the simple paths to your neighbors.
+  %li Dijkstra: Find the BEST path, not the shortest path (using path weights)
+  %li Closeness Centrality: Who is the most popular
+  %li Betweenness Centrality: Who knows the most popular people.
+  %li Eigenvector Centrality: similar to PageRank
+%h3 Graph speed
+%ul
+  %li Spare graphs are faster, more dense graphs are less so.
+  %li You need lots o' RAM and a goodness for a hard drive. It matters.
+  %li Metadata is important. You can add metadata to edges. Traversing metadata can be slow (esp, if you are traversing strings, ints are faster)
+  %li Breadth vs Depth First Searches: Depending on your data and what you want to get to, one type of search algo will be faster than another (analyze and use your best judgement)
+%p Graphs ARE approachable. You can use them in Rails.
+%p It is not NoSQL, it is "Not Only SQL" It is OK to have multiple data stores for different types of data.

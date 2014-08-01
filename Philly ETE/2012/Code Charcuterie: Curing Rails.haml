@@ -1,0 +1,45 @@
+%h2 Code Charcuterie: Curing Rails
+%i Aaron Patterson (@tenderlove)
+%p What does enterprise mean?
+%ul
+  %li Numerous Developers
+  %li Legacy Systems
+  %li Conservative Estimates
+%p But what does "enterprise" mean for developers?
+%p Developers care about speed. Specifically fast development and fast feedback. It is important to have a fast feedback loop.
+%p It is important to have a scalable system. "You can make any application scale, if you put a big enough engine on it." (Anything is scalable)
+%p Our systems have to be stable. When we upgrade, we don't want to have to change everything.
+%b You have to have a system that is testable. And quickly testable.
+%p You have to have strong well-defined integration points.
+%p You must have an understandable system. Other people need to be able to grok what your system does.
+%p This is all about risk management.
+%p As enterprise developers, one thing that we have that is different from non-enterprise developers is that we tend to be a bit more risk-averse.ustomers and revenue, because of that we have more to use with change.
+%p "I don't believe in the word 'Enterprise,' I believe in risk management."
+%p One good thing you can do to improve Rails logging is to actually override the logger to give out more useful information.
+%p Logs in Ruby take advantge of file buffering to improve performance. That helps because you are not writing to disk as often. Writing to disk is expesnive.
+%p Ruby has an 8K userland buffer. So if your process dies, you might lose 8K of data. Is this acceptable, you can do that.
+%p Another alternative is using the Syslog gem.
+%p
+  %a{:href => "http://www.lwes.org/"}LWES
+  is a logging system that is much more robust. Check it out.
+%p What about dealing with risk in code? How do we address those.
+%ul
+  %li
+    %b Prepared statement caching
+    %p parse your SQL statements once and have the DB use that as a reference.
+    %p In Rails, we cache an AST for SQL statements, so that the SQL statement can become a prepared statement in the background. Nice!
+    %p The cool thing about storing the AST, is that now you can use AST Transforms to create new SQL statements, and the rest of the code stays exactly the same.
+  %li
+    %b Instrumentation!
+    %p The instrumentation system is like a queue, and you can subscribe to the queue (like a pub/sub).
+    %p With proper instrumentation we are able to run metrics to improve our systems.
+%b As engineers we have to manage risk. That is what makes us more than hackers.
+%b Avoiding Nul Pointers in your Views!!!
+%ul
+  %li Run with "ruby -w" It will tell you all about your warnings. That is a good thing.
+  %li Run your tests with warnings enabled. Clean it up, son!
+  %li But so many people ignore warnings, so use methods instead of instance variables in your views. That is what helper methods are for.
+  %li That has its problems, though. Try our context objects.
+  %li Context objects will allow you to instantiate methods against a context unique to views, and they are testable.
+  %li Another big advantage is that your failures are much more meaningful.
+%p Thanks to Aaron for the great .talk!
