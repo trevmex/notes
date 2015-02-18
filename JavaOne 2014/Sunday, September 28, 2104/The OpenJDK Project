@@ -1,0 +1,5 @@
+%h2 #JavaOne The OpenJDK Project: Your Java. Our Java. [Notes]
+%i Otávio Santana (@otaviojava), Roland Chrisbel Amour Malonga (@karianna)
+%p
+	%a{:href => "http://openjdk.java.net/"}OpenJDK
+	is a completely free and open source Java Development Kit developed by the Java community. There is currently support for Java 7, 8 and 9 (future).

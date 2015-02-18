@@ -1,0 +1,38 @@
+%h2 #JavaOne Adopting Java: Create Java’s Future. Now. [Notes]
+%i Martijn Verburg, Séti Afanou
+%p ACRONYM CITY!!!:
+%ul
+	%li JUG - Java User Group
+	%li JCP - Java Community Process
+	%li JSR - Java Specification Request
+	%li RI - Reference Implementation
+	%li TCK - Technology Compatibility Kit
+%p Java EE's RI is usually JBoss or GlassFish
+%p If you want to have an RI you have to pass the TCK (their test suite).
+%p
+	%a{:href => "https://java.net/projects/adoptajsr/pages/Home"}Adopting a JSR starts here.
+%p You should get involved in shaping Java if you like coding in Java. If you don't then other people (not you) will be the people shaping the language, and that could be a bad thing for you...
+%p JUGs can get involved with JSRs in lots of ways. One of the big ones is through training, testing and debugging.
+%p One of the fun things about the program is that you can meet lots of people from other JUGs around the world.
+%p Every single JSR is developed out in the open. It is all public and open for comment.
+%p
+	You can join the
+	%a{:href => "http://virtualjug.com/"}virtual JUG
+	if you do not have a JUG near you.
+%p
+	Java is build by OpenJDK. You can compile
+	%a{:href => "http://openjdk.java.net/projects/jdk9/"}Java 9
+	right now!
+%p A great way to give back is to try out the new APIs (write an app that runs against a proposed API) and see if it works the way you expect.
+%p
+	You can work on RIs themselves as well! One fun one is
+	%a{:href => "http://javamoney.github.io/"}JavaMoney.
+%p
+	There is also a
+	%a{:href => "https://github.com/unitsofmeasurement/unit-api"}units and measurements API
+	that you can contribute to as well.
+%p Oracle is the lead for most of the Java EE JSRs, if you want to get involved with them, check out java.net.
+%p You can also join the "Expert Group" for a JSR, but fair warning it is a 20-40 hour per week time sink if you decide to do that.
+%p If you are really insane, you can ask to join the executive committee. There is almost no tech work on the executive committee, it is almost all lawyer work.
+%p If you want to get involved with a JSR, make sure you contact the Spec Lead before diving in.
+%p Great information, thanks!

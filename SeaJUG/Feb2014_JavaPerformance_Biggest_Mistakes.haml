@@ -1,0 +1,71 @@
+%h2 Java Performance: Biggest Mistakes
+%i Andreas Grabner (@grabnerandi)
+%p We can all build better software if we care about performance.
+%p Nobody wants 503s. How can we make our applications more resilient against heavy load? Why not? Well, that means we all get pulled in at the middle of the night for a war room to get stuff fixed. That sucks. It also generates bad publicity, and very poor reviews.
+%p Business people do not like downtime either. The later we find a problem the more expensive it is to fix.
+%b 80% if code written in the US last year was bug fixing.
+%p 80% of the problems, though, are caused by 20% of the patterns.
+%p Performance is a critical aspect of software development, we should treat it is a first class citizen.
+%p 6 Situations on Why this happens and How to avoid it:
+%ol
+  %li
+    %p
+      The "smart" engineer, that wants to reinvent the wheel can get you in trouble, but even more troublesome is the developer that
+      %b "blindly" (re)uses existing components.
+      "It works on my machine" is the most BS statement ever.
+    %p
+      Be careful when using Hibernate (or any other ORM) to see if the SQL makes sense for your use case. Always look to see what is happening under the covers.
+  %li
+    %p
+      %b Not every architect makes good decisions.
+      You always want to challenge your assumptions, especially if you did not make them originally.
+    %p The classical N+1 query problem: when you see the same SQL select statement over and over again with one variable changed each time.
+    %p When your developers do not understand how databases work, you are going to have a bad time.
+    %b Do not think that your metrics tell you everything!!! You WILL miss things.
+    %p
+      Look at these metrics when working with databases:
+      %ul
+        %li Number of SQL Executions
+        %li Number of SAME SQL Statements
+        %li Connection Acquisition Time
+  %li
+    %p Disconnected Teams
+    %p "Teamwork" between devs and ops can be troublesome. Devs, do NOT make back doors to subvert ops. You need to work together.
+    %p Make sure that your test environment and you production environment look the same.
+    %p
+      Look at these metrics:
+      %ul
+        %li Number of log messages
+        %li Number of exceptions (especially ones that are not in log files, you can find them with JMX)
+  %li
+    %p "Deployments" go bad!
+    %p Surprise: test and prod are DIFFERENT! You have to understand that when you deploy your software.
+    %b Do not upgrade your dependencies without testing them first! Never update in prod if you didn't upgrade in test.
+    %p 
+      Look at these metrics:
+      %ul
+        %li Time spent in an API
+        %li Number of calls to an API
+  %li
+    %p Pushing without a plan
+    %p
+      Always stop to think through how your project will render.
+      %b Especially on mobile.
+    %p When you push through things in a rush, you will miss things. You will break things.
+    %p
+      Look at these metrics:
+      %ul
+        %li Number of images
+        %li Number of redirects
+        %li Size of resources
+  %li
+    %p No "Agile" Deployment
+    %p When you know that you are going to be going under heavy load, change your product to make your message heard. Get rid of the cruft on your page if you know your load will be high for a short amount of time.
+    %p
+      Look at these metrics:
+      %ul
+        %li Number of domains (accessing your page)
+        %li Total size (of page load)
+%p We should not have to check performance metrics manually. We need to test our code. We have to test our architecture. That should be automated and part of the build cycle.
+%p We do NOT have to wait for bugs. We do not have to meet in the war rooms. If we care about performance as a first class citizen, we can make happier code and happier coders!
+%p Great talk, Andreas! Thanks for coming to Seattle!
