@@ -1,3 +1,28 @@
 %h2 HTTP/2 and Asynchronous APIs #OSB16 Notes
 %i Davey Shafik (@dshafik)
-%p 
+%h3 Open Source Bridge 2016 - Day 1 - Session 2
+%p prompt is an initiative to get people to talk about mental health in tech. Check it out.
+%p HTTP/2 was created by the IETF HTTP Working Group. HTTP/1.1, which we use today, was created in 1999. That is where we stopped until Google created SDPY in 2009, which was then adopted by IETF to become HTTP/2.
+%p 60% of browsers out there today, including all the most popular ones support HTTP/2.
+%p HTTP/2 is a binary transfer format, not text, like HTTP/1.1. It is also fully multiplexed.
+%p HTTP/2 also supports server push. That way a server can predict what you want, instead of waiting for the client to request all the resources one at a time.
+%p There are a lot of HTTP/2 proxies that you can turn on and it just works.
+%p You see, HTTP/1.1 sucks. We have t do a bunch of hacks like image sprites, and minification to make things better. That is dumb. HTTP/2 solves this through multiplexing, server push, and binary efficient format.
+%p Given a standard blog page, you could have lots of web requests, with HTTP/2, all of those requests could be multiplexed and called at the same time.
+%p Just by using HTTP/2, you do NOT get performance increases. You have to use it the right way, for example, explicitly using multiplexing.
+%p So, the thing to note is that with HTTP/2, you have to know what you are doing.
+%p
+	All browsers use TLS for HTTP/2. Encrypt your site. It is 
+	%a{:href => "https://letsencrypt.org/"}FREE!
+%p Server Push is the best! Your web application can tell clients all the resources you might think you need to make a web page work. The way it works is that the server says "hey I want to send you stuff," and then the client approves or denies it.
+%p Server push and web sockets are not the same thing. You can still use web sockets with HTTP/2.
+%p Good news! This means that minification is now unnecessary!
+%p Everything in HTTP/2 is based on streams. Streams are weighted, and can have dependencies. Streams are comprised of frames.
+%p Frames are the building blocks of HTTP/2. They are all uniquely identifiable, so they can come out of order! That is what allows multiplexing to work.
+%p Headers: Hpack. Hpack let's you send a byte array representing common headers, instead of the text of the header, which saves a LOT of space. AND you can dynamically add to the Hpack hash. That means you can pass a reference to a cookie instead of passing a cookie back and forth. That is huge!
+%p You can use stream dependencies and pages to send critical path js and css first, instead of embedding critical path js and css into your HTML.
+%p This is all new technology. Domain sharing becomes an anti-pattern. Minification becomes an anti-pattern. We can write better code and make it faster. Please try HTTP/2. It can make you faster. USE IT!
+%p
+	Check out HTTP/2 with Jetty.
+	%a{:href => "https://webtide.com/introduction-to-http2-in-jetty/"}Here is a tutorial (start with Jetty 9.3).
+%p Thank you, Davey, for a fantastic talk!

@@ -1,0 +1,35 @@
+%h2 Cassandra - an introduction #OSB16 Notes
+%i Hanneli Tavante (@hannelita)
+%h3 Open Source Bridge 2016 - Day 1 - Session 3
+%p Cassandra isn't difficult to get started with! You can do it today!
+%p Why Cassandra? What happens when you try to run a 300TB DB with a RDMS? It starts to die. You start to have a bad time.
+%p So, what do you do? You denormalize it! But denormalization gets messy fast.
+%p How about master/slave solutions? Well, you might run into replication lag and what if the master dies? You have a single point of failure.
+%p OK, how about sharding? Well, sharding gets really messy when you are doing schema updates. If one of your shards drops out, you are in trouble.
+%p Do you need consistency 100% of the time? If yes, all these solutions have downfalls.
+%p What about ACID? Do you need ACID all the time?
+%p How about HA? How highly available do you need your data? What is better availability or consistency in your situation?
+%p What would be a better scenario? Well, if you could put consistency aside sometimes, if you didn't ned to deal with master/slave issues, if you could scale with commodity hardware, if you didn't need to share. Well, then, maybe Cassandra!
+%p
+	CQL is the way you talk to Cassandra. It is very similar to SQL. If you need Hibernate to integrate with Cassandra, check out 
+	%a{:href => "https://github.com/impetus-opensource/Kundera"}Kundera.
+%p What is the data model behind Cassandra? You have a number of nodes that are connected together with a ring. There is no key node or master node. So any node can respond to any request at any time. It uses a gossip protocol to communicate between nodes.
+%p The ring the nodes are on is a consistent hash ring, which can be optimized for data locality, but that is an advanced topic.
+%p When you create a Cassandra KEYSPACE, you have to provide a replication factor (or RF) tells Cassandra how many copies of the data need to be distributed across the consistent hash ring.
+%p Replicated copies are made in an asynchronous way called a "hinted handoff." This could cause a consistency problem.
+%p What do you do if you have to have strong consistency in a part of the database? When you perform reads or writes you can set your consistency level (CL). The CL is the number of replicas that need to reply until that call is complete and sent to a client. So, if you want very strong consistency you would set CL=ALL. If you want to prefer availability, you could set CL=ONE. A more balanced approach would be to set a CL higher for write than read, like CL=QUORUM. CL is set per query, where RF is on the cluster level.
+%p For example, if you have a CL=ONE, RF=3. You will respond to the client fast (higher availability), but still have 3 replicas.
+%p Cassandra is a very good writer. It uses a sequential immutable commit log. It then writes the cdata to a memtable. Once the seq file and memtable is written to, the write is called successful.
+%p In an asynchronous time, the memtable is flushed to disk to an SSTable. This is continually happening in the background as the memtable gets full.
+%p Data comes with timestamps. They are immutable structures. A delete is not a real delete, it is a delete record sitting on top of a previous write.
+%p Of course, the SSTables will grow unbounded, so every now and again the SSTables are compacted.
+%p For CL=ALL or CL=QUORUM on reads, Cassandra tries to return you the most updated timestamp.
+%p You will want to build your tables based off of common queries based off of your data. There is no join in Cassandra. It is all in one big table.
+%p Clustering columns define data order. In Cassandra, you shouldn't do an Order By query. You, instead, can use the clustering columns to achieve this.
+%p Casssandra + Spark is a great combo for event tracking. Cassandra is a great place to flush Spark info.
+%p Even better, Cassandra + Spark + Kafka!!!
+%p Cassandra + Solr gives you a powerful type-ahead search engine.
+%p
+	Check out
+	%a{:href => "https://github.com/pcmanus/ccm"}CCM - Cassandra Cluster Manager!
+%p Thank you, Hanneli, for a great talk!
