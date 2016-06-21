@@ -1,4 +1,45 @@
-%h2 Less Painful Legacy Code Replacement #OSB16
+%h2 Less Painful Legacy Code Replacement #OSB16 Notes
 %h3 Open Source Bridge 2016 - Day 1 - Session 1
-%i Jennifer Tu
-%p 
+%i Jennifer Tu (@jtu) - One Medical Group
+%p Have you ever been asked to add a feature? Or for a "simple fix?" Well, we developers know that our code on the inside is crap.
+%p The key we always need to think about is when to rewrite versus when to refactor.
+%p "It's been a few years since anyone has worked on this project, but it should be a quick fix." - Always a falsehood.
+%p Some options:
+%ol
+	%li Small change: you have to change one or two lines of code, no biggie. This is a good option if this area of code won't be touched after your change for a long time.
+	%li Refactor and change: The code is a mess. You need to make the code easy to change FIRST, then fix it. This makes sense if there will be high churn on this area of code.
+	%li Sometimes you have to rewrite your legacy code. For example, if your crazy old code has, you know, NO TESTS. Boo.
+%p When do you rewrite versus refactor, though? That is the hard question.
+%p The only difference between the code before and after a refactor is the inside of the code, no functional changes have occurred (ideally). If you are changing behavior in code, you are NOT refactoring. You are, you know, changing your code.
+%p Rewrites, on the other hand, take a lot longer to do, can miss requirements, and are all or nothing propositions. Rewrites are almost always NOT the way to go. You should think deeply before making that decision.
+%b Choose refactoring whenever possible (over rewriting).
+%p How to decide? You have to gather some information first:
+%ol
+	%li
+		%b What are your goals and why?
+		%p Are you adding a feature, fixing a bug, adding an external dependency? What is it that your change suppose to do. You need to answer this first.
+	%li
+		%b What are your risks?
+		%p How much risk is acceptable in this project? Will your company's business suffer if you fail? How will your reputation be affected? Will there be user pain? You need to ask around to answer these questions. Risk assessment is a key job for any software engineer.
+	%li
+		%b Do you have tests?
+		%p DO YOU HAVE TESTS??? You MUST have tests. If you don't have tests, how can you safely rewrite OR refactor. The definition of legacy code is code without tests. How do you know what your code supposes to do without tests? You might know now, but six months from now? No way. Write tests.
+%p Ultimately, it is up to you, the developer, to make the right choice. Only you have the knowledge to make that decision. What is important here is that you need to do the research yourself to make that decision. No one else will think for you. You are and should be empowered to make that decision.
+%p OK, what do you have to do when you have decided to do the rewrite?
+%p First thing you need is a full team commitment to the rewrite. You have to have FULL team buy in. While rewriting, you will only be creating risk. No new features.
+%b Make sure you stabilize your code before adding new features!
+%p
+	Check out 
+	%a{:href => "https://github.com/github/scientist"}GitHub Scientist 
+	for compatibility testing.
+%p Use feature flags and beta users to test out your new system. This allows you to get fast feedback from core users to make iterative change.
+%p If you have beta users, make sure there is more than one point of contact from your team for the beta users. If you work with time zones, get people on other time zones to help you out.
+%p Tests tests tests. If you are doing a rewrite, you need behavior-based tests. You must be able to define the business rules, write tests for them, and be able to execute those tests in an automated way.
+%p Consider using design patterns to improve your code (See Heads First Design Patterns, The Gang of Four book, Refactoring, Effective Java).
+%ul
+	%li Strangler Application (Martin Fowler): Gradually create a new system around the edges of the old, letting it grow slowly over time.
+	%li Sprout Method (Michael Feathers): Add your new code in a little part of your code. Use feature flags to sprout a call to your new method.
+	%li Wrap Method (Michael Feathers): Wrap your legacy code in a new class (decorator pattern), and slowly replace pieces of your old code with new code.
+%p When do you choose sprout versus wrap methods? If you are doing benchmarking between the two implementations, sprout makes more sense, but if not, wrap might work better.
+%p Next time you find yourself faced with a rewrite, remember this advise. Look at your goals, your risks, and your available tests. Get team buy-in. And utilize your design patterns and real "Working Effectively With Legacy Code" by Michael Feathers.
+%p Thank you, Jennifer, for a wonderful talk!
