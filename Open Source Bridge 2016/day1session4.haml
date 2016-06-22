@@ -1,4 +1,22 @@
 %h2 Overdoing Microservices: how small is too small? #OSB16 Notes
 %i Kevin Scaldeferri (@kscaldef)
 %h3 Open Source Bridge 2016 - Day 1 - Session 4
-%p 
+%p Why do we like microservices? Well, you can get much faster release cycles, more team independence, less complex code, and increased developer happiness.
+%p But...you start to run into bigger issues. There are high operational overhead, high cognitive overhead.
+%p When is a microservice too small, when do you have too many? Let's try to figure it out.
+%p The first question you should ask is "how many services do I have?" This is a surprisingly hard question t answer for any system of even moderately complex systems. There are a lot of ways to find this: Perforce repos, Chef configs, Load balancers, TeamCity. But you WILL run into inconsistencies. Consistent naming helps a lot here, if you are in the position to affect that.
+%p How fast are you adding new services? If you are adding more and more services all the time, how are you keeping track of them? Are you ever getting rid of services? (do that).
+%p The next step is visualizing you services. But, you know, just stop using "death star" graphs, they are not very helpful to see what is connected together, even if it is pretty. A better way is to use boxes and arrows in a more service map structure.
+%p Another great visualization tool is loading your dependencies into a graph DB, like neo4j.
+%b If there is only one other service that depends on your service, there might not be a need for your service.
+%p Look for cycles in your services. If you find cycles in your service dependency graph, you should work to break them. It is a smell of a bad of not-thought-out architecture.
+%p Examining the request rate to your services is another way to discover which services you have that just don't need to be services.
+%b If you find out that replying to a heartbeat is the number one request to your service, it is a sign that you might not need that service.
+%p Also, look at your number of services versus number of developers. If your number of services are more than 3 per 1 dev, uh oh. Do you have that many services because devs can't work together? Does your front end and back end devs work well together? If not, you might see service explosion.
+%b Make it easy to decommission services if they are not needed.
+%p Number of commits per service. You can do a scatter graph of # of committers. versus # of commits. That is where you can find the bad services, and where services need help.
+%p One is the loneliest number. Don't focus on the huge monolithic services. Look at the services with one. One dependency, one client, one committer. the ones are where you might be going too small.
+%p You must invest in tooling to be able to update your services, and more importantly, retire your services.
+%b Snowflakes can't scale operationally.
+%p So, be engineers: measure things, analyze them, and improve.
+%p Thank you, Kevin, for a great talk!
