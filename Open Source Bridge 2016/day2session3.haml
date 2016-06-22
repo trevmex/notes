@@ -1,0 +1,24 @@
+%h2 Little Leaks Sink Your Tests #OSB16 Notes
+%i Ian Dees (@undees)
+%h3 Open Source Bridge 2016 - Day 2 - Session 3
+%p Tests rot. Test get out of control. It is easy to write fragile tests.
+%p "It was working..." "That test is flaky..." "It works on my machine..."
+%p There are lots of reasons this happens, and one big case is leaky global state.
+%p There are two big nasties that often get left behind affecting global state:
+%ol
+	%li
+		%p Temporary Files
+		%p You have to make sure that you put your temporary file creation and destruction in before and after blocks, not in the tests themselves.
+	%li
+		%p Databases
+		%p Database inserts can ofter be left behind. One great way to ensure that your database goes back in a better state is to rollback the database transactions your tests implemented.
+%p When you have global state issues, it is helpful to remove half of your tests and run again, and half of that again, rinse and repeat until we see the two (or more) tests that are conflicting.
+%p Mocks can bite you as well. When your mock objects stick around between tests, you can run into issues where the mocks are causing false issues when out-of-order test execution occurs. To address this, you can teardown your mocks between test runs.
+%p Faking out network connections can also get you in trouble when they are put in @BeforeClass methods. Not all mock network libraries clean up the fake network connections. Make sure that you clean out your connections.
+%b Never write tests that depend on setup performed in another test!
+%p Don't be afraid to delete bad tests. Some tests are just poorly written.
+%p If your language allows for runtime changes to classes (monkey patching in Ruby, for example), that can bite you as well. All of the sudden your class does something different than it did a second ago. Try your best to avoid monkey patching, if you can.
+%b Always randomize your test order! Every single test run!
+%p You need to use your detective hat on when you are finding these tests.
+%p Instead of just fixing the problem, try your best to automate the fix! Your future self will thank you!
+%p Thank you, Ian, for the great talk!
