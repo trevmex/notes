@@ -1,4 +1,32 @@
 %h3 Kubernetes 101 #OSB16 Notes
-%i Josh Berkus ()
+%i Josh Berkus (@fuzzychef)
 %h2 Open Source Bridge - Day 3 - Session 1
-%p 
+%p So...my code is in a container...now what? That is where Kubernetes came from.
+%p Kubernetes came from Google's internal set of tools. They made it compatible with Docker and gave it to the world.
+%p Let's talk about microservices. A microservice does one task and one task only. And the goal of Docker is to have one container per service.
+%p One container == One Service often means One App == Many containers. That gets messy fast. You need to coordinated them somehow. How do you do it? Bash scripting? Puppet? Chef? Ansible?
+%p the problem is configuration management tools were never designed to manage containers. Hence, Kubernetes.
+%p The basic concept of Kubernetes is called a pod. A pod shares a single IP address, a shared set of ports, and a shared data storage.
+%p You can ensure that pods are deployed together. And as far as the public is concerned, a pod looks like a complete app, even though it is comprised of many containers.
+%p Kubernetes pods are configured with YAML files.
+%p The apiVersion in the yml file is required. Then you define to kind of thing you are creating (a pod, for example), Then you have to have a name and label, both are needed. Finally you write a spec, in the pod case, you tell it the containers that will be part of the pod.
+%p You should name your containers in a pod if you are deploying to production, for debugging purposes.
+%p You deploy on nodes. A node maps to an individual virtual or physical machine. There will be multiple nodes in a cluster, especially since there has to be a master node. All nodes run a container called "kubelet."
+%p We still need configuration management (puppet/chef/ansible) to set up your cluster. We can't get rid of it all together.
+%p Kubernetes will automatically reschedule new nodes in a cluster if you lose nodes.
+%p Kubernetes is all about scale, and how it scales is through replicas. A replica replicates pods throughout your cluster of nodes and the Kubernetes scheduler places your pod replicas across your cluster.
+%p The scheduler is very simplistic. If you need to a more fine-grained scheduler, it is fully pluggable (you can write your own).
+%p If you want 3 replicas, an you already have 2, the scheduler will know and only deploy one more.
+%p Ok, now that you are deployed your app in your pod to many nodes in your cluster, how to do communicate to (view) your app?
+%p That is where we get to services. A service is the wrapper for sharing a replica set with other clusters or the external world. The default service shares internally only, if you need to share externally, you have to use NodePort or LoadBalancer. In prod you would only use NodePort if your load balancer couldn't interop with Kubernetes.
+%p Labels are how you search for things (containers, pods, nodes, clusters, services).
+%p Deployments were just introduced in Kubernetes 1.2.
+%p But what if I need to configure my app? You can use a Kubernetes configuration. ENV is for public info, and ConfigMap is for secrets.
+%b Environment variables are not a good place for passwords!
+%p The ConfigMap pulls info from a ConfigMap yml file that you will NOT put in source code management. DON'T DO IT!
+%p What about stateful services? One of the things that Docker Swarm didn't do was deal with state.
+%p Kubernetes deals with state with volumes and persistentVolumes. Volume data goes away when you destroy a pod. PersistentVolume data stays around when you destroy a pod.
+%p If you cannot connect to your services, one of the first things to check for is if kube-proxy is down on one of your nodes.
+%p There are namespaces you can use to to organize as well.
+%p Kubernetes helps you orchestrate Docker. You should use it!
+%p Thank you, Josh, for a very useful talk!
