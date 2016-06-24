@@ -1,0 +1,22 @@
+%h2 Bots Not Cattle #OSB16 Notes
+%i Josh Berkus (@fuzzychef)
+%h3 Open Source Bridge - Day 3 - Session 6
+%p DevOps. Database geeks were the original devops. When DevOps became a thing, it sort of ignored databases. "Databases are a special snowflake." Ugh!
+%p Why are databases so special? they need containers and configuration management as well. Stop leaving DBs in the dust!
+%p What is the third ave of automation. The first wave was software packaging. Then came configuration management. What comes next?
+%p Are containers a third wave? No...people are just using containers as a replacement for configuration management. It is like an evolution of the second wave. Not something new.
+%p In the second wave of automation one mantra is your servers are "cattle, not pets." Your servers should have numbers, not names, get herded around in large groups, and if they get sick, you kill them. Servers should not be "pets."
+%p The problem with cattle. Cattle are dumb. You can only herd them in one direction at a time, and they have to be centrally managed.
+%p Second wave automation depends on central management. This can be problematic.
+%p Central manage limits your scale ability. It runs into people scale, it increases your separation of dev and ops even more. Your developers don't become "dev/ops," your ops people are just now doing other things we call "devops."
+%p What would be great is if you could send out a bunch of "if this then that" instructions. You want some intelligent cattle. You want your systems to become state machines that can handle failures. Something more advanced than cattle: bots.
+%p There are real advantages to state machines. It needs simple testable logic, it needs to be able to avoid unhandled events, and it does not need a scheduler, since the machine itself knows what to do. Think of an airplane system. The airplane cannot have to talk to a central scheduler to work. It must be a state machine.
+%b Model your distributed systems as state machines. The nice thing with that is that you don't need a central controller, since every node knows how to handle itself as part of a cluster.
+%p How do you make your app a bot?
+%ol
+	%li Make your app initialize itself.
+	%li Make your app store state about itself.
+	%li Use a distributed configuration store like etcd.
+%p There are some problems with this approach. One is that everything you are doing is async. It can be laggy, there are race conditions, halting problems, and you have to add resource events
+%p Now we all have to write code about, not only the application, but how the application has to work, too, which they would be doing anyway, just in the form as a chef config.
+%p Thank you, Josh, for a great talk! Lots of thing to think about here.
