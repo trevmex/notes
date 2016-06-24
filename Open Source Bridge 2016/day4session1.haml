@@ -1,0 +1,18 @@
+%h2 On the design and construction of a keyboard #OSB16 Notes
+%i Jim Snow
+%h3 Open Source Bridge - Day 4 - Session 1
+%img{:src => "https://67.media.tumblr.com/3d1564c1e075d353daf9901669d22f3f/tumblr_o9aegxOFOL1qzxbxno1_1280.jpg"}
+%p Jim started with building cigar box guitars. You can build one in about a day, so it is a great way to get into making your own music instruments
+%p Equal temperament uses the 12th root of two. This is what most instruments use.
+%p Just intonation uses simple integer ratios. E.g. 3:2.
+%p One of the problems with equal temperament is that there are a lot of ratios that are unexplored in equal temperament.
+%p In a traditional piano layout, there are just not enough keys to tune for just intonation.
+%p Pianos cannot modulate after strike, with the exception of after touch, but that is not common.
+%p Jim's keyboard has 31 notes per octave.
+%p One way of seeing musical history is seeing music theory is seeing humans like higher prime limit-style music. Pythagorean tuning is 3-limit, most Western music is 5-limit, Jim's keyboard is 7-limit.
+%p Jim used a Delauney Triangulation to make a Voronoi Diagram that was used to make the keyboard layout.
+%p He made his own circuitry with MCP3008 AC/DC Converters, a SPI bus and a RasberryPi. He uses Velostat to turn the keys on and off. SPI bus allows you to read the ADC at 90 hertz. That is fast enough to not have lag when playing.
+%p Jim has it hooked up to a MIDI synthesizer. He uses the same techniques as alt-tuner. MIDI has no concept of pitch, but there is a loophole! There is a pitch-bend command that affects an entire channel, you can use that for pitch. There are 16 MIDI channels. You can hack it to send a note to a single channel with a pitch-bend command. That way you can get a one-note pitch.
+%p You can vary the pressure to a key to increase the volume! Cool!
+%i This is a really cool device! Jim is giving lots of technical details on the creation of the keyboard! Sorry if I'm not getting it all.
+%p Thank you, Jim, for showing off your invention!
