@@ -1,0 +1,24 @@
+%h2 Put A Type On It: Idris Type Providers for AWS Resources (#strangeloop notes)
+%i Susan Potter
+%p This is about making software and services a bit more reasonable.
+%p What is a type error? AWS availability zone mapping errors can be thought of as a type of type error! A common solution to solve for AWS availability zones is to hard code the availability zones in your app. So...that sucks.
+%p That leads to stale assumptions to your environment, and it leads to manual config updating.
+%p But, what can you do about it? We want derived rules or policies, be able yo validate existing deployments, validate future deployments, and manage infrastructure requirements.
+%p Why reason about infrastructure now? Well, there i a high turnover in operations and developers. Tribal knowledge is just not acceptable in today's churning workplace.
+%p Expressive type systems are no longer just for academics!!!
+%p What is a type provider? It is a mechanism that constructs types from a structured source outside the programming language.
+%p They work by constructing types through byte code generation behind the scenes.
+%p Idris type providers are different from other systems because it has the power of dependent types!
+%p Idris Type Providers are like Scala Either, where the other is always a String (Error).
+%p The key is to build up the types before you define your system.
+%p The type provider will, with a simple provide command, allow you to parse file formats with ease, in a well-defined way.
+%p The Curry-Howard Correspondence: Propositional logic concepts correspond to programming language features!
+%p Languages with total checking can be proven to be true.
+%p In Idris, you have a Truth type, it is Unit. Falsity should be Void. It should never be. If you need to express that a thing should never be met it your program, you send it to the Void.
+%p In Idris, you always define the type before defining the use.
+%p You can make lots of proposition using Idris types. Since you can make basic logical propositions, you can then create all propositions. Idris type propositions are turing complete.
+%p Idris logical propositions are "total," or logically consistent. Most other languages do not have logical consistency baked into the language.
+%p Idris supports Curry-Howard Correspondence as part of the type system itself.
+%p So, using this, you can take the concept of AWS availability zone mapping and turn that into a type provider that defines what an AWS availibility zone type. 
+%p Wow, heady stuff. I loved it. Sorry if the notes are light.
+%p Thank you, Susan, for the great talk!

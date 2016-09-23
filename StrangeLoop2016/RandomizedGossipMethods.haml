@@ -1,0 +1,28 @@
+%h2 Randomized Gossip Methods (#PWLConf notes)
+%i Dahlia Malkhi
+%p Random gossip protocols are super simple. You 1) Pick a random node. 2) Pick a random message. 3) Send.
+%p Xerox started the idea of gossip protocols in the first place.
+%p Grapevine was one of the first distributed systems, from Xerox. It used gossip to keep node synced.
+%p Multicast turns out to be really expensive. It doesn't really scale.
+%p Anti-entropy was another method, it used occasional database comparison between nodes. You pick a random node, and sync everything between the random nodes. But it turns out that comparing EVERYTHING is also expensive.
+%p Then comes the Rumor-mongering protocol. When you get a piece of information, you pick a random node, and send the information. You then sleep and repeat a few times. After a couple more times, you stop gossiping about that piece of information.
+%p Next up is the "Random Phone Call" Framework. The framework has synchronous rounds, each node initiates one connection, and nodes pick partners at random.
+%p Random Phone Call depends on a full network, accurate membership and the ability to choose random partners.
+%p The original node has the responsibility to send the information to all nodes. It makes a deal with another node to do half of the nodes. Then those are now responsible for sending to half of those, etc.
+%p There is different complexity for PUSH messages, PULL messages and PUSH-PULL messages.
+%p The PUSH protocol has a O(log n) completion time with very high probability.
+%p In the PULL protocol, you have to run log n rounds to ensure that even one informed node is reached. Once that is done, the time for the rest is O(log n). But when n/2 of the nodes are infirmed, the final convergence is O(loglog n). WAU!
+%b
+	The PUSH-PULL protocol
+	%a{:href =>"http://archive.cone.informatik.uni-freiburg.de/pubs/rumor.pdf"}Karp et al. FOCS 2000
+	made the overall complexity O(nloglog(n)). Super cool!!!
+%p Gossip is inherently fault tolerant.
+%p Your round complexity wil always be O(log n), and your message complexity will be anywhere from O(nlog(n)) (in PUSH or PULL) to O(nloglog(n)) (PUSH-PULL).
+%p The SWIM protocol uses Gossip to spread information about faulty nodes in a network. The message that is send is that a node is faulty. Then the nodes that learn about the failure, probe the failed node. Once n/2+1 nodes know that a node is faulty, that node can be cut out.
+%p This way, failure detection can be disseminated in O(log n) rounds. Which can take a long time in very large networks.
+%p Is SWIM better than steady heartbeats? Stable connections (TCP/IP)?
+%p What if a node was not faulty, but just sleeping (the halting problem)? That makes the gossip messy.
+%p So, in SWIM, the failure detection is really just a failure suspicion. And if another node says that node is fine, a counter-rumor is sent. When the counter-suspicion succeeds another gossip round is sent out. Oof, that is complex.
+%p There are quite a few enhancements that are needed to make SWIM work in production. There are a lot of different gossip messages that are needed.
+%p Check out the Name-Dropper protocol from Akamai!
+%p Thank you, Dahlia, for a fantastic talk!!!

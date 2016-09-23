@@ -1,0 +1,25 @@
+%h2 End-to-end encryption: Behind the scenes (#strangeloop notes)
+%i Martin Kleppmann, Diana Vasile
+%p There is no cloud, it is just someone else's computer!
+%p What we really want with end-to-end encryption is completely encrypted message passing, from client to server to client and all the passing in between.
+%p For most uses, we use public-private encryption.
+%p Public-private encryption looks like it works quite well! PGP and GnuPG work this way, but there are issues.
+%p The biggest problem is that someone that has a copy of all the encrypted messages could steal the key and get all the messages.
+%p You could use Diffie Hellman to prevent these issues, but you still have a time of key compromise.
+%p Diffie Hellman requires both sides to be online, but fortunately you can have pre-keys to allow for offline access.
+%p Diffie Hellman has the ability of a Man-in-the-middle attack! Oh no!
+%p So, how do you solve this man in the middle problem.
+%p One way is a certified key exchange (using signatures, or cryptographic proof).
+%p With digital signatures you get cryptographic proof that I authored a message.
+%p But, can you proof deniability? You can use HMAC codes which uses double hashes to proof that someone has your shared secret.
+%p You can now send an encrypted message and an HMAC using the Sigma protocol, which is an extended Diffie Hellman protocol.
+%p Sigma uses public-private key signing of HMAC codes with public keys. But still...how can we be sure that the public keys are correct?!?
+%p To do that, you need a Public Key Infrastructure. You might have used LetsEncrypt if you are new and fancy!
+%p The PKI signs your public keys and provides an external source to proof that you are you. But...
+%p We have to make sure the PKIs are honest. This is key to safe privacy.
+%p Keybase.io is doing an amazing work to make your identity safe and real.
+%p PGP is cool, bu if you get your private key, OH NO!
+%p Diffie Hellman is cool, but MAN IN THE MIDDLE!
+%p Sigma made Diffie Hellman way better! But it needs good PKI.
+%p So get good PKIs, like Keybase.io!
+%p Thank you, Diana and Martin, for the fun talk!

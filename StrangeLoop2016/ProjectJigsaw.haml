@@ -1,0 +1,43 @@
+%h2 Project Jigsaw in JDK 9: Modularity Comes To Java (#strangeloop notes)
+%i Simon Ritter
+%p JDK 9 will launch in July 2017
+%p In Java there are a lot of APIs. There are public APIs (java.* and javax.*)
+%p There are also other APIs that are public, like com.sun.* and jdk.*
+%p BUT there are other APIs... They are unsupported. You better not use them (sun.*, sun.misc.Unsafe)
+%b Stop using sun.* APIs everybody!!!
+%p JDK 9 MIGHT break your code. But only if you use sun.* APIs. So stop using that.
+%p Some deprecated APIs will be removed. This is a first! Six methods are set for removal!!!
+%p The structure of the JDK will change on the file system.
+%p There is a new version string format. Don't rely on this.
+%p A single underscore will no longer be allowed as a variable name.
+%p The standard API override mechanism and the extension mechanism are going away.
+%p The private APIs are going to be split into two groups. Non-critical, which are no use to the outside. And critical APIs that functionality will be impossible to write without it (like sun.misc.Unsafe).
+%p JEP 260 - The compromise. All the non-critical APIs will be encapsulated (hidden). The Critical APIs will be encapsulated but exposed. The critical APIs will be deprecated.
+%p Use the jdeps tool to review your code to see if you are using any internal APIs. You should run this on your code as well as code you use.
+%p The goal of Project Jigsaw is to make Java SE more scalable and flexible. Java SE is gigantic right now. Lots of rich functionality. But there is no way you need ALL the functionality of Java SE in YOUR app.
+%p This is especially true in IoT things and enterprise microservices.
+%p What is a module? It is just a grouping of code. So, we already have that in Java with packages. A module is just a grouping of packages. Modules can also have resource files, property files and native libraries.
+%p You create a module with a module-info.java file. Module is a restricted reserved word. It is only a reserved word in module-info.java files.
+%p Modules can require other modules with the requires keyword.
+%p The module-info.java file allows you to build a module dependency graph. (We should create these for packages in Maven!)
+%p The module dependency graph must be acyclic. There cannot be any loops.
+%p We have implied readability by using the required public keywords in module-info.java. That way you don't have to have Demeter violates in your code.
+%p You can now have implied readability graphs for your module.
+%p In order to allow others to use parts of your modules, you have to use the exports keyword. And you can restrict to specific modules or publicly.
+%p You cannot use wildcards in exports. You have to explicitly declare each one.
+%p What about reflection? Module encapsulation is hard encapsulation. You will not be allowed to use reflection.
+%p But, there is a proposal this week asking of weak modules that will allow reflection. We will see if this becomes a thing.
+%p In JDK 9, public doesn't really mean public anymore. It is public to the module, and the module has to define the external accessibility of the class in question.
+%p It turns out breaking up the JDK into modules is very...tricky.
+%p This is why there are six APIs that are going away, to allow the JDK 9 dep graph to look way simpler.
+%p Classpath s going away...we use modulepath now. :D
+%p To create a module you compile your module-info.java and your other classes. Then you get a jar that is now a module. That's it!
+%p jar --file my.jar -p will tell you your deps.
+%p you us -mp for module path, instead of -classpath for classpath.
+%p jlink is a way to compile your code to a specific JDK (with only the modlues you need, not everything in Java SE).
+%p "It is not a goal of the module system to solve the version-selection problem." That makes me sad.
+%p How do we migrate our apps today? Well, all the jars are in the classpath today. What changes in that the JDK level is now modules. We need a way of running existing with modules. The solution is the "unnamed module." That contains all the jars in the classpath.
+%p Automatic modules are a solution to making modules from legacy jars. All you have to do is add a non-module jar to the module path. That is great, but it makes cyclical graphs, but that is handled for you by the JDK for automatic modules.
+%p There is NetBeans support for graphing in JDK 9.
+%p Modularization is a huge change in Java. Developing modular code will take some learning, but it will be worth it!
+%p Thank you, Simon, for a great talk!

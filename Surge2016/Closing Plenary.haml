@@ -1,0 +1,22 @@
+%h2 Closing Plenary
+%i Theo Schlossnagle
+%p What is the 99th percentile, anyway? They aren't hard, they are just deceptive.
+%p Distributions are not standard. Sometimes your 100th percentile is WAY worse than your 99th percentile.
+%p What the 99th percentile doesn't tell you at all is what is it like for the top 1%?
+%p For that top 1%, you don't know how they're doing.
+%p What else is broken about the 99th percentile is what it DOESN'T tell you.
+%p Turns out 1% can be a lot of users? 1% of 1,000,000 users? That is a lot of users (10,000).
+%p What can you do instead? Look at your service objectives? It is to serve all users better, not 99% of them.
+%b What we want to know is the percentage of users that are getting a bad result over the number of total users.
+%p We need the cumulative distribution of screwed users. That is way more important than the 99th percentile.
+%p An inverse quantile is what we are looking for, so that would be 1/q(0.99).
+%p That is very useful to have a customer that enjoys your service.
+%p Systems are fast, users are really really slow.
+%p The probe effect is real in a web app, but it turns out that the time it takes to track your performance gives you a performance hit. It can be as hit as 60%. You cannot use it in production on every request.
+%p Probing should always consist of O(1) operations. There should be no latency bubbles in the code, and you should never allocate memory.
+%p Check out mtev_time.c to make timing requests in your probes.
+%p Power saving mode on processors is horrible. They actually slow down the clock on the machine. BOO. They fixed that with later processors.
+%p Each core on each socket, as they get booted, create their concept of time, so if you have multiple CPUs, you might have a different concept of time per core.
+%p Logging something can be expensive at times. Check out libcircmetrics.
+%p Get out there and fight the technology octopus!
+%p Thank you, Theo, for the talk!

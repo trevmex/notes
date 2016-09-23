@@ -1,0 +1,25 @@
+%h2 Reasoning about performance (in the context of search)
+%i Dan Luu
+%p When we say performance, we don't just mean speed.
+%p Most of the time it is an error to think about performance. But that is not true for very large applications.
+%p "Coding feels like real work..." however, when we think about performance, it is all about design, not coding.
+%p When you start coding right away, you will not do well creating high-performance systems.
+%p Let's talk about AND queries. How do you optimize for those? For small systems, grep is OK. For something like Wikipedia, it might be OK to have a simple service with little optimization.
+%p But what about larger services. Like, very large services. Think Amazon. For those size of services, we have to be faster, since latency == Money for large companies.
+%p a 2-seconds search for a very large system is NOT ok.
+%p Why not use indexes? Well, indexes vary widely.
+%p So you want to horizontally scale your servers. Lots of cheap servers with data sharded across them.
+%p Now, you have to have your data replicated across the world. Lots of data centers.
+%p But if you have lots of servers, they go down a lot. So you need replication. That is all really really expensive!!!
+%p Machine time is cheaper than dev time if your systems are small, but this is not true in very large systems.
+%p You can use HashMaps! You can use Bloom Filters! YAY!
+%p Most terms are not in most docs. There are a LOT of terms on the Internet. 10s of billions per shard!
+%p A bloom filter is a set data set that uses a bit set that takes terms and hashes together.
+%p Bloom filters CAN have false positives. The probability of false positives. Assuming 10% bit density, you have a 10% false positive rate. If you hash in more locations, you reduce your false positive rate exponentially for linear bit density growth.
+%p Bitwise ANDs are so cheap with Bloom Filters, you never even have to access memory to do it.
+%p Hierarchical bloom filters can speed up search even more!
+%p We always want a sharded configuration, even on the same machine.
+%p Spoiler, search is not simple. Designing this is very very hard, and takes a long time.
+%p Bloom filters are not always better than posting lists. It depends on the kind of queries you get.
+%p You cannot easily reason about all performance. Performance on unloaded systems is easy, but performance on a loaded system with multiple loads is mathematically impossible.
+%p Thanks for the talk, Dan!!!

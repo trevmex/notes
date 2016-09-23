@@ -1,0 +1,45 @@
+%h2 HTTP/2: what no one is telling you
+%i Hooman Beheshti
+%p HTTP/2! THE FUTURE IS NOW!
+%p HTTP/2 is RFC 7540 right around a year ago. It is a binary protocol. It is in a well-defined format. Everything is in the right place.
+%p Troubleshooting is now a lot more difficult. It is no longer text.
+%p HTTP/2 is over one long-lasting TCP connection. Everything is communicated over TLS.
+%p You can also reuse connections!
+%p "Streams" go over those collections. A Stream is a single request/response transaction. Stream 0 is for management. Client is odd stream, server is even.
+%p All streams consist of frames. All frames have frame ids.
+%p HTTP/2 is all about concurrency. They allow you to send a lot of data at the same time and since it is well-ordered we can construct it on the client-side.
+%b Everyone use WebpageTest. It is amazing!
+%p HTTP/2 is slightly faster than HTTP/1.1. But with packet loss, HTTP/1.1 gets WAY better.
+%p (There are a lot of graphs here, so tough to note-up. :P)
+%p H2 doesn't do great with packet loss.
+%p With H2 we are replacing 6 H1 connections with a single H2 connection, so the comparison is a bit unfair right now.
+%p We need to limit data sets to that which is analyzable.
+%p The point of this analysis is that H2 is not always better than H1, especially with packet loss.
+%p I encourage you to go see Hooman's slides to see the graphs. Very interesting.
+%p There are a lot of papers on packet loss and H2. Read them!
+%p There are no big conclusions. What we can say is packet loss affects H2 and sometimes H2 isn't best.
+%p But the tests are simulated packet loss. What we need is real world data to see the truth.
+%p Don't trust anyone. Test H2 yourself. Your results might be much better in the real world. We don't know, so try it.
+%p
+	Check out the
+	%a{:href => "https://github.com/fastlyhoo/wpt_h1vsh2"}H1 vs H2 testing tool.
+%p Check out QUIC, which is HTTP/2 over UDP. Super exciting!!! Check out draft-tsvwg-quic-protocol-2 in the RFC world.
+%p Server push let's servers push data to a client cache before we think the client will need it. Push uses a PUSH_PROMISE to send data over an even stream. That lets the client know the stream is coming.
+%p What do we push? The protocol does not tell you what to push, you can push whatever you want.
+%p It is a bummer, but push and browser cache do no work well together. They are two different caches on a client.
+%p Push could become a replacement for inlining resources.
+%p We could also use push to send down resources essential for the page you are on right now.
+%b Cache your HTML at the edge!
+%p Push during server think time. You can save a lot of time while your long-runing HTML is generated.
+%p Check out cache digests to see some new developments for browser and page caches communicating with each other.
+%p HPACK (RFC 7541) addresses header bloat problems. HPACK uses Huffman encoding to send a simple table to tell you what headers are being sent.
+%p HPACK has two tables, a static table and a dynamic table.
+%p HPACK gives us significant savings from browser to server, but not server to browser.
+%p The HPACK Dynamic table size is 4k. It does not change. So if you have big custom headers, HPACK doesn't help you currently.
+%p Site-wide headers will help with this.
+%p H2 has priorities and dependencies, so you can create priority trees, but it is only a suggestion.
+%p Priorities are really important, they are the key to the difference in Chrome/Firefox feed.
+%p Wireshark is the greatest thing in the world. Download it. Use it.
+%p There are parts that are good, there are parts that are bad. It is OK that it isn't perfect. What we need to do is use it, feed back into the system, and we can make it better!
+%b Let's build things for this protocol!
+%p Thank you, Hooman, for a great talk!

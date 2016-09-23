@@ -1,0 +1,29 @@
+%h2 Scaling Infrastructure at Etsy (@surgecon notes)
+%i Bethany Macri (@BethanyMacri)
+%p Etsy is active in almost every country in the world. They have about 800 employees.
+%p Etsy believed in code as craft. They are a monolithic LAMP stack.
+%p Etsy pushes code about 35 times daily. The failures are kept small because deployments are small.
+%p They measure EVERYTHING!
+%b Most importantly, they practice blamelessness. They do NOT tolerate blame.
+%p Scalability is all about growing what you have. In the Etsy case it is growth of engineers, features, code base, users and throughput.
+%p Shard your data! It avoids a single point of failure.
+%b Get rid of your stored procedures. They don't scale at all.
+%p They use a master-master sharding setup. They use a ticketing system to ensure unique keys.
+%p There is an index with a master-master relationship as well.
+%p Sharding allows to scale DBs horizontally. And it allows you to continue using MySQL.
+%p Care about your APIs. Write robust APIs and you can scale. But...APIs can bite you. Especially changing them.
+%p The schema of the API is a snapshot of the system. When the system changes, if you are using the snapshot, you could be introducing bugs for new versions.
+%b Don't make your mobile experience an afterthought. Mobile first design is paramount to modern day success.
+%p PHP does not allow for concurrency.
+%p You can have your device teams write APIs for only what they need. This leads to component and bespoke APIs.
+%p Etsy is very anti-SOA. Monolith forever!
+%p They got concurrency with curl_multi_init.
+%p A bespoke API goes to the cache, then the component API. The cache and component APIs are in our own data centers. Everything runs from the API. API-first.
+%p By allowing teams to write bespoke APIs it allows teams to get exactly what they need.
+%p As soon as they store data in HDFS, they call it a dataset. The latency of GETs off of hadoop is about 2 seconds. BLEH!
+%p They considered redis, but since it is in-memory, once they filled up the RAM on a box...the box crashed!
+%p Project Arizona is the result of Etsy's use of hadoop, and getting it performant.
+%p Projec tArizona is basically a big ol' state machine that pulls datasets out of hadoop through a transformer and into a SQLite file that is put on a server for local use.
+%p Do not use counter-factual language (If I had only known...).
+%p Code hygiene matters!!!
+%p Thank you, Bethany, for a great talk!

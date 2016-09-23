@@ -1,0 +1,20 @@
+%h2 Caching at Netflix: The Hidden Microservice (#strangeloop notes)
+%i Scott Mansfield
+%p Caching is hard. Netflix has about 90 seconds to capture your interest while browsing to keep you on the site.
+%p What does caching touch? ALL THE THINGS! It is all heavily cached!
+%p The EVCache is the source of most of the nodes. It is a distributes, sharded, replicated key-value store based on memcached.
+%p EVCache scales very big. All clients connect to all EVCache servers, no servers are connected to each other.
+%p Netflix pushes off almost everything to the cache, barely ever hitting the datastore.
+%p Their cache acts as a buffer for their personalized data.
+%p When you compute a new homepage, you have to hit a lot of services. All of those service hits are happening offline, and stored in the cache, so online access is only cache hits.
+%p EVCache does cache warming, global replication, secondary indexes and consistency assurances.
+%p They synchronize their EVCaches across regions using Kafka for message passing across the pond.
+%p The coolest part is that the EVCache client is a super simple java jar that works like a HashMap in your code.
+%p Moneta is EVCache 2.0, the goal of Moneta is to write EVCache data to disk.
+%p Netflix can take down one entire region and still have no performance loss.
+%p Access patterns are completely different in different regions. The plan is to keep their hot data in RAM and cold data on disk.
+%p The new server looks a lot like Memcached with cold data being written to disk.
+%p Rend is a highly performance Memcached proxy written in go-lang. It is designed to manage the L1/L2 caches well.
+%p What about the performance of Moneta in production? Gest and sets are around 220-360 microseconds.
+%p Moneta saved about 70% in hardware costs due to saving cold data to disk instead of eating up memory.
+%p Thank you, Scott, for the talk.

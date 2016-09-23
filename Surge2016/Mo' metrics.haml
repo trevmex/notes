@@ -1,0 +1,27 @@
+%h2 Mo' metrics, mo' problems; when a million metrics per second isn’t enough anymore
+%i Erin Willingham
+%p Graphite is a way to eat up your metrics and display them!
+%p Graphite gets metrics from collectd and statsd.
+%p Graphite Whisper merges metrics. It will try to fill in data from other servers to fix your holes.
+%p Graphite Aggregators are efficient.
+%p But Graphite is in Python. It is single-threaded, need to run on one port, one CPU core. It doesn't scale all that well past a single server.
+%p The Graphite relay is extremely CPU intensive.
+%p With Graphite Whisper, you have to use SSD disks. It is too I/O intensive to do otherwise.
+%p The UI is...horrible. Also, very slow.
+%p In the next version of Graphite, they had to solve the high CPU for relays and aggregators.
+%p Graphite 2.0 tools: Carbon-c-relay. This is both an aggregator and a relay and it is written in C. There is a Go version, but it is not as fully developed.
+%p They also use a Kafka Producer. It is a Java app with open TCP that dumps info into Kafka.
+%p kafkacat is a tool that pulls messages into kafta.
+%p socat is a relay for bidirectional data. They use it and kafkacat because they can be run as a single process that is easy to restart.
+%p For the backend they use Graphite Whisper, although they looked at InfluxDB and KairosDB.
+%p Splitting up the relays and aggregators allow us to scale different parts of the system differently.
+%p It is also helpful to have all of your Whisper apps clusters close (physically) together.
+%p Graphite Stresser is a great tool for stress testing your Graphite setup.
+%p socat has buffering problems at scale. The metrics will start to come through extremely fragmented. Lots of junk data files.
+%p Once the tools were together, they mirrored their production data with their old (production) Graphite system and their new one. But...the graphs were WAY off in the new system (they should have been identical).
+%p Carbon-relay-ng (the Go implementation) uses more than 2 CPU cores! Hooray!!!
+%b Complex regex takes a lot of computing power. SHOCK!
+%p When you have metrics coming in out of order to the aggregator, they are useless. They start to fail around 6-8 CPU cores.
+%p Carbon-relay-ng has some room for improvement, but in general it is pretty amazing.
+%p Lots of good tools here!
+%p Thank you, Erin, for a great talk!

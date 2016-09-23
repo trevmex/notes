@@ -1,0 +1,24 @@
+%h2 Lies, Damn Lies, and Metrics
+%i André Arko
+%p Metrics lie to you. Almost always.
+%p Web developers are usually pretty good at having some metrics in their apps nowadays. Which is awesome and cool. It i way better than not having those metrics in the first place.
+%p Without metrics, all you have is "is it up?" So that is so much better than that. Metrics tell you what is happening. And the reason we write software is to get business value. The only way to measure business value is metrics.
+%p The trap of metrics is that you do not have total visibility into your systems. Metrics mislead you in surprising ways.
+%p Averages convince you that you understand things. Averages are an easy way to miss the important events.
+%p Default views fall back to averages. And averages are the WORST metrics. Don't use averages. They are COMPLETELY USELESS. If you use them, you are bad, and should feel bad.
+%p The thing is that you are not collecting standard data. Real data is not pretty. The graphs are not perfect bell curves. If you are taking averages, you could have literally no data points at your average if there are two peaks.
+%p "The problem with averages: If you put one hand in a bucket of ice and the other in a bucket of hot coals, on average, you’re comfortable." @sferik
+%p Let's talk about the median. It is higher than half of the values you collected, and lower than half of the values you collected.
+%p Let's talk about the 99th Percentile. This is where your real problems can be found. This is where the important bits start to appear. Pay attention to this.
+%p If you are really rocking it, start to look at the 99.9th Percentile. That will get you the interesting outliers.
+%p Aggregate graphs...are another fancy way of saying averages. Remember what we said about averages? They are bad. Aggregate graphs are bad. Stop using them.
+%p Use breakout graphs of individual machines, not aggregate graphs of your clusters. They are a waste of time, and horribly misleading.
+%p To do this, you NEED to visualize your data. Human beings do not deal well with huge streams of numbers. Humans deal well with pictures. Use them.
+%p Linear regressions are also useless, since all they are is aggregate information.
+%b What you don't know about servers is a lot.
+%p When your code runs on a runtime environment, you have runtime lag. The runtime does a lot of things that you did not think that they should be doing. If you cannot directly instrument your runtime, how can you find out what is going on? Try running a simple piece of code that calls sleep(1) and time it. That can show you lag time (Thanks, @larry!)
+%p You also get VM lag. Turns out chances are that you are running on a VM, or a container on a VM. You are probably not running on bare metal. How do you check VM lag, or container lag? We don't know yet. Netflix might have a solution, but they haven't shared it yet.
+%p here is the thing. Do you know what you care about. The moral of the story is there are a lot of unknown unknowns when you are looking about metrics. The metrics you have are not all the metrics. You cannot trust them 100% of the time.
+%p Do you have metrics on your routing logic? Your proxies, your load balancers? If you are a web dev in a small shop, maybe not. Probably not. Your problems could lie there, the key is if you can't measure it, or you aren't measuring it, you just don't know. Figure out how to measure that today.
+%p Metrics are good, but you have to know what you are measuring.
+%p Thank you, André, for a great talk!
